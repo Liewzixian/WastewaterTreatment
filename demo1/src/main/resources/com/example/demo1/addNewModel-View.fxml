@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.addNewModel">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="131.0" style="-fx-background-color: #00D4FF;">
+         <children>
+            <Label layoutX="12.0" layoutY="148.0" prefHeight="79.0" prefWidth="114.0" text="Add New Model">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="162.0" layoutY="87.0" text="Model Name" />
+      <Label layoutX="162.0" layoutY="124.0" text="COD Cleaning Efficiency " />
+      <Label layoutX="162.0" layoutY="159.0" text="BOD Cleaning Efficiency " />
+      <Label layoutX="161.0" layoutY="195.0" text="TSS Cleaning Efficiency " />
+      <Label layoutX="163.0" layoutY="229.0" text="Area of Footprint" />
+      <Label layoutX="163.0" layoutY="51.0" text="Stage " />
+      <Label layoutX="163.0" layoutY="261.0" text="Energy per Meter Cube " />
+      <TextField layoutX="313.0" layoutY="47.0" />
+      <TextField layoutX="313.0" layoutY="83.0" />
+      <TextField layoutX="313.0" layoutY="120.0" />
+      <TextField layoutX="313.0" layoutY="155.0" />
+      <TextField layoutX="313.0" layoutY="191.0" />
+      <TextField layoutX="313.0" layoutY="225.0" />
+      <TextField layoutX="313.0" layoutY="257.0" />
+      <Button layoutX="517.0" layoutY="333.0" mnemonicParsing="false" style="-fx-background-color: #00D4FF;" text="Add" />
+      <Button layoutX="159.0" layoutY="333.0" mnemonicParsing="false" style="-fx-background-color: #00D4FF;" text="Back" />
+   </children>
+</AnchorPane>

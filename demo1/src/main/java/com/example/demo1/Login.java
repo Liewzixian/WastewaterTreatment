@@ -11,6 +11,7 @@ public class Login extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader2 = new FXMLLoader(Login.class.getResource("Menu-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 542, 400);
         stage.setTitle("Wastewater Treatment Decision Making System");
         stage.setScene(scene);

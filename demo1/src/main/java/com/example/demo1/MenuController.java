@@ -14,9 +14,6 @@ public class MenuController {
     private Button ManageButton;
 
     @FXML
-    private Button DeleteButton;
-
-    @FXML
     private Button AfterMenu;
 
     @FXML
@@ -30,9 +27,6 @@ public class MenuController {
     protected void manageButtonOnAction(){
     }
 
-    @FXML
-    protected void deleteButtonOnAction(){
-    }
 
     @FXML
     protected void afterMenuButtonOnAction(){
