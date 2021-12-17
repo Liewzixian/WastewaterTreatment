@@ -660,8 +660,7 @@ class Sort{ //class to sort linked list of result by TSS,COD,BOD or cost in asce
 class UniformCostSearchAlgo{
 
     public void UniformCostSearch(LinkedList<Tech> loadTech){
-
-        final int MAX_VALUE = 99999;
+        
         Scanner input = new Scanner(System.in);
 
         int[] index = new int[6]; //array of int to hold index of the final code of each type
@@ -703,18 +702,6 @@ class UniformCostSearchAlgo{
                     adjacency_matrix[loop+1][count+1] = 1;
 
                 currentNum++;
-            }
-        }
-
-        for (int i = 0; i < count+2; i++) {
-            for (int j = 0; j < count+2; j++) {
-                if (i == j) {
-                    adjacency_matrix[i][j] = 0;
-                    continue;
-                }
-                if (adjacency_matrix[i][j] == 0) {
-                    adjacency_matrix[i][j] = MAX_VALUE;
-                }
             }
         }
 

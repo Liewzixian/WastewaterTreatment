@@ -36,6 +36,18 @@ public class UniformCostSearch {
             System.arraycopy(adjacencyMatrix[sourcevertex], 0, this.adjacencyMatrix[sourcevertex], 0, numberOfNodes);
         }
 
+        for (int i = 0; i < numberOfNodes; i++) {
+            for (int j = 0; j < numberOfNodes; j++) {
+                if (i == j) {
+                    this.adjacencyMatrix[i][j] = 0;
+                    continue;
+                }
+                if (this.adjacencyMatrix[i][j] == 0) {
+                    this.adjacencyMatrix[i][j] = MAX_VALUE;
+                }
+            }
+        }
+
         priorityQueue.add(new Node(source, 0));
         distances[source] = 0;
 
