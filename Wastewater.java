@@ -746,7 +746,7 @@ class UniformCostSearchAlgo{
         System.out.format("%-15S %-30S %-30S %-50S %-20S %-4S %-5S %-5S %-5S\n", "Preliminary", "Chemical", "Biological", "Tertiary", "Sludge", "TSS","COD","BOD","Cost");
         System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n",names[0],names[1],names[2],names[3],names[4],TSS,BOD,COD,cost);
 
-        //System.out.println("\nThe Distance between source " + 0 + " and destination " + (count+1) + " is " + distance);
+        System.out.println("\nThe Distance between source " + 0 + " and destination " + (count+1) + " is " + distance);
     }
 }
 
@@ -781,21 +781,23 @@ class AdjacencyList{
             count++;
         }
 
-        WeightedGraph.Graph graph = new WeightedGraph.Graph(count+2);
+        WeightedGraph weightedGraph = new WeightedGraph(count+2);
 
         for(int loop = 0; loop <= count; loop++) {
             currentNum = 0;
             for (Tech cycle : loadTech) {
                 if((loop==0 && cycle.type==1)||((loop>0 && loop<=index[1]) && cycle.type==2)||((loop>index[1]&&loop<=index[2]) && cycle.type==3)||((loop>index[2]&&loop<=index[3]) && cycle.type==4)||((loop>index[3]&&loop<=index[4]) && cycle.type==5))
-                    graph.addEdge(loop,currentNum + 1,9999 - (int) (((cycle.TSS + cycle.COD + cycle.BOD)*weight - cycle.energy*(1-weight)) * 1000));
+                    weightedGraph.addEdge(loop,currentNum + 1,9999 - (int) (((cycle.TSS + cycle.COD + cycle.BOD)*weight - cycle.energy*(1-weight)) * 1000));
                 else if(loop>index[4]&&loop<=index[5]) {
-                    graph.addEdge(loop, count + 1, 1);
+                    weightedGraph.addEdge(loop, count + 1, 1);
                     break;
                 }
                 currentNum++;
             }
         }
-        graph.printGraph();
+        distance = weightedGraph.uniformCostSearch(0, count+1);
+        weightedGraph.printGraph();
+        System.out.println("\nThe Distance between source " + 0 + " and destination " + (count+1) + " is " + distance);
     }
 }
 
@@ -974,8 +976,8 @@ public class Wastewater { //main class
                         }
                         break;
                     case 8:
-                        //uniformCostSearchAlgo.UniformCostSearch(newTech);
-                        adjacencyList.UniformCostSearch(newTech);
+                        uniformCostSearchAlgo.UniformCostSearch(newTech);
+                        //adjacencyList.UniformCostSearch(newTech);
                         break;
                     default: //any number except 1-8
                         System.out.println("Invalid input.");
