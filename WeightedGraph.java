@@ -33,18 +33,11 @@ public class WeightedGraph {
             distances[i] = MAX_VALUE;
         }
 
-        System.out.println();
-        for(int print :distances){
-            System.out.format("%d ",print);
-        }
-        System.out.println();
-
         priorityQueue.add(new Edge(source,source,0));
         distances[source] = 0;
 
         while (!priorityQueue.isEmpty()) {
             currentNode = priorityQueue.peek();
-            System.out.println("The eval Node is " + currentNode.destination);
             priorityQueue.poll();
             for(Edge child : adjacencyList[currentNode.destination]){
                 if(distances[child.destination] > (child.weight + distances[currentNode.destination])){
@@ -54,22 +47,22 @@ public class WeightedGraph {
                 }
             }
         }
+        return distances[destination];
+    }
 
+    public int[] printPath(int destination){
+        int[] jobs = new int[6];
         int current = destination;
         while (current!=0){
             path.add(current);
             current = parent[current];
         }
-        System.out.println();
-        for(int print :distances){
-            System.out.format("%d ",print);
+        int temp = 0;
+        for(int print :path){
+            jobs[temp] = print;
+            temp++;
         }
-        System.out.println();
-        for(int print :parent){
-            System.out.format("%d ",print);
-        }
-        System.out.println();
-        return distances[destination];
+        return jobs;
     }
 
     public void addEdge(int source, int destination, int weight) {

@@ -5,10 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
 
 class NumTest{ //class for testing if input is integer or double
 
@@ -758,7 +755,7 @@ class AdjacencyList{
         LinkedList<Tech> newTech = new LinkedList<>(); //linked list to hold treatment plans
 
         int[] index = new int[6]; //array of int to hold index of the final code of each type
-        int[] nodes;
+        int[] path;
         int currentNum;
         int count = 0;
         int distance;
@@ -796,7 +793,33 @@ class AdjacencyList{
             }
         }
         distance = weightedGraph.uniformCostSearch(0, count+1);
-        weightedGraph.printGraph();
+        path = weightedGraph.printPath(count+1);
+
+        for(int i = 5; i > 0; i--){
+            newTech.add(loadTech.get(path[i]-1));
+        }
+        System.out.println();
+
+        double TSS = 1000, BOD = 1000, COD = 1000, cost = 0;
+        String[] names = new String[5];
+
+        currentNum = 0;
+        for(Tech calculate : newTech){
+            System.out.format("%d %d %S %.2f %.2f %.2f %.2f %.3f\n", calculate.type, calculate.code, calculate.name, calculate.TSS, calculate.COD, calculate.BOD,calculate.area,calculate.energy);
+            TSS = TSS*(1-calculate.TSS); //get final TSS
+            BOD = BOD*(1-calculate.BOD); //get final BOD
+            COD = COD*(1-calculate.COD); //get final COD
+            cost = cost + calculate.area*calculate.energy;
+            if(calculate.type==(currentNum+1))
+                names[currentNum] = calculate.name;
+            currentNum++;
+        }
+
+        System.out.println();
+
+        System.out.format("%-15S %-30S %-30S %-50S %-20S %-4S %-5S %-5S %-5S\n", "Preliminary", "Chemical", "Biological", "Tertiary", "Sludge", "TSS","COD","BOD","Cost");
+        System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n",names[0],names[1],names[2],names[3],names[4],TSS,BOD,COD,cost);
+
         System.out.println("\nThe Distance between source " + 0 + " and destination " + (count+1) + " is " + distance);
     }
 }
@@ -976,8 +999,8 @@ public class Wastewater { //main class
                         }
                         break;
                     case 8:
-                        uniformCostSearchAlgo.UniformCostSearch(newTech);
-                        //adjacencyList.UniformCostSearch(newTech);
+                        //uniformCostSearchAlgo.UniformCostSearch(newTech);
+                        adjacencyList.UniformCostSearch(newTech);
                         break;
                     default: //any number except 1-8
                         System.out.println("Invalid input.");
