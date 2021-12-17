@@ -53,7 +53,7 @@ public class UniformCostSearch {
 
         while (!priorityQueue.isEmpty()) {
             evaluationNode = getNodeWithMinDistanceFromPriorityQueue();
-            System.out.println("The eval Node is " + evaluationNode);
+            //System.out.println("The eval Node is " + evaluationNode);
             if (evaluationNode == destination) {
                 return distances[destination];
             }

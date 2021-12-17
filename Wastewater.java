@@ -660,8 +660,9 @@ class Sort{ //class to sort linked list of result by TSS,COD,BOD or cost in asce
 class UniformCostSearchAlgo{
 
     public void UniformCostSearch(LinkedList<Tech> loadTech){
-        
+
         Scanner input = new Scanner(System.in);
+        LinkedList<Tech> newTech = new LinkedList<>(); //linked list to hold treatment plans
 
         int[] index = new int[6]; //array of int to hold index of the final code of each type
         int[] nodes;
@@ -681,6 +682,8 @@ class UniformCostSearchAlgo{
                 System.out.println("Invalid input.");
             }
         }
+
+        System.out.println();
 
         for(Tech cycle : loadTech){ //get index of the final code of each type
             index[cycle.type]=loadTech.indexOf(cycle);
@@ -718,7 +721,35 @@ class UniformCostSearchAlgo{
         distance = uniformCostSearch.uniformCostSearch(adjacency_matrix,0, count+1);
         nodes = uniformCostSearch.printPath();
 
-        System.out.println("\nThe Distance between source " + 0 + " and destination " + (count+1) + " is " + distance);
+        System.out.println();
+
+        for(int i = 1; i < 6; i++){
+            newTech.add(loadTech.get(nodes[i]-1));
+        }
+
+        System.out.println();
+
+        double TSS = 1000, BOD = 1000, COD = 1000, cost = 0;
+        String[] names = new String[5];
+
+        currentNum = 0;
+        for(Tech calculate : newTech){ //loop through linked list
+            System.out.format("%d %d %S %.2f %.2f %.2f %.2f %.3f\n", calculate.type, calculate.code, calculate.name, calculate.TSS, calculate.COD, calculate.BOD,calculate.area,calculate.energy);
+            TSS = TSS*(1-calculate.TSS); //get final TSS
+            BOD = BOD*(1-calculate.BOD); //get final BOD
+            COD = COD*(1-calculate.COD); //get final COD
+            cost = cost + calculate.area*calculate.energy; //get final cost
+            if(calculate.type==(currentNum+1))
+                names[currentNum] = calculate.name;
+            currentNum++;
+        }
+
+        System.out.println();
+
+        System.out.format("%-15S %-30S %-30S %-50S %-20S %-4S %-5S %-5S %-5S\n", "Preliminary", "Chemical", "Biological", "Tertiary", "Sludge", "TSS","COD","BOD","Cost");
+        System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n",names[0],names[1],names[2],names[3],names[4],TSS,BOD,COD,cost); //print out results
+
+        //System.out.println("\nThe Distance between source " + 0 + " and destination " + (count+1) + " is " + distance);
     }
 }
 
