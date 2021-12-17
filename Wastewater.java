@@ -5,10 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
 
 class NumTest{ //class for testing if input is integer or double
 
@@ -94,7 +91,7 @@ class Tech { //class for linked list to hold all information on all treatment ty
 class Treatment { //class to get a specific combination of treatment and their results
 
     int c1,c2,c3,c4,c5; //5 numbers to choose 5 different types of treatment
-    String code,sTSS,sCOD,sBOD; //code is a string of 5 numbers eg 11111, sTSS,sCOD,sBOD is the initial value of TSS,COD,BOD
+    String code,sTSS,sCOD,sBOD; //code is a string of 5 numbers e.g. 11111, sTSS,sCOD,sBOD is the initial value of TSS,COD,BOD
     String n1,n2,n3,n4,n5; //hold name of all 5 treatment types
     double TSS,COD,BOD,cost; //to hold the final result of TSS,COD,BOD and cost
     int[] count = new int[6]; //to count number of times a treatment type appears
@@ -126,7 +123,7 @@ class Treatment { //class to get a specific combination of treatment and their r
 
             if(choice>100000||c1>count[1]||c2>count[2]||c3>count[3]||c4>count[4]||c5>count[5]){ //if entered int exceeds 5 digits (all methods do not exceed 9,
                 System.out.println("Invalid input. Try again.\n");                              //this check should suffice for now, but if methods should exceed
-                choice = input.nextInt();                                                        //9, then new code will be need) or any single code exceeds possible
+                choice = input.nextInt();                                                        //9, then new code will be needed) or any single code exceeds possible
             }                                                                                    //choices, then error and get new input
             else{
                 break; //if input is correct, break out of while loop
@@ -596,7 +593,7 @@ class Change{ //class to change a single parameter in the element of the linked 
 
             loadTech.set(hold,temp); //load changed element back into list
         }
-        else{ //if entry does not exists
+        else{ //if entry does not exist
             System.out.println("Entry does not exist.");
             return loadTech; //return old linked list
         }
@@ -686,24 +683,21 @@ class UniformCostSearchAlgo{
         System.out.println();
 
         for(Tech cycle : loadTech){ //get index of the final code of each type
-            index[cycle.type]=loadTech.indexOf(cycle);
+            index[cycle.type]=loadTech.indexOf(cycle)+1;
             count++;
         }
 
         int[][] adjacency_matrix = new int[count+2][count+2];
 
-        for(int loop = 0; loop < count; loop++) {
+        for(int loop = 0; loop <= count; loop++) {
             currentNum = 0;
             for (Tech cycle : loadTech) {
-
-                if(loop==0 && cycle.type==1)
+                if((loop==0 && cycle.type==1)||((loop>0 && loop<=index[1]) && cycle.type==2)||((loop>index[1]&&loop<=index[2]) && cycle.type==3)||((loop>index[2]&&loop<=index[3]) && cycle.type==4)||((loop>index[3]&&loop<=index[4]) && cycle.type==5))
                     adjacency_matrix[loop][currentNum+1] = 9999 - (int) (((cycle.TSS + cycle.COD + cycle.BOD)*weight - cycle.energy*(1-weight)) * 1000);
-
-                if((loop<=index[1] && cycle.type==2)||((loop>index[1]&&loop<=index[2]) && cycle.type==3)||((loop>index[2]&&loop<=index[3]) && cycle.type==4)||((loop>index[3]&&loop<=index[4]) && cycle.type==5))
-                    adjacency_matrix[loop+1][currentNum+1] = 9999 - (int) (((cycle.TSS + cycle.COD + cycle.BOD)*weight - cycle.energy*(1-weight)) * 1000);
-                else if(loop>index[4])
-                    adjacency_matrix[loop+1][count+1] = 1;
-
+                else if(loop>index[4]&&loop<=index[5]) {
+                    adjacency_matrix[loop][count+1] = 1;
+                    break;
+                }
                 currentNum++;
             }
         }
@@ -733,12 +727,12 @@ class UniformCostSearchAlgo{
         String[] names = new String[5];
 
         currentNum = 0;
-        for(Tech calculate : newTech){ //loop through linked list
+        for(Tech calculate : newTech){
             System.out.format("%d %d %S %.2f %.2f %.2f %.2f %.3f\n", calculate.type, calculate.code, calculate.name, calculate.TSS, calculate.COD, calculate.BOD,calculate.area,calculate.energy);
             TSS = TSS*(1-calculate.TSS); //get final TSS
             BOD = BOD*(1-calculate.BOD); //get final BOD
             COD = COD*(1-calculate.COD); //get final COD
-            cost = cost + calculate.area*calculate.energy; //get final cost
+            cost = cost + calculate.area*calculate.energy;
             if(calculate.type==(currentNum+1))
                 names[currentNum] = calculate.name;
             currentNum++;
@@ -747,9 +741,86 @@ class UniformCostSearchAlgo{
         System.out.println();
 
         System.out.format("%-15S %-30S %-30S %-50S %-20S %-4S %-5S %-5S %-5S\n", "Preliminary", "Chemical", "Biological", "Tertiary", "Sludge", "TSS","COD","BOD","Cost");
-        System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n",names[0],names[1],names[2],names[3],names[4],TSS,BOD,COD,cost); //print out results
+        System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n",names[0],names[1],names[2],names[3],names[4],TSS,BOD,COD,cost);
 
-        //System.out.println("\nThe Distance between source " + 0 + " and destination " + (count+1) + " is " + distance);
+        System.out.println("\nThe Distance between source " + 0 + " and destination " + (count+1) + " is " + distance);
+    }
+}
+
+class AdjacencyList{
+
+    public void UniformCostSearch(LinkedList<Tech> loadTech){
+
+        Scanner input = new Scanner(System.in);
+        LinkedList<Tech> newTech = new LinkedList<>(); //linked list to hold treatment plans
+
+        int[] index = new int[6]; //array of int to hold index of the final code of each type
+        int[] path;
+        int currentNum;
+        int count = 0;
+        int distance;
+        double weight;
+
+        while (true) {
+            System.out.println("\nEnter weight:");
+            weight = input.nextDouble();
+
+            if(weight>0 && weight<1){
+                break;
+            }
+            else {
+                System.out.println("Invalid input.");
+            }
+        }
+
+        for(Tech cycle : loadTech){ //get index of the final code of each type
+            index[cycle.type]=loadTech.indexOf(cycle)+1;
+            count++;
+        }
+
+        WeightedGraph weightedGraph = new WeightedGraph(count+2);
+
+        for(int loop = 0; loop <= count; loop++) {
+            currentNum = 0;
+            for (Tech cycle : loadTech) {
+                if((loop==0 && cycle.type==1)||((loop>0 && loop<=index[1]) && cycle.type==2)||((loop>index[1]&&loop<=index[2]) && cycle.type==3)||((loop>index[2]&&loop<=index[3]) && cycle.type==4)||((loop>index[3]&&loop<=index[4]) && cycle.type==5))
+                    weightedGraph.addEdge(loop,currentNum + 1,9999 - (int) (((cycle.TSS + cycle.COD + cycle.BOD)*weight - cycle.energy*(1-weight)) * 1000));
+                else if(loop>index[4]&&loop<=index[5]) {
+                    weightedGraph.addEdge(loop, count + 1, 1);
+                    break;
+                }
+                currentNum++;
+            }
+        }
+        distance = weightedGraph.uniformCostSearch(0, count+1);
+        path = weightedGraph.printPath(count+1);
+
+        for(int i = 5; i > 0; i--){
+            newTech.add(loadTech.get(path[i]-1));
+        }
+        System.out.println();
+
+        double TSS = 1000, BOD = 1000, COD = 1000, cost = 0;
+        String[] names = new String[5];
+
+        currentNum = 0;
+        for(Tech calculate : newTech){
+            System.out.format("%d %d %S %.2f %.2f %.2f %.2f %.3f\n", calculate.type, calculate.code, calculate.name, calculate.TSS, calculate.COD, calculate.BOD,calculate.area,calculate.energy);
+            TSS = TSS*(1-calculate.TSS); //get final TSS
+            BOD = BOD*(1-calculate.BOD); //get final BOD
+            COD = COD*(1-calculate.COD); //get final COD
+            cost = cost + calculate.area*calculate.energy;
+            if(calculate.type==(currentNum+1))
+                names[currentNum] = calculate.name;
+            currentNum++;
+        }
+
+        System.out.println();
+
+        System.out.format("%-15S %-30S %-30S %-50S %-20S %-4S %-5S %-5S %-5S\n", "Preliminary", "Chemical", "Biological", "Tertiary", "Sludge", "TSS","COD","BOD","Cost");
+        System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n",names[0],names[1],names[2],names[3],names[4],TSS,BOD,COD,cost);
+
+        System.out.println("\nThe Distance between source " + 0 + " and destination " + (count+1) + " is " + distance);
     }
 }
 
@@ -772,6 +843,7 @@ public class Wastewater { //main class
         Calculate cal = new Calculate(); //show all possible combinations and results
         Sort sort = new Sort(); //sort all possible results in ascending or descending order
         UniformCostSearchAlgo uniformCostSearchAlgo = new UniformCostSearchAlgo();
+        AdjacencyList adjacencyList = new AdjacencyList();
 
         String type,code,option,choice,five,result,order;
 
@@ -862,7 +934,7 @@ public class Wastewater { //main class
                     case 5:
                         while (true) {
                             System.out.println("Enter 5 digit code:");
-                            five = input.nextLine(); //get 5 digit number
+                            five = input.nextLine(); //get 5-digit number
 
                             if(num.isInt(five)){
                                 break;
@@ -927,7 +999,8 @@ public class Wastewater { //main class
                         }
                         break;
                     case 8:
-                        uniformCostSearchAlgo.UniformCostSearch(newTech);
+                        //uniformCostSearchAlgo.UniformCostSearch(newTech);
+                        adjacencyList.UniformCostSearch(newTech);
                         break;
                     default: //any number except 1-8
                         System.out.println("Invalid input.");

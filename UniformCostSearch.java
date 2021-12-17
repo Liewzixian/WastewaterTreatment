@@ -17,10 +17,10 @@ public class UniformCostSearch {
         this.numberOfNodes = numberOfNodes;
         this.settled = new HashSet<>();
         this.priorityQueue = new PriorityQueue<>(numberOfNodes, new Node());
-        this.distances = new int[numberOfNodes + 1];
+        this.distances = new int[numberOfNodes];
         this.path = new LinkedList<>();
-        this.adjacencyMatrix = new int[numberOfNodes + 1][numberOfNodes + 1];
-        this.parent = new int[numberOfNodes + 1];
+        this.adjacencyMatrix = new int[numberOfNodes][numberOfNodes];
+        this.parent = new int[numberOfNodes];
     }
 
     public int uniformCostSearch(int[][] adjacencyMatrix, int source, int destination) {
