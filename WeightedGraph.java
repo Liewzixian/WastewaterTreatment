@@ -50,17 +50,26 @@ public class WeightedGraph {
         return distances[destination];
     }
 
-    public int[] printPath(int destination){
-        int[] jobs = new int[6];
-        int current = destination;
-        while (current!=0){
-            path.add(current);
-            current = parent[current];
+    public int[] printPath(int source,int destination){
+        int[] jobs = new int[7];
+        path.add(destination);
+        boolean found = false;
+        int vertex = destination;
+        while (!found) {
+            if (vertex == source) {
+                found = true;
+                continue;
+            }
+            path.add(parent[vertex]);
+            vertex = parent[vertex];
         }
-        int temp = 0;
-        for(int print :path){
-            jobs[temp] = print;
-            temp++;
+        System.out.println("The Path between " + source + " and " + destination + " is ");
+        Iterator<Integer> iterator = path.descendingIterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+            jobs[i] = iterator.next();
+            System.out.print(jobs[i] + "\t");
+            i++;
         }
         return jobs;
     }
@@ -85,9 +94,7 @@ public class WeightedGraph {
         int destination;
         int weight;
 
-        public Edge() {
-
-        }
+        public Edge() {}
 
         public Edge(int source, int destination, int weight) {
             this.source = source;
@@ -99,9 +106,9 @@ public class WeightedGraph {
         public int compare(Edge o1, Edge o2) {
             if (o1.weight < o2.weight)
                 return -1;
-            if (o1.weight > o2.weight)
+            else if (o1.weight > o2.weight)
                 return 1;
-            if (o1.destination < o2.destination)
+            else if (o1.destination < o2.destination)
                 return -1;
             return 0;
         }

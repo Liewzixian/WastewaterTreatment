@@ -702,18 +702,9 @@ class UniformCostSearchAlgo{
             }
         }
 
-        //Cycles through rows
-        for (int[] adjacencyMatrix : adjacency_matrix) {
-            //Cycles through columns
-            for (int matrix : adjacencyMatrix) {
-                System.out.printf("%6d", matrix); //change the %5d to however much space you want
-            }
-            System.out.println(); //Makes a new row
-        }
-
         UniformCostSearch uniformCostSearch = new UniformCostSearch(count+2);
         distance = uniformCostSearch.uniformCostSearch(adjacency_matrix,0, count+1);
-        nodes = uniformCostSearch.printPath();
+        nodes = uniformCostSearch.printPath(0,count+1);
 
         System.out.println();
 
@@ -773,6 +764,8 @@ class AdjacencyList{
             }
         }
 
+        System.out.println();
+
         for(Tech cycle : loadTech){ //get index of the final code of each type
             index[cycle.type]=loadTech.indexOf(cycle)+1;
             count++;
@@ -793,11 +786,14 @@ class AdjacencyList{
             }
         }
         distance = weightedGraph.uniformCostSearch(0, count+1);
-        path = weightedGraph.printPath(count+1);
+        path = weightedGraph.printPath(0,count+1);
 
-        for(int i = 5; i > 0; i--){
+        System.out.println();
+
+        for(int i = 1; i < 6; i++){
             newTech.add(loadTech.get(path[i]-1));
         }
+
         System.out.println();
 
         double TSS = 1000, BOD = 1000, COD = 1000, cost = 0;

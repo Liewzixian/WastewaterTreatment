@@ -7,7 +7,7 @@ public class UniformCostSearch {
     private final Set<Integer> settled;
     private final int[] distances;
     private final int numberOfNodes;
-    private final int[][] adjacencyMatrix;
+    private int[][] adjacencyMatrix;
     private final LinkedList<Integer> path;
     private final int[] parent;
     private int source, destination;
@@ -27,13 +27,10 @@ public class UniformCostSearch {
         int evaluationNode;
         this.source = source;
         this.destination = destination;
+        this.adjacencyMatrix = adjacencyMatrix;
 
         for (int i = 0; i < numberOfNodes; i++) {
             distances[i] = MAX_VALUE;
-        }
-
-        for (int sourcevertex = 0; sourcevertex < numberOfNodes; sourcevertex++) {
-            System.arraycopy(adjacencyMatrix[sourcevertex], 0, this.adjacencyMatrix[sourcevertex], 0, numberOfNodes);
         }
 
         for (int i = 0; i < numberOfNodes; i++) {
@@ -53,7 +50,6 @@ public class UniformCostSearch {
 
         while (!priorityQueue.isEmpty()) {
             evaluationNode = getNodeWithMinDistanceFromPriorityQueue();
-            //System.out.println("The eval Node is " + evaluationNode);
             if (evaluationNode == destination) {
                 return distances[destination];
             }
@@ -84,7 +80,7 @@ public class UniformCostSearch {
         return node.node;
     }
 
-    public int[] printPath() {
+    public int[] printPath(int source, int destination) {
         int[] nodes = new int[7];
         path.add(destination);
         boolean found = false;
@@ -97,7 +93,6 @@ public class UniformCostSearch {
             path.add(parent[vertex]);
             vertex = parent[vertex];
         }
-
         System.out.println("The Path between " + source + " and " + destination + " is ");
         Iterator<Integer> iterator = path.descendingIterator();
         int i = 0;
@@ -109,13 +104,20 @@ public class UniformCostSearch {
         return nodes;
     }
 
+    public void printMatrix(){
+        for (int[] adjacencyMatrix : adjacencyMatrix) {
+            for (int matrix : adjacencyMatrix) {
+                System.out.printf("%6d", matrix); //change the %5d to however much space you want
+            }
+            System.out.println(); //Makes a new row
+        }
+    }
+
     static class Node implements Comparator<Node> {
         public int node;
         public int cost;
 
-        public Node() {
-
-        }
+        public Node() {}
 
         public Node(int node, int cost) {
             this.node = node;
@@ -126,9 +128,9 @@ public class UniformCostSearch {
         public int compare(Node node1, Node node2) {
             if (node1.cost < node2.cost)
                 return -1;
-            if (node1.cost > node2.cost)
+            else if (node1.cost > node2.cost)
                 return 1;
-            if (node1.node < node2.node)
+            else if (node1.node < node2.node)
                 return -1;
             return 0;
         }
