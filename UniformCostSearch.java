@@ -10,8 +10,7 @@ public class UniformCostSearch {
     private int[][] adjacencyMatrix;
     private final LinkedList<Integer> path;
     private final int[] parent;
-    private int source, destination;
-    public static final int MAX_VALUE = 99999;
+    public static final int MAX_VALUE = 9999;
 
     public UniformCostSearch(int numberOfNodes) {
         this.numberOfNodes = numberOfNodes;
@@ -25,8 +24,6 @@ public class UniformCostSearch {
 
     public int uniformCostSearch(int[][] adjacencyMatrix, int source, int destination) {
         int evaluationNode;
-        this.source = source;
-        this.destination = destination;
         this.adjacencyMatrix = adjacencyMatrix;
 
         for (int i = 0; i < numberOfNodes; i++) {

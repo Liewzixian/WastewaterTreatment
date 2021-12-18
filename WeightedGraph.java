@@ -10,7 +10,7 @@ public class WeightedGraph {
     private final int[] distances;
     private final int[] parent;
     private final int vertices;
-    public static final int MAX_VALUE = 99999;
+    public static final int MAX_VALUE = 9999;
 
     @SuppressWarnings("unchecked")
     public WeightedGraph(int vertices){

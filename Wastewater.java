@@ -693,9 +693,9 @@ class UniformCostSearchAlgo{
             currentNum = 0;
             for (Tech cycle : loadTech) {
                 if((loop==0 && cycle.type==1)||((loop>0 && loop<=index[1]) && cycle.type==2)||((loop>index[1]&&loop<=index[2]) && cycle.type==3)||((loop>index[2]&&loop<=index[3]) && cycle.type==4)||((loop>index[3]&&loop<=index[4]) && cycle.type==5))
-                    adjacency_matrix[loop][currentNum+1] = 9999 - (int) (((cycle.TSS + cycle.COD + cycle.BOD)*weight - cycle.energy*(1-weight)) * 1000);
+                    adjacency_matrix[loop][currentNum+1] = 300 - (int) (((cycle.TSS + cycle.COD + cycle.BOD)*weight - (cycle.energy + cycle.energy/10)*(1-weight)) * 100);
                 else if(loop>index[4]&&loop<=index[5]) {
-                    adjacency_matrix[loop][count+1] = 1;
+                    adjacency_matrix[loop][count+1] = 300;
                     break;
                 }
                 currentNum++;
@@ -777,9 +777,9 @@ class AdjacencyList{
             currentNum = 0;
             for (Tech cycle : loadTech) {
                 if((loop==0 && cycle.type==1)||((loop>0 && loop<=index[1]) && cycle.type==2)||((loop>index[1]&&loop<=index[2]) && cycle.type==3)||((loop>index[2]&&loop<=index[3]) && cycle.type==4)||((loop>index[3]&&loop<=index[4]) && cycle.type==5))
-                    weightedGraph.addEdge(loop,currentNum + 1,9999 - (int) (((cycle.TSS + cycle.COD + cycle.BOD)*weight - cycle.energy*(1-weight)) * 1000));
+                    weightedGraph.addEdge(loop,currentNum + 1,300 - (int) (((cycle.TSS + cycle.COD + cycle.BOD)*weight - (cycle.energy + cycle.energy/10)*(1-weight)) * 100));
                 else if(loop>index[4]&&loop<=index[5]) {
-                    weightedGraph.addEdge(loop, count + 1, 1);
+                    weightedGraph.addEdge(loop, count + 1, 300);
                     break;
                 }
                 currentNum++;
