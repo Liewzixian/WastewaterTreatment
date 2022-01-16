@@ -4,16 +4,25 @@ import Coursework.DataClasses.Tech;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class Load{ //class to load treatment types from text file (can add code to load result in future)
+public class IO {
 
-    public Load(LinkedList<Tech> loadTech) throws FileNotFoundException {
+    String fileName;
 
-        File file=new File("D:\\Download\\output.txt"); //load location
-        Scanner sc=new Scanner(file);
+    public IO(String fileName){
+        this.fileName = fileName;
+    }
+
+    public void load(LinkedList<Tech> loadTech) throws FileNotFoundException {
+
+        File file = new File(fileName); //load location
+        Scanner sc = new Scanner(file);
 
         String[] hold = new String[8]; //make array of strings with 8 elements
 
@@ -28,5 +37,15 @@ public class Load{ //class to load treatment types from text file (can add code 
                 loadTech.add(input); //change each string to correct type and load in linked list
             }
         }
+    }
+
+    public void save(LinkedList<Tech> saveTech) throws IOException {
+
+        PrintWriter writer = new PrintWriter("D:\\Download\\output.txt", StandardCharsets.UTF_8); //save location (can add code to change location)
+
+        for(Tech print : saveTech) { //save line by line with for loop
+            writer.format("%d,%d,%S,%.2f,%.2f,%.2f,%.2f,%.3f\n", print.getType(), print.getCode(), print.getName(), print.getTSS(), print.getCOD(), print.getBOD(),print.getArea(), print.getEnergy());
+        }
+        writer.close(); //close writer
     }
 }

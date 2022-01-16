@@ -1,4 +1,4 @@
-package Coursework;
+package Coursework.PathingAlgorithm;
 
 import java.util.*;
 

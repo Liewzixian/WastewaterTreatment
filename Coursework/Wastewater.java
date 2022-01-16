@@ -3,6 +3,9 @@ package Coursework;
 import Coursework.DataClasses.Result;
 import Coursework.DataClasses.Tech;
 
+import Coursework.PathingAlgorithm.AdjacencyList;
+import Coursework.PathingAlgorithm.UniformCostSearchAlgo;
+
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -17,6 +20,8 @@ public class Wastewater { //main class
 
         LinkedList<Tech> newTech = new LinkedList<>(); //linked list to hold treatment plans
         LinkedList<Result> newResult; //linked list to hold results
+
+        IO io = new IO("D:\\Download\\output.txt");
 
         Scanner input = new Scanner(System.in);
 
@@ -34,7 +39,7 @@ public class Wastewater { //main class
 
         String type,code,option,choice,five,result,order;
 
-        new Load(newTech); //load treatment types into linked list
+        io.load(newTech); //load treatment types into linked list
         System.out.println("Treatment data loaded to linked list.");
         newTech = renum.Recode(newTech); //renumber all data from linked list
         newTech.sort(typeComp.thenComparing(codeComp)); //sort all data from linked list
@@ -186,7 +191,7 @@ public class Wastewater { //main class
                         }
                         break;
                     case 8:
-                        //uniformCostSearchAlgo.UniformCostSearch(newTech);
+                        uniformCostSearchAlgo.UniformCostSearch(newTech);
                         adjacencyList.UniformCostSearch(newTech);
                         break;
                     default: //any number except 1-8
@@ -199,7 +204,7 @@ public class Wastewater { //main class
         }
 
         input.close(); //close scanner
-        new Save(newTech); //save linked list of treatment types into text file
+        io.save(newTech); //save linked list of treatment types into text file
         System.out.println("\nTreatment data saved to text file.");
     }
 }

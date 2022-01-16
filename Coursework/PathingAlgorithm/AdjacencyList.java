@@ -1,11 +1,11 @@
-package Coursework;
+package Coursework.PathingAlgorithm;
 
 import Coursework.DataClasses.Tech;
 
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class UniformCostSearchAlgo{
+public class AdjacencyList {
 
     public void UniformCostSearch(LinkedList<Tech> loadTech){
 
@@ -13,7 +13,7 @@ public class UniformCostSearchAlgo{
         LinkedList<Tech> newTech = new LinkedList<>(); //linked list to hold treatment plans
 
         int[] index = new int[6]; //array of int to hold index of the final code of each type
-        int[] nodes;
+        int[] path;
         int currentNum;
         int count = 0;
         int distance;
@@ -38,29 +38,27 @@ public class UniformCostSearchAlgo{
             count++;
         }
 
-        int[][] adjacency_matrix = new int[count+2][count+2];
+        WeightedGraph weightedGraph = new WeightedGraph(count+2);
 
         for(int loop = 0; loop <= count; loop++) {
             currentNum = 0;
             for (Tech cycle : loadTech) {
                 if((loop==0 && cycle.getType() ==1)||((loop>0 && loop<=index[1]) && cycle.getType() ==2)||((loop>index[1]&&loop<=index[2]) && cycle.getType() ==3)||((loop>index[2]&&loop<=index[3]) && cycle.getType() ==4)||((loop>index[3]&&loop<=index[4]) && cycle.getType() ==5))
-                    adjacency_matrix[loop][currentNum+1] = 300 - (int) (((cycle.getTSS() + cycle.getCOD() + cycle.getBOD())*weight - (cycle.getEnergy() + cycle.getEnergy() /10)*(1-weight)) * 100);
+                    weightedGraph.addEdge(loop,currentNum + 1,300 - (int) (((cycle.getTSS() + cycle.getCOD() + cycle.getBOD())*weight - (cycle.getEnergy() + cycle.getEnergy() /10)*(1-weight)) * 100));
                 else if(loop>index[4]&&loop<=index[5]) {
-                    adjacency_matrix[loop][count+1] = 300;
+                    weightedGraph.addEdge(loop, count + 1, 300);
                     break;
                 }
                 currentNum++;
             }
         }
-
-        UniformCostSearch uniformCostSearch = new UniformCostSearch(count+2);
-        distance = uniformCostSearch.uniformCostSearch(adjacency_matrix,0, count+1);
-        nodes = uniformCostSearch.printPath(0,count+1);
+        distance = weightedGraph.uniformCostSearch(0, count+1);
+        path = weightedGraph.printPath(0,count+1);
 
         System.out.println();
 
         for(int i = 1; i < 6; i++){
-            newTech.add(loadTech.get(nodes[i]-1));
+            newTech.add(loadTech.get(path[i]-1));
         }
 
         System.out.println();
