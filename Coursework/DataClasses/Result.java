@@ -1,19 +1,19 @@
 package Coursework.DataClasses;
 
 public class Result { //class for linked list to hold result of all possible combinations of treatments (can add more later)
-    String t1,t2,t3,t4,t5; //names for all 5 types of wastewater treatment
-    double TSS,COD,BOD,cost; //results for all calculations
+    private String t1,t2,t3,t4,t5;
+    private double TSS,COD,BOD,cost; //results for all calculations
 
-    public Result(String t1,String t2,String t3,String t4,String t5,double TSS,double COD,double BOD,double cost) {
-        this.t1 = t1;
-        this.t2 = t2;
-        this.t3 = t3;
-        this.t4 = t4;
-        this.t5 = t5;
-        this.TSS = TSS;
-        this.COD = COD;
-        this.BOD = BOD;
-        this.cost = cost;
+    public Result(Tech t1,Tech t2,Tech t3,Tech t4,Tech t5,double TSS,double COD,double BOD) {
+        this.t1 = t1.getName();
+        this.t2 = t2.getName();
+        this.t3 = t3.getName();
+        this.t4 = t4.getName();
+        this.t5 = t5.getName();
+        this.TSS = TSS * (1-t1.getTSS()) * (1-t2.getTSS()) * (1-t3.getTSS()) * (1-t4.getTSS()) * (1-t5.getTSS());
+        this.COD = COD * (1-t1.getCOD()) * (1-t2.getCOD()) * (1-t3.getCOD()) * (1-t4.getCOD()) * (1-t5.getCOD());
+        this.BOD = BOD * (1-t1.getBOD()) * (1-t2.getBOD()) * (1-t3.getBOD()) * (1-t4.getBOD()) * (1-t5.getBOD());
+        this.cost = (t1.getArea()*t1.getEnergy()) + (t2.getArea()*t2.getEnergy()) + (t3.getArea()*t3.getEnergy()) + (t4.getArea()*t4.getEnergy()) + (t5.getArea()*t5.getEnergy());
     }
 
     public String getT1() {
