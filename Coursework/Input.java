@@ -71,7 +71,7 @@ public class Input {
         while (true){
             input = scanner.nextLine(); //get TSS
 
-            if (input!=null)
+            if (input.length()>0)
                 break; //break loop if type is double
             else
                 System.out.println("Invalid input.");

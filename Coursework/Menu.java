@@ -22,8 +22,6 @@ public class Menu {
     AdjacencyList adjacencyList;
     TreeMap<Integer,TreeMap<Integer,Tech>> fullList;
 
-    String[] treatments = {"Preliminary","Chemical","Biological","Tertiary","Sludge"};
-
     public Menu(String fileName) {
 
         this.fullList = new TreeMap<>();
@@ -67,6 +65,7 @@ public class Menu {
     }
 
     public void showAllTreatments(){
+        String[] treatments = {"Preliminary","Chemical","Biological","Tertiary","Sludge"};
         for(Map.Entry<Integer, TreeMap<Integer,Tech>> full : fullList.entrySet()) {
             System.out.format("\n%S (Type:%d)\n",treatments[full.getKey()-1],full.getKey());
             for (Map.Entry<Integer, Tech> list : full.getValue().entrySet())

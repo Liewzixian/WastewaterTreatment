@@ -44,4 +44,20 @@ public class Text {
         System.out.println("Treatment Types");
         System.out.format("%-15S %-30S %-30S %-50S %-20S %-4S %-5S %-5S %-5S\n", "Preliminary", "Chemical", "Biological", "Tertiary", "Sludge", "TSS","COD","BOD","Cost");
     }
+
+    public void getTreatmentText(String text){
+        System.out.println("Enter treatment " + text +":");
+    }
+
+    public void getInitialText(String text){
+        System.out.println("Enter initial " + text +":");
+    }
+
+    public void getSortText(String text){
+        System.out.println("Enter sort " + text +":");
+    }
+
+    public void invalidText(){
+        System.out.println("Invalid input.");
+    }
 }
