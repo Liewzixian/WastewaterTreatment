@@ -2,15 +2,14 @@ package Coursework.PathingAlgorithm;
 
 import Coursework.DataClasses.Tech;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class AdjacencyList {
 
-    TreeMap<Integer, TreeMap<Integer,Tech>> fullList;
+    ArrayList<ArrayList<Tech>> fullList;
 
-    public AdjacencyList(TreeMap<Integer, TreeMap<Integer,Tech>> fullList){
+    public AdjacencyList(ArrayList<ArrayList<Tech>> fullList){
         this.fullList = fullList;
     }
 
@@ -25,19 +24,19 @@ public class AdjacencyList {
         System.out.println();
 
         index[0] = 0;
-        index[1] = fullList.get(1).size();
-        index[2] = index[1] + fullList.get(2).size();
-        index[3] = index[2] + fullList.get(3).size();
-        index[4] = index[3] + fullList.get(4).size();
-        index[5] = index[4] + fullList.get(5).size();
+        index[1] = fullList.get(0).size();
+        index[2] = index[1] + fullList.get(1).size();
+        index[3] = index[2] + fullList.get(2).size();
+        index[4] = index[3] + fullList.get(3).size();
+        index[5] = index[4] + fullList.get(4).size();
 
         WeightedGraph weightedGraph = new WeightedGraph(index[5]+2);
 
         for(int loop = 0; loop <= index[5]; loop++) {
 
             if(loop==0){
-                for(Map.Entry<Integer, Tech> list : fullList.get(1).entrySet()) {
-                    weightedGraph.addEdge(loop, list.getKey(), 300 - (int) (((list.getValue().getTSS() + list.getValue().getCOD() + list.getValue().getBOD()) * weight - (list.getValue().getEnergy() + list.getValue().getEnergy() / 10) * (1 - weight)) * 100));
+                for(Tech list : fullList.get(0)) {
+                    weightedGraph.addEdge(loop, fullList.get(0).indexOf(list)+1, 300 - (int) (((list.getTSS() + list.getCOD() + list.getBOD()) * weight - (list.getEnergy() + list.getEnergy() / 10) * (1 - weight)) * 100));
                 }
             }
             else if(loop > index[4]){
@@ -48,8 +47,8 @@ public class AdjacencyList {
                 while(loop > index[treatmentType])
                     treatmentType++;
 
-                for(Map.Entry<Integer, Tech> list : fullList.get(treatmentType+1).entrySet()) {
-                    weightedGraph.addEdge(loop, index[treatmentType] + list.getKey(), 300 - (int) (((list.getValue().getTSS() + list.getValue().getCOD() + list.getValue().getBOD()) * weight - (list.getValue().getEnergy() + list.getValue().getEnergy() / 10) * (1 - weight)) * 100));
+                for(Tech list : fullList.get(treatmentType)) {
+                    weightedGraph.addEdge(loop, index[treatmentType] + fullList.get(treatmentType).indexOf(list)+1, 300 - (int) (((list.getTSS() + list.getCOD() + list.getBOD()) * weight - (list.getEnergy() + list.getEnergy() / 10) * (1 - weight)) * 100));
                 }
             }
         }
@@ -60,7 +59,7 @@ public class AdjacencyList {
         System.out.println();
 
         for(int i = 1; i < 6; i++)
-            newTech.add(fullList.get(i).get(path[i]-index[i-1]));
+            newTech.add(fullList.get(i-1).get(path[i]-index[i-1]-1));
 
         System.out.println();
 

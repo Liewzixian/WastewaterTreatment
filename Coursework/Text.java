@@ -42,9 +42,9 @@ public class Text {
 
     public void getStandard(){
         System.out.println("Enter wastewater standard:");
-        System.out.println("0.No Standard");
         System.out.println("1.Standard A");
         System.out.println("2.Standard B");
+        System.out.println("3.No Standard");
     }
 
     public void getHeader(){

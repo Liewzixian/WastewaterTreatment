@@ -13,24 +13,12 @@ public class Input {
         this.numTest = new NumTest(); //testing if input is integer or double
     }
 
-    public int getInt(){
+    public int getIntBounded(int max){
         while (true){
             input = scanner.nextLine(); //get TSS
 
             if (numTest.isInt(input))
-                break; //break loop if type is double
-            else
-                System.out.println("Invalid input.");
-        }
-        return Integer.parseInt(input);
-    }
-
-    public int getIntBounded(int lower, int upper){
-        while (true){
-            input = scanner.nextLine(); //get TSS
-
-            if (numTest.isInt(input))
-                if(Integer.parseInt(input) >= lower && Integer.parseInt(input) <= upper)
+                if(Integer.parseInt(input) >= 1 && Integer.parseInt(input) <= max)
                     break;
                 else
                     System.out.println("Invalid input.");
@@ -52,12 +40,12 @@ public class Input {
         return Double.parseDouble(input);
     }
 
-    public double getDoubleBounded(double lower, double upper){
+    public double getDoubleBounded(){
         while (true){
             input = scanner.nextLine(); //get TSS
 
             if (numTest.isDouble(input))
-                if(Double.parseDouble(input) >= lower && Double.parseDouble(input) <= upper)
+                if(Double.parseDouble(input) >= 0 && Double.parseDouble(input) <= 1)
                     break;
                 else
                     System.out.println("Invalid input.");

@@ -9,11 +9,11 @@ import java.util.*;
 public class ResultControl {
 
     ArrayList<ArrayList<Comparator<Result>>> comparators;
-    TreeMap<Integer, TreeMap<Integer, Tech>> fullList;
-    LinkedList<Result> results;
+    ArrayList<ArrayList<Tech>> fullList;
+    ArrayList<Result> results;
     Tech[] tech;
 
-    public ResultControl(TreeMap<Integer, TreeMap<Integer,Tech>> fullList, LinkedList<Result> results){
+    public ResultControl(ArrayList<ArrayList<Tech>> fullList, ArrayList<Result> results){
         this.fullList = fullList;
         this.results = results;
         this.tech = new Tech[5];
@@ -42,16 +42,16 @@ public class ResultControl {
         Tech[] tech = new Tech[5];
         results.clear();
 
-        for(Map.Entry<Integer, Tech> primary : fullList.get(1).entrySet()) {
-            tech[0] = primary.getValue();
-            for (Map.Entry<Integer, Tech> chemical : fullList.get(2).entrySet()) {
-                tech[1] = chemical.getValue();
-                for (Map.Entry<Integer, Tech> biological : fullList.get(3).entrySet()) {
-                    tech[2] = biological.getValue();
-                    for (Map.Entry<Integer, Tech> tertiary : fullList.get(4).entrySet()) {
-                        tech[3] = tertiary.getValue();
-                        for (Map.Entry<Integer, Tech> sludge : fullList.get(5).entrySet()) {
-                            tech[4] = sludge.getValue();
+        for(Tech primary : fullList.get(0)) {
+            tech[0] = primary;
+            for (Tech chemical : fullList.get(1)) {
+                tech[1] = chemical;
+                for (Tech biological : fullList.get(2)) {
+                    tech[2] = biological;
+                    for (Tech tertiary : fullList.get(3)) {
+                        tech[3] = tertiary;
+                        for (Tech sludge : fullList.get(4)){
+                            tech[4] = sludge;
                             results.add(new Result(tech,initial));
                         }
                     }
@@ -66,11 +66,16 @@ public class ResultControl {
 
     public boolean getCode(String choice){
         int[] code = new int[5];
-        for(int i = 0; i < 5; i++){
-            code[i] = Integer.parseInt(choice.charAt(i) + "");
-            tech[i] = fullList.get(i+1).get(code[i]);
+        try {
+            for (int i = 0; i < 5; i++) {
+                code[i] = Integer.parseInt(choice.charAt(i) + "");
+                tech[i] = fullList.get(i).get(code[i]-1);
+            }
         }
-        return tech[0] != null && tech[1] != null && tech[2] != null && tech[3] != null && tech[4] != null;
+        catch (IndexOutOfBoundsException e){
+            return false;
+        }
+        return true;
     }
 
     public void getSpecificResult(Initial initial){
@@ -95,18 +100,18 @@ public class ResultControl {
     public void getSortResult(int type, int order, int standard){
         String[] sortType = {"TSS","BOD","COD","Cost"};
         String[] sortOrder = {"Ascending","Descending"};
-        String[] sortStandard = {"No Standard","Standard A","Standard B"};
-        System.out.format("Results sorted by " + sortType[type-1] + " in " + sortOrder[order-1] + " under " + sortStandard[standard]);
+        String[] sortStandard = {"Standard A","Standard B","No Standard"};
+        System.out.format("Results sorted by " + sortType[type-1] + " in " + sortOrder[order-1] + " under " + sortStandard[standard-1]);
     }
 
     public double getStandardNum(int standard, int type){
-        double[][] standards = {{0,0,0},{1,10,10},{1,10,10}};
-        return standards[standard][type];
+        double[][] standards = {{1,10,10},{1,10,10},{0,0,0}};
+        return standards[standard-1][type];
     }
 
     public void printResults(int standard){
         for(Result print : results) {
-            if (standard == 0 || (print.getTSS() <= getStandardNum(standard,0) && print.getCOD() <= getStandardNum(standard,1) && print.getBOD() <= getStandardNum(standard,2)))
+            if (standard == 3 || (print.getTSS() <= getStandardNum(standard,0) && print.getCOD() <= getStandardNum(standard,1) && print.getBOD() <= getStandardNum(standard,2)))
                 System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n", print.getTreatments()[0], print.getTreatments()[1], print.getTreatments()[2], print.getTreatments()[3], print.getTreatments()[4], print.getTSS(), print.getCOD(), print.getBOD(), print.getCost());
         }
     }

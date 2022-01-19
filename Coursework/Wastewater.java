@@ -22,22 +22,22 @@ public class Wastewater { //main class
         while (true){ //while loop until user exits
 
             text.getOptions();
-            option = input.getIntBounded(1,9);
+            option = input.getIntBounded(9);
 
             if(option==1){
 
                 menu.showAllTreatments();
 
                 text.getTreatmentText("type");
-                type = input.getIntBounded(1,5);
+                type = input.getIntBounded(5);
                 text.getTreatmentText("name");
                 name = input.getString();
                 text.getTreatmentText("TSS");
-                TSS = input.getDouble();
+                TSS = input.getDoubleBounded();
                 text.getTreatmentText("COD");
-                COD = input.getDouble();
+                COD = input.getDoubleBounded();
                 text.getTreatmentText("BOD");
-                BOD = input.getDouble();
+                BOD = input.getDoubleBounded();
                 text.getTreatmentText("area");
                 area = input.getDouble();
                 text.getTreatmentText("energy");
@@ -50,9 +50,9 @@ public class Wastewater { //main class
                 menu.showAllTreatments();
 
                 text.getTreatmentText("type");
-                type = input.getIntBounded(1,5);
+                type = input.getIntBounded(5);
                 text.getTreatmentText("code");
-                code = input.getInt();
+                code = input.getIntBounded(menu.getSize(type));
 
                 menu.delete(type,code);
 
@@ -64,22 +64,24 @@ public class Wastewater { //main class
                 menu.showAllTreatments();
 
                 text.getTreatmentText("type");
-                type = input.getIntBounded(1,5);
+                type = input.getIntBounded(5);
                 text.getTreatmentText("code");
-                code = input.getInt();
+                code = input.getIntBounded(menu.getSize(type));
 
                 text.getChoices();
 
                 text.getTreatmentText("choice");
-                choice = input.getIntBounded(1,7);
+                choice = input.getIntBounded(7);
 
                 System.out.println("Enter new " + choices[choice-1] + ":");
                 if (choice==1)
-                    newEntry = Integer.toString(input.getIntBounded(1,5));
+                    newEntry = Integer.toString(input.getIntBounded(5));
                 else if (choice==2)
                     newEntry = input.getString();
-                else
+                else if (choice>=6)
                     newEntry = Double.toString(input.getDouble());
+                else
+                    newEntry = Double.toString(input.getDoubleBounded());
 
                 menu.change(type,code,choice,newEntry);
             }
@@ -91,7 +93,13 @@ public class Wastewater { //main class
                 menu.showAllTreatments();
 
                 System.out.println("Enter 5-digit code:");
-                code = input.getIntBounded(11111,99999);
+                while (true) {
+                    code = input.getIntBounded(99999);
+                    if(Integer.toString(code).length()==5)
+                        break;
+                    else
+                        text.invalidText();
+                }
 
                 if(menu.getCode(Integer.toString(code))) {
                     text.getInitialText("TSS");
@@ -118,7 +126,7 @@ public class Wastewater { //main class
 
                 text.getStandard();
                 text.getTreatmentText("standard");
-                standard = input.getIntBounded(0,2);
+                standard = input.getIntBounded(3);
 
                 text.getHeader();
                 menu.showAllResults(new Initial(TSS,COD,BOD),standard);
@@ -131,15 +139,15 @@ public class Wastewater { //main class
 
                 text.getSortType();
                 text.getSortText("type");
-                type = input.getIntBounded(1,4);
+                type = input.getIntBounded(4);
 
                 text.getSortOrder();
                 text.getSortText("order");
-                code = input.getIntBounded(1,2);
+                code = input.getIntBounded(2);
 
                 text.getStandard();
                 text.getTreatmentText("standard");
-                standard = input.getIntBounded(0,2);
+                standard = input.getIntBounded(3);
 
                 text.getHeader();
                 menu.sortResults(type,code,standard);
@@ -147,7 +155,7 @@ public class Wastewater { //main class
             else if(option==8){
 
                 text.getTreatmentText("weight");
-                weight = input.getDoubleBounded(0,1);
+                weight = input.getDoubleBounded();
 
                 menu.uniformCost(weight);
             }

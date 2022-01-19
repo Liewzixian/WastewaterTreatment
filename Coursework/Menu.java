@@ -7,8 +7,7 @@ import Coursework.PathingAlgorithm.AdjacencyList;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.TreeMap;
+import java.util.ArrayList;
 
 public class Menu {
 
@@ -18,49 +17,43 @@ public class Menu {
     IO io;
     boolean changed;
 
-    LinkedList<Result> results;
+    ArrayList<Result> results;
+    ArrayList<ArrayList<Tech>> fullList;
     AdjacencyList adjacencyList;
-    TreeMap<Integer,TreeMap<Integer,Tech>> fullList;
 
     public Menu(String fileName) {
 
-        this.fullList = new TreeMap<>();
-        this.results = new LinkedList<>();
+        this.fullList = new ArrayList<>();
+        this.results = new ArrayList<>();
         this.adjacencyList = new AdjacencyList(fullList);
 
-        for(int i = 1; i <= 5; i++){
-            fullList.put(i, new TreeMap<>());
+        for(int i = 0; i < 5; i++){
+            fullList.add(new ArrayList<>());
         }
 
-        io = new IO(fileName);
+        io = new IO(fileName,fullList);
         techControl = new TechControl(fullList);
         resultControl = new ResultControl(fullList,results);
         changed = false;
     }
 
     public void load() throws FileNotFoundException {
-        io.load(fullList);
+        io.load();
         System.out.println("Treatment data loaded to linked list.");
     }
 
     public void add(int type, Tech newTech){
         techControl.addEntry(type,newTech);
-        techControl.renumberList(fullList.get(type),type);
         changed = true;
     }
 
     public void delete(int type, int code){
         techControl.deleteEntry(type,code);
-        techControl.renumberList(fullList.get(type),type);
         changed = true;
     }
 
     public void change(int type, int code, int choice, String newEntry){
         techControl.changeEntry(type,code,choice,newEntry);
-        if(choice==1) {
-            techControl.renumberList(fullList.get(type), type);
-            techControl.renumberList(fullList.get(Integer.parseInt(newEntry)), Integer.parseInt(newEntry));
-        }
         changed = true;
     }
 
@@ -96,7 +89,11 @@ public class Menu {
     }
 
     public void save() throws IOException {
-        io.save(fullList);
+        io.save();
         System.out.println("Treatment data saved to text file.");
+    }
+
+    public int getSize(int type){
+        return fullList.get(type-1).size();
     }
 }
