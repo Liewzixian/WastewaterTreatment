@@ -19,13 +19,12 @@ public class TechControl {
     }
 
     public void deleteEntry(int type, int code){
-
-        Tech temp = fullList.get(type).remove(code);
-
-        if(temp == null)
-            System.out.println("Entry does not exist.");
-        else
+        if(fullList.get(type).get(code) == null || fullList.get(type).size()==1)
+            System.out.println("Entry does not exist or is last entry of the list");
+        else {
+            fullList.get(type).remove(code);
             System.out.println("Entry removed");
+        }
     }
 
     public void changeEntry(int type, int code, int choice, String newEntry){
@@ -33,8 +32,7 @@ public class TechControl {
         Tech temp = fullList.get(type).get(code);
 
         if(temp!=null) { //if entry exists
-
-            if(choice==1) {
+            if(choice==1 && fullList.get(type).size()>1) {
                 fullList.get(type).remove(code);
                 fullList.get(Integer.parseInt(newEntry)).put(fullList.get(Integer.parseInt(newEntry)).size() + 1, temp);
             }
@@ -51,10 +49,12 @@ public class TechControl {
             else if(choice==7)
                 temp.setEnergy(Double.parseDouble(newEntry)); //change old value to new
 
-            if(choice!=1)
-                fullList.get(type).replace(code,temp);
-
-            System.out.println("Entry changed");
+            if(choice!=1 || fullList.get(type).size()>1) {
+                fullList.get(type).replace(code, temp);
+                System.out.println("Entry changed");
+            }
+            else
+                System.out.println("Entry is the last entry of the list");
         }
         else
             System.out.println("Entry does not exist");
@@ -73,5 +73,14 @@ public class TechControl {
         fullList.get(type).clear();
         fullList.get(type).putAll(temp);
         temp.clear();
+    }
+
+    public void showAllTreatments(){
+        String[] treatments = {"Preliminary","Chemical","Biological","Tertiary","Sludge"};
+        for(Map.Entry<Integer, TreeMap<Integer,Tech>> full : fullList.entrySet()) {
+            System.out.format("\n%S (Type:%d)\n",treatments[full.getKey()-1],full.getKey());
+            for (Map.Entry<Integer, Tech> list : full.getValue().entrySet())
+                System.out.format("%d,%S,%.2f,%.2f,%.2f,%.2f,%.3f\n", list.getKey(), list.getValue().getName(), list.getValue().getTSS(), list.getValue().getCOD(), list.getValue().getBOD(), list.getValue().getArea(), list.getValue().getEnergy());
+        }
     }
 }

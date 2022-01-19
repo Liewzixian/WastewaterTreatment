@@ -1,5 +1,6 @@
 package Coursework;
 
+import Coursework.DataClasses.Initial;
 import Coursework.DataClasses.Tech;
 
 import java.io.IOException;
@@ -11,8 +12,6 @@ public class Wastewater { //main class
         int option,type,code,choice,standard;
         double TSS,COD,BOD,area,energy,weight;
         String name,newEntry;
-        boolean exists;
-        Tech newTech;
 
         Menu menu = new Menu("D:\\Download\\output.txt");
         menu.load();
@@ -44,8 +43,7 @@ public class Wastewater { //main class
                 text.getTreatmentText("energy");
                 energy = input.getDouble();
 
-                newTech = new Tech(name,TSS,COD,BOD,area,energy);
-                menu.add(type,newTech);
+                menu.add(type,new Tech(name,TSS,COD,BOD,area,energy));
             }
             else if(option==2){
 
@@ -94,9 +92,8 @@ public class Wastewater { //main class
 
                 System.out.println("Enter 5-digit code:");
                 code = input.getIntBounded(11111,99999);
-                exists = menu.getCode(Integer.toString(code));
 
-                if(exists) {
+                if(menu.getCode(Integer.toString(code))) {
                     text.getInitialText("TSS");
                     TSS = input.getDouble();
                     text.getInitialText("COD");
@@ -105,7 +102,7 @@ public class Wastewater { //main class
                     BOD = input.getDouble();
 
                     text.getHeader();
-                    menu.getSpecificResult(TSS, COD, BOD);
+                    menu.getSpecificResult(new Initial(TSS,COD,BOD));
                 }
                 else
                     text.invalidText();
@@ -124,10 +121,13 @@ public class Wastewater { //main class
                 standard = input.getIntBounded(0,2);
 
                 text.getHeader();
-                menu.showAllResults(TSS,COD,BOD,standard);
+                menu.showAllResults(new Initial(TSS,COD,BOD),standard);
 
             }
             else if(option==7){
+
+                System.out.format("\nIn the event that results are not initialised or a change in data occurs,");
+                System.out.format("default values of 1000 will be used for TSS, COD and BOD to calculate new results.\n");
 
                 text.getSortType();
                 text.getSortText("type");
@@ -140,11 +140,6 @@ public class Wastewater { //main class
                 text.getStandard();
                 text.getTreatmentText("standard");
                 standard = input.getIntBounded(0,2);
-
-                if(menu.checkResults()){
-                    System.out.println("No record of previous calculations or change in data detected");
-                    System.out.println("Default TSS, COD and BOD values of 1000 used to calculate new results");
-                }
 
                 text.getHeader();
                 menu.sortResults(type,code,standard);

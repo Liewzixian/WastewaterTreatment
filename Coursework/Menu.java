@@ -1,5 +1,6 @@
 package Coursework;
 
+import Coursework.DataClasses.Initial;
 import Coursework.DataClasses.Result;
 import Coursework.DataClasses.Tech;
 import Coursework.PathingAlgorithm.AdjacencyList;
@@ -7,7 +8,6 @@ import Coursework.PathingAlgorithm.AdjacencyList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.TreeMap;
 
 public class Menu {
@@ -65,47 +65,28 @@ public class Menu {
     }
 
     public void showAllTreatments(){
-        String[] treatments = {"Preliminary","Chemical","Biological","Tertiary","Sludge"};
-        for(Map.Entry<Integer, TreeMap<Integer,Tech>> full : fullList.entrySet()) {
-            System.out.format("\n%S (Type:%d)\n",treatments[full.getKey()-1],full.getKey());
-            for (Map.Entry<Integer, Tech> list : full.getValue().entrySet())
-                System.out.format("%d,%S,%.2f,%.2f,%.2f,%.2f,%.3f\n", list.getKey(), list.getValue().getName(), list.getValue().getTSS(), list.getValue().getCOD(), list.getValue().getBOD(), list.getValue().getArea(), list.getValue().getEnergy());
-        }
-        System.out.println();
+        techControl.showAllTreatments();
     }
 
     public boolean getCode(String choice){
         return resultControl.getCode(choice);
     }
 
-    public void getSpecificResult(double TSS, double COD, double BOD){
-        resultControl.getSpecificResult(TSS,COD,BOD);
+    public void getSpecificResult(Initial initial){
+        resultControl.getSpecificResult(initial);
     }
 
-    public void showAllResults(double TSS, double COD, double BOD, int standard){
-        results.clear();
-        resultControl.calculateResults(TSS,COD,BOD);
-        for(Result print : results) {
-            if(standard == 0||(print.getTSS() <= resultControl.getStandardNum(standard,0) && print.getCOD() <= resultControl.getStandardNum(standard,1) && print.getBOD() <= resultControl.getStandardNum(standard,2)))
-                System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n", print.getT1(), print.getT2(), print.getT3(), print.getT4(), print.getT5(), print.getTSS(), print.getCOD(), print.getBOD(), print.getCost());
-        }
+    public void showAllResults(Initial initial, int standard){
+        resultControl.calculateResults(initial);
+        resultControl.printResults(standard);
         changed = false;
     }
 
-    public boolean checkResults(){
-        return (results.size()==0 || changed);
-    }
-
     public void sortResults(int type, int order, int standard){
-        if(checkResults()) { //if list empty or list changed
-            results.clear();
-            resultControl.calculateResults(1000, 1000, 1000); //default of 1000
-        }
+        if(results.size()==0 || changed)
+            resultControl.calculateResults(new Initial(1000, 1000, 1000)); //default of 1000
         resultControl.sortResults(type,order);
-        for(Result print : results) {
-            if (standard == 0 || (print.getTSS() <= resultControl.getStandardNum(standard,0) && print.getCOD() <= resultControl.getStandardNum(standard,1) && print.getBOD() <= resultControl.getStandardNum(standard,2)))
-                System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n", print.getT1(), print.getT2(), print.getT3(), print.getT4(), print.getT5(), print.getTSS(), print.getCOD(), print.getBOD(), print.getCost());
-        }
+        resultControl.printResults(standard);
         resultControl.getSortResult(type,order,standard);
         changed = false;
     }

@@ -1,8 +1,15 @@
 package Coursework.DataClasses;
 
 public class Result { //class for linked list to hold result of all possible combinations of treatments (can add more later)
-    private String t1,t2,t3,t4,t5;
-    private double TSS,COD,BOD,cost; //results for all calculations
+    private final String t1;
+    private final String t2;
+    private final String t3;
+    private final String t4;
+    private final String t5;
+    private final double TSS;
+    private final double COD;
+    private final double BOD;
+    private final double cost; //results for all calculations
 
     public Result(Tech t1,Tech t2,Tech t3,Tech t4,Tech t5,double TSS,double COD,double BOD) {
         this.t1 = t1.getName();
