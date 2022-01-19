@@ -29,8 +29,8 @@ public class Text {
     public void getSortType(){
         System.out.println("Enter result to be sorted:");
         System.out.println("1.TSS");
-        System.out.println("2.BOD");
-        System.out.println("3.COD");
+        System.out.println("2.COD");
+        System.out.println("3.BOD");
         System.out.println("4.Cost");
     }
 

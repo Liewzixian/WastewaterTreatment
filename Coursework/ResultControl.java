@@ -25,7 +25,7 @@ public class ResultControl {
         Comparator<Result> CostAscending = Comparator.comparing(Result::getCost);
 
         for(int i = 0; i < 4; i++)
-            comparators.add(new ArrayList<>());
+            comparators.add(new ArrayList<>(2));
 
         comparators.get(0).add(TssAscending);
         comparators.get(0).add(TssAscending.reversed());
@@ -39,22 +39,20 @@ public class ResultControl {
 
     public void calculateResults(Initial initial){
 
-        Tech tech1,tech2,tech3,tech4,tech5; //hold 5 elements of each type
-        Result newResult; //hold final result
-
+        Tech[] tech = new Tech[5];
         results.clear();
+
         for(Map.Entry<Integer, Tech> primary : fullList.get(1).entrySet()) {
-            tech1 = primary.getValue();
+            tech[0] = primary.getValue();
             for (Map.Entry<Integer, Tech> chemical : fullList.get(2).entrySet()) {
-                tech2 = chemical.getValue();
+                tech[1] = chemical.getValue();
                 for (Map.Entry<Integer, Tech> biological : fullList.get(3).entrySet()) {
-                    tech3 = biological.getValue();
+                    tech[2] = biological.getValue();
                     for (Map.Entry<Integer, Tech> tertiary : fullList.get(4).entrySet()) {
-                        tech4 = tertiary.getValue();
+                        tech[3] = tertiary.getValue();
                         for (Map.Entry<Integer, Tech> sludge : fullList.get(5).entrySet()) {
-                            tech5 = sludge.getValue();
-                            newResult = new Result(tech1,tech2,tech3,tech4,tech5,initial.getTSS(),initial.getCOD(),initial.getBOD());
-                            results.add(newResult);
+                            tech[4] = sludge.getValue();
+                            results.add(new Result(tech,initial));
                         }
                     }
                 }
@@ -109,7 +107,7 @@ public class ResultControl {
     public void printResults(int standard){
         for(Result print : results) {
             if (standard == 0 || (print.getTSS() <= getStandardNum(standard,0) && print.getCOD() <= getStandardNum(standard,1) && print.getBOD() <= getStandardNum(standard,2)))
-                System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n", print.getT1(), print.getT2(), print.getT3(), print.getT4(), print.getT5(), print.getTSS(), print.getCOD(), print.getBOD(), print.getCost());
+                System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n", print.getTreatments()[0], print.getTreatments()[1], print.getTreatments()[2], print.getTreatments()[3], print.getTreatments()[4], print.getTSS(), print.getCOD(), print.getBOD(), print.getCost());
         }
     }
 }
