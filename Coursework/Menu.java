@@ -82,11 +82,13 @@ public class Menu {
         resultControl.getSpecificResult(TSS,COD,BOD);
     }
 
-    public void showAllResults(double TSS, double COD, double BOD){
+    public void showAllResults(double TSS, double COD, double BOD, int standard){
         results.clear();
         resultControl.calculateResults(TSS,COD,BOD);
-        for(Result print : results)
-            System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n", print.getT1(), print.getT2(), print.getT3(), print.getT4(), print.getT5(), print.getTSS(),print.getCOD(),print.getBOD(), print.getCost());
+        for(Result print : results) {
+            if(standard == 0||(print.getTSS() <= resultControl.getStandardNum(standard,0) && print.getCOD() <= resultControl.getStandardNum(standard,1) && print.getBOD() <= resultControl.getStandardNum(standard,2)))
+                System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n", print.getT1(), print.getT2(), print.getT3(), print.getT4(), print.getT5(), print.getTSS(), print.getCOD(), print.getBOD(), print.getCost());
+        }
         changed = false;
     }
 
@@ -94,14 +96,17 @@ public class Menu {
         return (results.size()==0 || changed);
     }
 
-    public void sortResults(int type, int order){
+    public void sortResults(int type, int order, int standard){
         if(checkResults()) { //if list empty or list changed
             results.clear();
             resultControl.calculateResults(1000, 1000, 1000); //default of 1000
         }
         resultControl.sortResults(type,order);
-        for(Result print : results)
-            System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n", print.getT1(), print.getT2(), print.getT3(), print.getT4(), print.getT5(), print.getTSS(),print.getCOD(),print.getBOD(), print.getCost());
+        for(Result print : results) {
+            if (standard == 0 || (print.getTSS() <= resultControl.getStandardNum(standard,0) && print.getCOD() <= resultControl.getStandardNum(standard,1) && print.getBOD() <= resultControl.getStandardNum(standard,2)))
+                System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n", print.getT1(), print.getT2(), print.getT3(), print.getT4(), print.getT5(), print.getTSS(), print.getCOD(), print.getBOD(), print.getCost());
+        }
+        resultControl.getSortResult(type,order,standard);
         changed = false;
     }
 

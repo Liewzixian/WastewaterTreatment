@@ -35,9 +35,16 @@ public class Text {
     }
 
     public void getSortOrder(){
-        System.out.println("Enter order to be sorted");
+        System.out.println("Enter order to be sorted:");
         System.out.println("1.Ascending");
         System.out.println("2.Descending");
+    }
+
+    public void getStandard(){
+        System.out.println("Enter wastewater standard:");
+        System.out.println("0.No Standard");
+        System.out.println("1.Standard A");
+        System.out.println("2.Standard B");
     }
 
     public void getHeader(){

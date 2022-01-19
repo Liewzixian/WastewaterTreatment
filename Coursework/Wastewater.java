@@ -8,7 +8,7 @@ public class Wastewater { //main class
 
     public static void main(String[] args) throws IOException {
 
-        int option,type,code,choice;
+        int option,type,code,choice,standard;
         double TSS,COD,BOD,area,energy,weight;
         String name,newEntry;
         boolean exists;
@@ -119,8 +119,12 @@ public class Wastewater { //main class
                 text.getInitialText("BOD");
                 BOD = input.getDouble();
 
+                text.getStandard();
+                text.getTreatmentText("standard");
+                standard = input.getIntBounded(0,2);
+
                 text.getHeader();
-                menu.showAllResults(TSS,COD,BOD);
+                menu.showAllResults(TSS,COD,BOD,standard);
 
             }
             else if(option==7){
@@ -133,13 +137,17 @@ public class Wastewater { //main class
                 text.getSortText("order");
                 code = input.getIntBounded(1,2);
 
+                text.getStandard();
+                text.getTreatmentText("standard");
+                standard = input.getIntBounded(0,2);
+
                 if(menu.checkResults()){
                     System.out.println("No record of previous calculations or change in data detected");
                     System.out.println("Default TSS, COD and BOD values of 1000 used to calculate new results");
                 }
 
                 text.getHeader();
-                menu.sortResults(type,code);
+                menu.sortResults(type,code,standard);
             }
             else if(option==8){
 

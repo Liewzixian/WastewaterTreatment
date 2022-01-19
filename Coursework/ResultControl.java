@@ -108,10 +108,30 @@ public class ResultControl {
     }
 
     public void getSpecificResult(double initialTSS, double initialCOD, double initialBOD){
+        String[] standard = {"A","B"};
+
         TSS = initialTSS * (1 - t1.getTSS()) * (1 - t2.getTSS()) * (1 - t3.getTSS()) * (1 - t4.getTSS()) * (1 - t5.getTSS());
         COD = initialCOD * (1 - t1.getCOD()) * (1 - t2.getCOD()) * (1 - t3.getCOD()) * (1 - t4.getCOD()) * (1 - t5.getCOD());
         BOD = initialBOD * (1 - t1.getBOD()) * (1 - t2.getBOD()) * (1 - t3.getBOD()) * (1 - t4.getBOD()) * (1 - t5.getBOD());
         cost = (t1.getArea() * t1.getEnergy()) + (t2.getArea() * t2.getEnergy()) + (t3.getArea() * t3.getEnergy()) + (t4.getArea() * t4.getEnergy()) + (t5.getArea() * t5.getEnergy());
         System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n", t1.getName(), t2.getName(), t3.getName(), t4.getName(), t5.getName(), TSS, BOD, COD, cost); //print out results
+
+        for(int i = 1; i <= 2; i++)
+            if(TSS <= getStandardNum(i,0) && COD <= getStandardNum(i,1) && BOD <= getStandardNum(i,2))
+                System.out.println("Standard " + standard[i-1] + " satisfied.");
+            else
+                System.out.println("Standard " + standard[i-1] + " not satisfied.");
+    }
+
+    public void getSortResult(int type, int order, int standard){
+        String[] sortType = {"TSS","BOD","COD","Cost"};
+        String[] sortOrder = {"Ascending","Descending"};
+        String[] sortStandard = {"No Standard","Standard A","Standard B"};
+        System.out.format("Results sorted by " + sortType[type-1] + " in " + sortOrder[order-1] + " under " + sortStandard[standard]);
+    }
+
+    public double getStandardNum(int standard, int type){
+        double[][] standards = {{0,0,0},{1,10,10},{1,10,10}};
+        return standards[standard][type];
     }
 }
