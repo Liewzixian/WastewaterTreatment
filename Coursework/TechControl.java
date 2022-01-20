@@ -12,27 +12,33 @@ public class TechControl {
         this.fullList = fullList;
     }
 
-    public void addEntry(int type, Tech newTech) {
+    public boolean addEntry(int type, Tech newTech) {
         fullList.get(type-1).add(newTech);
         System.out.println("New entry added");
+        return true;
     }
 
-    public void deleteEntry(int type, int code){
-        if(fullList.get(type-1).size()==1)
+    public boolean deleteEntry(int type, int code){
+        if(fullList.get(type-1).size()==1) {
             System.out.println("Entry is the last entry of the list");
+            return false;
+        }
         else {
             fullList.get(type-1).remove(code-1);
             System.out.println("Entry removed");
+            return true;
         }
     }
 
-    public void changeEntry(int type, int code, int choice, String newEntry){
+    public boolean changeEntry(int type, int code, int choice, String newEntry){
 
         Tech temp = fullList.get(type-1).get(code-1);
+        boolean changed = false;
 
         if(choice==1 && fullList.get(type-1).size()>1) {
             fullList.get(type-1).remove(code-1);
             fullList.get(Integer.parseInt(newEntry)-1).add(temp);
+            changed = true;
         }
         else if(choice==2)
             temp.setName(newEntry); //change old name to new
@@ -47,12 +53,15 @@ public class TechControl {
         else if(choice==7)
             temp.setEnergy(Double.parseDouble(newEntry)); //change old value to new
 
-        if(choice!=1 || fullList.get(type-1).size()>1) {
+        if(choice!=1 || changed) {
             fullList.get(type-1).set(code-1,temp);
             System.out.println("Entry changed");
+            return true;
         }
-        else
+        else {
             System.out.println("Entry is the last entry of the list");
+            return false;
+        }
     }
 
     public void showAllTreatments(){

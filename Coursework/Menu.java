@@ -43,18 +43,15 @@ public class Menu {
     }
 
     public void add(int type, Tech newTech){
-        techControl.addEntry(type,newTech);
-        changed = true;
+        changed = techControl.addEntry(type,newTech);
     }
 
     public void delete(int type, int code){
-        techControl.deleteEntry(type,code);
-        changed = true;
+        changed = techControl.deleteEntry(type,code);
     }
 
     public void change(int type, int code, int choice, String newEntry){
-        techControl.changeEntry(type,code,choice,newEntry);
-        changed = true;
+        changed = techControl.changeEntry(type,code,choice,newEntry);
     }
 
     public void showAllTreatments(){
