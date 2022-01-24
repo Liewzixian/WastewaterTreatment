@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.LoginController">
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="220.0" BorderPane.alignment="CENTER">
          <children>
@@ -29,7 +34,7 @@
             <PasswordField fx:id="enterPasswordField" layoutX="82.0" layoutY="200.0" prefHeight="26.0" prefWidth="162.0" promptText="Password" />
             <TextField fx:id="UsernameTextField" layoutX="83.0" layoutY="140.0" prefHeight="26.0" prefWidth="161.0" promptText="Username" />
             <Button fx:id="loginButton" layoutX="17.0" layoutY="276.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="26.0" prefWidth="232.0" style="-fx-background-color: #00D4FF;" text="Login" />
-            <Label alignment="CENTER" layoutX="15.0" layoutY="239.0" prefHeight="18.0" prefWidth="230.0" />
+            <Label fx:id="LoginMessageLabel" alignment="CENTER" layoutX="15.0" layoutY="239.0" prefHeight="18.0" prefWidth="230.0" />
             <Button fx:id="cancelButton" cancelButton="true" layoutX="17.0" layoutY="317.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="26.0" prefWidth="232.0" style="-fx-background-color: #00D4FF;" text="Cancel" />
          </children>
       </AnchorPane>
