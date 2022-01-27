@@ -55,7 +55,7 @@ public class MenuController {
     protected void afterMenuButtonOnAction(ActionEvent event) throws IOException{
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader2.load(), 1039, 566);
+            scene = new Scene(fxmlLoader2.load(), 600, 400);
         } catch (IOException e) {
             e.printStackTrace();
         }
