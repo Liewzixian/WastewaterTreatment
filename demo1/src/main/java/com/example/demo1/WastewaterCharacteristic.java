@@ -18,7 +18,7 @@ public class WastewaterCharacteristic {
     ObservableList <String> StandardsList = FXCollections.observableArrayList("Standard A","Standard B");
     Input input = new Input();
     String Tss,Bss,Css,SelectedStandard;
-    static Menu menu = new Menu("/Users/kaorichoi/Desktop/WastewaterTreatment-main/output.txt");
+    static Menu menu = new Menu("output.txt");
 
     int [] standard ={1,2};
 
