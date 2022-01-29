@@ -133,7 +133,7 @@ public class ManageModel implements Initializable {
         SearchBar.setOnKeyReleased(e -> {
             SearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
                 filteredData.setPredicate((Predicate<? super Models>) models -> {
-                    System.out.println(models.toString());
+        
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
                     }
@@ -178,9 +178,10 @@ public class ManageModel implements Initializable {
         Login.window.setScene(scene);
 
     }
-    /*
+    
     @FXML
     void ModifyButtonOnAction(ActionEvent event) throws Exception {
+     /* 
         TableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Models>() {
             @Override
             public void changed(ObservableValue<? extends Models> observable, Models oldValue, Models newValue) {
@@ -228,7 +229,6 @@ public class ManageModel implements Initializable {
     }
     @FXML
     void Search(ActionEvent event) {
-
         searCh();
     }
 
