@@ -156,7 +156,7 @@ public class ManageModel implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+                searCh();
         try {
             readFile();
         } catch (Exception e) {
@@ -229,7 +229,7 @@ public class ManageModel implements Initializable {
     }
     @FXML
     void Search(ActionEvent event) {
-        searCh();
+   
     }
 
     }
