@@ -181,28 +181,20 @@ public class ManageModel implements Initializable {
     
     @FXML
     void ModifyButtonOnAction(ActionEvent event) throws Exception {
-     /* 
-        TableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Models>() {
-            @Override
-            public void changed(ObservableValue<? extends Models> observable, Models oldValue, Models newValue) {
-                if (oldValue !=null) NameColumn.textProperty().unbindBidirectional(oldValue.nameProperty());
-                if (newValue !=null) {
-                    NameColumn.textProperty().bindBidirectional(newValue.nameProperty());
-                    System.out.println(newValue.getName());
-                }
-                try {
-                    FileWriter myWriter = new FileWriter(inputFile);
-                    myWriter.write(myWriter + String.valueOf(newValue.getName()));
-                    myWriter.close();
-                } catch (IOException e) {
-                    Logger.getLogger(getClass().getName()).log(SEVERE, null, e);
-                }
+    BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+        ObservableList<Models> Md = TableView.getItems();
 
-            }
-        });
-
+        String[] words = Md.toString().split(", ");
+        for (String word: words) {
+            writer.write(word.replace("[","").replace("]", ""));
+            writer.newLine();
+        }
+        writer.close();
+        reader.close();
+        inputFile.delete();
+        tempFile.renameTo(inputFile);
     }
-*/
     @FXML
     void deleteButtonOnAction(ActionEvent event) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
