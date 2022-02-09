@@ -18,7 +18,7 @@ public class ConnectionDB {
             ConnectionDB test = new ConnectionDB();
             String databaseName = "javafx_db";
             String user = "root";
-            String pass = "root";
+            String pass = "snsqUv_zspnt5";
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
             con = DriverManager.getConnection(url, user, pass);
             Statement stmt = con.createStatement();

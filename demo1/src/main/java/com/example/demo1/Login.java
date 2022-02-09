@@ -9,8 +9,8 @@ public class Login extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         window=stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("ManageModel-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1039, 636);
+        FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 542, 400);
         window.setTitle("Wastewater Treatment Decision Making System");
         window.setScene(scene);
         window.show();
