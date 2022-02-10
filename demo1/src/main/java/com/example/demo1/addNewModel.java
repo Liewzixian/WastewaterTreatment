@@ -93,6 +93,7 @@ public class addNewModel {
             Tech newTech;
             newTech = new Tech(String.valueOf(TModel.getText()), Double.parseDouble(TTss.getText()), Double.parseDouble(TCod.getText()), Double.parseDouble(TBod.getText()), Double.parseDouble(TAof.getText()), Double.parseDouble(TEpm.getText()));
             menu.add(Integer.parseInt(TStage.getText()), newTech);
+            menu.save();
 
         } catch (Exception e) {
             e.printStackTrace();

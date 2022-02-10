@@ -48,7 +48,7 @@ public class MenuController {
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load(), 1039, 566);
-            menu.save();
+            //menu.save();
         } catch (IOException e) {
             e.printStackTrace();
         }

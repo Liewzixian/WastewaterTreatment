@@ -19,15 +19,15 @@
             </Label>
          </children>
       </AnchorPane>
-      <TableView layoutX="171.0" layoutY="93.0" prefHeight="397.0" prefWidth="822.0">
+      <TableView fx:id="TableView" layoutX="171.0" layoutY="93.0" prefHeight="397.0" prefWidth="822.0">
         <columns>
-          <TableColumn prefWidth="40.0" style="-fx-background-color: #00D4FF;" text="Stage" />
-          <TableColumn prefWidth="88.0" style="-fx-background-color: #00D4FF;" text="Model Name" />
-            <TableColumn prefWidth="144.0" style="-fx-background-color: #00D4FF;" text="COD Cleaning Efficiency " />
-            <TableColumn prefWidth="144.79989624023438" style="-fx-background-color: #00D4FF;" text="BOD Cleaning Efficiency " />
-            <TableColumn minWidth="0.0" prefWidth="141.60009765625" style="-fx-background-color: #00D4FF;" text="TSS Cleaning Efficiency " />
-            <TableColumn minWidth="0.0" prefWidth="115.9998779296875" style="-fx-background-color: #00D4FF;" text="Area of Footprint" />
-            <TableColumn minWidth="0.0" prefWidth="147.199951171875" style="-fx-background-color: #00D4FF;" text="Energy per Meter Cube " />
+          <TableColumn fx:id="StageColumn" prefWidth="40.0" style="-fx-background-color: #00D4FF;" text="Stage" />
+          <TableColumn fx:id="NameColumn" prefWidth="88.0" style="-fx-background-color: #00D4FF;" text="Model Name" />
+            <TableColumn fx:id="codColumn" prefWidth="144.0" style="-fx-background-color: #00D4FF;" text="COD Cleaning Efficiency " />
+            <TableColumn fx:id="bodColumn" prefWidth="144.79989624023438" style="-fx-background-color: #00D4FF;" text="BOD Cleaning Efficiency " />
+            <TableColumn fx:id="tssColumn" minWidth="0.0" prefWidth="141.60009765625" style="-fx-background-color: #00D4FF;" text="TSS Cleaning Efficiency " />
+            <TableColumn fx:id="areaColumn" minWidth="0.0" prefWidth="115.9998779296875" style="-fx-background-color: #00D4FF;" text="Area of Footprint" />
+            <TableColumn fx:id="energyColumn" minWidth="0.0" prefWidth="147.199951171875" style="-fx-background-color: #00D4FF;" text="Energy per Meter Cube " />
         </columns>
       </TableView>
       <TextField fx:id="SearchModel" layoutX="173.0" layoutY="35.0" prefHeight="26.0" prefWidth="284.0" />

@@ -78,6 +78,7 @@ public class LoginController {
                     LoginMessageLabel.setText("Successfully login!");
                     nextScene(); // go to next scene when login successfully
                     menu = new Menu("src/main/resources/com/Treatment/output.txt");
+                    menu.load();
                 } else {
                     LoginMessageLabel.setText("Invalid login!");
 

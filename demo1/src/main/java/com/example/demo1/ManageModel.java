@@ -122,13 +122,19 @@ public class ManageModel implements Initializable {
     public void searCh() {
         FilteredList<Models> filteredData = new FilteredList<>(detailss, e -> true);
         SearchBar.setOnKeyReleased(e -> {
-            SearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> filteredData.setPredicate((Predicate<? super Models>) models -> {
+            SearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
+                filteredData.setPredicate((Predicate<? super Models>) models -> {
 
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                return models.toString().contains(newValue);
-            }));
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    if (models.toString().contains(newValue)) {
+                        return true;
+                    }
+                    return false;
+                });
+            });
 
             SortedList<Models> sortedData = new SortedList<>(filteredData);
             sortedData.comparatorProperty().bind(TableView.comparatorProperty());
@@ -141,7 +147,7 @@ public class ManageModel implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-                searCh();
+                //searCh();
         try {
             readFile();
         } catch (Exception e) {
@@ -163,7 +169,7 @@ public class ManageModel implements Initializable {
         Login.window.setScene(scene);
 
     }
-    
+
     @FXML
     void ModifyButtonOnAction() throws Exception {
     BufferedReader reader = new BufferedReader(new FileReader(inputFile));
@@ -180,6 +186,8 @@ public class ManageModel implements Initializable {
         inputFile.delete();
         tempFile.renameTo(inputFile);
     }
+
+
     @FXML
     void deleteButtonOnAction(ActionEvent event) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
