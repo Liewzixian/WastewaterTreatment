@@ -12,6 +12,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 
+import static com.example.demo1.LoginController.menu;
+
 public class DisplayResult {
     ObservableList<String> Preference = FXCollections.observableArrayList("Best Overall","Cost Effectiveness ");
 
@@ -71,7 +73,7 @@ public class DisplayResult {
         COD.setCellValueFactory(new PropertyValueFactory<>("COD"));
         BOD.setCellValueFactory(new PropertyValueFactory<>("BOD"));
         COST.setCellValueFactory(new PropertyValueFactory<>("cost"));
-        ResultView.setItems(WastewaterCharacteristic.menu.getResultsTable());
+        ResultView.setItems(menu.getResultsTable());
 
     }
 

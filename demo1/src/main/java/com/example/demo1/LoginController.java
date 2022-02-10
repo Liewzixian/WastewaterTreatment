@@ -22,6 +22,7 @@ import java.util.EventObject;
 
 
 public class LoginController {
+    static Menu menu;
 
     @FXML
     private Button loginButton;
@@ -76,7 +77,7 @@ public class LoginController {
                 if (queryResult.getInt(1) == 1) {
                     LoginMessageLabel.setText("Successfully login!");
                     nextScene(); // go to next scene when login successfully
-
+                    menu = new Menu("src/main/resources/com/Treatment/output.txt");
                 } else {
                     LoginMessageLabel.setText("Invalid login!");
 

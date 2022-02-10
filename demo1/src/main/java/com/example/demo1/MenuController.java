@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static com.example.demo1.LoginController.menu;
+
 public class MenuController {
 
     FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource("ManageModel-view.fxml"));
@@ -46,6 +48,7 @@ public class MenuController {
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load(), 1039, 566);
+            menu.save();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,20 +1,18 @@
 package com.example.demo1;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.concurrent.ScheduledService;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
@@ -22,24 +20,17 @@ import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileTime;
-import java.util.*;
+import java.util.Collection;
+import java.util.ResourceBundle;
 import java.util.function.Predicate;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.logging.Level.SEVERE;
 
 
 public class ManageModel implements Initializable {
 
     private final ObservableList<Models> detailss = FXCollections.observableArrayList();
-    File inputFile = new File("output.txt");
-    File tempFile = new File("output1.txt");
-    private File loadedFileReference;
-    private FileTime lastModifiedTime;
+    File inputFile = new File("src/main/resources/com/Treatment/output.txt");
+    File tempFile = new File("src/main/resources/com/Treatment/output1.txt");
 
     @FXML
     private Button BackButton;
@@ -107,19 +98,19 @@ public class ManageModel implements Initializable {
         areaColumn.setCellValueFactory(data -> data.getValue().codProperty());
         energyColumn.setCellValueFactory(data -> data.getValue().codProperty());
 
-        StageColumn.setCellValueFactory(new PropertyValueFactory<Models, String>("stage"));
+        StageColumn.setCellValueFactory(new PropertyValueFactory<>("stage"));
         StageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        NameColumn.setCellValueFactory(new PropertyValueFactory<Models, String>("name"));
+        NameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         NameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        codColumn.setCellValueFactory(new PropertyValueFactory<Models, String>("COD"));
+        codColumn.setCellValueFactory(new PropertyValueFactory<>("COD"));
         codColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        bodColumn.setCellValueFactory(new PropertyValueFactory<Models, String>("BOD"));
+        bodColumn.setCellValueFactory(new PropertyValueFactory<>("BOD"));
         bodColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        tssColumn.setCellValueFactory(new PropertyValueFactory<Models, String>("TSS"));
+        tssColumn.setCellValueFactory(new PropertyValueFactory<>("TSS"));
         tssColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        areaColumn.setCellValueFactory(new PropertyValueFactory<Models, String>("area"));
+        areaColumn.setCellValueFactory(new PropertyValueFactory<>("area"));
         areaColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        energyColumn.setCellValueFactory(new PropertyValueFactory<Models, String>("energy"));
+        energyColumn.setCellValueFactory(new PropertyValueFactory<>("energy"));
         energyColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
 
@@ -131,19 +122,13 @@ public class ManageModel implements Initializable {
     public void searCh() {
         FilteredList<Models> filteredData = new FilteredList<>(detailss, e -> true);
         SearchBar.setOnKeyReleased(e -> {
-            SearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
-                filteredData.setPredicate((Predicate<? super Models>) models -> {
-        
-                    if (newValue == null || newValue.isEmpty()) {
-                        return true;
-                    }
-                    String lowerCaseFilter = newValue.toLowerCase();
-                    if (models.toString().contains(newValue)) {
-                        return true;
-                    }
-                    return false;
-                });
-            });
+            SearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> filteredData.setPredicate((Predicate<? super Models>) models -> {
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                return models.toString().contains(newValue);
+            }));
 
             SortedList<Models> sortedData = new SortedList<>(filteredData);
             sortedData.comparatorProperty().bind(TableView.comparatorProperty());
@@ -167,7 +152,7 @@ public class ManageModel implements Initializable {
 
 
     @FXML
-    void BackButtonOnAction(ActionEvent event) {
+    void BackButtonOnAction() {
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-view.fxml"));
         Scene scene = null;
         try {
@@ -180,7 +165,7 @@ public class ManageModel implements Initializable {
     }
     
     @FXML
-    void ModifyButtonOnAction(ActionEvent event) throws Exception {
+    void ModifyButtonOnAction() throws Exception {
     BufferedReader reader = new BufferedReader(new FileReader(inputFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
         ObservableList<Models> Md = TableView.getItems();
@@ -202,7 +187,6 @@ public class ManageModel implements Initializable {
 
        Models Md = TableView.getSelectionModel().getSelectedItem();
         String currentLine ;
-        int count = 0;
 
         while ((currentLine = reader.readLine()) != null) {
             String trimmedLine = currentLine;
@@ -219,9 +203,5 @@ public class ManageModel implements Initializable {
 
         TableView.getItems().removeAll(TableView.getSelectionModel().getSelectedItems());
     }
-    @FXML
-    void Search(ActionEvent event) {
-   
-    }
 
-    }
+}

@@ -12,13 +12,15 @@ import javafx.scene.control.TextField;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import static com.example.demo1.LoginController.menu;
+
 
 public class WastewaterCharacteristic {
 
     ObservableList <String> StandardsList = FXCollections.observableArrayList("Standard A","Standard B");
     Input input = new Input();
     String Tss,Bss,Css,SelectedStandard;
-    static Menu menu = new Menu("output.txt");
+
 
     int [] standard ={1,2};
 
