@@ -92,11 +92,11 @@ public class ManageModel implements Initializable {
 
         StageColumn.setCellValueFactory(data -> data.getValue().stageProperty());
         NameColumn.setCellValueFactory(data -> data.getValue().nameProperty());
-        codColumn.setCellValueFactory(data -> data.getValue().tssProperty());
-        bodColumn.setCellValueFactory(data -> data.getValue().codProperty());
-        tssColumn.setCellValueFactory(data -> data.getValue().codProperty());
-        areaColumn.setCellValueFactory(data -> data.getValue().codProperty());
-        energyColumn.setCellValueFactory(data -> data.getValue().codProperty());
+        codColumn.setCellValueFactory(data -> data.getValue().codProperty());
+        bodColumn.setCellValueFactory(data -> data.getValue().bodProperty());
+        tssColumn.setCellValueFactory(data -> data.getValue().tssProperty());
+        areaColumn.setCellValueFactory(data -> data.getValue().areaProperty());
+        energyColumn.setCellValueFactory(data -> data.getValue().energyProperty());
 
         StageColumn.setCellValueFactory(new PropertyValueFactory<>("stage"));
         StageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -147,7 +147,7 @@ public class ManageModel implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-                //searCh();
+        //searCh();
         try {
             readFile();
         } catch (Exception e) {
@@ -172,7 +172,7 @@ public class ManageModel implements Initializable {
 
     @FXML
     void ModifyButtonOnAction() throws Exception {
-    BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
         ObservableList<Models> Md = TableView.getItems();
 
@@ -193,7 +193,7 @@ public class ManageModel implements Initializable {
         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
-       Models Md = TableView.getSelectionModel().getSelectedItem();
+        Models Md = TableView.getSelectionModel().getSelectedItem();
         String currentLine ;
 
         while ((currentLine = reader.readLine()) != null) {
