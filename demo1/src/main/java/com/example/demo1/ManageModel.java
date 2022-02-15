@@ -89,7 +89,7 @@ public class ManageModel implements Initializable {
         ObservableList<Models> details = FXCollections.observableArrayList(list);
 
         // TableView.getColumns().addAll(StageColumn, NameColumn, codColumn, bodColumn, tssColumn);
-
+/*
         StageColumn.setCellValueFactory(data -> data.getValue().stageProperty());
         NameColumn.setCellValueFactory(data -> data.getValue().nameProperty());
         codColumn.setCellValueFactory(data -> data.getValue().codProperty());
@@ -97,17 +97,48 @@ public class ManageModel implements Initializable {
         tssColumn.setCellValueFactory(data -> data.getValue().tssProperty());
         areaColumn.setCellValueFactory(data -> data.getValue().areaProperty());
         energyColumn.setCellValueFactory(data -> data.getValue().energyProperty());
-
+*/
+        
         StageColumn.setCellValueFactory(new PropertyValueFactory<>("stage"));
         StageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         NameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         NameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        codColumn.setCellValueFactory(new PropertyValueFactory<>("COD"));
+         codColumn.setCellValueFactory(new PropertyValueFactory<>("COD"));
         codColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        codColumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Models, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Models, String> t) {
+                        ((Models) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setCOD(t.getNewValue());
+                    }
+                }
+        );
         bodColumn.setCellValueFactory(new PropertyValueFactory<>("BOD"));
         bodColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        bodColumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Models, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Models, String> t) {
+                        ((Models) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setBOD(t.getNewValue());
+                    }
+                }
+        );
         tssColumn.setCellValueFactory(new PropertyValueFactory<>("TSS"));
         tssColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        tssColumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Models, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Models, String> t) {
+                        ((Models) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setTSS(t.getNewValue());
+                    }
+                }
+        );
         areaColumn.setCellValueFactory(new PropertyValueFactory<>("area"));
         areaColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         energyColumn.setCellValueFactory(new PropertyValueFactory<>("energy"));
