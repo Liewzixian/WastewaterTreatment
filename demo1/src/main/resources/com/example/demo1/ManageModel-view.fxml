@@ -9,31 +9,31 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="566.0" prefWidth="1039.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.ManageModel">
-   <children>
-      <AnchorPane prefHeight="565.0" prefWidth="151.0" style="-fx-background-color: #00D4FF;">
-         <children>
-            <Label layoutX="16.0" layoutY="238.0" prefHeight="18.0" prefWidth="120.0" text="Manage Model">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <TableView fx:id="TableView" layoutX="171.0" layoutY="93.0" prefHeight="397.0" prefWidth="822.0">
-        <columns>
-          <TableColumn fx:id="StageColumn" prefWidth="40.0" style="-fx-background-color: #00D4FF;" text="Stage" />
-          <TableColumn fx:id="NameColumn" prefWidth="88.0" style="-fx-background-color: #00D4FF;" text="Model Name" />
-            <TableColumn fx:id="codColumn" prefWidth="144.0" style="-fx-background-color: #00D4FF;" text="COD Cleaning Efficiency " />
-            <TableColumn fx:id="bodColumn" prefWidth="144.79989624023438" style="-fx-background-color: #00D4FF;" text="BOD Cleaning Efficiency " />
-            <TableColumn fx:id="tssColumn" minWidth="0.0" prefWidth="141.60009765625" style="-fx-background-color: #00D4FF;" text="TSS Cleaning Efficiency " />
-            <TableColumn fx:id="areaColumn" minWidth="0.0" prefWidth="115.9998779296875" style="-fx-background-color: #00D4FF;" text="Area of Footprint" />
-            <TableColumn fx:id="energyColumn" minWidth="0.0" prefWidth="147.199951171875" style="-fx-background-color: #00D4FF;" text="Energy per Meter Cube " />
-        </columns>
-      </TableView>
-      <TextField fx:id="SearchModel" layoutX="173.0" layoutY="35.0" prefHeight="26.0" prefWidth="284.0" />
-      <Label layoutX="468.0" layoutY="39.0" prefHeight="18.0" prefWidth="131.0" text="Search by Model Name " />
-      <Button fx:id="ModifyButton" layoutX="939.0" layoutY="526.0" mnemonicParsing="false" onAction="#ModifyButtonOnAction" style="-fx-background-color: #00D4FF;" text="Modify" />
-      <Button fx:id="BackButton" layoutX="173.0" layoutY="526.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #00D4FF;" text="Back" />
-      <Button fx:id="DeleteButton" layoutX="863.0" layoutY="526.0" mnemonicParsing="false" onAction="#deleteButtonOnAction" style="-fx-background-color: #00D4FF;" text="Delete" />
-   </children>
+    <children>
+        <AnchorPane prefHeight="565.0" prefWidth="151.0" style="-fx-background-color: #00D4FF;">
+            <children>
+                <Label layoutX="16.0" layoutY="238.0" prefHeight="18.0" prefWidth="120.0" text="Manage Model">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <TableView fx:id="TableView" layoutX="171.0" layoutY="93.0" prefHeight="397.0" prefWidth="822.0">
+            <columns>
+                <TableColumn fx:id="StageColumn" prefWidth="40.0" style="-fx-background-color: #00D4FF;" text="Stage" />
+                <TableColumn fx:id="NameColumn" prefWidth="88.0" style="-fx-background-color: #00D4FF;" text="Model Name" />
+                <TableColumn fx:id="codColumn" prefWidth="144.0" style="-fx-background-color: #00D4FF;" text="COD Cleaning Efficiency " />
+                <TableColumn fx:id="bodColumn" prefWidth="144.79989624023438" style="-fx-background-color: #00D4FF;" text="BOD Cleaning Efficiency " />
+                <TableColumn fx:id="tssColumn" minWidth="0.0" prefWidth="141.60009765625" style="-fx-background-color: #00D4FF;" text="TSS Cleaning Efficiency " />
+                <TableColumn fx:id="areaColumn" minWidth="0.0" prefWidth="115.9998779296875" style="-fx-background-color: #00D4FF;" text="Area of Footprint" />
+                <TableColumn fx:id="energyColumn" minWidth="0.0" prefWidth="147.199951171875" style="-fx-background-color: #00D4FF;" text="Energy per Meter Cube " />
+            </columns>
+        </TableView>
+        <TextField fx:id="SearchBar" layoutX="173.0" layoutY="35.0" prefHeight="26.0" prefWidth="284.0" />
+        <Label layoutX="468.0" layoutY="39.0" prefHeight="18.0" prefWidth="131.0" text="Search by Model Name " />
+        <Button fx:id="ModifyButton" layoutX="939.0" layoutY="526.0" mnemonicParsing="false" onAction="#ModifyButtonOnAction" style="-fx-background-color: #00D4FF;" text="Modify" />
+        <Button fx:id="BackButton" layoutX="173.0" layoutY="526.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #00D4FF;" text="Back" />
+        <Button fx:id="DeleteButton" layoutX="863.0" layoutY="526.0" mnemonicParsing="false" onAction="#deleteButtonOnAction" style="-fx-background-color: #00D4FF;" text="Delete" />
+    </children>
 </AnchorPane>

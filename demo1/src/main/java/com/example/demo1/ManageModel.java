@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -98,12 +99,12 @@ public class ManageModel implements Initializable {
         areaColumn.setCellValueFactory(data -> data.getValue().areaProperty());
         energyColumn.setCellValueFactory(data -> data.getValue().energyProperty());
 */
-        
+
         StageColumn.setCellValueFactory(new PropertyValueFactory<>("stage"));
         StageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         NameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         NameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-         codColumn.setCellValueFactory(new PropertyValueFactory<>("COD"));
+        codColumn.setCellValueFactory(new PropertyValueFactory<>("COD"));
         codColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         codColumn.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<Models, String>>() {

@@ -77,7 +77,7 @@ public class addNewModel {
         Connection connectDB = connectNow.main();
 
         // making insert statement to insert new data into database
-        String InsertFields = "INSERT INTO addnewmodel (Stage,Model,Cod,Bod,Tss,Area,Energy) VALUES('";
+        String InsertFields = "INSERT INTO addmodel (Stage,ModelName,COD,BOD,TSS,Foot,Meter) VALUES('";
         String InsertValues = TStage.getText() + "','" + TModel.getText() + "','" + TCod.getText() + "','" + TBod.getText() + "','" + TTss.getText() + "','" + TAof.getText() + "','" + TEpm.getText() + "')";
         String InsertToAdd = InsertFields + InsertValues;
 
