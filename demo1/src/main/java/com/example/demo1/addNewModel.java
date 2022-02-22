@@ -16,6 +16,8 @@ import java.sql.Statement;
 import static com.example.demo1.LoginController.menu;
 
 public class addNewModel {
+    Tech newTech;
+
     @FXML
     private Button addToButton;
 
@@ -84,13 +86,12 @@ public class addNewModel {
 
         try {
             //Creating a statement that connects to database and update the database
-            Statement statement = connectDB.createStatement();
+            /*Statement statement = connectDB.createStatement();
             statement.executeUpdate(InsertToAdd);
 
             // if new data is inserted into the database , then msg will display
-            addnewMessageLabel.setText("Added Successfully!");
+            addnewMessageLabel.setText("Added Successfully!");*/
 
-            Tech newTech;
             newTech = new Tech(String.valueOf(TModel.getText()), Double.parseDouble(TTss.getText()), Double.parseDouble(TCod.getText()), Double.parseDouble(TBod.getText()), Double.parseDouble(TAof.getText()), Double.parseDouble(TEpm.getText()));
             menu.add(Integer.parseInt(TStage.getText()), newTech);
             menu.save();

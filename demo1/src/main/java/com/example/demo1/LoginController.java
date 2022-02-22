@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -40,10 +41,14 @@ public class LoginController {
     private TextField UsernameTextField;
 
     @FXML
-    protected void loginButtonOnAction(ActionEvent event) {
+    protected void loginButtonOnAction(ActionEvent event) throws FileNotFoundException {
         // if username and password is filled up then go to validateLogin()
         if(!UsernameTextField.getText().isBlank() && !enterPasswordField.getText().isBlank()){
-            validateLogin();
+            //validateLogin();
+            LoginMessageLabel.setText("Successfully login!");
+            nextScene(); // go to next scene when login successfully
+            menu = new Menu("src/main/resources/com/Treatment/output.txt");
+            menu.load();
 
         }else{
             // if username and password is empty then msg will display

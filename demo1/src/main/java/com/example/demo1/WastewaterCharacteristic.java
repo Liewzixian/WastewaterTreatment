@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+
 import static com.example.demo1.LoginController.menu;
 
 
@@ -40,8 +41,9 @@ public class WastewaterCharacteristic {
     private Label StandardAlert;
 
     @FXML
-    private void initialize() {
+    private void initialize() throws FileNotFoundException {
         Standard.setItems(StandardsList);
+
     }
 
     @FXML
@@ -72,6 +74,8 @@ public class WastewaterCharacteristic {
         }
 
         if(Input.validate ==0){
+            menu.clear();
+            menu=new Menu("src/main/resources/com/Treatment/output.txt");
             menu.load();
             if(Standard.getValue()=="Standard A"){
                 menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),standard[0]);

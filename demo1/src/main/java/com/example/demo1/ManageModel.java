@@ -204,8 +204,8 @@ public class ManageModel implements Initializable {
 
     @FXML
     void ModifyButtonOnAction() throws Exception {
-        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+        //BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile));
         ObservableList<Models> Md = TableView.getItems();
 
         String[] words = Md.toString().split(", ");
@@ -214,7 +214,7 @@ public class ManageModel implements Initializable {
             writer.newLine();
         }
         writer.close();
-        reader.close();
+       // reader.close();
         inputFile.delete();
         tempFile.renameTo(inputFile);
     }

@@ -71,4 +71,10 @@ public class TechControl {
                 System.out.format("%d,%S,%.2f,%.2f,%.2f,%.2f,%.3f\n", full.indexOf(list)+1, list.getName(), list.getTSS(), list.getCOD(), list.getBOD(), list.getArea(), list.getEnergy());
         }
     }
+
+    public void Clear(){
+        fullList.clear();
+    }
+
+
 }

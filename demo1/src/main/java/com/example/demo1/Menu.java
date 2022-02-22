@@ -95,4 +95,8 @@ public class Menu {
     public int getSize(int type){
         return fullList.get(type-1).size();
     }
+
+    public void clear(){
+        techControl.Clear();
+    }
 }
