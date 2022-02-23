@@ -18,6 +18,7 @@ public class MenuController {
     FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource("ManageModel-view.fxml"));
     FXMLLoader fxmlLoader1 = new FXMLLoader(MenuController.class.getResource("addNewModel-view.fxml"));
     FXMLLoader fxmlLoader2 = new FXMLLoader(MenuController.class.getResource("WaterChar-view.fxml"));
+    FXMLLoader fxmlLoader3 = new FXMLLoader(MenuController.class.getResource("Selection-view.fxml"));
 
     @FXML
     private Button addButton;
@@ -25,9 +26,11 @@ public class MenuController {
     @FXML
     private Button ManageButton;
 
-
     @FXML
     private Button AfterMenu;
+
+    @FXML
+    private Button SelectButton;
 
     @FXML
     private Label MainMenu;
@@ -44,7 +47,7 @@ public class MenuController {
     }
 
     @FXML
-    void manageButtonOnAction(ActionEvent event) throws IOException {
+    protected void manageButtonOnAction(ActionEvent event) throws IOException {
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load(), 1039, 566);
@@ -58,7 +61,19 @@ public class MenuController {
     protected void afterMenuButtonOnAction(ActionEvent event) throws IOException{
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader2.load(), 585, 400);
+            scene = new Scene(fxmlLoader2.load(), 595, 400);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Login.window.setScene(scene);
+    }
+
+    @FXML
+    protected void selectButtonOnAction(ActionEvent event) throws IOException {
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader3.load(), 739, 500);
+            //menu.save();
         } catch (IOException e) {
             e.printStackTrace();
         }

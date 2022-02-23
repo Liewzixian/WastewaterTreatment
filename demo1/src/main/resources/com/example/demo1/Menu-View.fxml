@@ -23,8 +23,9 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Button fx:id="addButton" layoutX="218.0" layoutY="187.0" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #00D4FF;" text="Add New Model" />
-      <Button fx:id="ManageButton" layoutX="218.0" layoutY="238.0" mnemonicParsing="false" onAction="#manageButtonOnAction" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #00D4FF;" text="Manage Model" />
+      <Button fx:id="addButton" layoutX="218.0" layoutY="167.0" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #00D4FF;" text="Add New Model" />
+      <Button fx:id="ManageButton" layoutX="218.0" layoutY="211.0" mnemonicParsing="false" onAction="#manageButtonOnAction" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #00D4FF;" text="Manage Model" />
       <Button fx:id="AfterMenu" layoutX="477.0" layoutY="351.0" mnemonicParsing="false" onAction="#afterMenuButtonOnAction" prefHeight="26.0" prefWidth="96.0" style="-fx-background-color: #00D4FF;" text="Continue" />
+      <Button fx:id="SelectButton" layoutX="218.0" layoutY="254.0" mnemonicParsing="false" onAction="#selectButtonOnAction" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #00D4FF;" text="Model Selection" />
    </children>
 </AnchorPane>
