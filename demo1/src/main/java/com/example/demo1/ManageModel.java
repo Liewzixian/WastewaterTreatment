@@ -4,13 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -32,15 +29,9 @@ public class ManageModel implements Initializable {
     private final ObservableList<Models> detailss = FXCollections.observableArrayList();
     File inputFile = new File("src/main/resources/com/Treatment/output.txt");
     File tempFile = new File("src/main/resources/com/Treatment/output1.txt");
+    boolean deleteValidation;
+    boolean renameValidation;
 
-    @FXML
-    private Button BackButton;
-
-    @FXML
-    private Button DeleteButton;
-
-    @FXML
-    private Button ModifyButton;
     @FXML
     private TableView<Models> TableView;
     @FXML
@@ -48,9 +39,6 @@ public class ManageModel implements Initializable {
 
     @FXML
     private TextField SearchBar;
-
-    @FXML
-    private Button Search;
 
     @FXML
     private TableColumn<Models, String> StageColumn;
@@ -90,15 +78,6 @@ public class ManageModel implements Initializable {
         ObservableList<Models> details = FXCollections.observableArrayList(list);
 
         // TableView.getColumns().addAll(StageColumn, NameColumn, codColumn, bodColumn, tssColumn);
-/*
-        StageColumn.setCellValueFactory(data -> data.getValue().stageProperty());
-        NameColumn.setCellValueFactory(data -> data.getValue().nameProperty());
-        codColumn.setCellValueFactory(data -> data.getValue().codProperty());
-        bodColumn.setCellValueFactory(data -> data.getValue().bodProperty());
-        tssColumn.setCellValueFactory(data -> data.getValue().tssProperty());
-        areaColumn.setCellValueFactory(data -> data.getValue().areaProperty());
-        energyColumn.setCellValueFactory(data -> data.getValue().energyProperty());
-*/
 
         StageColumn.setCellValueFactory(new PropertyValueFactory<>("stage"));
         StageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -107,38 +86,20 @@ public class ManageModel implements Initializable {
         codColumn.setCellValueFactory(new PropertyValueFactory<>("COD"));
         codColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         codColumn.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<Models, String>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<Models, String> t) {
-                        ((Models) t.getTableView().getItems().get(
-                                t.getTablePosition().getRow())
-                        ).setCOD(t.getNewValue());
-                    }
-                }
+                t -> t.getTableView().getItems().get(
+                        t.getTablePosition().getRow()).setCOD(t.getNewValue())
         );
         bodColumn.setCellValueFactory(new PropertyValueFactory<>("BOD"));
         bodColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         bodColumn.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<Models, String>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<Models, String> t) {
-                        ((Models) t.getTableView().getItems().get(
-                                t.getTablePosition().getRow())
-                        ).setBOD(t.getNewValue());
-                    }
-                }
+                t -> t.getTableView().getItems().get(
+                        t.getTablePosition().getRow()).setBOD(t.getNewValue())
         );
         tssColumn.setCellValueFactory(new PropertyValueFactory<>("TSS"));
         tssColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         tssColumn.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<Models, String>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<Models, String> t) {
-                        ((Models) t.getTableView().getItems().get(
-                                t.getTablePosition().getRow())
-                        ).setTSS(t.getNewValue());
-                    }
-                }
+                t -> t.getTableView().getItems().get(
+                        t.getTablePosition().getRow()).setTSS(t.getNewValue())
         );
         areaColumn.setCellValueFactory(new PropertyValueFactory<>("area"));
         areaColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -154,19 +115,13 @@ public class ManageModel implements Initializable {
     public void searCh() {
         FilteredList<Models> filteredData = new FilteredList<>(detailss, e -> true);
         SearchBar.setOnKeyReleased(e -> {
-            SearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
-                filteredData.setPredicate((Predicate<? super Models>) models -> {
+            SearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> filteredData.setPredicate((Predicate<? super Models>) models -> {
 
-                    if (newValue == null || newValue.isEmpty()) {
-                        return true;
-                    }
-                    String lowerCaseFilter = newValue.toLowerCase();
-                    if (models.toString().contains(newValue)) {
-                        return true;
-                    }
-                    return false;
-                });
-            });
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                return models.toString().contains(newValue);
+            }));
 
             SortedList<Models> sortedData = new SortedList<>(filteredData);
             sortedData.comparatorProperty().bind(TableView.comparatorProperty());
@@ -179,7 +134,7 @@ public class ManageModel implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //searCh();
+        searCh();
         try {
             readFile();
         } catch (Exception e) {
@@ -204,7 +159,6 @@ public class ManageModel implements Initializable {
 
     @FXML
     void ModifyButtonOnAction() throws Exception {
-        //BufferedReader reader = new BufferedReader(new FileReader(inputFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile));
         ObservableList<Models> Md = TableView.getItems();
 
@@ -214,14 +168,11 @@ public class ManageModel implements Initializable {
             writer.newLine();
         }
         writer.close();
-       // reader.close();
-        inputFile.delete();
-        tempFile.renameTo(inputFile);
     }
 
 
     @FXML
-    void deleteButtonOnAction(ActionEvent event) throws IOException {
+    void deleteButtonOnAction() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
@@ -229,9 +180,8 @@ public class ManageModel implements Initializable {
         String currentLine ;
 
         while ((currentLine = reader.readLine()) != null) {
-            String trimmedLine = currentLine;
 
-            if(trimmedLine.equals(Md.toString())) {
+            if(currentLine.equals(Md.toString())) {
                 continue;
             }
             writer.write(currentLine + System.getProperty("line.separator"));
@@ -240,8 +190,7 @@ public class ManageModel implements Initializable {
         reader.close();
         inputFile.delete();
         tempFile.renameTo(inputFile);
-
-        TableView.getItems().removeAll(TableView.getSelectionModel().getSelectedItems());
+        TableView.getItems().remove(Md);
     }
 
 }

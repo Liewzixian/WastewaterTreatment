@@ -41,7 +41,7 @@ public class WastewaterCharacteristic {
     private Label StandardAlert;
 
     @FXML
-    private void initialize() throws FileNotFoundException {
+    private void initialize() {
         Standard.setItems(StandardsList);
 
     }

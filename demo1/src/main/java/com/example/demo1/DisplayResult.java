@@ -22,7 +22,7 @@ public class DisplayResult {
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("WaterChar-view.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 585, 400);
+            scene = new Scene(fxmlLoader.load(), 595, 400);
         } catch (IOException e) {
             e.printStackTrace();
         }

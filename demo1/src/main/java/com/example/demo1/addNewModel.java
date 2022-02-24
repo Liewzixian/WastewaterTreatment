@@ -19,37 +19,7 @@ public class addNewModel {
     Tech newTech;
 
     @FXML
-    private Button addToButton;
-
-    @FXML
     private Button BackButton;
-
-    @FXML
-    private Label Stage;
-
-    @FXML
-    private Label Model;
-
-    @FXML
-    private Label cod;
-
-    @FXML
-    private Label bod;
-
-    @FXML
-    private Label tss;
-
-    @FXML
-    private Label aof;
-
-    @FXML
-    private Label epm;
-
-    @FXML
-    private Label tittle;
-
-    @FXML
-    private Label addnewMessageLabel;
 
     @FXML
     private TextField TStage;
