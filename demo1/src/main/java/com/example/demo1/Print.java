@@ -6,10 +6,15 @@ public class Print {
     public String treatmentsC;
     public String treatmentsD;
     public String treatmentsE;
+
+    public String treatments;
     public double TSS;
     public double COD;
     public double BOD;
     public double cost;
+
+    public int stage;
+
 
     public Print(String a,String b,String c,String d,String e,double aa,double bb,double cc,double dd){
         treatmentsA=a;
@@ -23,6 +28,10 @@ public class Print {
         cost=dd;
     }
 
+    public Print(int a , String b){
+        stage=a;
+        treatments=b;
+    }
 
     public String getTreatmentsB() {
         return treatmentsB;
@@ -48,6 +57,10 @@ public class Print {
         return BOD;
     }
 
+    public int getStage() {
+        return stage;
+    }
+
     public double getCost() {
         return cost;
     }
@@ -59,5 +72,10 @@ public class Print {
     public String getTreatmentsA() {
         return treatmentsA;
     }
+
+    public String getTreatments() {
+        return treatments;
+    }
+
 
 }

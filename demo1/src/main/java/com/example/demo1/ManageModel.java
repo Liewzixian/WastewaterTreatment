@@ -182,9 +182,10 @@ public class ManageModel implements Initializable {
         while ((currentLine = reader.readLine()) != null) {
 
             if(currentLine.equals(Md.toString())) {
-                continue;
+               continue;
+            }else {
+                writer.write(currentLine + System.getProperty("line.separator"));
             }
-            writer.write(currentLine + System.getProperty("line.separator"));
         }
         writer.close();
         reader.close();

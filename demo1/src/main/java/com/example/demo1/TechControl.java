@@ -1,12 +1,17 @@
 package com.example.demo1;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class TechControl {
 
     ArrayList<ArrayList<Tech>> fullList;
 
+    ObservableList<Print> SelectionTable = FXCollections.observableArrayList() ;
+     int stage;
     public TechControl(ArrayList<ArrayList<Tech>> fullList){
         this.fullList = fullList;
     }
@@ -66,14 +71,17 @@ public class TechControl {
     public void showAllTreatments(){
         String[] treatments = {"Preliminary","Chemical","Biological","Tertiary","Sludge"};
         for(ArrayList<Tech> full : fullList) {
-            System.out.format("\n%S (Type:%d)\n",treatments[fullList.indexOf(full)],fullList.indexOf(full)+1);
+            stage=fullList.indexOf(full)+1;
             for (Tech list : full)
-                System.out.format("%d,%S,%.2f,%.2f,%.2f,%.2f,%.3f\n", full.indexOf(list)+1, list.getName(), list.getTSS(), list.getCOD(), list.getBOD(), list.getArea(), list.getEnergy());
+                 SelectionTable.add(new Print (stage,list.getName()));
         }
     }
 
     public void Clear(){
         fullList.clear();
+    }
+    public ObservableList<Print> getSelectionTable() {
+        return SelectionTable;
     }
 
 

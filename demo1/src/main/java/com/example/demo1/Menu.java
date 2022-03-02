@@ -99,4 +99,8 @@ public class Menu {
     public void clear(){
         techControl.Clear();
     }
+
+    public ObservableList<Print> getSelectionTable() {
+        return techControl.getSelectionTable();
+    }
 }
