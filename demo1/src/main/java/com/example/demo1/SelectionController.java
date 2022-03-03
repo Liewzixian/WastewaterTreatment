@@ -104,5 +104,41 @@ public class SelectionController {
     });
     }
 
+    public ArrayList<ArrayList<Tech>> getChoice(){
+
+        ArrayList<ArrayList<Tech>> choice = new ArrayList<>();
+
+        for(int i = 0; i < 5; i++){
+            choice.add(new ArrayList<>());
+        }
+
+        for(Print list: SelectedList){
+            int i = 0;
+            for(Tech find: menu.fullList.get(list.stage - 1)){
+                if(list.treatments.equalsIgnoreCase(find.getName())) {
+                    choice.get(list.stage - 1).add(menu.fullList.get(list.stage - 1).get(i));
+                    break;
+                }
+                i++;
+            }
+        }
+        return choice;
+    }
+
+    public boolean[] stageFlag(){
+        boolean [] flag = new boolean[5];
+        int [] count = new int[5];
+
+        for(Print list: SelectedList){
+            count[list.stage-1]++;
+        }
+
+        for(int i = 0; i < 5; i++){
+            if(count[i]>0)
+                flag[i] = true;
+        }
+        return flag;
+    }
+
 }
 
