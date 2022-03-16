@@ -10,7 +10,7 @@ public class AdjacencyList {
         this.fullList = fullList;
     }
 
-    public void UniformCostSearch(double weight){
+    public void UniformCostSearch(int choice){
 
         LinkedList<Tech> newTech = new LinkedList<>(); //linked list to hold treatment plans
 
@@ -33,7 +33,7 @@ public class AdjacencyList {
 
             if(loop==0){
                 for(Tech list : fullList.get(0)) {
-                    weightedGraph.addEdge(loop, fullList.get(0).indexOf(list)+1, 300 - (int) (((list.getTSS() + list.getCOD() + list.getBOD()) * weight - (list.getEnergy() + list.getEnergy() / 10) * (1 - weight)) * 100));
+                    weightedGraph.addEdge(loop, fullList.get(0).indexOf(list)+1, getWeight(list,choice));
                 }
             }
             else if(loop > index[4]){
@@ -45,7 +45,7 @@ public class AdjacencyList {
                     treatmentType++;
 
                 for(Tech list : fullList.get(treatmentType)) {
-                    weightedGraph.addEdge(loop, index[treatmentType] + fullList.get(treatmentType).indexOf(list)+1, 300 - (int) (((list.getTSS() + list.getCOD() + list.getBOD()) * weight - (list.getEnergy() + list.getEnergy() / 10) * (1 - weight)) * 100));
+                    weightedGraph.addEdge(loop, index[treatmentType] + fullList.get(treatmentType).indexOf(list)+1, getWeight(list,choice));
                 }
             }
         }
@@ -80,5 +80,15 @@ public class AdjacencyList {
         System.out.format("%-15S %-30S %-30S %-50S %-20S %4.2f %5.2f %5.2f %5.2f\n",names[0],names[1],names[2],names[3],names[4],TSS,BOD,COD,cost);
 
         System.out.println("\nThe Distance between source " + 0 + " and destination " + (index[5]+1) + " is " + distance);
+    }
+
+    public int getWeight(Tech tech, int choice){
+        if(choice == 1){
+            return 300 - (int) (tech.getTSS() + tech.getCOD() + tech.getBOD()) * 100;
+        }
+        else if(choice == 2){
+            return (int) (tech.getEnergy() * tech.getArea());
+        }
+        return 0;
     }
 }

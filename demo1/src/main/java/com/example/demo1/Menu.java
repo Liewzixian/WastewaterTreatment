@@ -83,8 +83,8 @@ public class Menu {
         changed = false;
     }
 
-    public void uniformCost(double weight){
-        adjacencyList.UniformCostSearch(weight);
+    public void uniformCost(int choice){
+        adjacencyList.UniformCostSearch(choice);
     }
 
     public void save() throws IOException {
