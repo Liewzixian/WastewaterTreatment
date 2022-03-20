@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class Menu {
 
@@ -16,20 +17,18 @@ public class Menu {
     boolean changed;
 
     ArrayList<Result> results;
-    ArrayList<ArrayList<Tech>> fullList;
+    LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList;
+    LinkedHashMap<String,LinkedHashMap<String,Location>> locations;
     AdjacencyList adjacencyList;
 
     public Menu(String fileName) {
 
-        this.fullList = new ArrayList<>();
+        this.fullList = new LinkedHashMap<>();
+        this.locations = new LinkedHashMap<>();
         this.results = new ArrayList<>();
         this.adjacencyList = new AdjacencyList(fullList);
 
-        for(int i = 0; i < 5; i++){
-            fullList.add(new ArrayList<>());
-        }
-
-        io = new IO(fileName,fullList);
+        io = new IO(fileName,fullList,locations);
         techControl = new TechControl(fullList);
         resultControl = new ResultControl(fullList,results);
         changed = false;
@@ -40,15 +39,15 @@ public class Menu {
         System.out.println("Treatment data loaded to linked list.");
     }
 
-    public void add(int type, Tech newTech){
+    public void add(String type, Tech newTech){
         changed = techControl.addEntry(type,newTech);
     }
 
-    public void delete(int type, int code){
-        changed = techControl.deleteEntry(type,code);
+    public void delete(String type, String name){
+        changed = techControl.deleteEntry(type,name);
     }
 
-    public void change(int type, int code, int choice, String newEntry){
+    public void change(String type, String code, int choice, String newEntry){
         changed = techControl.changeEntry(type,code,choice,newEntry);
     }
 

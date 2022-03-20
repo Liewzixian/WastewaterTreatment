@@ -4,14 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 import static com.example.demo1.LoginController.menu;
 
@@ -62,8 +59,8 @@ public class addNewModel {
             // if new data is inserted into the database , then msg will display
             addnewMessageLabel.setText("Added Successfully!");*/
 
-            newTech = new Tech(String.valueOf(TModel.getText()), Double.parseDouble(TTss.getText()), Double.parseDouble(TCod.getText()), Double.parseDouble(TBod.getText()), Double.parseDouble(TAof.getText()), Double.parseDouble(TEpm.getText()));
-            menu.add(Integer.parseInt(TStage.getText()), newTech);
+            newTech = new Tech(String.valueOf(TStage.getText()),String.valueOf(TModel.getText()), Double.parseDouble(TTss.getText()), Double.parseDouble(TCod.getText()), Double.parseDouble(TBod.getText()), Double.parseDouble(TAof.getText()), Double.parseDouble(TEpm.getText()));
+            menu.add(String.valueOf(TStage.getText()), newTech);
             menu.save();
             menu.showAllTreatments();
 

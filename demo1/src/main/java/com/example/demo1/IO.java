@@ -11,11 +11,13 @@ import java.util.*;
 public class IO {
 
     private final String fileName;
-    private final ArrayList<ArrayList<Tech>> fullList;
+    private final LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList;
+    private final LinkedHashMap<String,LinkedHashMap<String,Location>> locations;
 
-    public IO(String fileName, ArrayList<ArrayList<Tech>> fullList){
+    public IO(String fileName, LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList, LinkedHashMap<String,LinkedHashMap<String,Location>> locations){
         this.fileName = fileName;
         this.fullList = fullList;
+        this.locations = locations;
     }
 
     public void load() throws FileNotFoundException {
@@ -24,10 +26,10 @@ public class IO {
         Scanner sc = new Scanner(file);
 
         String[] hold = new String[7]; //make array of strings with 8 elements
-        int type;
+        String line;
 
-        while(sc.hasNextLine()){ //tokenize string using , and stop when list is empty
-            StringTokenizer st = new StringTokenizer(sc.nextLine(),",");
+        while(!(line = sc.nextLine()).equals("")){ //tokenize string using , and stop when list is empty
+            StringTokenizer st = new StringTokenizer(line,",");
 
             while (st.hasMoreTokens()) { //temporarily save info of treatment in each loop
 
@@ -35,20 +37,43 @@ public class IO {
                     hold[count] = st.nextToken();
                 }
 
-                type = Integer.parseInt(hold[0]) - 1;
-                Tech input = new Tech(hold[1],Double.parseDouble(hold[2]),Double.parseDouble(hold[3]),Double.parseDouble(hold[4]),Double.parseDouble(hold[5]),Double.parseDouble(hold[6]));
-                fullList.get(type).add(input);
+                fullList.computeIfAbsent(hold[0], k -> new LinkedHashMap<>());
+                Tech input = new Tech(hold[0],hold[1],Double.parseDouble(hold[2]),Double.parseDouble(hold[3]),Double.parseDouble(hold[4]),Double.parseDouble(hold[5]),Double.parseDouble(hold[6]));
+                fullList.get(hold[0]).put(hold[1],input);
             }
         }
+
+        while(sc.hasNextLine()){ //tokenize string using , and stop when list is empty
+            StringTokenizer st = new StringTokenizer(sc.nextLine(),",");
+
+            while (st.hasMoreTokens()) { //temporarily save info of treatment in each loop
+
+                for (int count = 0; count < 5; count++){
+                    hold[count] = st.nextToken();
+                }
+
+                locations.computeIfAbsent(hold[0], k -> new LinkedHashMap<>());
+                Location location = new Location(hold[0],hold[1],Double.parseDouble(hold[2]),Double.parseDouble(hold[3]),Double.parseDouble(hold[4]));
+                locations.get(hold[0]).put(hold[1],location);
+            }
+        }
+
+        sc.close();
     }
 
     public void save() throws IOException {
 
         PrintWriter writer = new PrintWriter(fileName, StandardCharsets.UTF_8); //save location (can add code to change location)
 
-        for(ArrayList<Tech> full : fullList)
-            for(Tech list : full)
-                writer.format("%d,%S,%.2f,%.2f,%.2f,%.2f,%.3f\n", fullList.indexOf(full)+1, list.getName(), list.getTSS(), list.getCOD(), list.getBOD(),list.getArea(), list.getEnergy());
+        for(Map.Entry<String, LinkedHashMap<String, Tech>> full : fullList.entrySet())
+            for(Map.Entry<String, Tech> list : full.getValue().entrySet())
+                writer.format("%S,%S,%.2f,%.2f,%.2f,%.2f,%.3f\n", list.getValue().getType(), list.getValue().getName(), list.getValue().getTSS(), list.getValue().getCOD(), list.getValue().getBOD(),list.getValue().getArea(), list.getValue().getEnergy());
+
+        writer.write("\n");
+
+        for(Map.Entry<String, LinkedHashMap<String, Location>> full : locations.entrySet())
+            for(Map.Entry<String, Location> list : full.getValue().entrySet())
+                writer.format("%S,%S,%.2f,%.2f,%.2f\n", list.getValue().getState(), list.getValue().getLocation(), list.getValue().getTSS(), list.getValue().getCOD(),list.getValue().getBOD());
 
         writer.close(); //close writer
     }

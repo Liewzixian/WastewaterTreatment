@@ -14,6 +14,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.example.demo1.LoginController.menu;
 
@@ -22,7 +25,6 @@ public class SelectionController {
 
     ArrayList<Print> SelectedList = new ArrayList<>();
     ObservableList<Print>Unselected= menu.getSelectionTable();
-
 
     @FXML
     private Button selectButton;
@@ -74,6 +76,11 @@ public class SelectionController {
         SelectedList.add(theSelected);
         SelectedTable.getItems().add(theSelected);
         UnselectedTable.getItems().remove(selection);
+        //test
+        for(Map.Entry<String, LinkedHashMap<String, Tech>> loop : getChoice().entrySet())
+            for(Map.Entry<String, Tech> print : loop.getValue().entrySet())
+                System.out.println(print.getKey());
+        System.out.println(Arrays.toString(stageFlag()));
     }
 
     @FXML
@@ -104,41 +111,26 @@ public class SelectionController {
     });
     }
 
-    public ArrayList<ArrayList<Tech>> getChoice(){
+    public LinkedHashMap<String, LinkedHashMap<String,Tech>> getChoice(){
 
-        ArrayList<ArrayList<Tech>> choice = new ArrayList<>();
-
-        for(int i = 0; i < 5; i++){
-            choice.add(new ArrayList<>());
-        }
+        LinkedHashMap<String, LinkedHashMap<String,Tech>> choice = new LinkedHashMap<>();
 
         for(Print list: SelectedList){
-            int i = 0;
-            for(Tech find: menu.fullList.get(list.stage - 1)){
-                if(list.treatments.equalsIgnoreCase(find.getName())) {
-                    choice.get(list.stage - 1).add(menu.fullList.get(list.stage - 1).get(i));
-                    break;
-                }
-                i++;
-            }
+            choice.computeIfAbsent(list.stage, k -> new LinkedHashMap<>());
+            choice.get(list.stage).put(list.treatments,menu.fullList.get(list.stage).get(list.treatments));
         }
         return choice;
     }
 
     public boolean[] stageFlag(){
+
+        String[] treatments = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
         boolean [] flag = new boolean[5];
-        int [] count = new int[5];
 
         for(Print list: SelectedList){
-            count[list.stage-1]++;
-        }
-
-        for(int i = 0; i < 5; i++){
-            if(count[i]>0)
-                flag[i] = true;
+            flag[Arrays.asList(treatments).indexOf(list.stage)] = true;
         }
         return flag;
     }
-
 }
 

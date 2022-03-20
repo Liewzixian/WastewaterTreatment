@@ -1,47 +1,48 @@
 package com.example.demo1;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class TechControl {
 
-    ArrayList<ArrayList<Tech>> fullList;
+    LinkedHashMap<String, LinkedHashMap<String,Tech>> fullList;
 
     ObservableList<Print> SelectionTable = FXCollections.observableArrayList() ;
-     int stage;
-    public TechControl(ArrayList<ArrayList<Tech>> fullList){
+    public TechControl(LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList){
         this.fullList = fullList;
     }
 
-    public boolean addEntry(int type, Tech newTech) {
-        fullList.get(type-1).add(newTech);
+    public boolean addEntry(String type, Tech newTech) {
+        fullList.get(type).put(newTech.getName(),newTech);
         System.out.println("New entry added");
         return true;
     }
 
-    public boolean deleteEntry(int type, int code){
-        if(fullList.get(type-1).size()==1) {
+    public boolean deleteEntry(String type, String name){
+
+        if(fullList.get(type).size()==1) {
             System.out.println("Entry is the last entry of the list");
             return false;
         }
         else {
-            fullList.get(type-1).remove(code-1);
+            fullList.get(type).remove(name);
             System.out.println("Entry removed");
             return true;
         }
     }
 
-    public boolean changeEntry(int type, int code, int choice, String newEntry){
+    public boolean changeEntry(String type, String name, int choice, String newEntry){
 
-        Tech temp = fullList.get(type-1).get(code-1);
+        String[] treatments = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
+
+        Tech temp = fullList.get(type).get(name);
         boolean changed = false;
 
-        if(choice==1 && fullList.get(type-1).size()>1) {
-            fullList.get(type-1).remove(code-1);
-            fullList.get(Integer.parseInt(newEntry)-1).add(temp);
+        if(choice==1 && fullList.get(type).size()>1) {
+            fullList.get(type).remove(name);
+            fullList.get(treatments[Integer.parseInt(newEntry)-1]).put(temp.getName(),temp);
             changed = true;
         }
         else if(choice==2)
@@ -58,7 +59,7 @@ public class TechControl {
             temp.setEnergy(Double.parseDouble(newEntry)); //change old value to new
 
         if(choice!=1 || changed) {
-            fullList.get(type-1).set(code-1,temp);
+            fullList.get(type).replace(name,temp);
             System.out.println("Entry changed");
             return true;
         }
@@ -69,11 +70,9 @@ public class TechControl {
     }
 
     public void showAllTreatments(){
-        String[] treatments = {"Preliminary","Chemical","Biological","Tertiary","Sludge"};
-        for(ArrayList<Tech> full : fullList) {
-            stage=fullList.indexOf(full)+1;
-            for (Tech list : full)
-                 SelectionTable.add(new Print (stage,list.getName()));
+        for(Map.Entry<String, LinkedHashMap<String, Tech>> full : fullList.entrySet()) {
+            for(Map.Entry<String, Tech> list : full.getValue().entrySet())
+                 SelectionTable.add(new Print (list.getValue().getType(),list.getKey()));
         }
     }
 

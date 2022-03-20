@@ -2,9 +2,10 @@ package com.example.demo1;
 
 public class Tech { //class for linked list to hold all information on all treatment types
     private double TSS,COD,BOD,area,energy; //removal efficiencies for TSS,BOD,COD and values for area and energy/volume
-    private String name; //names for all treatments
+    private String type,name; //names for all treatments
 
-    public Tech(String name,double TSS,double COD,double BOD,double area,double energy){
+    public Tech(String type, String name,double TSS,double COD,double BOD,double area,double energy){
+        this.type = type;
         this.name = name;
         this.TSS = TSS;
         this.COD = COD;
@@ -33,6 +34,8 @@ public class Tech { //class for linked list to hold all information on all treat
         return energy;
     }
 
+    public String getType() { return type;}
+
     public String getName() {
         return name;
     }
@@ -56,6 +59,8 @@ public class Tech { //class for linked list to hold all information on all treat
     public void setEnergy(double energy) {
         this.energy = energy;
     }
+
+    public void setType(String type) { this.type = type;}
 
     public void setName(String name) {
         this.name = name;

@@ -5,7 +5,7 @@ import javafx.beans.property.*;
 public class Models {
  //  IntegerProperty stage = new SimpleIntegerProperty();
     StringProperty stage = new SimpleStringProperty();
-   StringProperty name = new SimpleStringProperty();
+    StringProperty name = new SimpleStringProperty();
     StringProperty COD = new SimpleStringProperty();
     StringProperty BOD = new SimpleStringProperty();
     StringProperty TSS = new SimpleStringProperty();

@@ -22,7 +22,6 @@ public class WastewaterCharacteristic {
     Input input = new Input();
     String Tss,Bss,Css,SelectedStandard;
 
-
     int [] standard ={1,2};
 
     @FXML
@@ -43,7 +42,6 @@ public class WastewaterCharacteristic {
     @FXML
     private void initialize() {
         Standard.setItems(StandardsList);
-
     }
 
     @FXML

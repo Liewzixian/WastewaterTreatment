@@ -13,7 +13,7 @@ public class Print {
     public double BOD;
     public double cost;
 
-    public int stage;
+    public String stage;
 
 
     public Print(String a,String b,String c,String d,String e,double aa,double bb,double cc,double dd){
@@ -28,7 +28,7 @@ public class Print {
         cost=dd;
     }
 
-    public Print(int a , String b){
+    public Print(String a , String b){
         stage=a;
         treatments=b;
     }
@@ -57,7 +57,7 @@ public class Print {
         return BOD;
     }
 
-    public int getStage() {
+    public String getStage() {
         return stage;
     }
 
