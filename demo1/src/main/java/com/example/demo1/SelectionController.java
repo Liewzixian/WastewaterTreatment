@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class SelectionController {
 
     ArrayList<Print> SelectedList = new ArrayList<>();
     ObservableList<Print>Unselected= menu.getSelectionTable();
+    static Stage stage=new Stage();
+    boolean ModelValidation;
 
     @FXML
     private Button selectButton;
@@ -58,14 +61,30 @@ public class SelectionController {
 
     @FXML
     protected void backButtonOnAction(){
-        FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-view.fxml"));
-        Scene scene = null;
-        try {
-            scene = new Scene(fxmlLoader.load(), 585, 400);
-        } catch (IOException e) {
-            e.printStackTrace();
+        for(int i =0 ; i< 5;i++){
+            boolean[]flag=stageFlag();
+            ModelValidation=ModelValidation&&flag[i];
         }
-        Login.window.setScene(scene);
+        if(ModelValidation) {
+            FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-view.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load(), 585, 400);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Login.window.setScene(scene);
+        }else{
+            FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("SelectionAlert-view.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load(), 359, 180);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            stage.setScene(scene);
+            stage.show();
+        }
 
     }
 
