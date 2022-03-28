@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class ManageModel implements Initializable {
 
     private final ObservableList<Models> detailss = FXCollections.observableArrayList();
-    File inputFile = new File("src/main/resources/com/Treatment/output.txt");
+    File inputFile = new File("src/main/resources/com/Treatment/output1.txt");
     File tempFile = new File("src/main/resources/com/Treatment/output1.txt");
     boolean deleteValidation;
     boolean renameValidation;

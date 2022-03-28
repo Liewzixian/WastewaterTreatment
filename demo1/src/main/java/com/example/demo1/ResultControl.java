@@ -24,10 +24,10 @@ public class ResultControl {
         this.tech = new Tech[5];
         this.comparators = new ArrayList<>(4);
 
-        Comparator<Result> TssAscending = Comparator.comparing(Result::getTSS);
-        Comparator<Result> CodAscending = Comparator.comparing(Result::getCOD);
-        Comparator<Result> BodAscending = Comparator.comparing(Result::getBOD);
-        Comparator<Result> CostAscending = Comparator.comparing(Result::getCost);
+        Comparator<Result> TssAscending = Comparator.comparing(Result::getFinalTSS);
+        Comparator<Result> CodAscending = Comparator.comparing(Result::getFinalCOD);
+        Comparator<Result> BodAscending = Comparator.comparing(Result::getFinalBOD);
+        Comparator<Result> CostAscending = Comparator.comparing(Result::getFinalCost);
 
         for(int i = 0; i < 4; i++)
             comparators.add(new ArrayList<>(2));
@@ -119,8 +119,8 @@ public class ResultControl {
 
     public void printResults(int standard){
         for(Result print : results) {
-            if (standard == 3 || (print.getTSS() <= getStandardNum(standard,0) && print.getCOD() <= getStandardNum(standard,1) && print.getBOD() <= getStandardNum(standard,2)))
-                ResultsTable.add(new Print(print.getTreatments()[0], print.getTreatments()[1], print.getTreatments()[2], print.getTreatments()[3], print.getTreatments()[4], print.getTSS(), print.getCOD(), print.getBOD(), print.getCost()));
+            if (standard == 3 || (print.getFinalTSS() <= getStandardNum(standard,0) && print.getFinalCOD() <= getStandardNum(standard,1) && print.getFinalBOD() <= getStandardNum(standard,2)))
+                ResultsTable.add(new Print(print.getTreatments()[0], print.getTreatments()[1], print.getTreatments()[2], print.getTreatments()[3], print.getTreatments()[4], print.getFinalTSS(), print.getFinalCOD(), print.getFinalBOD(), print.getFinalCost()));
         }
     }
 }
