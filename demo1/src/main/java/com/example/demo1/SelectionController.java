@@ -94,7 +94,7 @@ public class SelectionController {
         Print theSelected=new Print(selection.getStage(),selection.getTreatments());
         SelectedList.add(theSelected);
         SelectedTable.getItems().add(theSelected);
-        UnselectedTable.getItems().remove(UnselectedTable.getSelectionModel().getSelectedItem());
+        remove();
         //test
         for(Map.Entry<String, LinkedHashMap<String, Tech>> loop : getChoice().entrySet())
             for(Map.Entry<String, Tech> print : loop.getValue().entrySet())
@@ -129,6 +129,12 @@ public class SelectionController {
         ObservableList<Print> unSelected1 = FXCollections.observableArrayList(sortedList);
         UnselectedTable.setItems(unSelected1);
     });
+    }
+      public void remove() {
+        UnselectedTable.setItems(Unselected);
+        UnselectedTextField.clear();
+        SelectedTextField.clear();
+        UnselectedTable.getItems().remove(UnselectedTable.getSelectionModel().getSelectedItem());
     }
 
     public LinkedHashMap<String, LinkedHashMap<String,Tech>> getChoice(){
