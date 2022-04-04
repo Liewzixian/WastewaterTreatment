@@ -23,12 +23,16 @@ public class Result { //class for linked list to hold result of all possible com
 
         for(int i = 0; i < 5; i++) {
             treatments[i] = tech[i].getName();
-            TSS[i] = tempTSS * (1 - tech[i].getTSS());
-            COD[i] = tempCOD * (1 - tech[i].getCOD());
-            BOD[i] = tempBOD * (1 - tech[i].getBOD());
+            tempTSS = tempTSS * (1 - tech[i].getTSS());
+            TSS[i] = tempTSS;
+            tempCOD = tempCOD * (1 - tech[i].getCOD());
+            COD[i] = tempCOD;
+            tempBOD = tempBOD * (1 - tech[i].getBOD());
+            BOD[i] = tempBOD;
+            tempCost = tempCost + (tech[i].getArea() * tech[i].getEnergy());
+            cost[i] = tempCost;
             area[i] = tech[i].getArea();
             energy[i] = tech[i].getEnergy();
-            cost[i] = tempCost + (tech[i].getArea() * tech[i].getEnergy());
         }
     }
 

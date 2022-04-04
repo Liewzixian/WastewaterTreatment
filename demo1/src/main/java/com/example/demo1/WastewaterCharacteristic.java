@@ -73,8 +73,12 @@ public class WastewaterCharacteristic {
 
         if(Input.validate ==0){
             menu.clear();
-            menu=new Menu("src/main/resources/com/Treatment/output.txt");
-            menu.load();
+            if(SelectionController.sign){
+                menu= new Menu(SelectionController.choice);
+           }else {
+               menu = new Menu("src/main/resources/com/Treatment/output.txt");
+               menu.load();
+            }
             if(Standard.getValue()=="Standard A"){
                 menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),standard[0]);
             }else{

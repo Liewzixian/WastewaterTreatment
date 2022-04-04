@@ -34,6 +34,18 @@ public class Menu {
         changed = false;
     }
 
+    public Menu(LinkedHashMap<String,LinkedHashMap<String,Tech>> List) {
+
+        this.fullList = List;
+        this.locations = new LinkedHashMap<>();
+        this.results = new ArrayList<>();
+        this.adjacencyList = new AdjacencyList(fullList);
+
+        techControl = new TechControl(fullList);
+        resultControl = new ResultControl(fullList,results);
+        changed = false;
+    }
+
     public void load() throws FileNotFoundException {
         io.load();
         System.out.println("Treatment data loaded to linked list.");
