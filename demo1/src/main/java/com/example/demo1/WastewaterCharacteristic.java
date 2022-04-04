@@ -46,11 +46,14 @@ public class WastewaterCharacteristic {
 
     @FXML
     protected void BackButtonOnAction(){
+
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-View.fxml"));
         Scene scene = null;
+
         try {
             scene = new Scene(fxmlLoader.load(), 585, 400);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
         Login.window.setScene(scene);
@@ -67,36 +70,37 @@ public class WastewaterCharacteristic {
         SelectedStandard=(String)Standard.getValue();
 
         if (Standard.getValue() == null) {
-            Input.validate =1;
+            Input.validate = 1;
             StandardAlert.setText("Please Select A Standard");
         }
 
-        if(Input.validate ==0){
+        if(Input.validate == 0){
             menu.clear();
-            if(SelectionController.sign){
-                menu= new Menu(SelectionController.choice);
-           }else {
-               menu = new Menu("src/main/resources/com/Treatment/output.txt");
+
+            if(SelectionController.sign)
+                menu.changeList(SelectionController.choice);
+            else
                menu.load();
-            }
-            if(Standard.getValue()=="Standard A"){
+
+            if(Standard.getValue()=="Standard A")
                 menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),standard[0]);
-            }else{
+            else
                 menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),standard[1]);
-            }
+
             FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("DisplayResultView.fxml"));
             Scene scene = null;
+
             try {
                 scene = new Scene(fxmlLoader.load(), 979, 590);
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 e.printStackTrace();
             }
             Login.window.setScene(scene);
-        }else{
+        }
+        else{
             Input.validate =0;
         }
-
     }
-
 
 }

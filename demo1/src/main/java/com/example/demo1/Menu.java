@@ -34,8 +34,7 @@ public class Menu {
         changed = false;
     }
 
-    public Menu(LinkedHashMap<String,LinkedHashMap<String,Tech>> List) {
-
+    public void changeList(LinkedHashMap<String,LinkedHashMap<String,Tech>> List){
         this.fullList = List;
         this.locations = new LinkedHashMap<>();
         this.results = new ArrayList<>();
