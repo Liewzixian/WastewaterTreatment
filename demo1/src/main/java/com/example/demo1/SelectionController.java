@@ -15,10 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.example.demo1.LoginController.menu;
 
@@ -26,9 +23,9 @@ import static com.example.demo1.LoginController.menu;
 public class SelectionController {
 
     static LinkedHashMap<String,LinkedHashMap<String,Tech>> choice = new LinkedHashMap<>();
-    ArrayList<Print> SelectedList = new ArrayList<>(Arrays.asList());
-    ObservableList<Print> Unselected = menu.getSelectionTable();
-    ObservableList<Print> Selected = FXCollections.observableArrayList(SelectedList);
+    static ArrayList<Print> saved = new ArrayList<>();
+    ObservableList<Print> Unselected;
+    ObservableList<Print> Selected;
 
     static boolean sign= false;
     static Stage stage = new Stage();
@@ -64,6 +61,11 @@ public class SelectionController {
     @FXML
     private TableView<Print> SelectedTable;
 
+    public SelectionController(){
+        Unselected = menu.getSelectionTable();
+        Selected = FXCollections.observableArrayList(saved);
+    }
+
     @FXML
     protected void backButtonOnAction() {
         ModelValidation=true;
@@ -81,7 +83,8 @@ public class SelectionController {
                 e.printStackTrace();
             }
             Login.window.setScene(scene);
-        } else {
+        }
+        else {
             FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("SelectionAlert-view.fxml"));
             Scene scene = null;
             try {
@@ -92,17 +95,17 @@ public class SelectionController {
             stage.setScene(scene);
             stage.show();
         }
-
     }
 
     public void Search()  {
 
-           FilteredList<Print> filteredData = new FilteredList<>(Unselected, b -> true);
+           FilteredList<Print> filteredData = new FilteredList<>(Unselected, k -> true);
            UnselectedTextField.setOnKeyReleased(e -> {
                UnselectedTextField.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(Unselected -> {
                    if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
                        return true;
-                   } else {
+                   }
+                   else {
                        String Keyword = newValue.toLowerCase();
                        return Unselected.getTreatments().toLowerCase().contains(Keyword);
                    }
@@ -110,46 +113,38 @@ public class SelectionController {
                SortedList<Print> sortedList = new SortedList<>(filteredData);
                sortedList.comparatorProperty().bind(UnselectedTable.comparatorProperty());
                UnselectedTable.setItems(sortedList);
-
            });
-           SelectedTable.setItems(Selected);
-            FilteredList<Print> filteredData1 = new FilteredList<>(Selected, a -> true);
+
+            FilteredList<Print> filteredData1 = new FilteredList<>(Selected, k -> true);
             SelectedTextField.setOnKeyReleased(f -> {
                 SelectedTextField.textProperty().addListener((observable, oldValue, newValue) -> filteredData1.setPredicate(selected -> {
                     if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
-                       // SelectedTable.setItems(Selected);
+                        SelectedTable.setItems(Selected);
                         return true;
-                    } else {
+                    }
+                    else {
                         String Keyword = newValue.toLowerCase();
                         return selected.getTreatments().toLowerCase().contains(Keyword);
                     }
                 }));
                     SortedList<Print> sortedList1 = new SortedList<>(filteredData1);
                     sortedList1.comparatorProperty().bind(SelectedTable.comparatorProperty());
-                    ObservableList<Print> Selected2 = FXCollections.observableArrayList(sortedList1);
-                    Selected = Selected2;
-                    SelectedTable.setItems(Selected2);
-
+                    SelectedTable.setItems(sortedList1);
             });
         }
 
     @FXML
     protected void selectButtonOnAction() {
         Print selection = UnselectedTable.getSelectionModel().getSelectedItem();
-        Print theSelected = new Print(selection.getStage(), selection.getTreatments());
-        SelectedList.add(theSelected);
-        SelectedTable.getItems().add(theSelected);
+        Selected.add(selection);
+        saved.add(selection);
         remove();
 
         for(Map.Entry<String, LinkedHashMap<String, Tech>> loop : menu.fullList.entrySet())
-            choice.put(loop.getKey(),new LinkedHashMap<>());
+            choice.computeIfAbsent(loop.getKey(),k -> new LinkedHashMap<>());
 
-        for(Print print : SelectedList)
-            choice.get(print.stage).put(print.treatments,menu.fullList.get(print.stage).get(print.treatments));
-
-        for (Map.Entry<String, LinkedHashMap<String, Tech>> loop : choice.entrySet())
-            for (Map.Entry<String, Tech> print : loop.getValue().entrySet())
-                System.out.println(loop.getKey() + " " + print.getKey());
+        for(Print print : Selected)
+            choice.get(print.stage).computeIfAbsent(print.treatments,k -> menu.fullList.get(print.stage).get(print.treatments));
     }
 
     public void remove() {
@@ -161,18 +156,19 @@ public class SelectionController {
 
     public void update(){
         SelectedTable.setItems(Selected);
-}
+    }
 
     @FXML
-    private void initialize (){
-        menu.showAllTreatments();
+    private void initialize(){
+        if(Unselected.isEmpty())
+            menu.showAllTreatments();
         UnselectedStage.setCellValueFactory(new PropertyValueFactory<>("stage"));
         UnselectedModel.setCellValueFactory(new PropertyValueFactory<>("treatments"));
         SelectedStage.setCellValueFactory(new PropertyValueFactory<>("stage"));
         SelectedModel.setCellValueFactory(new PropertyValueFactory<>("treatments"));
         UnselectedTable.setItems(Unselected);
+        SelectedTable.setItems(Selected);
         Search();
-
     }
 
     public boolean[] stageFlag(){
@@ -180,10 +176,9 @@ public class SelectionController {
         String[] treatments = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
         boolean [] flag = new boolean[5];
 
-        for(Print list: SelectedList){
+        for(Print list: Selected){
             flag[Arrays.asList(treatments).indexOf(list.stage)] = true;
         }
         return flag;
     }
 }
-
