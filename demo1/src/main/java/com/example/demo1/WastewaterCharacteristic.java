@@ -95,7 +95,7 @@ public class WastewaterCharacteristic {
             Scene scene = null;
 
             try {
-                scene = new Scene(fxmlLoader.load(), 979, 590);
+                scene = new Scene(fxmlLoader.load(), 992, 632);
             }
             catch (IOException e) {
                 e.printStackTrace();

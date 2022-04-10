@@ -19,7 +19,7 @@ public class MenuController {
     protected void addButtonOnAction() {
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader1.load(), 600, 400);
+            scene = new Scene(fxmlLoader1.load(), 600, 380);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,7 +31,7 @@ public class MenuController {
     protected void manageButtonOnAction() {
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 1039, 566);
+            scene = new Scene(fxmlLoader.load(), 1039, 560);
             //menu.save();
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,7 +55,7 @@ public class MenuController {
     protected void selectButtonOnAction() {
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader3.load(), 739, 500);
+            scene = new Scene(fxmlLoader3.load(), 739, 483);
             //menu.save();
         } catch (IOException e) {
             e.printStackTrace();

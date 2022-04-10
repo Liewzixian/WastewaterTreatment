@@ -5,20 +5,17 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="566.0" prefWidth="1039.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.ManageModel">
+<AnchorPane prefHeight="557.0" prefWidth="1039.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.ManageModel">
     <children>
-        <AnchorPane prefHeight="565.0" prefWidth="151.0" style="-fx-background-color: #00D4FF;">
-            <children>
-                <Label layoutX="16.0" layoutY="238.0" prefHeight="18.0" prefWidth="120.0" text="Manage Model">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Label>
-            </children>
-        </AnchorPane>
+      <ImageView fitHeight="566.0" fitWidth="888.0" layoutX="151.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../wastewater/BackgroundManage.png" />
+         </image>
+      </ImageView>
         <TableView fx:id="TableView" layoutX="171.0" layoutY="93.0" prefHeight="397.0" prefWidth="822.0">
             <columns>
                 <TableColumn fx:id="StageColumn" prefWidth="40.0" style="-fx-background-color: #00D4FF;" text="Stage" />
@@ -31,9 +28,14 @@
             </columns>
         </TableView>
         <TextField fx:id="SearchBar" layoutX="173.0" layoutY="35.0" prefHeight="26.0" prefWidth="284.0" />
-        <Label layoutX="468.0" layoutY="39.0" prefHeight="18.0" prefWidth="131.0" text="Search by Model Name " />
+        <Label layoutX="468.0" layoutY="39.0" prefHeight="18.0" prefWidth="131.0" text="Search by Model Name " textFill="WHITE" />
         <Button fx:id="ModifyButton" layoutX="939.0" layoutY="526.0" mnemonicParsing="false" onAction="#ModifyButtonOnAction" style="-fx-background-color: #00D4FF;" text="Modify" />
         <Button fx:id="BackButton" layoutX="173.0" layoutY="526.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #00D4FF;" text="Back" />
         <Button fx:id="DeleteButton" layoutX="863.0" layoutY="526.0" mnemonicParsing="false" onAction="#deleteButtonOnAction" style="-fx-background-color: #00D4FF;" text="Delete" />
+      <ImageView fitHeight="566.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../wastewater/ManageModel.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

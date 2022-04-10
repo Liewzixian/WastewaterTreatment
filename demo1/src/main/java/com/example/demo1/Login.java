@@ -19,6 +19,7 @@ public class Login extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 545, 375);
         window.setTitle("Wastewater Treatment Decision Making System");
+        window.setResizable(false);
         splashStage.setTitle("Wastewater Treatment Decision Making System");
         splashStage.setScene(scene);
         splashStage.show();

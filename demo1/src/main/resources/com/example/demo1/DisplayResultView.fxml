@@ -5,16 +5,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="587.0" prefWidth="973.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.DisplayResult">
+<AnchorPane prefHeight="635.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.DisplayResult">
    <children>
-      <AnchorPane prefHeight="75.0" prefWidth="980.0" style="-fx-background-color: #00D4FF;">
-         <children>
-            <Label layoutX="14.0" layoutY="29.0" text="Result" />
-         </children>
-      </AnchorPane>
-      <TableView fx:id="ResultView" layoutX="10.0" layoutY="118.0" prefHeight="454.0" prefWidth="948.0">
+      <ImageView fitHeight="605.0" fitWidth="994.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../wastewater/ResultBackground.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="ResultView" layoutX="23.0" layoutY="133.0" prefHeight="454.0" prefWidth="948.0">
          <columns>
             <TableColumn fx:id="Preliminary" prefWidth="171.99999618530273" style="-fx-background-color: #00D4FF;" text="Preliminary " />
             <TableColumn fx:id="Chemical" minWidth="0.0" prefWidth="177.6000213623047" style="-fx-background-color: #00D4FF;" text="Chemical" />
@@ -28,7 +30,12 @@
          </columns>
       </TableView>
       <Label layoutX="14.0" layoutY="89.0" text="Sort By" />
-      <ComboBox fx:id="SelectPreference" layoutX="68.0" layoutY="85.0" onAction="#ComboBoxOnActionListener" prefWidth="150.0" promptText="Select Preference" style="-fx-background-color: #00D4FF;" />
-      <Button fx:id="BackButton" layoutX="907.0" layoutY="85.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #00D4FF;" text="Back" />
+      <ComboBox fx:id="SelectPreference" layoutX="765.0" layoutY="85.0" onAction="#ComboBoxOnActionListener" prefWidth="150.0" promptText="Select Preference" style="-fx-background-color: #00D4FF;" />
+      <Button fx:id="BackButton" layoutX="930.0" layoutY="85.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #00D4FF;" text="Back" />
+      <ImageView fitHeight="79.0" fitWidth="994.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../wastewater/Result.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
