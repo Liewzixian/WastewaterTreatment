@@ -3,35 +3,36 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.demo1.addNewModel">
-   <AnchorPane prefHeight="400.0" prefWidth="131.0" style="-fx-background-color: #00D4FF;">
-      <Label fx:id="tittle" layoutX="12.0" layoutY="148.0" prefHeight="79.0" prefWidth="114.0" text="Add New Model">
-         <font>
-            <Font size="15.0"/>
-         </font>
-      </Label>
-   </AnchorPane>
-   <Label fx:id="Model" layoutX="162.0" layoutY="87.0" text="Model Name"/>
-   <Label fx:id="cod" layoutX="162.0" layoutY="124.0" text="COD Cleaning Efficiency "/>
-   <Label fx:id="bod" layoutX="162.0" layoutY="159.0" text="BOD Cleaning Efficiency "/>
-   <Label fx:id="tss" layoutX="161.0" layoutY="195.0" text="TSS Cleaning Efficiency "/>
-   <Label fx:id="aof" layoutX="163.0" layoutY="229.0" text="Area of Footprint"/>
-   <Label fx:id="Stage" layoutX="163.0" layoutY="51.0" text="Stage "/>
-   <Label fx:id="epm" layoutX="163.0" layoutY="261.0" text="Energy per Meter Cube "/>
-   <TextField fx:id="TStage" layoutX="313.0" layoutY="47.0"/>
-   <TextField fx:id="TModel" layoutX="313.0" layoutY="83.0"/>
-   <TextField fx:id="TCod" layoutX="313.0" layoutY="120.0"/>
-   <TextField fx:id="TBod" layoutX="313.0" layoutY="155.0"/>
-   <TextField fx:id="TTss" layoutX="313.0" layoutY="191.0"/>
-   <TextField fx:id="TAof" layoutX="313.0" layoutY="225.0"/>
-   <TextField fx:id="TEpm" layoutX="313.0" layoutY="257.0"/>
-   <Button fx:id="addToButton" layoutX="517.0" layoutY="333.0" mnemonicParsing="false" onAction="#addButtonOnAction"
-           style="-fx-background-color: #00D4FF;" text="Add"/>
-   <Button fx:id="BackButton" layoutX="159.0" layoutY="333.0" mnemonicParsing="false" onAction="#BackButtonOnAction"
-           style="-fx-background-color: #00D4FF;" text="Back"/>
-   <Label fx:id="addnewMessageLabel" layoutX="313.0" layoutY="292.0" prefHeight="26.0" prefWidth="160.0"/>
+<AnchorPane prefHeight="382.0" prefWidth="587.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.addNewModel">
+   <ImageView fitHeight="107.0" fitWidth="150.0" layoutX="450.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../wastewater/AddNewPic.png" />
+      </image>
+   </ImageView>
+   <Label fx:id="Model" layoutX="162.0" layoutY="87.0" text="Model Name" />
+   <Label fx:id="cod" layoutX="162.0" layoutY="124.0" text="COD Cleaning Efficiency " />
+   <Label fx:id="bod" layoutX="162.0" layoutY="159.0" text="BOD Cleaning Efficiency " />
+   <Label fx:id="tss" layoutX="161.0" layoutY="195.0" text="TSS Cleaning Efficiency " />
+   <Label fx:id="aof" layoutX="163.0" layoutY="229.0" text="Area of Footprint" />
+   <Label fx:id="Stage" layoutX="163.0" layoutY="51.0" text="Stage " />
+   <Label fx:id="epm" layoutX="163.0" layoutY="261.0" text="Energy per Meter Cube " />
+   <TextField fx:id="TStage" layoutX="313.0" layoutY="47.0" />
+   <TextField fx:id="TModel" layoutX="313.0" layoutY="83.0" />
+   <TextField fx:id="TCod" layoutX="313.0" layoutY="120.0" />
+   <TextField fx:id="TBod" layoutX="313.0" layoutY="155.0" />
+   <TextField fx:id="TTss" layoutX="313.0" layoutY="191.0" />
+   <TextField fx:id="TAof" layoutX="313.0" layoutY="225.0" />
+   <TextField fx:id="TEpm" layoutX="313.0" layoutY="257.0" />
+   <Button fx:id="addToButton" layoutX="506.0" layoutY="333.0" mnemonicParsing="false" onAction="#addButtonOnAction" style="-fx-background-color: #00D4FF;" text="Add" />
+   <Button fx:id="BackButton" layoutX="159.0" layoutY="333.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #00D4FF;" text="Back" />
+   <Label fx:id="addnewMessageLabel" layoutX="313.0" layoutY="292.0" prefHeight="26.0" prefWidth="160.0" />
+   <ImageView fitHeight="381.0" fitWidth="126.0" pickOnBounds="true">
+      <image>
+         <Image url="@../../wastewater/AddNewModel.png" />
+      </image>
+   </ImageView>
 </AnchorPane>
