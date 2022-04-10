@@ -64,6 +64,19 @@ public class CombinationController {
     @FXML
     private Label Stage5Tss;
 
+    @FXML
+    public void initialize(){
+        Print rowData=DisplayResult.rowData;
+        double[] COD = rowData.fullCOD;
+        double[] BOD = rowData.fullBOD;
+        double[] TSS = rowData.fullTSS;
+        setStage1(rowData.getTreatmentsA(),String.valueOf(COD[0]),String.valueOf(BOD[0]),String.valueOf(TSS[0]));
+        setStage2(rowData.getTreatmentsB(),String.valueOf(COD[1]),String.valueOf(BOD[1]),String.valueOf(TSS[1]));
+        setStage3(rowData.getTreatmentsC(),String.valueOf(COD[2]),String.valueOf(BOD[2]),String.valueOf(TSS[2]));
+        setStage4(rowData.getTreatmentsD(),String.valueOf(COD[3]),String.valueOf(BOD[3]),String.valueOf(TSS[3]));
+        setStage5(rowData.getTreatmentsE(),String.valueOf(COD[4]),String.valueOf(BOD[4]),String.valueOf(TSS[4]));
+
+    }
 
     public void setStage1(String stage1Name,String stage1CoD,String stage1BoD,String stage1Tss) {
         Stage1Name.setText(stage1Name);

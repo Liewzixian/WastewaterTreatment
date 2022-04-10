@@ -2,6 +2,7 @@ package com.example.demo1;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -13,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -21,6 +23,8 @@ import static com.example.demo1.LoginController.menu;
 public class DisplayResult {
     static Stage stage = new Stage();
     ObservableList<String> Preference = FXCollections.observableArrayList("Best Overall","Cost Effectiveness ");
+
+    static Print rowData;
 
     @FXML
     protected void BackButtonOnAction(){
@@ -100,10 +104,8 @@ public class DisplayResult {
             TableRow<Print> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    Print rowData = row.getItem();
-                    System.out.println(rowData.getTreatmentsA());
+                    rowData = row.getItem();
                     DedicatedWindow();
-
                 }
             });
             return row ;

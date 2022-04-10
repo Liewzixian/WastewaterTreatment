@@ -12,11 +12,15 @@ public class Print {
     public double COD;
     public double BOD;
     public double cost;
+    public double[] fullTSS;
+    public double[] fullBOD;
+    public double[] fullCOD;
+
 
     public String stage;
 
 
-    public Print(String a,String b,String c,String d,String e,double aa,double bb,double cc,double dd){
+    public Print(String a,String b,String c,String d,String e,double aa,double bb,double cc,double dd,double []cod,double []bod,double []tss){
         treatmentsA=a;
         treatmentsB=b;
         treatmentsC=c;
@@ -26,6 +30,9 @@ public class Print {
         COD=bb;
         BOD=cc;
         cost=dd;
+        fullCOD=cod;
+        fullBOD=bod;
+        fullTSS=tss;
     }
 
     public Print(String a , String b){

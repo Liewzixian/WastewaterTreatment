@@ -14,9 +14,7 @@ public class Tech { //class for linked list to hold all information on all treat
         this.energy = energy;
     }
 
-    public double getTSS() {
-        return TSS;
-    }
+    public double getTSS() {return TSS;}
 
     public double getCOD() {
         return COD;
