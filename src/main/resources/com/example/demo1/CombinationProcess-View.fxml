@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.CombinationController">
+   <AnchorPane layoutX="-2.0" layoutY="-2.0" prefHeight="96.0" prefWidth="856.0" style="-fx-background-color: #00D4FF;">
+      <Label layoutX="33.0" layoutY="26.0" prefHeight="40.0" prefWidth="338.0" text="Combination Process ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </AnchorPane>
+   <SplitPane dividerPositions="0.2623626373626374" layoutX="31.0" layoutY="134.0" orientation="VERTICAL" prefHeight="117.0" prefWidth="134.0" style="-fx-border-color: #000000;">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="141.0" style="-fx-background-color: #00D4FF;">
+         <Label fx:id="Stage1Name" layoutX="8.0" prefHeight="26.0" prefWidth="113.0" text="Label" wrapText="true" />
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="94.0" prefWidth="143.0" />
+   </SplitPane>
+   <SplitPane dividerPositions="0.2623626373626374" layoutX="270.0" layoutY="134.0" orientation="VERTICAL" prefHeight="117.0" prefWidth="134.0" style="-fx-border-color: #000000;">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="141.0" style="-fx-background-color: #00D4FF;">
+         <Label fx:id="Stage2Name" layoutX="9.0" layoutY="4.0" prefHeight="18.0" prefWidth="114.0" text="Label" wrapText="true" />
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="60.0" prefWidth="130.0" />
+   </SplitPane>
+   <SplitPane dividerPositions="0.2623626373626374" layoutX="510.0" layoutY="134.0" orientation="VERTICAL" prefHeight="117.0" prefWidth="134.0" style="-fx-border-color: #000000;">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="141.0" style="-fx-background-color: #00D4FF;">
+         <Label fx:id="Stage3Name" layoutX="10.0" layoutY="5.0" prefHeight="18.0" prefWidth="114.0" text="Label" wrapText="true" />
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="94.0" prefWidth="143.0" />
+   </SplitPane>
+   <SplitPane dividerPositions="0.2623626373626374" layoutX="310.0" layoutY="343.0" orientation="VERTICAL" prefHeight="117.0" prefWidth="134.0" style="-fx-border-color: #000000;">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="141.0" style="-fx-background-color: #00D4FF;">
+         <Label fx:id="Stage5Name" layoutX="16.0" layoutY="5.0" prefHeight="18.0" prefWidth="106.0" text="Label" wrapText="true" />
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="94.0" prefWidth="143.0" />
+   </SplitPane>
+   <SplitPane dividerPositions="0.2623626373626374" layoutX="551.0" layoutY="343.0" orientation="VERTICAL" prefHeight="117.0" prefWidth="134.0" style="-fx-border-color: #000000;">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="141.0" style="-fx-background-color: #00D4FF;">
+         <Label fx:id="Stage4Name" layoutX="18.0" layoutY="5.0" prefHeight="18.0" prefWidth="106.0" text="Label" wrapText="true" />
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="94.0" prefWidth="143.0" />
+   </SplitPane>
+   <Line endX="48.999969482421875" endY="-0.20001220703125" layoutX="222.0" layoutY="182.0" startX="-55.600006103515625" startY="-0.20001220703125" />
+   <Line endX="48.999969482421875" endY="-0.20001220703125" layoutX="460.0" layoutY="182.0" startX="-55.600006103515625" startY="-0.20001220703125" />
+   <Line endX="30.5999755859375" layoutX="745.0" layoutY="182.0" startX="-100.0" />
+   <Line endX="35.0999755859375" endY="114.99996948242188" layoutX="741.0" layoutY="275.0" startX="35.0999755859375" startY="-92.5" />
+   <Line endX="48.999969482421875" endY="-0.20001220703125" layoutX="501.0" layoutY="390.0" startX="-55.600006103515625" startY="-0.20001220703125" />
+   <Line endX="-10.4000244140625" endY="1.499969482421875" layoutX="786.0" layoutY="389.0" startX="-100.5999755859375" startY="1.499969482421875" />
+   <Label layoutX="457.0" layoutY="396.0" text="COD:" />
+   <Label layoutX="205.0" layoutY="414.0" prefHeight="18.0" prefWidth="28.0" text="BOD:" />
+   <Label layoutX="412.0" layoutY="229.0" prefHeight="18.0" prefWidth="27.0" text="TSS:" />
+   <Line endX="100.0" layoutX="210.0" layoutY="393.0" startX="-40.0" startY="-3.0517578125E-5" />
+   <Line endX="15.999969482421875" endY="42.600006103515625" layoutX="170.0" layoutY="337.0" startX="-0.707122802734375" startY="55.292877197265625" />
+   <Line endX="52.999969482421875" endY="-33.600006103515625" layoutX="133.0" layoutY="438.0" startX="36.292877197265625" startY="-44.292877197265625" />
+   <Label layoutX="205.0" layoutY="396.0" text="COD:" />
+   <Label layoutX="657.0" layoutY="193.0" text="COD:" />
+   <Label layoutX="412.0" layoutY="193.0" text="COD:" />
+   <Label layoutX="174.0" layoutY="193.0" text="COD:" />
+   <Label layoutX="457.0" layoutY="414.0" prefHeight="18.0" prefWidth="28.0" text="BOD:" />
+   <Label layoutX="657.0" layoutY="211.0" prefHeight="18.0" prefWidth="28.0" text="BOD:" />
+   <Label layoutX="412.0" layoutY="211.0" prefHeight="18.0" prefWidth="28.0" text="BOD:" />
+   <Label layoutX="173.0" layoutY="211.0" prefHeight="18.0" prefWidth="28.0" text="BOD:" />
+   <Label layoutX="205.0" layoutY="432.0" prefHeight="18.0" prefWidth="27.0" text="TSS:" />
+   <Label layoutX="457.0" layoutY="432.0" prefHeight="18.0" prefWidth="27.0" text="TSS:" />
+   <Label layoutX="657.0" layoutY="229.0" prefHeight="18.0" prefWidth="27.0" text="TSS:" />
+   <Label layoutX="173.0" layoutY="229.0" prefHeight="18.0" prefWidth="27.0" text="TSS:" />
+   <Label fx:id="Stage1CoD" layoutX="205.0" layoutY="193.0" text="Label" />
+   <Label fx:id="Stage1BoD" layoutX="205.0" layoutY="212.0" text="Label" />
+   <Label fx:id="Stage1Tss" layoutX="205.0" layoutY="229.0" text="Label" />
+   <Label fx:id="Stage2CoD" layoutX="443.0" layoutY="193.0" text="Label" />
+   <Label fx:id="Stage2Bod" layoutX="443.0" layoutY="212.0" text="Label" />
+   <Label fx:id="Stage2Tss" layoutX="443.0" layoutY="230.0" text="Label" />
+   <Label fx:id="Stage3CoD" layoutX="685.0" layoutY="193.0" text="Label" />
+   <Label fx:id="Stage3BoD" layoutX="685.0" layoutY="212.0" text="Label" />
+   <Label fx:id="Stage3Tss" layoutX="685.0" layoutY="230.0" text="Label" />
+   <Label fx:id="Stage4CoD" layoutX="484.0" layoutY="396.0" text="Label" />
+   <Label fx:id="Stage4BoD" layoutX="484.0" layoutY="415.0" text="Label" />
+   <Label fx:id="Stage4Tss" layoutX="484.0" layoutY="433.0" text="Label" />
+   <Label fx:id="Stage5CoD" layoutX="233.0" layoutY="396.0" text="Label" />
+   <Label fx:id="Stage5BoD" layoutX="233.0" layoutY="414.0" text="Label" />
+   <Label fx:id="Stage5Tss" layoutX="233.0" layoutY="432.0" text="Label" />
+</AnchorPane>

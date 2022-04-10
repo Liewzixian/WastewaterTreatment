@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.WastewaterCharacteristic">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="424.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../wastewater/WaterChar.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="202.0" layoutY="93.0" text="COD" />
+      <Button fx:id="EnterButton" layoutX="538.0" layoutY="351.0" mnemonicParsing="false" onAction="#EnterButtonOnAction" style="-fx-background-color: #00D4FF;" text="Enter " />
+      <Button fx:id="BackButton" layoutX="154.0" layoutY="351.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #00D4FF;" text="Back" />
+      <Label layoutX="202.0" layoutY="130.0" text="BOD" />
+      <Label layoutX="192.0" layoutY="130.0" />
+      <Label layoutX="205.0" layoutY="170.0" text="TSS" />
+      <ComboBox fx:id="Standard" layoutX="254.0" layoutY="221.0" prefWidth="150.0" promptText="Select standard" style="-fx-background-color: #00D4FF;" />
+      <TextField fx:id="TCod" layoutX="255.0" layoutY="89.0" />
+      <TextField fx:id="TBod" layoutX="255.0" layoutY="126.0" />
+      <TextField fx:id="TTss" layoutX="255.0" layoutY="166.0" />
+      <Label fx:id="StandardAlert" layoutX="406.0" layoutY="192.0" />
+      <ImageView fitHeight="400.0" fitWidth="150.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../wastewater/WastewaterCharacteristic.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
