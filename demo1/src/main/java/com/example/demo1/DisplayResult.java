@@ -4,17 +4,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
 import static com.example.demo1.LoginController.menu;
 
 public class DisplayResult {
+    static Stage stage = new Stage();
     ObservableList<String> Preference = FXCollections.observableArrayList("Best Overall","Cost Effectiveness ");
 
     @FXML
@@ -27,6 +32,7 @@ public class DisplayResult {
             e.printStackTrace();
         }
         Login.window.setScene(scene);
+        SetSceneOnCentral(Login.window);
     }
     @FXML
     private ComboBox<String> SelectPreference;
@@ -74,6 +80,7 @@ public class DisplayResult {
         BOD.setCellValueFactory(new PropertyValueFactory<>("BOD"));
         COST.setCellValueFactory(new PropertyValueFactory<>("cost"));
         ResultView.setItems(menu.getResultsTable());
+        ClickListener();
 
     }
 
@@ -87,8 +94,43 @@ public class DisplayResult {
 
     }
 
+    @FXML
+    private void ClickListener(){
+        ResultView.setRowFactory( tv -> {
+            TableRow<Print> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Print rowData = row.getItem();
+                    System.out.println(rowData.getTreatmentsA());
+                    DedicatedWindow();
 
+                }
+            });
+            return row ;
+        });
 
+    }
+
+    @FXML
+    private void DedicatedWindow(){
+        FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("CombinationProcess-View.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 800, 680);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setScene(scene);
+        stage.show();
+        SetSceneOnCentral(stage);
+    }
+
+    @FXML
+    protected void SetSceneOnCentral(Stage stage){
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+    }
 
 
 }

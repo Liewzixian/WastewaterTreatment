@@ -7,12 +7,15 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
@@ -154,7 +157,7 @@ public class ManageModel implements Initializable {
             e.printStackTrace();
         }
         Login.window.setScene(scene);
-
+        SetSceneOnCentral(Login.window);
     }
 
     @FXML
@@ -193,5 +196,10 @@ public class ManageModel implements Initializable {
         tempFile.renameTo(inputFile);
         TableView.getItems().remove(Md);
     }
-
+    @FXML
+    protected void SetSceneOnCentral(Stage stage){
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+    }
 }

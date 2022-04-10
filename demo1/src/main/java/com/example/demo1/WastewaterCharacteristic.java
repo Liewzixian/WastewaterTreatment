@@ -4,10 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -57,6 +60,7 @@ public class WastewaterCharacteristic {
             e.printStackTrace();
         }
         Login.window.setScene(scene);
+        SetSceneOnCentral(Login.window);
     }
 
     @FXML
@@ -97,10 +101,17 @@ public class WastewaterCharacteristic {
                 e.printStackTrace();
             }
             Login.window.setScene(scene);
+            SetSceneOnCentral(Login.window);
         }
         else{
             Input.validate =0;
         }
     }
 
+    @FXML
+    protected void SetSceneOnCentral(Stage stage){
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+    }
 }

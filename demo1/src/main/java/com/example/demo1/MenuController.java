@@ -2,7 +2,9 @@ package com.example.demo1;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 
 import java.io.IOException;
 
@@ -22,6 +24,7 @@ public class MenuController {
             e.printStackTrace();
         }
         Login.window.setScene(scene);
+        SetSceneOnCentral();
     }
 
     @FXML
@@ -34,6 +37,7 @@ public class MenuController {
             e.printStackTrace();
         }
         Login.window.setScene(scene);
+        SetSceneOnCentral();
     }
     @FXML
     protected void afterMenuButtonOnAction() {
@@ -44,6 +48,7 @@ public class MenuController {
             e.printStackTrace();
         }
         Login.window.setScene(scene);
+        SetSceneOnCentral();
     }
 
     @FXML
@@ -56,6 +61,15 @@ public class MenuController {
             e.printStackTrace();
         }
         Login.window.setScene(scene);
+        SetSceneOnCentral();
     }
+
+    @FXML
+    protected void SetSceneOnCentral(){
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        Login.window.setX((primScreenBounds.getWidth() - Login.window.getWidth()) / 2);
+        Login.window.setY((primScreenBounds.getHeight() - Login.window.getHeight()) / 2);
+    }
+
 
 }
