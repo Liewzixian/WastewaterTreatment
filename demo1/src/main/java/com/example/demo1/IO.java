@@ -26,10 +26,9 @@ public class IO {
         Scanner sc = new Scanner(file);
 
         String[] hold = new String[7]; //make array of strings with 8 elements
-        String line;
 
-        while(!(line = sc.nextLine()).equals("")){ //tokenize string using , and stop when list is empty
-            StringTokenizer st = new StringTokenizer(line,",");
+        while(sc.hasNextLine()){ //tokenize string using , and stop when list is empty
+            StringTokenizer st = new StringTokenizer(sc.nextLine(),",");
 
             while (st.hasMoreTokens()) { //temporarily save info of treatment in each loop
 
@@ -43,13 +42,16 @@ public class IO {
             }
         }
 
-        while(sc.hasNextLine()){ //tokenize string using , and stop when list is empty
-            StringTokenizer st = new StringTokenizer(sc.nextLine(),",");
+        File locationData = new File("src/main/resources/com/Treatment/location.txt");
+        Scanner sc2 = new Scanner(locationData);
 
-            while (st.hasMoreTokens()) { //temporarily save info of treatment in each loop
+        while(sc2.hasNextLine()){ //tokenize string using , and stop when list is empty
+            StringTokenizer st2 = new StringTokenizer(sc2.nextLine(),",");
+
+            while (st2.hasMoreTokens()) { //temporarily save info of treatment in each loop
 
                 for (int count = 0; count < 5; count++){
-                    hold[count] = st.nextToken();
+                    hold[count] = st2.nextToken();
                 }
 
                 locations.computeIfAbsent(hold[0], k -> new LinkedHashMap<>());
@@ -57,8 +59,8 @@ public class IO {
                 locations.get(hold[0]).put(hold[1],location);
             }
         }
-
         sc.close();
+        sc2.close();
     }
 
     public void save() throws IOException {
@@ -69,12 +71,13 @@ public class IO {
             for(Map.Entry<String, Tech> list : full.getValue().entrySet())
                 writer.format("%S,%S,%.2f,%.2f,%.2f,%.2f,%.3f\n", list.getValue().getType(), list.getValue().getName(), list.getValue().getTSS(), list.getValue().getCOD(), list.getValue().getBOD(),list.getValue().getArea(), list.getValue().getEnergy());
 
-        writer.write("\n");
+        PrintWriter writer2 = new PrintWriter("src/main/resources/com/Treatment/location.txt", StandardCharsets.UTF_8); //save location (can add code to change location)
 
         for(Map.Entry<String, LinkedHashMap<String, Location>> full : locations.entrySet())
             for(Map.Entry<String, Location> list : full.getValue().entrySet())
-                writer.format("%S,%S,%.2f,%.2f,%.2f\n", list.getValue().getState(), list.getValue().getLocation(), list.getValue().getTSS(), list.getValue().getCOD(),list.getValue().getBOD());
+                writer2.format("%S,%S,%.2f,%.2f,%.2f\n", list.getValue().getState(), list.getValue().getLocation(), list.getValue().getTSS(), list.getValue().getCOD(),list.getValue().getBOD());
 
         writer.close(); //close writer
+        writer2.close();
     }
 }
