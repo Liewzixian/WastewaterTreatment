@@ -3,6 +3,9 @@ package com.example.demo1;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 public class CombinationController {
     @FXML
     private Label Stage1Name;
@@ -66,15 +69,17 @@ public class CombinationController {
 
     @FXML
     public void initialize(){
+        DecimalFormat df = new DecimalFormat("#.####");
+        df.setRoundingMode(RoundingMode.CEILING);
         Print rowData=DisplayResult.rowData;
         double[] COD = rowData.fullCOD;
         double[] BOD = rowData.fullBOD;
         double[] TSS = rowData.fullTSS;
-        setStage1(rowData.getTreatmentsA(),String.valueOf(COD[0]),String.valueOf(BOD[0]),String.valueOf(TSS[0]));
-        setStage2(rowData.getTreatmentsB(),String.valueOf(COD[1]),String.valueOf(BOD[1]),String.valueOf(TSS[1]));
-        setStage3(rowData.getTreatmentsC(),String.valueOf(COD[2]),String.valueOf(BOD[2]),String.valueOf(TSS[2]));
-        setStage4(rowData.getTreatmentsD(),String.valueOf(COD[3]),String.valueOf(BOD[3]),String.valueOf(TSS[3]));
-        setStage5(rowData.getTreatmentsE(),String.valueOf(COD[4]),String.valueOf(BOD[4]),String.valueOf(TSS[4]));
+        setStage1(rowData.getTreatmentsA(),String.valueOf(df.format(COD[0])),String.valueOf(df.format(BOD[0])),String.valueOf(df.format(TSS[0])));
+        setStage2(rowData.getTreatmentsB(),String.valueOf(df.format(COD[1])),String.valueOf(df.format(BOD[1])),String.valueOf(df.format(TSS[1])));
+        setStage3(rowData.getTreatmentsC(),String.valueOf(df.format(COD[2])),String.valueOf(df.format(BOD[2])),String.valueOf(df.format(TSS[2])));
+        setStage4(rowData.getTreatmentsD(),String.valueOf(df.format(COD[3])),String.valueOf(df.format(BOD[3])),String.valueOf(df.format(TSS[3])));
+        setStage5(rowData.getTreatmentsE(),String.valueOf(df.format(COD[4])),String.valueOf(df.format(BOD[4])),String.valueOf(df.format(TSS[4])));
 
     }
 

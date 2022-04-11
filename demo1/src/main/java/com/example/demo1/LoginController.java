@@ -4,25 +4,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.EventObject;
 
 
 public class LoginController {
@@ -48,12 +42,16 @@ public class LoginController {
         // if username and password is filled up then go to validateLogin()
         if(!UsernameTextField.getText().isBlank() && !enterPasswordField.getText().isBlank()){
             //validateLogin();
+            SoundEffect sound = new SoundEffect();
+            sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
             LoginMessageLabel.setText("Successfully login!");
             nextScene(); // go to next scene when login successfully
             menu = new Menu("src/main/resources/com/Treatment/output.txt");
             menu.load();
 
         }else{
+            SoundEffect sound = new SoundEffect();
+            sound.playSound("src/main/resources/com/SoundEffect/error.wav");
             // if username and password is empty then msg will display
             LoginMessageLabel.setText("Please enter username and password");
         }
@@ -61,6 +59,8 @@ public class LoginController {
 
     @FXML
     protected void cancelButtonOnAction(ActionEvent event){
+        SoundEffect sound = new SoundEffect();
+        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         //when cancel button is click then window will be close
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
@@ -83,11 +83,15 @@ public class LoginController {
             while (queryResult.next()) {
                 // if result is 1 means data exist in database
                 if (queryResult.getInt(1) == 1) {
+                    SoundEffect sound = new SoundEffect();
+                    sound.playSound("src/main/resources/com/SoundEffect/success-chime.wav");
                     LoginMessageLabel.setText("Successfully login!");
                     nextScene(); // go to next scene when login successfully
                     menu = new Menu("src/main/resources/com/Treatment/output.txt");
                     menu.load();
                 } else {
+                    SoundEffect sound = new SoundEffect();
+                    sound.playSound("src/main/resources/com/SoundEffect/error.wav");
                     LoginMessageLabel.setText("Invalid login!");
 
                 }

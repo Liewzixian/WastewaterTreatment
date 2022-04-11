@@ -76,6 +76,8 @@ public class SelectionController {
             ModelValidation = ModelValidation && flag[i];
         }
         if (ModelValidation) {
+            SoundEffect sound = new SoundEffect();
+            sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
             sign=true; // this is to show user wan to customize the models that be taken into comparison
             FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-view.fxml"));
             Scene scene = null;
@@ -88,6 +90,8 @@ public class SelectionController {
             SetSceneOnCentral(Login.window);
         }
         else {
+            SoundEffect sound = new SoundEffect();
+            sound.playSound("src/main/resources/com/SoundEffect/error.wav");
             FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("SelectionAlert-view.fxml"));
             Scene scene = null;
             try {
@@ -139,6 +143,8 @@ public class SelectionController {
 
     @FXML
     protected void selectButtonOnAction() {
+        SoundEffect sound = new SoundEffect();
+        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         Print selection = UnselectedTable.getSelectionModel().getSelectedItem();
         Selected.add(selection);
         saved.add(selection);
