@@ -60,7 +60,7 @@ public class MenuController {
     @FXML
     protected void selectButtonOnAction() {
         SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/clicksound.wav");
+        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader3.load(), 739, 483);
