@@ -8,7 +8,6 @@ import java.util.*;
 public class ResultControl {
 
     ArrayList<ArrayList<Comparator<Result>>> comparators;
-    LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList;
     ArrayList<Result> results;
 
     public ObservableList<Print> getResultsTable() {
@@ -18,8 +17,7 @@ public class ResultControl {
     ObservableList<Print> ResultsTable =FXCollections.observableArrayList() ;
     Tech[] tech;
 
-    public ResultControl(LinkedHashMap<String,LinkedHashMap<String,Tech>>fullList, ArrayList<Result> results){
-        this.fullList = fullList;
+    public ResultControl(ArrayList<Result> results){
         this.results = results;
         this.tech = new Tech[5];
         this.comparators = new ArrayList<>(4);
@@ -47,15 +45,15 @@ public class ResultControl {
         Tech[] tech = new Tech[5];
         results.clear();
 
-        for(Map.Entry<String, Tech> primary : fullList.get("PRELIMINARY").entrySet()) {
+        for(Map.Entry<String, Tech> primary : Menu.fullList.get("PRELIMINARY").entrySet()) {
             tech[0] = primary.getValue();
-            for (Map.Entry<String, Tech> chemical : fullList.get("CHEMICAL").entrySet()) {
+            for (Map.Entry<String, Tech> chemical : Menu.fullList.get("CHEMICAL").entrySet()) {
                 tech[1] = chemical.getValue();
-                for (Map.Entry<String, Tech> biological : fullList.get("BIOLOGICAL").entrySet()) {
+                for (Map.Entry<String, Tech> biological : Menu.fullList.get("BIOLOGICAL").entrySet()) {
                     tech[2] = biological.getValue();
-                    for (Map.Entry<String, Tech> tertiary : fullList.get("TERTIARY").entrySet()) {
+                    for (Map.Entry<String, Tech> tertiary : Menu.fullList.get("TERTIARY").entrySet()) {
                         tech[3] = tertiary.getValue();
-                        for (Map.Entry<String, Tech> sludge : fullList.get("SLUDGE").entrySet()){
+                        for (Map.Entry<String, Tech> sludge : Menu.fullList.get("SLUDGE").entrySet()){
                             tech[4] = sludge.getValue();
                             results.add(new Result(tech,initial));
                         }
@@ -74,10 +72,10 @@ public class ResultControl {
         String[] treatments = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
         try {
             for (int i = 0; i < 5; i++) {
-                Set<String> keys = fullList.get(treatments[i]).keySet();
+                Set<String> keys = Menu.fullList.get(treatments[i]).keySet();
                 List<String> listKeys = new ArrayList<>(keys);
                 code[i] = Integer.parseInt(choice.charAt(i) + "");
-                tech[i] = fullList.get(treatments[i]).get(listKeys.get(code[i]-1));
+                tech[i] = Menu.fullList.get(treatments[i]).get(listKeys.get(code[i]-1));
             }
         }
         catch (IndexOutOfBoundsException e){
@@ -118,6 +116,7 @@ public class ResultControl {
     }
 
     public void printResults(int standard){
+        ResultsTable.clear();
         for(Result print : results) {
             if (standard == 3 || (print.getFinalTSS() <= getStandardNum(standard,0) && print.getFinalCOD() <= getStandardNum(standard,1) && print.getFinalBOD() <= getStandardNum(standard,2)))
                 ResultsTable.add(new Print(print.getTreatments()[0], print.getTreatments()[1], print.getTreatments()[2], print.getTreatments()[3], print.getTreatments()[4], print.getFinalTSS(), print.getFinalCOD(), print.getFinalBOD(), print.getFinalCost(), print.getCOD(), print.getBOD(), print.getTSS()));

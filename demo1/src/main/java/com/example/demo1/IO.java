@@ -11,12 +11,10 @@ import java.util.*;
 public class IO {
 
     private final String fileName;
-    private final LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList;
     private final LinkedHashMap<String,LinkedHashMap<String,Location>> locations;
 
-    public IO(String fileName, LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList, LinkedHashMap<String,LinkedHashMap<String,Location>> locations){
+    public IO(String fileName,LinkedHashMap<String,LinkedHashMap<String,Location>> locations){
         this.fileName = fileName;
-        this.fullList = fullList;
         this.locations = locations;
     }
 
@@ -36,9 +34,9 @@ public class IO {
                     hold[count] = st.nextToken();
                 }
 
-                fullList.computeIfAbsent(hold[0], k -> new LinkedHashMap<>());
+                Menu.fullList.computeIfAbsent(hold[0], k -> new LinkedHashMap<>());
                 Tech input = new Tech(hold[0],hold[1],Double.parseDouble(hold[2]),Double.parseDouble(hold[3]),Double.parseDouble(hold[4]),Double.parseDouble(hold[5]),Double.parseDouble(hold[6]));
-                fullList.get(hold[0]).put(hold[1],input);
+                Menu.fullList.get(hold[0]).putIfAbsent(hold[1],input);
             }
         }
 
@@ -56,7 +54,7 @@ public class IO {
 
                 locations.computeIfAbsent(hold[0], k -> new LinkedHashMap<>());
                 Location location = new Location(hold[0],hold[1],Double.parseDouble(hold[2]),Double.parseDouble(hold[3]),Double.parseDouble(hold[4]));
-                locations.get(hold[0]).put(hold[1],location);
+                locations.get(hold[0]).putIfAbsent(hold[1],location);
             }
         }
         sc.close();
@@ -67,7 +65,7 @@ public class IO {
 
         PrintWriter writer = new PrintWriter(fileName, StandardCharsets.UTF_8); //save location (can add code to change location)
 
-        for(Map.Entry<String, LinkedHashMap<String, Tech>> full : fullList.entrySet())
+        for(Map.Entry<String, LinkedHashMap<String, Tech>> full : Menu.fullList.entrySet())
             for(Map.Entry<String, Tech> list : full.getValue().entrySet())
                 writer.format("%S,%S,%.2f,%.2f,%.2f,%.2f,%.3f\n", list.getValue().getType(), list.getValue().getName(), list.getValue().getTSS(), list.getValue().getCOD(), list.getValue().getBOD(),list.getValue().getArea(), list.getValue().getEnergy());
 

@@ -84,12 +84,6 @@ public class WastewaterCharacteristic {
         }
 
         if(Input.validate == 0){
-            menu.clear();
-
-            if(SelectionController.sign)
-                menu.changeList(SelectionController.choice);
-            else
-               menu.load();
 
             if(Standard.getValue()=="Standard A")
                 menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),standard[0]);
