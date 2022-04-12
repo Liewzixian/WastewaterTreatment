@@ -73,7 +73,7 @@ public class Menu {
         return resultControl.getResultsTable();
     }
 
-    public LinkedHashMap<String,LinkedHashMap<String,Tech>> uniformCost(int choice){
+    public LinkedHashMap<String,Tech> uniformCost(int choice){
         return adjacencyList.UniformCostSearch(choice);
     }
 

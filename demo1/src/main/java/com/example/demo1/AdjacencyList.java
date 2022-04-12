@@ -3,9 +3,9 @@ import java.util.*;
 
 public class AdjacencyList {
 
-    public LinkedHashMap<String,LinkedHashMap<String,Tech>> UniformCostSearch(int choice){
+    public LinkedHashMap<String,Tech> UniformCostSearch(int choice){
 
-        LinkedHashMap<String,LinkedHashMap<String,Tech>> best = new LinkedHashMap<>();
+        LinkedHashMap<String,Tech> best = new LinkedHashMap<>();
 
         int[] index = new int[6]; //array of int to hold index of the final code of each type
         int[] path;
@@ -55,8 +55,7 @@ public class AdjacencyList {
             String[] treatments = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
             Collection<Tech> keys = Menu.fullList.get(treatments[i-1]).values();
             List<Tech> listKeys = new ArrayList<>(keys);
-            best.computeIfAbsent(treatments[i-1],k -> new LinkedHashMap<>());
-            best.get(treatments[i-1]).put(listKeys.get(path[i]-index[i-1]-1).getName(),listKeys.get(path[i]-index[i-1]-1));
+            best.put(treatments[i-1],listKeys.get(path[i]-index[i-1]-1));
         }
         return best;
     }
