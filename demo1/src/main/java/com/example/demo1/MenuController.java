@@ -17,8 +17,6 @@ public class MenuController {
 
     @FXML
     protected void addButtonOnAction() {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader1.load(), 600, 380);
@@ -31,8 +29,6 @@ public class MenuController {
 
     @FXML
     protected void manageButtonOnAction() {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load(), 1039, 560);
@@ -45,8 +41,6 @@ public class MenuController {
     }
     @FXML
     protected void afterMenuButtonOnAction() {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader2.load(), 595, 400);
@@ -59,8 +53,6 @@ public class MenuController {
 
     @FXML
     protected void selectButtonOnAction() {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader3.load(), 739, 483);

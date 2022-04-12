@@ -49,8 +49,7 @@ public class WastewaterCharacteristic {
 
     @FXML
     protected void BackButtonOnAction(){
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-View.fxml"));
         Scene scene = null;
 
@@ -66,8 +65,6 @@ public class WastewaterCharacteristic {
 
     @FXML
     protected void EnterButtonOnAction() throws FileNotFoundException {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         Css=TCod.getText();
         TCod.setText(input.getDouble(Css));
         Bss=TBod.getText();
@@ -77,13 +74,17 @@ public class WastewaterCharacteristic {
         SelectedStandard=(String)Standard.getValue();
 
         if (Standard.getValue() == null) {
-            sound = new SoundEffect();
-            sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
             Input.validate = 1;
             StandardAlert.setText("Please Select A Standard");
         }
 
         if(Input.validate == 0){
+            menu.clear();
+
+            if(SelectionController.sign)
+                menu.changeList(SelectionController.choice);
+            else
+               menu.load();
 
             if(Standard.getValue()=="Standard A")
                 menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),standard[0]);

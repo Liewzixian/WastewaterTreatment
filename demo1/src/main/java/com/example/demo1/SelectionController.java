@@ -16,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
@@ -25,16 +24,12 @@ import static com.example.demo1.LoginController.menu;
 
 public class SelectionController {
 
-    LinkedHashMap<String,LinkedHashMap<String,Tech>> choice = new LinkedHashMap<>();
-    static ArrayList<Print> selectedSaved = new ArrayList<>();
-    static ArrayList<Print> unselectedSaved = new ArrayList<>();
-    static boolean loaded;
-
+    static LinkedHashMap<String,LinkedHashMap<String,Tech>> choice = new LinkedHashMap<>();
+    static ArrayList<Print> saved = new ArrayList<>();
     ObservableList<Print> Unselected;
     ObservableList<Print> Selected;
 
-    private final LinkedHashMap<String,LinkedHashMap<String,Print>> tempList;
-
+    static boolean sign= false;
     static Stage stage = new Stage();
     boolean ModelValidation;
 
@@ -68,29 +63,9 @@ public class SelectionController {
     @FXML
     private TableView<Print> SelectedTable;
 
-    public SelectionController() throws FileNotFoundException {
-        String[] treatments = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
-        tempList = new LinkedHashMap<>();
-
-        for(String loop : treatments) {
-            tempList.computeIfAbsent(loop, k -> new LinkedHashMap<>());
-            choice.computeIfAbsent(loop, k -> new LinkedHashMap<>());
-        }
-
-        for(Print loop : selectedSaved)
-            choice.get(loop.stage).putIfAbsent(loop.treatments,Menu.fullList.get(loop.stage).get(loop.treatments));
-
-        if(!loaded) {
-            menu.showAllTreatments();
-            unselectedSaved = new ArrayList<>(menu.getSelectionTable());
-            loaded = true;
-        }
-
-        Unselected = FXCollections.observableList(unselectedSaved);
-        Selected = FXCollections.observableList(selectedSaved);
-
-        menu.clear();
-        menu.load();
+    public SelectionController(){
+        Unselected = menu.getSelectionTable();
+        Selected = FXCollections.observableArrayList(saved);
     }
 
     @FXML
@@ -101,8 +76,7 @@ public class SelectionController {
             ModelValidation = ModelValidation && flag[i];
         }
         if (ModelValidation) {
-            SoundEffect sound = new SoundEffect();
-            sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+            sign=true; // this is to show user wan to customize the models that be taken into comparison
             FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-view.fxml"));
             Scene scene = null;
             try {
@@ -114,8 +88,6 @@ public class SelectionController {
             SetSceneOnCentral(Login.window);
         }
         else {
-            SoundEffect sound = new SoundEffect();
-            sound.playSound("src/main/resources/com/SoundEffect/error.wav");
             FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("SelectionAlert-view.fxml"));
             Scene scene = null;
             try {
@@ -127,75 +99,63 @@ public class SelectionController {
             stage.show();
             SetSceneOnCentral(stage);
         }
-        Menu.fullList = choice;
     }
 
     public void Search()  {
 
-        FilteredList<Print> filteredData = new FilteredList<>(Unselected, k -> true);
-        UnselectedTextField.setOnKeyReleased(e -> {
-            UnselectedTextField.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(Unselected -> {
-                if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
-                    return true;
-                }
-                else {
-                    String Keyword = newValue.toLowerCase();
-                    return Unselected.getTreatments().toLowerCase().contains(Keyword);
-                }
-            }));
-            SortedList<Print> sortedList = new SortedList<>(filteredData);
-            sortedList.comparatorProperty().bind(UnselectedTable.comparatorProperty());
-            UnselectedTable.setItems(sortedList);
-        });
+           FilteredList<Print> filteredData = new FilteredList<>(Unselected, k -> true);
+           UnselectedTextField.setOnKeyReleased(e -> {
+               UnselectedTextField.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(Unselected -> {
+                   if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
+                       return true;
+                   }
+                   else {
+                       String Keyword = newValue.toLowerCase();
+                       return Unselected.getTreatments().toLowerCase().contains(Keyword);
+                   }
+               }));
+               SortedList<Print> sortedList = new SortedList<>(filteredData);
+               sortedList.comparatorProperty().bind(UnselectedTable.comparatorProperty());
+               UnselectedTable.setItems(sortedList);
+           });
 
-        FilteredList<Print> filteredData1 = new FilteredList<>(Selected, k -> true);
-        SelectedTextField.setOnKeyReleased(f -> {
-            SelectedTextField.textProperty().addListener((observable, oldValue, newValue) -> filteredData1.setPredicate(selected -> {
-                if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
-                    SelectedTable.setItems(Selected);
-                    return true;
-                }
-                else {
-                    String Keyword = newValue.toLowerCase();
-                    return selected.getTreatments().toLowerCase().contains(Keyword);
-                }
-            }));
-            SortedList<Print> sortedList1 = new SortedList<>(filteredData1);
-            sortedList1.comparatorProperty().bind(SelectedTable.comparatorProperty());
-            SelectedTable.setItems(sortedList1);
-        });
-    }
+            FilteredList<Print> filteredData1 = new FilteredList<>(Selected, k -> true);
+            SelectedTextField.setOnKeyReleased(f -> {
+                SelectedTextField.textProperty().addListener((observable, oldValue, newValue) -> filteredData1.setPredicate(selected -> {
+                    if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
+                        SelectedTable.setItems(Selected);
+                        return true;
+                    }
+                    else {
+                        String Keyword = newValue.toLowerCase();
+                        return selected.getTreatments().toLowerCase().contains(Keyword);
+                    }
+                }));
+                    SortedList<Print> sortedList1 = new SortedList<>(filteredData1);
+                    sortedList1.comparatorProperty().bind(SelectedTable.comparatorProperty());
+                    SelectedTable.setItems(sortedList1);
+            });
+        }
 
     @FXML
     protected void selectButtonOnAction() {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
-
         Print selection = UnselectedTable.getSelectionModel().getSelectedItem();
-        Unselected.remove(selection);
-
-        for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
-            tempList.get(loop.getKey()).clear();
-
-        for(Print loop : Selected)
-            tempList.get(loop.stage).put(loop.treatments,loop);
-        tempList.get(selection.stage).put(selection.treatments,selection);
-
-        Selected.clear();
-
-        for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
-            for (Map.Entry<String, Print> print : loop.getValue().entrySet())
-                Selected.add(print.getValue());
-
+        Selected.add(selection);
+        saved.add(selection);
         remove();
 
+        for(Map.Entry<String, LinkedHashMap<String, Tech>> loop : menu.fullList.entrySet())
+            choice.computeIfAbsent(loop.getKey(),k -> new LinkedHashMap<>());
+
         for(Print print : Selected)
-            choice.get(print.stage).putIfAbsent(print.treatments,Menu.fullList.get(print.stage).get(print.treatments));
+            choice.get(print.stage).computeIfAbsent(print.treatments,k -> menu.fullList.get(print.stage).get(print.treatments));
     }
 
     public void remove() {
+        UnselectedTable.setItems(Unselected);
         UnselectedTextField.clear();
         SelectedTextField.clear();
+        UnselectedTable.getItems().remove(UnselectedTable.getSelectionModel().getSelectedItem());
     }
 
     public void update(){
@@ -204,6 +164,8 @@ public class SelectionController {
 
     @FXML
     private void initialize(){
+        if(Unselected.isEmpty())
+            menu.showAllTreatments();
         UnselectedStage.setCellValueFactory(new PropertyValueFactory<>("stage"));
         UnselectedModel.setCellValueFactory(new PropertyValueFactory<>("treatments"));
         SelectedStage.setCellValueFactory(new PropertyValueFactory<>("stage"));

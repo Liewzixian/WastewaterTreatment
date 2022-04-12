@@ -17,19 +17,31 @@ public class Menu {
     boolean changed;
 
     ArrayList<Result> results;
+    LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList;
     LinkedHashMap<String,LinkedHashMap<String,Location>> locations;
     AdjacencyList adjacencyList;
 
-    static LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList;
-
     public Menu(String fileName) {
-        fullList = new LinkedHashMap<>();
+
+        this.fullList = new LinkedHashMap<>();
         this.locations = new LinkedHashMap<>();
         this.results = new ArrayList<>();
         this.adjacencyList = new AdjacencyList(fullList);
 
-        io = new IO(fileName,locations);
-        techControl = new TechControl();
+        io = new IO(fileName,fullList,locations);
+        techControl = new TechControl(fullList);
+        resultControl = new ResultControl(fullList,results);
+        changed = false;
+    }
+
+    public void changeList(LinkedHashMap<String,LinkedHashMap<String,Tech>> List){
+        this.fullList = List;
+        this.locations = new LinkedHashMap<>();
+        this.results = new ArrayList<>();
+        this.adjacencyList = new AdjacencyList(fullList);
+
+        techControl = new TechControl(fullList);
+        resultControl = new ResultControl(fullList,results);
         changed = false;
     }
 
@@ -63,7 +75,6 @@ public class Menu {
     }
 
     public void showAllResults(Initial initial, int standard){
-        resultControl = new ResultControl(results);
         resultControl.calculateResults(initial);
         resultControl.printResults(standard);
         changed = false;
@@ -73,6 +84,15 @@ public class Menu {
         return resultControl.getResultsTable();
     }
 
+    public void sortResults(int type, int order, int standard){
+        if(results.size()==0 || changed)
+            resultControl.calculateResults(new Initial(1000, 1000, 1000)); //default of 1000
+        resultControl.sortResults(type,order);
+        resultControl.printResults(standard);
+        resultControl.getSortResult(type,order,standard);
+        changed = false;
+    }
+
     public void uniformCost(int choice){
         adjacencyList.UniformCostSearch(choice);
     }
@@ -80,6 +100,10 @@ public class Menu {
     public void save() throws IOException {
         io.save();
         System.out.println("Treatment data saved to text file.");
+    }
+
+    public int getSize(int type){
+        return fullList.get(type-1).size();
     }
 
     public void clear(){
