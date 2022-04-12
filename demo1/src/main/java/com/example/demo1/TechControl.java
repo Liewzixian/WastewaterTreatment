@@ -9,7 +9,7 @@ public class TechControl {
 
     LinkedHashMap<String, LinkedHashMap<String,Tech>> fullList;
 
-    ObservableList<Print> SelectionTable = FXCollections.observableArrayList() ;
+    ObservableList<Print> SelectionTable = FXCollections.observableArrayList();
     public TechControl(LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList){
         this.fullList = fullList;
     }
@@ -79,9 +79,9 @@ public class TechControl {
     public void Clear(){
         fullList.clear();
     }
+
     public ObservableList<Print> getSelectionTable() {
         return SelectionTable;
     }
-
 
 }
