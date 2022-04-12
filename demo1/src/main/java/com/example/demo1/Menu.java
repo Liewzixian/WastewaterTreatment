@@ -26,7 +26,7 @@ public class Menu {
         fullList = new LinkedHashMap<>();
         this.locations = new LinkedHashMap<>();
         this.results = new ArrayList<>();
-        this.adjacencyList = new AdjacencyList(fullList);
+        this.adjacencyList = new AdjacencyList();
 
         io = new IO(fileName,locations);
         techControl = new TechControl();
@@ -73,8 +73,8 @@ public class Menu {
         return resultControl.getResultsTable();
     }
 
-    public void uniformCost(int choice){
-        adjacencyList.UniformCostSearch(choice);
+    public LinkedHashMap<String,LinkedHashMap<String,Tech>> uniformCost(int choice){
+        return adjacencyList.UniformCostSearch(choice);
     }
 
     public void save() throws IOException {
