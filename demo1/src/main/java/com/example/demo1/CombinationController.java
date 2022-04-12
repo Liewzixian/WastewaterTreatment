@@ -3,6 +3,9 @@ package com.example.demo1;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 public class CombinationController {
     @FXML
     private Label Stage1Name;
@@ -65,16 +68,56 @@ public class CombinationController {
     private Label Stage5Tss;
 
     @FXML
+    private Label BestFinalCOD;
+
+    @FXML
+    private Label BestFinalBOD;
+
+    @FXML
+    private Label BestFinalTss;
+
+    @FXML
+    private Label BestFinalCOST;
+
+    @FXML
+    private Label CurrentFinalCOD;
+
+    @FXML
+    private Label CurrentFinalBOD;
+
+    @FXML
+    private Label CurrentFinalTss;
+
+    @FXML
+    private Label CurrentFinalCOST;
+
+    @FXML
+    private Label CompareCOST;
+
+    @FXML
+    private Label CompareCOD;
+
+    @FXML
+    private Label CompareBOD;
+
+    @FXML
+    private Label CompareTSS;
+
+
+    @FXML
     public void initialize(){
+        DecimalFormat df = new DecimalFormat("#.####");
+        df.setRoundingMode(RoundingMode.CEILING);
         Print rowData=DisplayResult.rowData;
         double[] COD = rowData.fullCOD;
         double[] BOD = rowData.fullBOD;
         double[] TSS = rowData.fullTSS;
-        setStage1(rowData.getTreatmentsA(),String.valueOf(COD[0]),String.valueOf(BOD[0]),String.valueOf(TSS[0]));
-        setStage2(rowData.getTreatmentsB(),String.valueOf(COD[1]),String.valueOf(BOD[1]),String.valueOf(TSS[1]));
-        setStage3(rowData.getTreatmentsC(),String.valueOf(COD[2]),String.valueOf(BOD[2]),String.valueOf(TSS[2]));
-        setStage4(rowData.getTreatmentsD(),String.valueOf(COD[3]),String.valueOf(BOD[3]),String.valueOf(TSS[3]));
-        setStage5(rowData.getTreatmentsE(),String.valueOf(COD[4]),String.valueOf(BOD[4]),String.valueOf(TSS[4]));
+        setStage1(rowData.getTreatmentsA(),String.valueOf(df.format(COD[0])),String.valueOf(df.format(BOD[0])),String.valueOf(df.format(TSS[0])));
+        setStage2(rowData.getTreatmentsB(),String.valueOf(df.format(COD[1])),String.valueOf(df.format(BOD[1])),String.valueOf(df.format(TSS[1])));
+        setStage3(rowData.getTreatmentsC(),String.valueOf(df.format(COD[2])),String.valueOf(df.format(BOD[2])),String.valueOf(df.format(TSS[2])));
+        setStage4(rowData.getTreatmentsD(),String.valueOf(df.format(COD[3])),String.valueOf(df.format(BOD[3])),String.valueOf(df.format(TSS[3])));
+        setStage5(rowData.getTreatmentsE(),String.valueOf(df.format(COD[4])),String.valueOf(df.format(BOD[4])),String.valueOf(df.format(TSS[4])));
+        setCurrentFinal(String.valueOf(df.format(COD[4])),String.valueOf(df.format(BOD[4])),String.valueOf(df.format(TSS[4])),String.valueOf(df.format(rowData.cost)));
 
     }
 
@@ -116,5 +159,26 @@ public class CombinationController {
         Stage5BoD.setText(stage5BoD);
         Stage5Tss.setText(stage5Tss);
 
+    }
+
+    public void setCurrentFinal(String COD ,String BOD, String Tss , String Cost){
+        CurrentFinalCOD.setText(COD);
+        CurrentFinalBOD.setText(BOD);
+        CurrentFinalTss.setText(Tss);
+        CurrentFinalCOST.setText(Cost);
+    }
+
+    public void setBestFinal(String COD ,String BOD, String Tss , String Cost){
+        BestFinalCOD.setText(COD);
+        BestFinalBOD.setText(BOD);
+        BestFinalTss.setText(Tss);
+        BestFinalCOST.setText(Cost);
+    }
+
+    public void setCompareResult(String COD ,String BOD, String Tss , String Cost){
+        CompareCOD.setText(COD);
+        CompareBOD.setText(BOD);
+        CompareTSS.setText(Tss);
+        CompareCOST.setText(Cost);
     }
 }

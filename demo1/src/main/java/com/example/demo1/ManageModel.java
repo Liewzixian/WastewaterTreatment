@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 public class ManageModel implements Initializable {
 
     private final ObservableList<Models> detailss = FXCollections.observableArrayList();
-    File inputFile = new File("src/main/resources/com/Treatment/output1.txt");
+    File inputFile = new File("src/main/resources/com/Treatment/output.txt");
     File tempFile = new File("src/main/resources/com/Treatment/output1.txt");
     boolean deleteValidation;
     boolean renameValidation;
@@ -149,6 +149,8 @@ public class ManageModel implements Initializable {
 
     @FXML
     void BackButtonOnAction() {
+        SoundEffect sound = new SoundEffect();
+        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-view.fxml"));
         Scene scene = null;
         try {
@@ -162,6 +164,8 @@ public class ManageModel implements Initializable {
 
     @FXML
     void ModifyButtonOnAction() throws Exception {
+        SoundEffect sound = new SoundEffect();
+        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile));
         ObservableList<Models> Md = TableView.getItems();
 
@@ -176,6 +180,8 @@ public class ManageModel implements Initializable {
 
     @FXML
     void deleteButtonOnAction() throws IOException {
+        SoundEffect sound = new SoundEffect();
+        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
