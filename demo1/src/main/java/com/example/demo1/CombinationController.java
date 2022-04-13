@@ -2,9 +2,16 @@ package com.example.demo1;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+
+import static com.example.demo1.LoginController.menu;
 
 public class CombinationController {
     @FXML
@@ -103,12 +110,43 @@ public class CombinationController {
     @FXML
     private Label CompareTSS;
 
+    @FXML
+    private TableView<Print> BestResultView;
+
+    @FXML
+    private TableColumn<Print,String> Preliminary;
+
+    @FXML
+    private TableColumn<Print,String> Chemical;
+
+    @FXML
+    private TableColumn<Print,String> Biological;
+
+    @FXML
+    private TableColumn<Print,String> Tertiary;
+
+    @FXML
+    private TableColumn<Print,String> Sludge;
+
+    @FXML
+    private TableColumn<Print,Double> TSSTable;
+
+    @FXML
+    private TableColumn<Print,Double> CODTable;
+
+    @FXML
+    private TableColumn<Print,Double> BODTable;
+
+    @FXML
+    private TableColumn<Print,Double> COSTTable;
+
 
     @FXML
     public void initialize(){
         DecimalFormat df = new DecimalFormat("#.####");
         df.setRoundingMode(RoundingMode.CEILING);
         Print rowData=DisplayResult.rowData;
+        ArrayList<Result>BestResultList;
         double[] COD = rowData.fullCOD;
         double[] BOD = rowData.fullBOD;
         double[] TSS = rowData.fullTSS;
@@ -118,6 +156,24 @@ public class CombinationController {
         setStage4(rowData.getTreatmentsD(),String.valueOf(df.format(COD[3])),String.valueOf(df.format(BOD[3])),String.valueOf(df.format(TSS[3])));
         setStage5(rowData.getTreatmentsE(),String.valueOf(df.format(COD[4])),String.valueOf(df.format(BOD[4])),String.valueOf(df.format(TSS[4])));
         setCurrentFinal(String.valueOf(df.format(COD[4])),String.valueOf(df.format(BOD[4])),String.valueOf(df.format(TSS[4])),String.valueOf(df.format(rowData.cost)));
+        Preliminary.setCellValueFactory(new PropertyValueFactory<>("treatmentsA"));
+        Chemical.setCellValueFactory(new PropertyValueFactory<>("treatmentsB"));
+        Biological.setCellValueFactory(new PropertyValueFactory<>("treatmentsC"));
+        Tertiary.setCellValueFactory(new PropertyValueFactory<>("treatmentsD"));
+        Sludge.setCellValueFactory(new PropertyValueFactory<>("treatmentsE"));
+        TSSTable.setCellValueFactory(new PropertyValueFactory<>("TSS"));
+        CODTable.setCellValueFactory(new PropertyValueFactory<>("COD"));
+        BODTable.setCellValueFactory(new PropertyValueFactory<>("BOD"));
+        COSTTable.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        menu.UniformSearch(1);
+        BestResultView.setItems(menu.getBestTable());
+        autoResizeColumns(BestResultView);
+        BestResultList=menu.getBestResults();
+        for(Result print : BestResultList) {
+            setBestFinal(String.valueOf(df.format(print.getFinalCOD())),String.valueOf(df.format(print.getFinalBOD())),String.valueOf(df.format(print.getFinalTSS())),String.valueOf(df.format(print.getFinalCost())));
+            setCompareResult(calculation(COD[4],print.getFinalCOD()),calculation(BOD[4],print.getFinalBOD()),calculation(TSS[4],print.getFinalTSS()),calculation(rowData.cost, print.getFinalCost()));
+        }
+
 
     }
 
@@ -180,5 +236,32 @@ public class CombinationController {
         CompareBOD.setText(BOD);
         CompareTSS.setText(Tss);
         CompareCOST.setText(Cost);
+    }
+
+    public static void autoResizeColumns( TableView<Print> table )
+    {
+        //Set the right policy
+        table.setColumnResizePolicy( TableView.UNCONSTRAINED_RESIZE_POLICY);
+        table.getColumns().forEach( (column) ->
+        {
+            Text t = new Text( column.getText() );
+            double max = t.getLayoutBounds().getWidth();
+            for ( int i = 0; i < table.getItems().size(); i++ )
+            {
+                if ( column.getCellData( i ) != null )
+                {
+                    t = new Text( column.getCellData( i ).toString() );
+                    double CalWidth = t.getLayoutBounds().getWidth();
+                    if ( CalWidth > max )
+                    {
+                        max = CalWidth;
+                    }
+                }
+            }
+            column.setPrefWidth( max + 10.0d );
+        } );
+    }
+    public String calculation(double current,double best){
+        return String.valueOf((int) (best/current*100));
     }
 }

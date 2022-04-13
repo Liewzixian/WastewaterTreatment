@@ -39,10 +39,10 @@ public class AdjacencyList {
                 while(loop > index[treatmentType])
                     treatmentType++;
 
-                Set<String> keys = Menu.fullList.get(treatments[treatmentType]).keySet();
+                Set<String> keys = Menu.fullList.get(treatments[treatmentType-1]).keySet();
                 List<String> listKeys = new ArrayList<>(keys);
 
-                for(Map.Entry<String, Tech> list : Menu.fullList.get(treatments[treatmentType]).entrySet()) {
+                for(Map.Entry<String, Tech> list : Menu.fullList.get(treatments[treatmentType-1]).entrySet()) {
                     weightedGraph.addEdge(loop, index[treatmentType] + listKeys.indexOf(list.getValue().getName())+1, getWeight(list.getValue(),choice));
                 }
             }

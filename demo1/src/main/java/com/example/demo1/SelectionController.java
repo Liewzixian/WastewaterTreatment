@@ -127,7 +127,7 @@ public class SelectionController {
             stage.show();
             SetSceneOnCentral(stage);
         }
-        Menu.fullList = choice;
+        Menu.fullList = choice;//?
     }
 
     public void Search()  {

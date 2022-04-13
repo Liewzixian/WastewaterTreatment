@@ -5,17 +5,19 @@ import javafx.collections.ObservableList;
 
 import java.util.*;
 
+import static com.example.demo1.LoginController.menu;
+
 public class ResultControl {
 
     ArrayList<ArrayList<Comparator<Result>>> comparators;
     ArrayList<Result> results;
-
-    public ObservableList<Print> getResultsTable() {
-        return ResultsTable;
-    }
-
     ObservableList<Print> ResultsTable =FXCollections.observableArrayList() ;
+    ObservableList<Print> BestTable =FXCollections.observableArrayList() ;
+
+    ArrayList<Result> BestResults=new ArrayList<>();
     Tech[] tech;
+    int standard;
+    Initial initial;
 
     public ResultControl(ArrayList<Result> results){
         this.results = results;
@@ -41,7 +43,7 @@ public class ResultControl {
     }
 
     public void calculateResults(Initial initial){
-
+        this.initial=initial;
         Tech[] tech = new Tech[5];
         results.clear();
 
@@ -61,6 +63,25 @@ public class ResultControl {
                 }
             }
         }
+    }
+
+    public void UniFormSearch(int i){
+        Tech[] tech = new Tech[5];
+        BestResults.clear();
+        LinkedHashMap<String,Tech> BestCombination;
+        BestCombination=menu.uniformCost(i);
+        tech[0]=BestCombination.get("PRELIMINARY");
+        tech[1]=BestCombination.get("CHEMICAL");
+        tech[2]=BestCombination.get("BIOLOGICAL");
+        tech[3]=BestCombination.get("TERTIARY");
+        tech[4]=BestCombination.get("SLUDGE");
+        BestResults.add(new Result(tech,initial));
+        BestTable.clear();
+        for(Result print : BestResults) {
+            if (standard == 3 || (print.getFinalTSS() <= getStandardNum(standard,0) && print.getFinalCOD() <= getStandardNum(standard,1) && print.getFinalBOD() <= getStandardNum(standard,2)))
+                BestTable.add(new Print(print.getTreatments()[0], print.getTreatments()[1], print.getTreatments()[2], print.getTreatments()[3], print.getTreatments()[4], print.getFinalTSS(), print.getFinalCOD(), print.getFinalBOD(), print.getFinalCost(), print.getCOD(), print.getBOD(), print.getTSS()));
+        }
+
     }
 
     public void sortResults(int type, int order) {
@@ -116,10 +137,17 @@ public class ResultControl {
     }
 
     public void printResults(int standard){
+        this.standard=standard;
         ResultsTable.clear();
         for(Result print : results) {
             if (standard == 3 || (print.getFinalTSS() <= getStandardNum(standard,0) && print.getFinalCOD() <= getStandardNum(standard,1) && print.getFinalBOD() <= getStandardNum(standard,2)))
                 ResultsTable.add(new Print(print.getTreatments()[0], print.getTreatments()[1], print.getTreatments()[2], print.getTreatments()[3], print.getTreatments()[4], print.getFinalTSS(), print.getFinalCOD(), print.getFinalBOD(), print.getFinalCost(), print.getCOD(), print.getBOD(), print.getTSS()));
         }
     }
+
+    public ObservableList<Print> getResultsTable() {
+        return ResultsTable;
+    }
+    public ObservableList<Print> getBestTable() {return BestTable;}
+    public ArrayList<Result> getBestResults() {return BestResults;}
 }

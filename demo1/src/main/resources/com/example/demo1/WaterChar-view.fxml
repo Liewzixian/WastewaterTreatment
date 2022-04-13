@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.WastewaterCharacteristic">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.WastewaterCharacteristic">
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="424.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -25,11 +25,11 @@
       <TextField fx:id="TCod" layoutX="255.0" layoutY="89.0" />
       <TextField fx:id="TBod" layoutX="255.0" layoutY="126.0" />
       <TextField fx:id="TTss" layoutX="255.0" layoutY="166.0" />
-      <Label fx:id="StandardAlert" layoutX="406.0" layoutY="192.0" />
       <ImageView fitHeight="400.0" fitWidth="150.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../wastewater/WastewaterCharacteristic.png" />
          </image>
       </ImageView>
+      <Label fx:id="StandardAlert" layoutX="424.0" layoutY="224.0" prefHeight="18.0" prefWidth="122.0" />
    </children>
 </AnchorPane>

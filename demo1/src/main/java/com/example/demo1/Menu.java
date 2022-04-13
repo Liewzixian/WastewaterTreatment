@@ -72,6 +72,8 @@ public class Menu {
     public ObservableList<Print> getResultsTable() {
         return resultControl.getResultsTable();
     }
+    public ObservableList<Print> getBestTable() {return resultControl.getBestTable();}
+    public  void UniformSearch(int i){resultControl.UniFormSearch(i);}
 
     public LinkedHashMap<String,Tech> uniformCost(int choice){
         return adjacencyList.UniformCostSearch(choice);
@@ -89,4 +91,5 @@ public class Menu {
     public ObservableList<Print> getSelectionTable() {
         return techControl.getSelectionTable();
     }
+    public ArrayList<Result> getBestResults() {return resultControl.getBestResults();}
 }
