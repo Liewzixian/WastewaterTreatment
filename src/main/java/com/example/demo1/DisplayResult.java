@@ -2,7 +2,6 @@ package com.example.demo1;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -12,9 +11,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -28,6 +27,8 @@ public class DisplayResult {
 
     @FXML
     protected void BackButtonOnAction(){
+        SoundEffect sound = new SoundEffect();
+        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("WaterChar-view.fxml"));
         Scene scene = null;
         try {
@@ -84,6 +85,7 @@ public class DisplayResult {
         BOD.setCellValueFactory(new PropertyValueFactory<>("BOD"));
         COST.setCellValueFactory(new PropertyValueFactory<>("cost"));
         ResultView.setItems(menu.getResultsTable());
+        autoResizeColumns(ResultView)  ;
         ClickListener();
 
     }
@@ -104,6 +106,8 @@ public class DisplayResult {
             TableRow<Print> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    SoundEffect sound = new SoundEffect();
+                    sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
                     rowData = row.getItem();
                     DedicatedWindow();
                 }
@@ -118,7 +122,7 @@ public class DisplayResult {
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("CombinationProcess-View.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 800, 680);
+            scene = new Scene(fxmlLoader.load(), 825, 600);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -132,6 +136,30 @@ public class DisplayResult {
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+    }
+
+    public static void autoResizeColumns( TableView<Print> table )
+    {
+        //Set the right policy
+        table.setColumnResizePolicy( TableView.UNCONSTRAINED_RESIZE_POLICY);
+        table.getColumns().forEach( (column) ->
+        {
+            Text t = new Text( column.getText() );
+            double max = t.getLayoutBounds().getWidth();
+            for ( int i = 0; i < table.getItems().size(); i++ )
+            {
+                if ( column.getCellData( i ) != null )
+                {
+                    t = new Text( column.getCellData( i ).toString() );
+                    double CalWidth = t.getLayoutBounds().getWidth();
+                    if ( CalWidth > max )
+                    {
+                        max = CalWidth;
+                    }
+                }
+            }
+            column.setPrefWidth( max + 10.0d );
+        } );
     }
 
 

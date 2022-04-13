@@ -42,6 +42,8 @@ public class addNewModel {
     @FXML
     protected void addButtonOnAction() {
         //connecting to database
+        SoundEffect sound = new SoundEffect();
+        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         ConnectionDB connectNow = new ConnectionDB();
         Connection connectDB = connectNow.main();
 
@@ -73,6 +75,8 @@ public class addNewModel {
 
     @FXML
     protected void BackButtonOnAction() {
+        SoundEffect sound = new SoundEffect();
+        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu-View.fxml"));
             Stage stage = (Stage) BackButton.getScene().getWindow();

@@ -29,7 +29,7 @@ public class WeightedGraph {
         }
     }
 
-    public int uniformCostSearch(int source, int destination){
+    public void uniformCostSearch(int source, int destination){
         Edge currentNode;
 
         for (int i = 0; i < adjacencyList.length; i++) {
@@ -50,7 +50,6 @@ public class WeightedGraph {
                 }
             }
         }
-        return distances[destination];
     }
 
     public int[] printPath(int source,int destination){
