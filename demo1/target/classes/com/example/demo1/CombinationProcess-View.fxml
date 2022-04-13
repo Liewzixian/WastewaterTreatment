@@ -125,10 +125,10 @@
                   <children>
                      <TableView fx:id="BestResultView" layoutX="28.0" layoutY="26.0" prefHeight="75.0" prefWidth="748.0">
                        <columns>
-                         <TableColumn fx:id="Preliminary" minWidth="-1.0" prefWidth="75.0" style="-fx-background-color: #00D4FF;" text="Preliminary " />
-                         <TableColumn fx:id="Chemical" minWidth="-1.0" prefWidth="97.60003662109375" style="-fx-background-color: #00D4FF;" text="Chemical" />
-                           <TableColumn fx:id="Biological" minWidth="-1.0" prefWidth="-1.0" style="-fx-background-color: #00D4FF;" text="Biological" />
-                           <TableColumn fx:id="Tertiary" minWidth="-1.0" prefWidth="93.59991455078125" style="-fx-background-color: #00D4FF;" text="Tertiary" />
+                         <TableColumn fx:id="Preliminary" minWidth="-Infinity" prefWidth="75.0" style="-fx-background-color: #00D4FF;" text="Preliminary " />
+                         <TableColumn fx:id="Chemical" minWidth="-Infinity" prefWidth="97.60003662109375" style="-fx-background-color: #00D4FF;" text="Chemical" />
+                           <TableColumn fx:id="Biological" minWidth="-Infinity" prefWidth="123.199951171875" style="-fx-background-color: #00D4FF;" text="Biological" />
+                           <TableColumn fx:id="Tertiary" minWidth="-Infinity" prefWidth="93.59991455078125" style="-fx-background-color: #00D4FF;" text="Tertiary" />
                            <TableColumn fx:id="Sludge" minWidth="-Infinity" prefWidth="113.60003662109375" style="-fx-background-color: #00D4FF;" text="Sludge" />
                            <TableColumn fx:id="CODTable" minWidth="-Infinity" prefWidth="45.60003662109375" style="-fx-background-color: #00D4FF;" text="COD" />
                            <TableColumn fx:id="BODTable" minWidth="-Infinity" prefWidth="74.4000244140625" style="-fx-background-color: #00D4FF;" text="BOD" />
