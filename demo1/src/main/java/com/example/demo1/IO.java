@@ -11,19 +11,18 @@ import java.util.*;
 public class IO {
 
     private final String fileName;
-    private final LinkedHashMap<String,LinkedHashMap<String,Location>> locations;
-
-    public IO(String fileName,LinkedHashMap<String,LinkedHashMap<String,Location>> locations){
+    public IO(String fileName){
         this.fileName = fileName;
-        this.locations = locations;
     }
 
-    public void load() throws FileNotFoundException {
+    public LinkedHashMap<String, LinkedHashMap<String,Tech>> loadData() throws FileNotFoundException {
+
+        LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList = new LinkedHashMap<>();
 
         File file = new File(fileName); //load location
         Scanner sc = new Scanner(file);
 
-        String[] hold = new String[7]; //make array of strings with 8 elements
+        String[] hold = new String[7]; //make array of strings with 7 elements
 
         while(sc.hasNextLine()){ //tokenize string using , and stop when list is empty
             StringTokenizer st = new StringTokenizer(sc.nextLine(),",");
@@ -34,14 +33,23 @@ public class IO {
                     hold[count] = st.nextToken();
                 }
 
-                Menu.fullList.computeIfAbsent(hold[0], k -> new LinkedHashMap<>());
+                originalList.computeIfAbsent(hold[0], k -> new LinkedHashMap<>());
                 Tech input = new Tech(hold[0],hold[1],Double.parseDouble(hold[2]),Double.parseDouble(hold[3]),Double.parseDouble(hold[4]),Double.parseDouble(hold[5]),Double.parseDouble(hold[6]));
-                Menu.fullList.get(hold[0]).putIfAbsent(hold[1],input);
+                originalList.get(hold[0]).putIfAbsent(hold[1],input);
             }
         }
+        sc.close();
+        return originalList;
+    }
+
+    public LinkedHashMap<String,LinkedHashMap<String,Location>> loadLocations() throws FileNotFoundException {
+
+        LinkedHashMap<String,LinkedHashMap<String,Location>> locations = new LinkedHashMap<>();
 
         File locationData = new File("src/main/resources/com/Treatment/location.txt");
         Scanner sc2 = new Scanner(locationData);
+
+        String[] hold = new String[5]; //make array of strings with 5 elements
 
         while(sc2.hasNextLine()){ //tokenize string using , and stop when list is empty
             StringTokenizer st2 = new StringTokenizer(sc2.nextLine(),",");
@@ -57,17 +65,22 @@ public class IO {
                 locations.get(hold[0]).putIfAbsent(hold[1],location);
             }
         }
-        sc.close();
         sc2.close();
+        return locations;
     }
 
-    public void save() throws IOException {
+    public void saveData(LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList) throws IOException {
 
         PrintWriter writer = new PrintWriter(fileName, StandardCharsets.UTF_8); //save location (can add code to change location)
 
-        for(Map.Entry<String, LinkedHashMap<String, Tech>> full : Menu.fullList.entrySet())
+        for(Map.Entry<String, LinkedHashMap<String, Tech>> full : originalList.entrySet())
             for(Map.Entry<String, Tech> list : full.getValue().entrySet())
                 writer.format("%S,%S,%.2f,%.2f,%.2f,%.2f,%.3f\n", list.getValue().getType(), list.getValue().getName(), list.getValue().getTSS(), list.getValue().getCOD(), list.getValue().getBOD(),list.getValue().getArea(), list.getValue().getEnergy());
+
+        writer.close(); //close writer
+    }
+
+    public void saveLocations(LinkedHashMap<String,LinkedHashMap<String,Location>> locations) throws IOException {
 
         PrintWriter writer2 = new PrintWriter("src/main/resources/com/Treatment/location.txt", StandardCharsets.UTF_8); //save location (can add code to change location)
 
@@ -75,7 +88,7 @@ public class IO {
             for(Map.Entry<String, Location> list : full.getValue().entrySet())
                 writer2.format("%S,%S,%.2f,%.2f,%.2f\n", list.getValue().getState(), list.getValue().getLocation(), list.getValue().getTSS(), list.getValue().getCOD(),list.getValue().getBOD());
 
-        writer.close(); //close writer
         writer2.close();
+
     }
 }

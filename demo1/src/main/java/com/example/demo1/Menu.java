@@ -13,6 +13,8 @@ public class Menu {
     TechControl techControl;
     ResultControl resultControl;
 
+    SharedData sharedData;
+
     IO io;
     boolean changed;
 
@@ -20,21 +22,21 @@ public class Menu {
     LinkedHashMap<String,LinkedHashMap<String,Location>> locations;
     AdjacencyList adjacencyList;
 
-    static LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList;
+    //static LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList;
 
-    public Menu(String fileName) {
-        fullList = new LinkedHashMap<>();
-        this.locations = new LinkedHashMap<>();
-        this.results = new ArrayList<>();
-        this.adjacencyList = new AdjacencyList();
+    public Menu(String fileName) throws FileNotFoundException {
+        locations = new LinkedHashMap<>();
+        results = new ArrayList<>();
+        adjacencyList = new AdjacencyList();
 
-        io = new IO(fileName,locations);
-        techControl = new TechControl();
+        io = new IO(fileName);
+        sharedData = new SharedData(io);
+        techControl = new TechControl(sharedData);
         changed = false;
     }
 
     public void load() throws FileNotFoundException {
-        io.load();
+        io.loadData();
         System.out.println("Treatment data loaded to linked list.");
     }
 
@@ -50,10 +52,6 @@ public class Menu {
         changed = techControl.changeEntry(type,code,choice,newEntry);
     }
 
-    public void showAllTreatments(){
-        techControl.showAllTreatments();
-    }
-
     public boolean getCode(String choice){
         return resultControl.getCode(choice);
     }
@@ -63,7 +61,7 @@ public class Menu {
     }
 
     public void showAllResults(Initial initial, int standard){
-        resultControl = new ResultControl(results);
+        resultControl = new ResultControl(sharedData);
         resultControl.calculateResults(initial);
         resultControl.printResults(standard);
         changed = false;
@@ -76,20 +74,13 @@ public class Menu {
     public  void UniformSearch(int i){resultControl.UniFormSearch(i);}
 
     public LinkedHashMap<String,Tech> uniformCost(int choice){
-        return adjacencyList.UniformCostSearch(choice);
+        return adjacencyList.UniformCostSearch(choice,sharedData);
     }
 
     public void save() throws IOException {
-        io.save();
+        io.saveData(sharedData.getOriginalList());
         System.out.println("Treatment data saved to text file.");
     }
 
-    public void clear(){
-        techControl.Clear();
-    }
-
-    public ObservableList<Print> getSelectionTable() {
-        return techControl.getSelectionTable();
-    }
     public ArrayList<Result> getBestResults() {return resultControl.getBestResults();}
 }

@@ -3,19 +3,25 @@ import java.util.*;
 
 public class AdjacencyList {
 
-    public LinkedHashMap<String,Tech> UniformCostSearch(int choice){
+    SharedData sharedData;
 
+    public LinkedHashMap<String,Tech> UniformCostSearch(int choice, SharedData sharedData){
+
+        LinkedHashMap<String, LinkedHashMap<String,Tech>> selectedList;
         LinkedHashMap<String,Tech> best = new LinkedHashMap<>();
+
+        this.sharedData = sharedData;
+        selectedList = sharedData.getSelectedList();
 
         int[] index = new int[6]; //array of int to hold index of the final code of each type
         int[] path;
 
         index[0] = 0;
-        index[1] = Menu.fullList.get("PRELIMINARY").size();
-        index[2] = index[1] + Menu.fullList.get("CHEMICAL").size();
-        index[3] = index[2] + Menu.fullList.get("BIOLOGICAL").size();
-        index[4] = index[3] + Menu.fullList.get("TERTIARY").size();
-        index[5] = index[4] + Menu.fullList.get("SLUDGE").size();
+        index[1] = selectedList.get("PRELIMINARY").size();
+        index[2] = index[1] + selectedList.get("CHEMICAL").size();
+        index[3] = index[2] + selectedList.get("BIOLOGICAL").size();
+        index[4] = index[3] + selectedList.get("TERTIARY").size();
+        index[5] = index[4] + selectedList.get("SLUDGE").size();
 
         WeightedGraph weightedGraph = new WeightedGraph(index[5]+2);
 
@@ -23,10 +29,10 @@ public class AdjacencyList {
 
             if(loop==0){
 
-                Set<String> keys = Menu.fullList.get("PRELIMINARY").keySet();
+                Set<String> keys = selectedList.get("PRELIMINARY").keySet();
                 List<String> listKeys = new ArrayList<>(keys);
 
-                for(Map.Entry<String, Tech> list : Menu.fullList.get("PRELIMINARY").entrySet()) {
+                for(Map.Entry<String, Tech> list : selectedList.get("PRELIMINARY").entrySet()) {
                     weightedGraph.addEdge(loop, listKeys.indexOf(list.getValue().getName())+1, getWeight(list.getValue(),choice));
                 }
             }
@@ -39,10 +45,10 @@ public class AdjacencyList {
                 while(loop > index[treatmentType])
                     treatmentType++;
 
-                Set<String> keys = Menu.fullList.get(treatments[treatmentType-1]).keySet();
+                Set<String> keys = selectedList.get(treatments[treatmentType-1]).keySet();
                 List<String> listKeys = new ArrayList<>(keys);
 
-                for(Map.Entry<String, Tech> list : Menu.fullList.get(treatments[treatmentType-1]).entrySet()) {
+                for(Map.Entry<String, Tech> list : selectedList.get(treatments[treatmentType-1]).entrySet()) {
                     weightedGraph.addEdge(loop, index[treatmentType] + listKeys.indexOf(list.getValue().getName())+1, getWeight(list.getValue(),choice));
                 }
             }
@@ -53,7 +59,7 @@ public class AdjacencyList {
 
         for(int i = 1; i < 6; i++) {
             String[] treatments = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
-            Collection<Tech> keys = Menu.fullList.get(treatments[i-1]).values();
+            Collection<Tech> keys = selectedList.get(treatments[i-1]).values();
             List<Tech> listKeys = new ArrayList<>(keys);
             best.put(treatments[i-1],listKeys.get(path[i]-index[i-1]-1));
         }

@@ -44,8 +44,8 @@ public class addNewModel {
         //connecting to database
         SoundEffect sound = new SoundEffect();
         sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
-        ConnectionDB connectNow = new ConnectionDB();
-        Connection connectDB = connectNow.main();
+        //ConnectionDB connectNow = new ConnectionDB();
+        //Connection connectDB = connectNow.main();
 
         // making insert statement to insert new data into database
         String InsertFields = "INSERT INTO addmodel (Stage,ModelName,COD,BOD,TSS,Foot,Meter) VALUES('";
@@ -64,7 +64,7 @@ public class addNewModel {
             newTech = new Tech(String.valueOf(TStage.getText()),String.valueOf(TModel.getText()), Double.parseDouble(TTss.getText()), Double.parseDouble(TCod.getText()), Double.parseDouble(TBod.getText()), Double.parseDouble(TAof.getText()), Double.parseDouble(TEpm.getText()));
             menu.add(String.valueOf(TStage.getText()), newTech);
             menu.save();
-            menu.showAllTreatments();
+            menu.sharedData.reloadData();
 
         } catch (Exception e) {
             e.printStackTrace();

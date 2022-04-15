@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-
+import static com.example.demo1.LoginController.menu;
 public class ManageModel implements Initializable {
 
     private final ObservableList<Models> detailss = FXCollections.observableArrayList();
@@ -175,6 +175,7 @@ public class ManageModel implements Initializable {
             writer.newLine();
         }
         writer.close();
+        menu.sharedData.reloadData();
     }
 
 

@@ -10,7 +10,6 @@ import static com.example.demo1.LoginController.menu;
 public class ResultControl {
 
     ArrayList<ArrayList<Comparator<Result>>> comparators;
-    ArrayList<Result> results;
     ObservableList<Print> ResultsTable =FXCollections.observableArrayList() ;
     ObservableList<Print> BestTable =FXCollections.observableArrayList() ;
 
@@ -19,8 +18,10 @@ public class ResultControl {
     int standard;
     Initial initial;
 
-    public ResultControl(ArrayList<Result> results){
-        this.results = results;
+    SharedData sharedData;
+
+    public ResultControl(SharedData sharedData){
+        this.sharedData = sharedData;
         this.tech = new Tech[5];
         this.comparators = new ArrayList<>(4);
 
@@ -45,19 +46,20 @@ public class ResultControl {
     public void calculateResults(Initial initial){
         this.initial=initial;
         Tech[] tech = new Tech[5];
-        results.clear();
+        sharedData.getResults().clear();
+        LinkedHashMap<String, LinkedHashMap<String,Tech>> selectedList = sharedData.getSelectedList();
 
-        for(Map.Entry<String, Tech> primary : Menu.fullList.get("PRELIMINARY").entrySet()) {
+        for(Map.Entry<String, Tech> primary : selectedList.get("PRELIMINARY").entrySet()) {
             tech[0] = primary.getValue();
-            for (Map.Entry<String, Tech> chemical : Menu.fullList.get("CHEMICAL").entrySet()) {
+            for (Map.Entry<String, Tech> chemical : selectedList.get("CHEMICAL").entrySet()) {
                 tech[1] = chemical.getValue();
-                for (Map.Entry<String, Tech> biological : Menu.fullList.get("BIOLOGICAL").entrySet()) {
+                for (Map.Entry<String, Tech> biological : selectedList.get("BIOLOGICAL").entrySet()) {
                     tech[2] = biological.getValue();
-                    for (Map.Entry<String, Tech> tertiary : Menu.fullList.get("TERTIARY").entrySet()) {
+                    for (Map.Entry<String, Tech> tertiary : selectedList.get("TERTIARY").entrySet()) {
                         tech[3] = tertiary.getValue();
-                        for (Map.Entry<String, Tech> sludge : Menu.fullList.get("SLUDGE").entrySet()){
+                        for (Map.Entry<String, Tech> sludge : selectedList.get("SLUDGE").entrySet()){
                             tech[4] = sludge.getValue();
-                            results.add(new Result(tech,initial));
+                            sharedData.getResults().add(new Result(tech,initial));
                         }
                     }
                 }
@@ -85,7 +87,7 @@ public class ResultControl {
     }
 
     public void sortResults(int type, int order) {
-        results.sort(comparators.get(type-1).get(order-1));
+        sharedData.getResults().sort(comparators.get(type-1).get(order-1));
     }
 
     public boolean getCode(String choice){
@@ -93,10 +95,10 @@ public class ResultControl {
         String[] treatments = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
         try {
             for (int i = 0; i < 5; i++) {
-                Set<String> keys = Menu.fullList.get(treatments[i]).keySet();
+                Set<String> keys = sharedData.getOriginalList().get(treatments[i]).keySet();
                 List<String> listKeys = new ArrayList<>(keys);
                 code[i] = Integer.parseInt(choice.charAt(i) + "");
-                tech[i] = Menu.fullList.get(treatments[i]).get(listKeys.get(code[i]-1));
+                tech[i] = sharedData.getOriginalList().get(treatments[i]).get(listKeys.get(code[i]-1));
             }
         }
         catch (IndexOutOfBoundsException e){
@@ -139,7 +141,7 @@ public class ResultControl {
     public void printResults(int standard){
         this.standard=standard;
         ResultsTable.clear();
-        for(Result print : results) {
+        for(Result print : sharedData.getResults()) {
             if (standard == 3 || (print.getFinalTSS() <= getStandardNum(standard,0) && print.getFinalCOD() <= getStandardNum(standard,1) && print.getFinalBOD() <= getStandardNum(standard,2)))
                 ResultsTable.add(new Print(print.getTreatments()[0], print.getTreatments()[1], print.getTreatments()[2], print.getTreatments()[3], print.getTreatments()[4], print.getFinalTSS(), print.getFinalCOD(), print.getFinalBOD(), print.getFinalCost(), print.getCOD(), print.getBOD(), print.getTSS()));
         }

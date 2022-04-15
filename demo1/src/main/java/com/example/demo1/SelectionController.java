@@ -24,11 +24,7 @@ import static com.example.demo1.LoginController.menu;
 
 
 public class SelectionController {
-
-    LinkedHashMap<String,LinkedHashMap<String,Tech>> choice = new LinkedHashMap<>();
-    static ArrayList<Print> selectedSaved = new ArrayList<>();
-    static ArrayList<Print> unselectedSaved = new ArrayList<>();
-    static boolean loaded;
+    SharedData sharedData;
 
     ObservableList<Print> Unselected;
     ObservableList<Print> Selected;
@@ -64,33 +60,21 @@ public class SelectionController {
 
     @FXML
     private TableView<Print> UnselectedTable;
-
     @FXML
     private TableView<Print> SelectedTable;
 
     public SelectionController() throws FileNotFoundException {
+
+        sharedData = menu.sharedData;
+
         String[] treatments = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
         tempList = new LinkedHashMap<>();
 
-        for(String loop : treatments) {
+        for(String loop : treatments)
             tempList.computeIfAbsent(loop, k -> new LinkedHashMap<>());
-            choice.computeIfAbsent(loop, k -> new LinkedHashMap<>());
-        }
 
-        for(Print loop : selectedSaved)
-            choice.get(loop.stage).putIfAbsent(loop.treatments,Menu.fullList.get(loop.stage).get(loop.treatments));
-
-        if(!loaded) {
-            menu.showAllTreatments();
-            unselectedSaved = new ArrayList<>(menu.getSelectionTable());
-            loaded = true;
-        }
-
-        Unselected = FXCollections.observableList(unselectedSaved);
-        Selected = FXCollections.observableList(selectedSaved);
-
-        menu.clear();
-        menu.load();
+        Unselected = FXCollections.observableList(sharedData.getUnselected());
+        Selected = FXCollections.observableList(sharedData.getSelected());
     }
 
     @FXML
@@ -100,8 +84,8 @@ public class SelectionController {
             boolean[] flag = stageFlag();
             ModelValidation = ModelValidation && flag[i];
         }
+        SoundEffect sound = new SoundEffect();
         if (ModelValidation) {
-            SoundEffect sound = new SoundEffect();
             sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
             FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-view.fxml"));
             Scene scene = null;
@@ -114,7 +98,6 @@ public class SelectionController {
             SetSceneOnCentral(Login.window);
         }
         else {
-            SoundEffect sound = new SoundEffect();
             sound.playSound("src/main/resources/com/SoundEffect/error.wav");
             FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("SelectionAlert-view.fxml"));
             Scene scene = null;
@@ -127,7 +110,6 @@ public class SelectionController {
             stage.show();
             SetSceneOnCentral(stage);
         }
-        Menu.fullList = choice;//?
     }
 
     public void Search()  {
@@ -188,9 +170,6 @@ public class SelectionController {
                 Selected.add(print.getValue());
 
         remove();
-
-        for(Print print : Selected)
-            choice.get(print.stage).putIfAbsent(print.treatments,Menu.fullList.get(print.stage).get(print.treatments));
     }
 
     public void remove() {
