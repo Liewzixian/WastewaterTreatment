@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
 
 import static com.example.demo1.LoginController.menu;
 
@@ -64,7 +63,7 @@ public class addNewModel {
             newTech = new Tech(String.valueOf(TStage.getText()),String.valueOf(TModel.getText()), Double.parseDouble(TTss.getText()), Double.parseDouble(TCod.getText()), Double.parseDouble(TBod.getText()), Double.parseDouble(TAof.getText()), Double.parseDouble(TEpm.getText()));
             menu.add(String.valueOf(TStage.getText()), newTech);
             menu.save();
-            menu.sharedData.reloadData();
+            menu.sharedData.reload();
 
         } catch (Exception e) {
             e.printStackTrace();

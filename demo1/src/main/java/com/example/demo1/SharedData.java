@@ -35,15 +35,12 @@ public class SharedData {
     public ArrayList<Print> getSelected() {
         return selected;
     }
-
     public ArrayList<Print> getUnselected() {
         return unselected;
     }
-
     public ArrayList<Result> getResults() {
         return results;
     }
-
     public LinkedHashMap<String, LinkedHashMap<String,Tech>> getSelectedList(){
 
         selectedList.clear();
@@ -61,9 +58,15 @@ public class SharedData {
     }
 
     public void reloadList(){
+        selected.clear();
         unselected.clear();
         for(Map.Entry<String, LinkedHashMap<String, Tech>> loop : originalList.entrySet())
             for(Map.Entry<String, Tech> print : loop.getValue().entrySet())
                 unselected.add(new Print(loop.getKey(),print.getKey()));
+    }
+
+    public void reload() throws FileNotFoundException {
+        reloadData();
+        reloadList();
     }
 }

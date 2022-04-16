@@ -175,7 +175,7 @@ public class ManageModel implements Initializable {
             writer.newLine();
         }
         writer.close();
-        menu.sharedData.reloadData();
+        menu.sharedData.reload();
     }
 
 

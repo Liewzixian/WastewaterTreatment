@@ -16,9 +16,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.example.demo1.LoginController.menu;
 
@@ -63,7 +64,7 @@ public class SelectionController {
     @FXML
     private TableView<Print> SelectedTable;
 
-    public SelectionController() throws FileNotFoundException {
+    public SelectionController() {
 
         sharedData = menu.sharedData;
 
