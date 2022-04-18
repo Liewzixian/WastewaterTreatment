@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="359.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.JDialogBoxController">
    <children>
-      <Button layoutX="160.0" layoutY="134.0" mnemonicParsing="false" onAction="#okButtonOnAction" style="-fx-background-color: #00D4FF;" text="OK" />
+      <Button layoutX="160.0" layoutY="134.0" mnemonicParsing="false" onAction="#okButtonOnAction" style="-fx-background-color: #ffbd59;" text="OK" textFill="WHITE" />
       <Label layoutX="37.0" layoutY="70.0" text="Please choose each stage at least a treatment!">
          <font>
             <Font size="14.0" />

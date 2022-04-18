@@ -8,34 +8,34 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="635.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.DisplayResult">
+<AnchorPane prefHeight="635.0" prefWidth="994.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.DisplayResult">
    <children>
-      <ImageView fitHeight="605.0" fitWidth="994.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="824.0" fitWidth="1173.0" layoutX="-178.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../wastewater/ResultBackground.png" />
+            <Image url="@../../wastewater/result1.png" />
          </image>
       </ImageView>
-      <TableView fx:id="ResultView" layoutX="23.0" layoutY="133.0" prefHeight="454.0" prefWidth="948.0">
+      <TableView fx:id="ResultView" layoutX="22.0" layoutY="151.0" prefHeight="454.0" prefWidth="948.0">
          <columns>
-            <TableColumn fx:id="Preliminary" prefWidth="171.99999618530273" style="-fx-background-color: #00D4FF;" text="Preliminary " />
-            <TableColumn fx:id="Chemical" minWidth="0.0" prefWidth="177.6000213623047" style="-fx-background-color: #00D4FF;" text="Chemical" />
-            <TableColumn fx:id="Biological" prefWidth="125.5999755859375" style="-fx-background-color: #00D4FF;" text="Biological" />
-            <TableColumn fx:id="Tertiary" prefWidth="153.5999755859375" style="-fx-background-color: #00D4FF;" text="Tertiary" />
-            <TableColumn fx:id="Sludge" minWidth="0.0" prefWidth="135.99993896484375" style="-fx-background-color: #00D4FF;" text="Sludge" />
-            <TableColumn fx:id="TSS" minWidth="0.0" prefWidth="38.4000244140625" style="-fx-background-color: #00D4FF;" text="TSS" />
-            <TableColumn fx:id="COD" minWidth="0.0" prefWidth="54.39990234375" style="-fx-background-color: #00D4FF;" text="COD" />
-            <TableColumn fx:id="BOD" minWidth="0.0" prefWidth="36.800048828125" style="-fx-background-color: #00D4FF;" text="BOD" />
-            <TableColumn fx:id="COST" minWidth="0.0" prefWidth="52.0" style="-fx-background-color: #00D4FF;" text="Cost" />
+            <TableColumn fx:id="Preliminary" prefWidth="171.99999618530273" style="-fx-background-color: #ffbd59;" text="Preliminary " />
+            <TableColumn fx:id="Chemical" minWidth="0.0" prefWidth="177.6000213623047" style="-fx-background-color: #ffbd59;" text="Chemical" />
+            <TableColumn fx:id="Biological" prefWidth="125.5999755859375" style="-fx-background-color: #ffbd59;" text="Biological" />
+            <TableColumn fx:id="Tertiary" prefWidth="153.5999755859375" style="-fx-background-color: #ffbd59;" text="Tertiary" />
+            <TableColumn fx:id="Sludge" minWidth="0.0" prefWidth="135.99993896484375" style="-fx-background-color: #ffbd59;" text="Sludge" />
+            <TableColumn fx:id="TSS" minWidth="0.0" prefWidth="38.4000244140625" style="-fx-background-color: #ffbd59;" text="TSS" />
+            <TableColumn fx:id="COD" minWidth="0.0" prefWidth="54.39990234375" style="-fx-background-color: #ffbd59;" text="COD" />
+            <TableColumn fx:id="BOD" minWidth="0.0" prefWidth="36.800048828125" style="-fx-background-color: #ffbd59;" text="BOD" />
+            <TableColumn fx:id="COST" minWidth="0.0" prefWidth="52.0" style="-fx-background-color: #ffbd59;" text="Cost" />
          </columns>
       </TableView>
-      <Label layoutX="14.0" layoutY="89.0" text="Sort By" />
-      <ComboBox fx:id="SelectPreference" layoutX="765.0" layoutY="85.0" onAction="#ComboBoxOnActionListener" prefWidth="150.0" promptText="Select Preference" style="-fx-background-color: #00D4FF;" />
-      <Button fx:id="BackButton" layoutX="930.0" layoutY="85.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #00D4FF;" text="Back" />
-      <ImageView fitHeight="79.0" fitWidth="994.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../wastewater/Result.png" />
-         </image>
-      </ImageView>
+      <ComboBox fx:id="SelectPreference" layoutX="695.0" layoutY="102.0" onAction="#ComboBoxOnActionListener" prefWidth="150.0" promptText="Select Preference" style="-fx-background-color: #ffbd59;" />
+      <Button fx:id="BackButton" layoutX="911.0" layoutY="103.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #ffbd59;" text="Back" />
+      <Label layoutX="447.0" layoutY="56.0" text="RESULT" textFill="#ffbd59">
+         <font>
+            <Font name="Verdana Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
