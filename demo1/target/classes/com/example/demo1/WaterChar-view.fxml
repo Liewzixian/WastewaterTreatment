@@ -7,27 +7,29 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.WastewaterCharacteristic">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #434343;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.WastewaterCharacteristic">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="424.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../wastewater/WaterChar.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="202.0" layoutY="93.0" text="COD" />
-      <Button fx:id="EnterButton" layoutX="538.0" layoutY="351.0" mnemonicParsing="false" onAction="#EnterButtonOnAction" style="-fx-background-color: #00D4FF;" text="Enter " />
-      <Button fx:id="BackButton" layoutX="154.0" layoutY="351.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #00D4FF;" text="Back" />
-      <Label layoutX="202.0" layoutY="130.0" text="BOD" />
+      <Label layoutX="317.0" layoutY="113.0" text="COD" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <Button fx:id="EnterButton" layoutX="503.0" layoutY="346.0" mnemonicParsing="false" onAction="#EnterButtonOnAction" style="-fx-background-color: #ffbd59;" text="Enter " textFill="WHITE" />
+      <Button fx:id="BackButton" layoutX="297.0" layoutY="346.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #ffbd59;" text="Back" textFill="WHITE" />
+      <Label layoutX="317.0" layoutY="150.0" text="BOD" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
       <Label layoutX="192.0" layoutY="130.0" />
-      <Label layoutX="205.0" layoutY="170.0" text="TSS" />
-      <ComboBox fx:id="Standard" layoutX="254.0" layoutY="221.0" prefWidth="150.0" promptText="Select standard" style="-fx-background-color: #00D4FF;" />
-      <TextField fx:id="TCod" layoutX="255.0" layoutY="89.0" />
-      <TextField fx:id="TBod" layoutX="255.0" layoutY="126.0" />
-      <TextField fx:id="TTss" layoutX="255.0" layoutY="166.0" />
-      <ImageView fitHeight="400.0" fitWidth="150.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="319.0" layoutY="190.0" text="TSS" textFill="WHITE" />
+      <ComboBox fx:id="Standard" layoutX="367.0" layoutY="240.0" prefHeight="26.0" prefWidth="164.0" promptText="Select standard" style="-fx-background-color: #ffbd59;" />
+      <TextField fx:id="TCod" layoutX="368.0" layoutY="108.0" />
+      <TextField fx:id="TBod" layoutX="368.0" layoutY="145.0" />
+      <TextField fx:id="TTss" layoutX="368.0" layoutY="185.0" />
+      <ImageView fitHeight="441.0" fitWidth="251.0" layoutX="-3.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../wastewater/WastewaterCharacteristic.png" />
+            <Image url="@../../wastewater/watercharacter.png" />
          </image>
       </ImageView>
       <Label fx:id="StandardAlert" layoutX="424.0" layoutY="224.0" prefHeight="18.0" prefWidth="122.0" />
