@@ -1,6 +1,5 @@
 package com.example.demo1;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -23,9 +22,6 @@ public class LoginController {
     static Menu menu;
 
     @FXML
-    private Button loginButton;
-
-    @FXML
     private Button cancelButton;
 
     @FXML
@@ -38,7 +34,7 @@ public class LoginController {
     private TextField UsernameTextField;
 
     @FXML
-    protected void loginButtonOnAction(ActionEvent event) throws FileNotFoundException {
+    protected void loginButtonOnAction() throws FileNotFoundException {
         // if username and password is filled up then go to validateLogin()
         if(!UsernameTextField.getText().isBlank() && !enterPasswordField.getText().isBlank()){
             //validateLogin();
@@ -58,7 +54,7 @@ public class LoginController {
     }
 
     @FXML
-    protected void cancelButtonOnAction(ActionEvent event){
+    protected void cancelButtonOnAction(){
         SoundEffect sound = new SoundEffect();
         sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         //when cancel button is click then window will be close
@@ -124,5 +120,18 @@ public class LoginController {
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+    }
+
+    @FXML
+    protected void SignUpOnClicked(){
+        FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("SignUp-View.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(loader.load(), 545, 365);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Login.splashStage.setScene(scene);
+        SetSceneOnCentral(Login.splashStage);
     }
 }

@@ -61,6 +61,9 @@ public class ManageModel implements Initializable {
     @FXML
     private TableColumn<Models, String> tssColumn;
 
+    @FXML
+    private TableColumn<Models, String> CostColumn;
+
 
     public void readFile() throws Exception {
         Collection<Models> list = Files.readAllLines(Paths.get(String.valueOf(inputFile)))

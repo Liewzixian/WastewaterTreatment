@@ -11,6 +11,7 @@ public class Models {
     StringProperty TSS = new SimpleStringProperty();
     StringProperty area = new SimpleStringProperty();
     StringProperty energy = new SimpleStringProperty();
+    StringProperty cost = new SimpleStringProperty();
 
 
     public String toString() {
@@ -103,54 +104,17 @@ public class Models {
         this.energyProperty().set(Models);
     }
 
-/*
-    public Models(int stage, String name, Double TSS, Double BOD, Double COD) {
-        this.stage = stage;
-        this.name = name;
-        this.TSS = TSS;
-        this.BOD = BOD;
-        this.COD = COD;
+    public final StringProperty costProperty() {
+        return this.cost;
     }
 
-    public int getStage() {
-        return stage;
+    public java.lang.String getCost() {
+        return this.costProperty().get();
     }
 
-    public void setStage(int stage) {
-        this.stage = stage;
+    public final void setCost(final java.lang.String Models) {
+        this.costProperty().set(Models);
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getTSS() {
-        return TSS;
-    }
-
-    public void setTSS(Double TSS) {
-        this.TSS = TSS;
-    }
-
-    public Double getBOD() {
-        return BOD;
-    }
-
-    public void setBOD(Double BOD) {
-        this.BOD = BOD;
-    }
-
-    public Double getCOD() {
-        return COD;
-    }
-
-    public void setCOD(Double COD) {
-        this.COD = COD;
-    }
-
-*/
 }

@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -34,12 +31,6 @@ public class SelectionController {
 
     static Stage stage = new Stage();
     boolean ModelValidation;
-
-    @FXML
-    private Button selectButton;
-
-    @FXML
-    private Button backButton;
 
     @FXML
     private TextField UnselectedTextField;
@@ -118,7 +109,7 @@ public class SelectionController {
         FilteredList<Print> filteredData = new FilteredList<>(Unselected, k -> true);
         UnselectedTextField.setOnKeyReleased(e -> {
             UnselectedTextField.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(Unselected -> {
-                if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
+                if (newValue.isEmpty() || newValue.isBlank()) {
                     return true;
                 }
                 else {
@@ -134,7 +125,7 @@ public class SelectionController {
         FilteredList<Print> filteredData1 = new FilteredList<>(Selected, k -> true);
         SelectedTextField.setOnKeyReleased(f -> {
             SelectedTextField.textProperty().addListener((observable, oldValue, newValue) -> filteredData1.setPredicate(selected -> {
-                if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
+                if (newValue.isEmpty() || newValue.isBlank()) {
                     SelectedTable.setItems(Selected);
                     return true;
                 }
@@ -150,36 +141,33 @@ public class SelectionController {
     }
 
     @FXML
-    protected void selectButtonOnAction() {
+    protected void selectAllButtonOnAction() {
         SoundEffect sound = new SoundEffect();
         sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
 
-        Print selection = UnselectedTable.getSelectionModel().getSelectedItem();
-        Unselected.remove(selection);
+        ObservableList<Print> selection = UnselectedTable.getItems();
 
         for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
             tempList.get(loop.getKey()).clear();
 
         for(Print loop : Selected)
             tempList.get(loop.stage).put(loop.treatments,loop);
-        tempList.get(selection.stage).put(selection.treatments,selection);
+
+        for(Print loop : selection)
+            tempList.get(loop.stage).put(loop.treatments,loop);
 
         Selected.clear();
 
         for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
             for (Map.Entry<String, Print> print : loop.getValue().entrySet())
                 Selected.add(print.getValue());
-
         remove();
+        UnselectedTable.getItems().clear();
     }
 
     public void remove() {
         UnselectedTextField.clear();
         SelectedTextField.clear();
-    }
-
-    public void update(){
-        SelectedTable.setItems(Selected);
     }
 
     @FXML
@@ -190,6 +178,8 @@ public class SelectionController {
         SelectedModel.setCellValueFactory(new PropertyValueFactory<>("treatments"));
         UnselectedTable.setItems(Unselected);
         SelectedTable.setItems(Selected);
+        SelectOnDoubleClick();
+        DeleteOnDoubleClick();
         Search();
     }
 
@@ -209,5 +199,88 @@ public class SelectionController {
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+    }
+
+    @FXML
+    protected  void SelectOnDoubleClick(){
+        UnselectedTable.setRowFactory( tv -> {
+            TableRow<Print> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    SoundEffect sound = new SoundEffect();
+                    sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+                    Print selection = UnselectedTable.getSelectionModel().getSelectedItem();
+                    Unselected.remove(selection);
+
+                    for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
+                        tempList.get(loop.getKey()).clear();
+
+                    for(Print loop : Selected)
+                        tempList.get(loop.stage).put(loop.treatments,loop);
+                    tempList.get(selection.stage).put(selection.treatments,selection);
+
+                    Selected.clear();
+
+                    for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
+                        for (Map.Entry<String, Print> print : loop.getValue().entrySet())
+                            Selected.add(print.getValue());
+
+                    remove();
+                }
+            });
+            return row ;
+        });
+    }
+
+    @FXML
+    protected  void DeleteOnDoubleClick(){
+        SelectedTable.setRowFactory( tv -> {
+            TableRow<Print> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    SoundEffect sound = new SoundEffect();
+                    sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+                    Print selection = SelectedTable.getSelectionModel().getSelectedItem();
+                    Selected.remove(selection);
+                    Unselected.add(selection);
+                    UnselectedTable.refresh();
+
+                    remove();
+
+                }
+            });
+            return row ;
+        });
+    }
+
+    @FXML
+    protected void DeleteAllOnAction(){
+        SoundEffect sound = new SoundEffect();
+        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+
+        ObservableList<Print> selection = SelectedTable.getItems();
+
+        for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
+            tempList.get(loop.getKey()).clear();
+
+        for(Print loop : Unselected)
+            tempList.get(loop.stage).put(loop.treatments,loop);
+
+        for(Print loop : Selected)
+            tempList.get(loop.stage).put(loop.treatments,loop);
+
+        for(Print loop : selection)
+            tempList.get(loop.stage).put(loop.treatments,loop);
+
+        Selected.clear();
+        Unselected.clear();
+
+        for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
+            for (Map.Entry<String, Print> print : loop.getValue().entrySet())
+                Unselected.add(print.getValue());
+
+        remove();
+        UnselectedTable.refresh();
+        SelectedTable.refresh();
     }
 }

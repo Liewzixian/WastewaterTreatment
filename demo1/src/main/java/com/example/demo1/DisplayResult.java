@@ -21,7 +21,7 @@ import static com.example.demo1.LoginController.menu;
 
 public class DisplayResult {
     static Stage stage = new Stage();
-    ObservableList<String> Preference = FXCollections.observableArrayList("Best Overall","Cost Effectiveness ");
+    ObservableList<String> Preference = FXCollections.observableArrayList("Best Cleaning Efficiency To Worst","Best Overall","Most Cost Effectiveness");
 
     static Print rowData;
 
@@ -91,13 +91,19 @@ public class DisplayResult {
     }
 
     @FXML
-    private void sortByCost(){
-
-    }
-
-    @FXML
     private void ComboBoxOnActionListener(){
-
+       if(SelectPreference.getValue().equals("Best Overall")){
+           menu.UniformSearch(1);
+           ResultView.setItems(menu.getBestTable());
+           ResultView.refresh();
+       }else if(SelectPreference.getValue().equals("Cost Effectiveness")){
+           menu.UniformSearch(2);
+           ResultView.setItems(menu.getBestTable());
+           ResultView.refresh();
+       }else if(SelectPreference.getValue().equals("Best Cleaning Efficiency To Worst")){
+           ResultView.setItems(menu.getResultsTable());
+           ResultView.refresh();
+       }
     }
 
     @FXML
