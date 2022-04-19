@@ -52,14 +52,6 @@ public class Menu {
         changed = techControl.changeEntry(type,code,choice,newEntry);
     }
 
-    public boolean getCode(String choice){
-        return resultControl.getCode(choice);
-    }
-
-    public void getSpecificResult(Initial initial){
-        resultControl.getSpecificResult(initial);
-    }
-
     public void showAllResults(Initial initial, int standard){
         resultControl = new ResultControl(sharedData);
         resultControl.calculateResults(initial);

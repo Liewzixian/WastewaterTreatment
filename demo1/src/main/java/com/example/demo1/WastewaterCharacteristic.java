@@ -25,8 +25,6 @@ public class WastewaterCharacteristic {
     Input input = new Input();
     String Tss,Bss,Css,SelectedStandard;
 
-    int [] standard ={1,2};
-
     @FXML
     private TextField TCod;
 
@@ -37,7 +35,7 @@ public class WastewaterCharacteristic {
     private TextField TTss;
 
     @FXML
-    private ComboBox Standard;
+    private ComboBox<String> Standard;
 
     @FXML
     private Label StandardAlert;
@@ -86,9 +84,9 @@ public class WastewaterCharacteristic {
         if(Input.validate == 0){
 
             if(Standard.getValue()=="Standard A")
-                menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),standard[0]);
+                menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),0);
             else
-                menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),standard[1]);
+                menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),1);
 
             FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("DisplayResultView.fxml"));
             Scene scene = null;
