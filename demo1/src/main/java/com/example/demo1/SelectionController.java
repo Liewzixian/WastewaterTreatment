@@ -72,10 +72,11 @@ public class SelectionController {
     @FXML
     protected void backButtonOnAction() {
         ModelValidation=true;
-        for (int i = 0; i < 5; i++) {
-            boolean[] flag = stageFlag();
-            ModelValidation = ModelValidation && flag[i];
-        }
+
+        /*boolean[] flag = stageFlag();
+        for (int i = 0; i < 5; i++)
+            ModelValidation = ModelValidation && flag[i];*/
+
         SoundEffect sound = new SoundEffect();
         if (ModelValidation) {
             sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");

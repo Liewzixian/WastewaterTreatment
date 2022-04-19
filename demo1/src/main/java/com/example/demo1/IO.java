@@ -19,6 +19,10 @@ public class IO {
 
         LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList = new LinkedHashMap<>();
 
+        String[] stages = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
+        for(String stage : stages)
+            originalList.put(stage,new LinkedHashMap<>());
+
         File file = new File(fileName); //load location
         Scanner sc = new Scanner(file);
 
@@ -29,11 +33,9 @@ public class IO {
 
             while (st.hasMoreTokens()) { //temporarily save info of treatment in each loop
 
-                for (int count = 0; count < 8; count++){
+                for (int count = 0; count < 8; count++)
                     hold[count] = st.nextToken();
-                }
 
-                originalList.computeIfAbsent(hold[0], k -> new LinkedHashMap<>());
                 Tech input = new Tech(hold[0],hold[1],Double.parseDouble(hold[2]),Double.parseDouble(hold[3]),Double.parseDouble(hold[4]),Double.parseDouble(hold[5]),Double.parseDouble(hold[6]),Double.parseDouble(hold[7]));
                 originalList.get(hold[0]).putIfAbsent(hold[1],input);
             }

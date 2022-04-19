@@ -65,14 +65,13 @@ public class WeightedGraph {
             path.add(parent[vertex]);
             vertex = parent[vertex];
         }
-        System.out.println("The Path between " + source + " and " + destination + " is ");
+
         Iterator<Integer> iterator = path.descendingIterator();
+
         int i = 0;
-        while (iterator.hasNext()) {
-            jobs[i] = iterator.next();
-            System.out.print(jobs[i] + "\t");
-            i++;
-        }
+        while (iterator.hasNext())
+            jobs[i++] = iterator.next();
+
         return jobs;
     }
 

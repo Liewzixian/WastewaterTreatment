@@ -29,9 +29,7 @@ public class SharedData {
         return originalList;
     }
 
-    public LinkedHashMap<String, LinkedHashMap<String, Location>> getLocations() {
-        return locations;
-    }
+    public LinkedHashMap<String, LinkedHashMap<String, Location>> getLocations() { return locations; }
     public ArrayList<Print> getSelected() {
         return selected;
     }
@@ -45,12 +43,23 @@ public class SharedData {
 
         selectedList.clear();
 
-        for(Print loop: selected) {
-            selectedList.computeIfAbsent(loop.stage, k -> new LinkedHashMap<>());
-            selectedList.get(loop.stage).put(loop.treatments,originalList.get(loop.stage).get(loop.treatments));
-        }
+        if(selected.isEmpty())
+            return originalList;
+        else {
 
-        return selected.isEmpty() ? originalList : selectedList;
+            String[] stages = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
+            for(String stage : stages)
+                selectedList.put(stage,new LinkedHashMap<>());
+
+            for(Print loop: selected)
+                selectedList.get(loop.stage).put(loop.treatments,originalList.get(loop.stage).get(loop.treatments));
+
+            for(Map.Entry<String, LinkedHashMap<String, Tech>> stage : selectedList.entrySet()){
+                if(stage.getValue().isEmpty())
+                    stage.getValue().put("NULL",new Tech(stage.getKey(),"NULL",0,0,0,0,0,0));
+            }
+            return selectedList;
+        }
     }
 
     public void reloadData() throws FileNotFoundException {
