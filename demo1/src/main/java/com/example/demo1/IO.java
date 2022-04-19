@@ -22,19 +22,19 @@ public class IO {
         File file = new File(fileName); //load location
         Scanner sc = new Scanner(file);
 
-        String[] hold = new String[7]; //make array of strings with 7 elements
+        String[] hold = new String[8]; //make array of strings with 7 elements
 
         while(sc.hasNextLine()){ //tokenize string using , and stop when list is empty
             StringTokenizer st = new StringTokenizer(sc.nextLine(),",");
 
             while (st.hasMoreTokens()) { //temporarily save info of treatment in each loop
 
-                for (int count = 0; count < 7; count++){
+                for (int count = 0; count < 8; count++){
                     hold[count] = st.nextToken();
                 }
 
                 originalList.computeIfAbsent(hold[0], k -> new LinkedHashMap<>());
-                Tech input = new Tech(hold[0],hold[1],Double.parseDouble(hold[2]),Double.parseDouble(hold[3]),Double.parseDouble(hold[4]),Double.parseDouble(hold[5]),Double.parseDouble(hold[6]));
+                Tech input = new Tech(hold[0],hold[1],Double.parseDouble(hold[2]),Double.parseDouble(hold[3]),Double.parseDouble(hold[4]),Double.parseDouble(hold[5]),Double.parseDouble(hold[6]),Double.parseDouble(hold[7]));
                 originalList.get(hold[0]).putIfAbsent(hold[1],input);
             }
         }

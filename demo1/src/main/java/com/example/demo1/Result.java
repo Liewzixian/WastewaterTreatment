@@ -19,7 +19,7 @@ public class Result { //class for linked list to hold result of all possible com
         this.cost = new double[5];
         this.area = new double[5];
         this.energy = new double[5];
-        double tempTSS = initial.getTSS(), tempCOD = initial.getCOD(), tempBOD = initial.getBOD(), tempCost = 0;
+        double tempTSS = initial.getTSS(), tempCOD = initial.getCOD(), tempBOD = initial.getBOD(), tempCost = 0, tempArea = 0, tempEnergy = 0;
 
         for(int i = 0; i < 5; i++) {
             treatments[i] = tech[i].getName();
@@ -29,10 +29,12 @@ public class Result { //class for linked list to hold result of all possible com
             COD[i] = tempCOD;
             tempBOD = tempBOD * (1 - tech[i].getBOD());
             BOD[i] = tempBOD;
-            tempCost = tempCost + (tech[i].getArea() * tech[i].getEnergy());
+            tempCost = tempCost + tech[i].getCost();
             cost[i] = tempCost;
-            area[i] = tech[i].getArea();
-            energy[i] = tech[i].getEnergy();
+            tempArea = tempArea + tech[i].getArea();
+            area[i] = tempArea;
+            tempEnergy = tempEnergy + tech[i].getEnergy();
+            energy[i] = tempEnergy/(i+1);
         }
     }
 

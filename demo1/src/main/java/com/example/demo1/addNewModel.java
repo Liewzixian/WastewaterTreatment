@@ -54,6 +54,9 @@ public class addNewModel implements Initializable {
     private TextField TEpm;
 
     @FXML
+    private TextField TCost;
+
+    @FXML
     protected void addButtonOnAction() {
         //connecting to database
         SoundEffect sound = new SoundEffect();
@@ -75,7 +78,7 @@ public class addNewModel implements Initializable {
             // if new data is inserted into the database , then msg will display
             addnewMessageLabel.setText("Added Successfully!");*/
 
-            newTech = new Tech(String.valueOf(TStage.getValue()),String.valueOf(TModel.getText()), Double.parseDouble(String.valueOf(TTss.getValue())), Double.parseDouble(String.valueOf(TCod.getValue())), Double.parseDouble(String.valueOf(TBod.getValue())), Double.parseDouble(TAof.getText()), Double.parseDouble(TEpm.getText()));
+            newTech = new Tech(String.valueOf(TStage.getValue()),String.valueOf(TModel.getText()), Double.parseDouble(String.valueOf(TTss.getValue())), Double.parseDouble(String.valueOf(TCod.getValue())), Double.parseDouble(String.valueOf(TBod.getValue())), Double.parseDouble(TAof.getText()), Double.parseDouble(TEpm.getText()),Double.parseDouble(TCost.getText()));
             menu.add(String.valueOf(TStage.getValue()), newTech);
             menu.save();
             menu.sharedData.reload();
