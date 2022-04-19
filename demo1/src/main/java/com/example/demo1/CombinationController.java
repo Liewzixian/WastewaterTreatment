@@ -1,9 +1,9 @@
 package com.example.demo1;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
@@ -14,6 +14,22 @@ import java.util.ArrayList;
 import static com.example.demo1.LoginController.menu;
 
 public class CombinationController {
+    ObservableList<String> Preference = FXCollections.observableArrayList("Most Cleaning Efficient","Most Cost Efficient","Most Energy Efficient","Least Area");
+    DecimalFormat df = new DecimalFormat("#.####");
+    Print rowData=DisplayResult.rowData;
+    ArrayList<Result>BestResultList;
+    double[] COD = rowData.fullCOD;
+    double[] BOD = rowData.fullBOD;
+    double[] TSS = rowData.fullTSS;
+    @FXML
+    private ComboBox<String> SelectPreference;
+
+    @FXML
+    private Tab BestTable;
+
+    @FXML
+    private Tab Comparison;
+
     @FXML
     private Label Stage1Name;
 
@@ -140,16 +156,17 @@ public class CombinationController {
     @FXML
     private TableColumn<Print,Double> COSTTable;
 
+    @FXML
+    private TableColumn<Print,Double> EnergyTable;
+
+    @FXML
+    private TableColumn<Print,Double> AreaTable;
+
 
     @FXML
     public void initialize(){
-        DecimalFormat df = new DecimalFormat("#.####");
         df.setRoundingMode(RoundingMode.CEILING);
-        Print rowData=DisplayResult.rowData;
-        ArrayList<Result>BestResultList;
-        double[] COD = rowData.fullCOD;
-        double[] BOD = rowData.fullBOD;
-        double[] TSS = rowData.fullTSS;
+        SelectPreference.setItems(Preference);
         setStage1(rowData.getTreatmentsA(),String.valueOf(df.format(COD[0])),String.valueOf(df.format(BOD[0])),String.valueOf(df.format(TSS[0])));
         setStage2(rowData.getTreatmentsB(),String.valueOf(df.format(COD[1])),String.valueOf(df.format(BOD[1])),String.valueOf(df.format(TSS[1])));
         setStage3(rowData.getTreatmentsC(),String.valueOf(df.format(COD[2])),String.valueOf(df.format(BOD[2])),String.valueOf(df.format(TSS[2])));
@@ -165,6 +182,8 @@ public class CombinationController {
         CODTable.setCellValueFactory(new PropertyValueFactory<>("COD"));
         BODTable.setCellValueFactory(new PropertyValueFactory<>("BOD"));
         COSTTable.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        AreaTable.setCellValueFactory(new PropertyValueFactory<>("areaOfFootprint"));
+        EnergyTable.setCellValueFactory(new PropertyValueFactory<>("energy"));
         menu.UniformSearch(1);
         BestResultView.setItems(menu.getBestTable());
         autoResizeColumns(BestResultView);
@@ -174,46 +193,45 @@ public class CombinationController {
             setCompareResult(calculation(COD[4],print.getFinalCOD()),calculation(BOD[4],print.getFinalBOD()),calculation(TSS[4],print.getFinalTSS()),calculation(rowData.cost, print.getFinalCost()));
         }
 
-
     }
 
     public void setStage1(String stage1Name,String stage1CoD,String stage1BoD,String stage1Tss) {
         Stage1Name.setText(stage1Name);
-        Stage1CoD.setText(stage1CoD);
-        Stage1BoD.setText(stage1BoD);
-        Stage1Tss.setText(stage1Tss);
+        Stage1CoD.setText(stage1CoD+" ppm");
+        Stage1BoD.setText(stage1BoD+" ppm");
+        Stage1Tss.setText(stage1Tss+" ppm");
 
     }
 
     public void setStage2(String stage2Name,String stage2CoD,String stage2BoD,String stage2Tss) {
         Stage2Name.setText(stage2Name);
-        Stage2CoD.setText(stage2CoD);
-        Stage2Bod.setText(stage2BoD);
-        Stage2Tss.setText(stage2Tss);
+        Stage2CoD.setText(stage2CoD+" ppm");
+        Stage2Bod.setText(stage2BoD+" ppm");
+        Stage2Tss.setText(stage2Tss+" ppm");
 
     }
 
     public void setStage3(String stage3Name,String stage3CoD,String stage3BoD,String stage3Tss) {
         Stage3Name.setText(stage3Name);
-        Stage3CoD.setText(stage3CoD);
-        Stage3BoD.setText(stage3BoD);
-        Stage3Tss.setText(stage3Tss);
+        Stage3CoD.setText(stage3CoD+" ppm");
+        Stage3BoD.setText(stage3BoD+" ppm");
+        Stage3Tss.setText(stage3Tss+" ppm");
 
     }
 
     public void setStage4(String stage4Name,String stage4CoD,String stage4BoD,String stage4Tss) {
         Stage4Name.setText(stage4Name);
-        Stage4CoD.setText(stage4CoD);
-        Stage4BoD.setText(stage4BoD);
-        Stage4Tss.setText(stage4Tss);
+        Stage4CoD.setText(stage4CoD+" ppm");
+        Stage4BoD.setText(stage4BoD+" ppm");
+        Stage4Tss.setText(stage4Tss+" ppm");
 
     }
 
     public void setStage5(String stage5Name,String stage5CoD,String stage5BoD,String stage5Tss) {
         Stage5Name.setText(stage5Name);
-        Stage5CoD.setText(stage5CoD);
-        Stage5BoD.setText(stage5BoD);
-        Stage5Tss.setText(stage5Tss);
+        Stage5CoD.setText(stage5CoD+" ppm");
+        Stage5BoD.setText(stage5BoD+" ppm");
+        Stage5Tss.setText(stage5Tss+" ppm");
 
     }
 
@@ -263,5 +281,58 @@ public class CombinationController {
     }
     public String calculation(double current,double best){
         return String.valueOf((int) (best/current*100));
+    }
+
+    @FXML
+    private void ComboBoxOnActionListener(){
+        if(SelectPreference.getValue().equals("Most Cleaning Efficient")){
+            BestTable.setText("The Most Cleaning Efficient Combination");
+            Comparison.setText("Comparison With The Best Cleaning Efficiency");
+            menu.UniformSearch(1);
+            BestResultView.setItems(menu.getBestTable());
+            BestResultView.refresh();
+            autoResizeColumns(BestResultView);
+            BestResultList=menu.getBestResults();
+            for(Result print : BestResultList) {
+                setBestFinal(String.valueOf(df.format(print.getFinalCOD())),String.valueOf(df.format(print.getFinalBOD())),String.valueOf(df.format(print.getFinalTSS())),String.valueOf(df.format(print.getFinalCost())));
+                setCompareResult(calculation(COD[4],print.getFinalCOD()),calculation(BOD[4],print.getFinalBOD()),calculation(TSS[4],print.getFinalTSS()),calculation(rowData.cost, print.getFinalCost()));
+            }
+        }else if(SelectPreference.getValue().equals("Most Cost Efficient")){
+            BestTable.setText("The Most Cost Efficient Combination");
+            Comparison.setText("Comparison With The Best Cost Efficiency");
+            menu.UniformSearch(2);
+            BestResultView.setItems(menu.getBestTable());
+            BestResultView.refresh();
+            autoResizeColumns(BestResultView);
+            BestResultList=menu.getBestResults();
+            for(Result print : BestResultList) {
+                setBestFinal(String.valueOf(df.format(print.getFinalCOD())),String.valueOf(df.format(print.getFinalBOD())),String.valueOf(df.format(print.getFinalTSS())),String.valueOf(df.format(print.getFinalCost())));
+                setCompareResult(calculation(COD[4],print.getFinalCOD()),calculation(BOD[4],print.getFinalBOD()),calculation(TSS[4],print.getFinalTSS()),calculation(rowData.cost, print.getFinalCost()));
+            }
+        }else if(SelectPreference.getValue().equals("Most Energy Efficient")){
+            BestTable.setText("The Most Energy Efficient Combination");
+            Comparison.setText("Comparison With The Most Energy Efficiency");
+            menu.UniformSearch(3);
+            BestResultView.setItems(menu.getBestTable());
+            BestResultView.refresh();
+            autoResizeColumns(BestResultView);
+            BestResultList=menu.getBestResults();
+            for(Result print : BestResultList) {
+                setBestFinal(String.valueOf(df.format(print.getFinalCOD())),String.valueOf(df.format(print.getFinalBOD())),String.valueOf(df.format(print.getFinalTSS())),String.valueOf(df.format(print.getFinalCost())));
+                setCompareResult(calculation(COD[4],print.getFinalCOD()),calculation(BOD[4],print.getFinalBOD()),calculation(TSS[4],print.getFinalTSS()),calculation(rowData.cost, print.getFinalCost()));
+            }
+        }else if(SelectPreference.getValue().equals("Least Area")){
+            BestTable.setText("The Least Area Combination");
+            Comparison.setText("Comparison With The Most Least Area");
+            menu.UniformSearch(4);
+            BestResultView.setItems(menu.getBestTable());
+            BestResultView.refresh();
+            autoResizeColumns(BestResultView);
+            BestResultList=menu.getBestResults();
+            for(Result print : BestResultList) {
+                setBestFinal(String.valueOf(df.format(print.getFinalCOD())),String.valueOf(df.format(print.getFinalBOD())),String.valueOf(df.format(print.getFinalTSS())),String.valueOf(df.format(print.getFinalCost())));
+                setCompareResult(calculation(COD[4],print.getFinalCOD()),calculation(BOD[4],print.getFinalBOD()),calculation(TSS[4],print.getFinalTSS()),calculation(rowData.cost, print.getFinalCost()));
+            }
+        }
     }
 }

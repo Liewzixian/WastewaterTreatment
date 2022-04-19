@@ -9,21 +9,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #434343;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.WastewaterCharacteristic">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #434343;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.WastewaterCharacteristic">
    <children>
-      <Label layoutX="317.0" layoutY="113.0" text="COD" textFill="WHITE">
+      <Label layoutX="298.0" layoutY="111.0" text="COD(ppm)" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
       <Button fx:id="EnterButton" layoutX="503.0" layoutY="346.0" mnemonicParsing="false" onAction="#EnterButtonOnAction" style="-fx-background-color: #ffbd59;" text="Enter " textFill="WHITE" />
       <Button fx:id="BackButton" layoutX="297.0" layoutY="346.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #ffbd59;" text="Back" textFill="WHITE" />
-      <Label layoutX="317.0" layoutY="150.0" text="BOD" textFill="WHITE">
+      <Label layoutX="298.0" layoutY="148.0" text="BOD(ppm)" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
       <Label layoutX="192.0" layoutY="130.0" />
-      <Label layoutX="319.0" layoutY="190.0" text="TSS" textFill="WHITE" />
-      <ComboBox fx:id="Standard" layoutX="367.0" layoutY="240.0" prefHeight="26.0" prefWidth="164.0" promptText="Select standard" style="-fx-background-color: #ffbd59;" />
+      <ComboBox fx:id="Standard" layoutX="368.0" layoutY="235.0" prefHeight="26.0" prefWidth="164.0" promptText="Select standard" style="-fx-background-color: #ffbd59;" />
       <TextField fx:id="TCod" layoutX="368.0" layoutY="108.0" />
       <TextField fx:id="TBod" layoutX="368.0" layoutY="145.0" />
       <TextField fx:id="TTss" layoutX="368.0" layoutY="185.0" />
@@ -32,6 +31,21 @@
             <Image url="@../../wastewater/watercharacter.png" />
          </image>
       </ImageView>
-      <Label fx:id="StandardAlert" layoutX="424.0" layoutY="224.0" prefHeight="18.0" prefWidth="122.0" />
+      <Label fx:id="StandardAlert" layoutX="368.0" layoutY="217.0" prefHeight="18.0" prefWidth="164.0" textFill="WHITE" />
+      <Label layoutX="298.0" layoutY="188.0" text="TSS (ppm)" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="349.0" layoutY="55.0" text="Initial Pollution Level" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="368.0" layoutY="261.0" prefHeight="63.0" prefWidth="164.0" text="Malaysia Wastewater Effluent Discharge Standards" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

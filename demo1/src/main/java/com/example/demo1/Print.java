@@ -12,6 +12,10 @@ public class Print {
     public double COD;
     public double BOD;
     public double cost;
+    public double energy;
+
+
+    public double areaOfFootprint;
     public double[] fullTSS;
     public double[] fullBOD;
     public double[] fullCOD;
@@ -20,7 +24,7 @@ public class Print {
     public String stage;
 
 
-    public Print(String a,String b,String c,String d,String e,double aa,double bb,double cc,double dd,double []cod,double []bod,double []tss){
+    public Print(String a,String b,String c,String d,String e,double aa,double bb,double cc,double dd,double []cod,double []bod,double []tss,double energy,double areaOfFootprint){
         treatmentsA=a;
         treatmentsB=b;
         treatmentsC=c;
@@ -33,6 +37,8 @@ public class Print {
         fullCOD=cod;
         fullBOD=bod;
         fullTSS=tss;
+        this.energy=energy;
+        this.areaOfFootprint=areaOfFootprint;
     }
 
     public Print(String a , String b){
@@ -84,5 +90,8 @@ public class Print {
         return treatments;
     }
 
+    public double getEnergy() {return energy;}
+
+    public double getAreaOfFootprint() {return areaOfFootprint;}
 
 }

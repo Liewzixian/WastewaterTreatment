@@ -19,6 +19,8 @@ import static com.example.demo1.LoginController.menu;
 public class addNewModel implements Initializable {
     Tech newTech;
     ObservableList<String> StageName = FXCollections.observableArrayList("PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE");
+    NumTest numTest=new NumTest();
+    boolean validation=true;
 
     @FXML
     private Button BackButton;
@@ -57,35 +59,71 @@ public class addNewModel implements Initializable {
     private TextField TCost;
 
     @FXML
+    private Label addNewMessageLabel;
+
+    @FXML
     protected void addButtonOnAction() {
-        //connecting to database
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
-        //ConnectionDB connectNow = new ConnectionDB();
-        //Connection connectDB = connectNow.main();
+        validation=true;
 
-        // making insert statement to insert new data into database
-        String InsertFields = "INSERT INTO addmodel (Stage,ModelName,COD,BOD,TSS,Foot,Meter) VALUES('";
-        String InsertValues = TStage.getValue() + "','" + TModel.getText() + "','" + TCod.getValue() + "','" + TBod.getValue() + "','" + TTss.getValue() + "','" + TAof.getText() + "','" + TEpm.getText() + "')";
-        String InsertToAdd = InsertFields + InsertValues;
+        if(TModel.getText().isEmpty()){
+            TModel.setText("Please Enter The Model");
+            validation=false;
+        }
+
+        if(TAof.getText().isEmpty()){
+            TAof.setText("Please Enter Area");
+        }else if(!numTest.isDouble(TAof.getText())){
+            TAof.setText("Invalid Value");
+            validation=false;
+        }
+
+        if(TCost.getText().isEmpty()){
+            TCost.setText("Please Enter Cost");
+        }else if(!numTest.isDouble(TCost.getText())){
+            TCost.setText("Invalid Value");
+            validation=false;
+        }
+
+        if(TEpm.getText().isEmpty()){
+            TEpm.setText("Please Enter Energy");
+        }else if(!numTest.isDouble(TEpm.getText())){
+            TEpm.setText("Invalid Value");
+            validation=false;
+        }
 
 
-        try {
-            //Creating a statement that connects to database and update the database
+        if(validation) {
+            //connecting to database
+            SoundEffect sound = new SoundEffect();
+            sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+            //ConnectionDB connectNow = new ConnectionDB();
+            //Connection connectDB = connectNow.main();
+
+            // making insert statement to insert new data into database
+            String InsertFields = "INSERT INTO addmodel (Stage,ModelName,COD,BOD,TSS,Foot,Meter) VALUES('";
+            String InsertValues = TStage.getValue() + "','" + TModel.getText() + "','" + TCod.getValue() + "','" + TBod.getValue() + "','" + TTss.getValue() + "','" + TAof.getText() + "','" + TEpm.getText() + "')";
+            String InsertToAdd = InsertFields + InsertValues;
+
+
+            try {
+                //Creating a statement that connects to database and update the database
             /*Statement statement = connectDB.createStatement();
             statement.executeUpdate(InsertToAdd);
 
             // if new data is inserted into the database , then msg will display
             addnewMessageLabel.setText("Added Successfully!");*/
 
-            newTech = new Tech(String.valueOf(TStage.getValue()),String.valueOf(TModel.getText()), Double.parseDouble(String.valueOf(TTss.getValue())), Double.parseDouble(String.valueOf(TCod.getValue())), Double.parseDouble(String.valueOf(TBod.getValue())), Double.parseDouble(TAof.getText()), Double.parseDouble(TEpm.getText()),Double.parseDouble(TCost.getText()));
-            menu.add(String.valueOf(TStage.getValue()), newTech);
-            menu.save();
-            menu.sharedData.reload();
+                newTech = new Tech(String.valueOf(TStage.getValue()), String.valueOf(TModel.getText()), Double.parseDouble(String.valueOf(TTss.getValue())), Double.parseDouble(String.valueOf(TCod.getValue())), Double.parseDouble(String.valueOf(TBod.getValue())), Double.parseDouble(TAof.getText()), Double.parseDouble(TEpm.getText()), Double.parseDouble(TCost.getText()));
+                menu.add(String.valueOf(TStage.getValue()), newTech);
+                menu.save();
+                menu.sharedData.reload();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.getCause();
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.getCause();
+            }
+        }else{
+            addNewMessageLabel.setText("Model Addition Failed!");
         }
 
     }
@@ -112,10 +150,10 @@ public class addNewModel implements Initializable {
         BODSlider.setText("0%");
         TSSSlider.setText("0%");
 
-        TCod.valueProperty().addListener((observable,oldNumber,newNumber)-> CODSlider.setText(df.format(newNumber.doubleValue()) + "%"));
+        TCod.valueProperty().addListener((observable,oldNumber,newNumber)-> CODSlider.setText(df.format(newNumber.doubleValue()*100) + "%"));
 
-        TBod.valueProperty().addListener((observable,oldNumber,newNumber)-> BODSlider.setText(df.format(newNumber.doubleValue()) + "%"));
+        TBod.valueProperty().addListener((observable,oldNumber,newNumber)-> BODSlider.setText(df.format(newNumber.doubleValue()*100) + "%"));
 
-        TTss.valueProperty().addListener((observable,oldNumber,newNumber)-> TSSSlider.setText(df.format(newNumber.doubleValue()) + "%"));
+        TTss.valueProperty().addListener((observable,oldNumber,newNumber)-> TSSSlider.setText(df.format(newNumber.doubleValue()*100) + "%"));
     }
     }

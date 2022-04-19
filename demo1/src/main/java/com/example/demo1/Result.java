@@ -1,5 +1,7 @@
 package com.example.demo1;
 
+import java.text.DecimalFormat;
+
 public class Result { //class for linked list to hold result of all possible combinations of treatments (can add more later)
 
     private final String[] treatments;
@@ -9,6 +11,7 @@ public class Result { //class for linked list to hold result of all possible com
     private final double[] cost;
     private final double[] area;
     private final double[] energy;
+    DecimalFormat df = new DecimalFormat("#.####");
 
     public Result(Tech[] tech,Initial initial) {
 
@@ -67,27 +70,27 @@ public class Result { //class for linked list to hold result of all possible com
     }
 
     public double getFinalTSS(){
-        return TSS[4];
+        return Double.parseDouble(df.format(TSS[4]));
     }
 
     public double getFinalCOD(){
-        return COD[4];
+        return Double.parseDouble(df.format(COD[4]));
     }
 
     public double getFinalBOD(){
-        return BOD[4];
+        return Double.parseDouble(df.format(BOD[4]));
     }
 
     public double getFinalCost(){
-        return cost[4];
+        return Double.parseDouble(df.format(cost[4]));
     }
 
     public double getFinalArea(){
-        return area[4];
+        return Double.parseDouble(df.format(area[4]));
     }
 
     public double getFinalEnergy(){
-        return energy[4];
+        return Double.parseDouble(df.format(energy[4]));
     }
 }
 

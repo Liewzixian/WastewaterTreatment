@@ -71,7 +71,11 @@ public class AdjacencyList {
             return 300 - (int) (tech.getTSS() + tech.getCOD() + tech.getBOD()) * 100;
         }
         else if(choice == 2){
-            return (int) (tech.getEnergy() * tech.getArea());
+            return (int) (tech.getCost()*100);
+        }else if(choice == 3){
+            return (int) (tech.getEnergy()*100);
+        }else if(choice == 4){
+            return (int) (tech.getArea()*100);
         }
         return 0;
     }

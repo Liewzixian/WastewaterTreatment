@@ -21,7 +21,7 @@ import static com.example.demo1.LoginController.menu;
 
 public class DisplayResult {
     static Stage stage = new Stage();
-    ObservableList<String> Preference = FXCollections.observableArrayList("Best Cleaning Efficiency To Worst","Best Overall","Most Cost Effectiveness");
+    ObservableList<String> Preference = FXCollections.observableArrayList("Show All Combination","Most Cleaning Efficient","Most Cost Efficient","Most Energy Efficient","Least Area");
 
     static Print rowData;
 
@@ -73,6 +73,12 @@ public class DisplayResult {
     private TableColumn<Print,Double> COST;
 
     @FXML
+    private TableColumn<Print,Double> Energy;
+
+    @FXML
+    private TableColumn<Print,Double> Area;
+
+    @FXML
     private void initialize() {
         SelectPreference.setItems(Preference);
         Preliminary.setCellValueFactory(new PropertyValueFactory<>("treatmentsA"));
@@ -84,6 +90,8 @@ public class DisplayResult {
         COD.setCellValueFactory(new PropertyValueFactory<>("COD"));
         BOD.setCellValueFactory(new PropertyValueFactory<>("BOD"));
         COST.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        Energy.setCellValueFactory(new PropertyValueFactory<>("energy"));
+        Area.setCellValueFactory(new PropertyValueFactory<>("areaOfFootprint"));
         ResultView.setItems(menu.getResultsTable());
         autoResizeColumns(ResultView)  ;
         ClickListener();
@@ -92,16 +100,24 @@ public class DisplayResult {
 
     @FXML
     private void ComboBoxOnActionListener(){
-       if(SelectPreference.getValue().equals("Best Overall")){
+       if(SelectPreference.getValue().equals("Most Cleaning Efficient")){
            menu.UniformSearch(1);
            ResultView.setItems(menu.getBestTable());
            ResultView.refresh();
-       }else if(SelectPreference.getValue().equals("Cost Effectiveness")){
+       }else if(SelectPreference.getValue().equals("Most Cost Efficient")){
            menu.UniformSearch(2);
            ResultView.setItems(menu.getBestTable());
            ResultView.refresh();
-       }else if(SelectPreference.getValue().equals("Best Cleaning Efficiency To Worst")){
+       }else if(SelectPreference.getValue().equals("Show All Combination")){
            ResultView.setItems(menu.getResultsTable());
+           ResultView.refresh();
+       }else if(SelectPreference.getValue().equals("Most Energy Efficient")){
+           menu.UniformSearch(3);
+           ResultView.setItems(menu.getBestTable());
+           ResultView.refresh();
+       }else if(SelectPreference.getValue().equals("Least Area")){
+           menu.UniformSearch(4);
+           ResultView.setItems(menu.getBestTable());
            ResultView.refresh();
        }
     }
@@ -128,7 +144,7 @@ public class DisplayResult {
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("CombinationProcess-View.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 825, 600);
+            scene = new Scene(fxmlLoader.load(), 850, 620);
         } catch (IOException e) {
             e.printStackTrace();
         }
