@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="367.0" prefWidth="532.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="367.0" prefWidth="532.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.LoginController">
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="220.0" BorderPane.alignment="CENTER">
          <children>
@@ -41,9 +41,19 @@
                   <Font name="Verdana Bold" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="147.0" layoutY="332.0" text="CREATED BY GROUP 2A">
+            <Label layoutX="159.0" layoutY="346.0" text="CREATED BY GROUP 2A">
                <font>
-                  <Font name="Arial" size="8.0" />
+                  <Font name="Arial" size="6.0" />
+               </font>
+            </Label>
+            <Label layoutX="59.0" layoutY="304.0" text="Don't have an accout?">
+               <font>
+                  <Font name="Arial" size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="SignUp" layoutX="163.0" layoutY="304.0" onMouseClicked="#SignUpOnClicked" text="Sign Up" textFill="#ffbd59">
+               <font>
+                  <Font name="Arial" size="10.0" />
                </font>
             </Label>
          </children>
