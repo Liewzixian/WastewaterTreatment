@@ -16,8 +16,8 @@
           <TableColumn fx:id="SelectedModel" prefWidth="249.60003662109375" style="-fx-background-color: #ffbd59;" text="Model Name " />
         </columns>
       </TableView>
-      <TextField fx:id="UnselectedTextField" layoutX="43.0" layoutY="120.0" prefHeight="26.0" prefWidth="200.0" promptText="Search by model name " />
-      <TextField fx:id="SelectedTextField" layoutX="388.0" layoutY="120.0" prefHeight="26.0" prefWidth="200.0" promptText="Search by model name " />
+      <TextField fx:id="UnselectedTextField" layoutX="43.0" layoutY="100.0" prefHeight="26.0" prefWidth="200.0" promptText="Search by model name " />
+      <TextField fx:id="SelectedTextField" layoutX="388.0" layoutY="100.0" prefHeight="26.0" prefWidth="200.0" promptText="Search by model name " />
       <Button fx:id="backButton" layoutX="43.0" layoutY="440.0" mnemonicParsing="false" onAction="#backButtonOnAction" prefHeight="26.0" prefWidth="66.0" style="-fx-background-color: #ffbd59;" text="Back" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="13.0" />
@@ -42,5 +42,15 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Button>
+      <Label layoutX="43.0" layoutY="136.0" text="*Double Click Row To Add Model" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="388.0" layoutY="136.0" text="*Double Click Row To Delete Model" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

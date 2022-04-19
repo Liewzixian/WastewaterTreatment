@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="635.0" prefWidth="994.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.DisplayResult">
+<AnchorPane prefHeight="635.0" prefWidth="994.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.DisplayResult">
    <children>
       <ImageView fitHeight="824.0" fitWidth="1173.0" layoutX="-178.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -21,13 +21,15 @@
          <columns>
             <TableColumn fx:id="Preliminary" prefWidth="171.99999618530273" style="-fx-background-color: #ffbd59;" text="Preliminary " />
             <TableColumn fx:id="Chemical" minWidth="0.0" prefWidth="177.6000213623047" style="-fx-background-color: #ffbd59;" text="Chemical" />
-            <TableColumn fx:id="Biological" prefWidth="125.5999755859375" style="-fx-background-color: #ffbd59;" text="Biological" />
-            <TableColumn fx:id="Tertiary" prefWidth="153.5999755859375" style="-fx-background-color: #ffbd59;" text="Tertiary" />
-            <TableColumn fx:id="Sludge" minWidth="0.0" prefWidth="135.99993896484375" style="-fx-background-color: #ffbd59;" text="Sludge" />
-            <TableColumn fx:id="TSS" minWidth="0.0" prefWidth="38.4000244140625" style="-fx-background-color: #ffbd59;" text="TSS" />
-            <TableColumn fx:id="COD" minWidth="0.0" prefWidth="54.39990234375" style="-fx-background-color: #ffbd59;" text="COD" />
-            <TableColumn fx:id="BOD" minWidth="0.0" prefWidth="36.800048828125" style="-fx-background-color: #ffbd59;" text="BOD" />
-            <TableColumn fx:id="COST" minWidth="0.0" prefWidth="52.0" style="-fx-background-color: #ffbd59;" text="Cost" />
+            <TableColumn fx:id="Biological" prefWidth="85.60000610351562" style="-fx-background-color: #ffbd59;" text="Biological" />
+            <TableColumn fx:id="Tertiary" prefWidth="90.39999389648438" style="-fx-background-color: #ffbd59;" text="Tertiary" />
+            <TableColumn fx:id="Sludge" minWidth="0.0" prefWidth="75.20001220703125" style="-fx-background-color: #ffbd59;" text="Sludge" />
+            <TableColumn fx:id="TSS" minWidth="0.0" prefWidth="76.79998779296875" style="-fx-background-color: #ffbd59;" text="TSS(ppm)" />
+            <TableColumn fx:id="COD" minWidth="0.0" prefWidth="78.39996337890625" style="-fx-background-color: #ffbd59;" text="COD(ppm)" />
+            <TableColumn fx:id="BOD" minWidth="0.0" prefWidth="72.800048828125" style="-fx-background-color: #ffbd59;" text="BOD(ppm)" />
+            <TableColumn fx:id="COST" minWidth="0.0" prefWidth="39.99993896484375" style="-fx-background-color: #ffbd59;" text="Cost(RM)" />
+            <TableColumn fx:id="Area" minWidth="0.0" prefWidth="39.20001220703125" style="-fx-background-color: #ffbd59;" text="Area of footprint (m^2)" />
+            <TableColumn fx:id="Energy" minWidth="0.0" prefWidth="31.2000732421875" style="-fx-background-color: #ffbd59;" text="Enegry per meter cube(kWh/m^3)" />
          </columns>
       </TableView>
       <ComboBox fx:id="SelectPreference" layoutX="695.0" layoutY="102.0" onAction="#ComboBoxOnActionListener" prefWidth="150.0" promptText="Select Preference" style="-fx-background-color: #ffbd59;" />
@@ -35,6 +37,11 @@
       <Label layoutX="447.0" layoutY="56.0" text="RESULT" textFill="#ffbd59">
          <font>
             <Font name="Verdana Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="106.0" text="*Double Click Row To Show Overlay" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
    </children>
