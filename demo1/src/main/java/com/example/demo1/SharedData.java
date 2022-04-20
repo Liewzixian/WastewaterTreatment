@@ -1,9 +1,6 @@
 package com.example.demo1;
 
-import com.example.demo1.dataclasses.Location;
-import com.example.demo1.dataclasses.Result;
-import com.example.demo1.dataclasses.Selection;
-import com.example.demo1.dataclasses.Tech;
+import com.example.demo1.dataclasses.*;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -12,7 +9,7 @@ import java.util.Map;
 public class SharedData {
     LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList;
     LinkedHashMap<String, LinkedHashMap<String,Tech>> selectedList;
-    LinkedHashMap<String,LinkedHashMap<String,Location>> locations;
+    LinkedHashMap<String,LinkedHashMap<String, Initial>> locations;
     ArrayList<Selection> selected;
     ArrayList<Selection> unselected;
     ArrayList<String> states;
@@ -61,7 +58,7 @@ public class SharedData {
                 selectedList.put(stage,new LinkedHashMap<>());
 
             for(Selection loop: selected)
-                selectedList.get(loop.stage).put(loop.treatments,originalList.get(loop.stage).get(loop.treatments));
+                selectedList.get(loop.getStage()).put(loop.getTreatments(),originalList.get(loop.getStage()).get(loop.getTreatments()));
 
             for(Map.Entry<String, LinkedHashMap<String, Tech>> stage : selectedList.entrySet()){
                 if(stage.getValue().isEmpty())
@@ -85,19 +82,19 @@ public class SharedData {
     public void loadLocation() throws FileNotFoundException {
         locations = io.loadLocations();
 
-        for(Map.Entry<String, LinkedHashMap<String, Location>> state : locations.entrySet())
+        for(Map.Entry<String, LinkedHashMap<String, Initial>> state : locations.entrySet())
             if(!states.contains(state.getKey()))
                 states.add(state.getKey());
     }
 
     public ArrayList<String> loadStateArea(String stateName){
         ArrayList<String> areas = new ArrayList<>();
-        for(Map.Entry<String, Location> area : locations.get(stateName).entrySet())
+        for(Map.Entry<String, Initial> area : locations.get(stateName).entrySet())
             areas.add(area.getKey());
         return areas;
     }
 
-    public Location loadAreaData(String stateName, String areaName){
+    public Initial loadAreaData(String stateName, String areaName){
         return locations.get(stateName).get(areaName);
     }
 }

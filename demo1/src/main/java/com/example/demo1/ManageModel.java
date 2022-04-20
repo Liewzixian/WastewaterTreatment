@@ -32,35 +32,29 @@ public class ManageModel implements Initializable {
     private final ObservableList<Models> detailss = FXCollections.observableArrayList();
     File inputFile = new File("src/main/resources/com/Treatment/output.txt");
     File tempFile = new File("src/main/resources/com/Treatment/output1.txt");
+
     boolean deleteValidation;
+
     boolean renameValidation;
 
     @FXML
     private TableView<Models> TableView;
     @FXML
     private TableColumn<Models, String> NameColumn;
-
     @FXML
     private TextField SearchBar;
-
     @FXML
     private TableColumn<Models, String> StageColumn;
-
     @FXML
     private TableColumn<Models, String> areaColumn;
-
     @FXML
     private TableColumn<Models, String> bodColumn;
-
     @FXML
     private TableColumn<Models, String> codColumn;
-
     @FXML
     private TableColumn<Models, String> energyColumn;
-
     @FXML
     private TableColumn<Models, String> tssColumn;
-
     @FXML
     private TableColumn<Models, String> CostColumn;
 
@@ -96,25 +90,27 @@ public class ManageModel implements Initializable {
                 t -> t.getTableView().getItems().get(
                         t.getTablePosition().getRow()).setCOD(t.getNewValue())
         );
+
         bodColumn.setCellValueFactory(new PropertyValueFactory<>("BOD"));
         bodColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         bodColumn.setOnEditCommit(
                 t -> t.getTableView().getItems().get(
                         t.getTablePosition().getRow()).setBOD(t.getNewValue())
         );
+
         tssColumn.setCellValueFactory(new PropertyValueFactory<>("TSS"));
         tssColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         tssColumn.setOnEditCommit(
                 t -> t.getTableView().getItems().get(
                         t.getTablePosition().getRow()).setTSS(t.getNewValue())
         );
+
         areaColumn.setCellValueFactory(new PropertyValueFactory<>("area"));
         areaColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         energyColumn.setCellValueFactory(new PropertyValueFactory<>("energy"));
         energyColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         CostColumn.setCellValueFactory(new PropertyValueFactory<>("cost"));
         CostColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-
 
         TableView.setItems(details);
         detailss.addAll(details);
@@ -152,7 +148,6 @@ public class ManageModel implements Initializable {
 
     }
 
-
     @FXML
     void BackButtonOnAction() {
         SoundEffect sound = new SoundEffect();
@@ -184,27 +179,24 @@ public class ManageModel implements Initializable {
         menu.sharedData.reloadData();
     }
 
-
     @FXML
     void deleteButtonOnAction() throws IOException {
         SoundEffect sound = new SoundEffect();
         sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+
         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
         Models Md = TableView.getSelectionModel().getSelectedItem();
-        String currentLine ;
+        String currentLine;
 
-        while ((currentLine = reader.readLine()) != null) {
-
-            if(currentLine.equals(Md.toString())) {
-               continue;
-            }else {
+        while ((currentLine = reader.readLine()) != null)
+            if(!currentLine.equals(Md.toString()))
                 writer.write(currentLine + System.getProperty("line.separator"));
-            }
-        }
+
         writer.close();
         reader.close();
+
         inputFile.delete();
         tempFile.renameTo(inputFile);
         TableView.getItems().remove(Md);

@@ -12,18 +12,15 @@ public class WeightedGraph {
     private final LinkedList<Integer> path;
     private final int[] distances;
     private final int[] parent;
-    private final int vertices;
     public static final int MAX_VALUE = 9999;
 
     @SuppressWarnings("unchecked")
     public WeightedGraph(int vertices){
-        this.vertices = vertices;
         this.priorityQueue = new PriorityQueue<>(vertices, new Edge());
         this.adjacencyList = new LinkedList[vertices];
         this.distances = new int[vertices];
         this.parent = new int[vertices];
         this.path = new LinkedList<>();
-        //initialize adjacency lists for all the vertices
         for (int i = 0; i <vertices ; i++) {
             adjacencyList[i] = new LinkedList<>();
         }

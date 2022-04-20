@@ -13,22 +13,20 @@ public class Menu {
     ResultControl resultControl;
     SharedData sharedData;
     IO io;
-    ArrayList<Result> results;
-    LinkedHashMap<String,LinkedHashMap<String,Location>> locations;
     AdjacencyList adjacencyList;
 
-    public Menu(String fileName) throws FileNotFoundException {
-        locations = new LinkedHashMap<>();
-        results = new ArrayList<>();
-        adjacencyList = new AdjacencyList();
+    SoundEffect soundEffect;
 
+    public Menu(String fileName) throws FileNotFoundException {
+        adjacencyList = new AdjacencyList();
         io = new IO(fileName);
         sharedData = new SharedData(io);
+        soundEffect = new SoundEffect();
+        soundEffect.playBGM("src/main/resources/com/SoundEffect/BGM.wav");
     }
 
     public void load() throws FileNotFoundException {
         io.loadData();
-        System.out.println("Treatment data loaded to linked list.");
     }
 
     public void add(String type, Tech newTech){
@@ -55,6 +53,5 @@ public class Menu {
         io.saveData(sharedData.getOriginalList());
         System.out.println("Treatment data saved to text file.");
     }
-
     public ArrayList<Result> getBestResults() {return resultControl.getBestResults();}
 }

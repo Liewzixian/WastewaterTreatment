@@ -23,7 +23,6 @@ import static com.example.demo1.LoginController.menu;
 public class DisplayResult {
     static Stage stage = new Stage();
     ObservableList<String> Preference = FXCollections.observableArrayList("Show All Combination","Most Cleaning Efficient","Most Cost Efficient","Most Energy Efficient","Least Area");
-
     static Print rowData;
 
     @FXML
@@ -137,7 +136,6 @@ public class DisplayResult {
             });
             return row ;
         });
-
     }
 
     @FXML

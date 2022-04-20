@@ -14,8 +14,8 @@ import java.util.Map;
 import static com.example.demo1.LoginController.menu;
 
 public class ResultControl {
-    ObservableList<Print> ResultsTable =FXCollections.observableArrayList() ;
-    ObservableList<Print> BestTable =FXCollections.observableArrayList() ;
+    ObservableList<Print> ResultsTable = FXCollections.observableArrayList() ;
+    ObservableList<Print> BestTable = FXCollections.observableArrayList() ;
 
     ArrayList<Result> BestResults=new ArrayList<>();
     Tech[] tech;

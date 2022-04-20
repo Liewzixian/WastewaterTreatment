@@ -1,7 +1,6 @@
 package com.example.demo1;
 
-
-import com.example.demo1.dataclasses.Location;
+import com.example.demo1.dataclasses.Initial;
 import com.example.demo1.dataclasses.Tech;
 
 import java.io.File;
@@ -11,13 +10,12 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-public class IO {
-    private final String fileName;
+public class IO { //class to get wastewater tech and location data
+    private final String fileName; //name for wastewater tech location
     public IO(String fileName){
         this.fileName = fileName;
-    }
-
-    public LinkedHashMap<String, LinkedHashMap<String,Tech>> loadData() throws FileNotFoundException {
+    } //constructor
+    public LinkedHashMap<String, LinkedHashMap<String,Tech>> loadData() throws FileNotFoundException { //load wastewater tech
 
         LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList = new LinkedHashMap<>();
 
@@ -46,9 +44,9 @@ public class IO {
         return originalList;
     }
 
-    public LinkedHashMap<String,LinkedHashMap<String,Location>> loadLocations() throws FileNotFoundException {
+    public LinkedHashMap<String,LinkedHashMap<String,Initial>> loadLocations() throws FileNotFoundException { //load location data
 
-        LinkedHashMap<String,LinkedHashMap<String,Location>> locations = new LinkedHashMap<>();
+        LinkedHashMap<String,LinkedHashMap<String, Initial>> locations = new LinkedHashMap<>();
 
         File locationData = new File("src/main/resources/com/Treatment/location.txt");
         Scanner sc2 = new Scanner(locationData);
@@ -65,15 +63,15 @@ public class IO {
                 }
 
                 locations.computeIfAbsent(hold[0], k -> new LinkedHashMap<>());
-                Location location = new Location(hold[0],hold[1],Double.parseDouble(hold[2]),Double.parseDouble(hold[3]),Double.parseDouble(hold[4]));
-                locations.get(hold[0]).putIfAbsent(hold[1],location);
+                Initial initial = new Initial(Double.parseDouble(hold[2]),Double.parseDouble(hold[3]),Double.parseDouble(hold[4]));
+                locations.get(hold[0]).putIfAbsent(hold[1],initial);
             }
         }
         sc2.close();
         return locations;
     }
 
-    public void saveData(LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList) throws IOException {
+    public void saveData(LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList) throws IOException { //save wastewater tech
 
         PrintWriter writer = new PrintWriter(fileName, StandardCharsets.UTF_8); //save location (can add code to change location)
 

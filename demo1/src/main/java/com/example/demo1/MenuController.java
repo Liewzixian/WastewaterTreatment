@@ -7,22 +7,23 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 
 import java.io.IOException;
-
 public class MenuController {
 
     FXMLLoader fxmlLoader = new FXMLLoader(MenuController.class.getResource("ManageModel-view.fxml"));
     FXMLLoader fxmlLoader1 = new FXMLLoader(MenuController.class.getResource("addNewModel-view.fxml"));
     FXMLLoader fxmlLoader2 = new FXMLLoader(MenuController.class.getResource("WaterChar-view.fxml"));
     FXMLLoader fxmlLoader3 = new FXMLLoader(MenuController.class.getResource("Selection-view.fxml"));
+    String clickSound = "src/main/resources/com/SoundEffect/clicksound.wav";
 
     @FXML
     protected void addButtonOnAction() {
         SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        sound.playSound(clickSound);
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader1.load(), 600, 380);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
         Login.window.setScene(scene);
@@ -32,12 +33,12 @@ public class MenuController {
     @FXML
     protected void manageButtonOnAction() {
         SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        sound.playSound(clickSound);
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load(), 1239, 560);
-            //menu.save();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
         Login.window.setScene(scene);
@@ -46,11 +47,12 @@ public class MenuController {
     @FXML
     protected void afterMenuButtonOnAction() {
         SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        sound.playSound(clickSound);
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader2.load(), 595, 415);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
         Login.window.setScene(scene);
@@ -60,12 +62,13 @@ public class MenuController {
     @FXML
     protected void selectButtonOnAction() {
         SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        sound.playSound(clickSound);
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader3.load(), 739, 483);
             //menu.save();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
         Login.window.setScene(scene);
@@ -78,6 +81,4 @@ public class MenuController {
         Login.window.setX((primScreenBounds.getWidth() - Login.window.getWidth()) / 2);
         Login.window.setY((primScreenBounds.getHeight() - Login.window.getHeight()) / 2);
     }
-
-
 }

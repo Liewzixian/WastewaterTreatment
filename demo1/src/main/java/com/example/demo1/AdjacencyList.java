@@ -3,18 +3,18 @@ import com.example.demo1.dataclasses.Tech;
 
 import java.util.*;
 
-public class AdjacencyList {
-    SharedData sharedData;
-    public LinkedHashMap<String,Tech> UniformCostSearch(int choice, SharedData sharedData){
+public class AdjacencyList { //Adjacency list for uniform cost search
+    SharedData sharedData; //data class
+    public LinkedHashMap<String,Tech> UniformCostSearch(int choice, SharedData sharedData){ //uniform cost search
 
-        LinkedHashMap<String, LinkedHashMap<String,Tech>> selectedList;
-        LinkedHashMap<String,Tech> best = new LinkedHashMap<>();
+        LinkedHashMap<String, LinkedHashMap<String,Tech>> selectedList; //get user choice of tech
+        LinkedHashMap<String,Tech> best = new LinkedHashMap<>(); //get the best combination of tech
 
         this.sharedData = sharedData;
         selectedList = sharedData.getSelectedList();
 
-        int[] index = new int[6]; //array of int to hold index of the final code of each type
-        int[] path;
+        int[] index = new int[6]; //array of int to hold index of the final code of each treatment stage
+        int[] path; //array of int to hold path of the least cost
 
         index[0] = 0;
         index[1] = selectedList.get("PRELIMINARY").size();
@@ -23,7 +23,7 @@ public class AdjacencyList {
         index[4] = index[3] + selectedList.get("TERTIARY").size();
         index[5] = index[4] + selectedList.get("SLUDGE").size();
 
-        WeightedGraph weightedGraph = new WeightedGraph(index[5]+2);
+        WeightedGraph weightedGraph = new WeightedGraph(index[5]+2); //
 
         for(int loop = 0; loop <= index[5]; loop++) {
 

@@ -1,22 +1,22 @@
 package com.example.demo1.dataclasses;
 
 public class Print {
-    public String treatmentsA;
-    public String treatmentsB;
-    public String treatmentsC;
-    public String treatmentsD;
-    public String treatmentsE;
+    private final String treatmentsA;
+    private final String treatmentsB;
+    private final String treatmentsC;
+    private final String treatmentsD;
+    private final String treatmentsE;
 
-    public double TSS;
-    public double COD;
-    public double BOD;
-    public double cost;
-    public double energy;
+    private final double TSS;
+    private final double COD;
+    private final double BOD;
+    private final double cost;
+    private final double energy;
+    private final double areaOfFootprint;
 
-    public double areaOfFootprint;
-    public double[] fullTSS;
-    public double[] fullBOD;
-    public double[] fullCOD;
+    private final double[] fullTSS;
+    private final double[] fullBOD;
+    private final double[] fullCOD;
 
     public Print(String a, String b, String c, String d, String e, double aa, double bb, double cc, double dd, double []cod, double []bod, double []tss, double energy, double areaOfFootprint){
         treatmentsA=a;
@@ -72,4 +72,16 @@ public class Print {
     }
 
     public double getAreaOfFootprint() {return areaOfFootprint;}
+
+    public double[] getFullBOD() {
+        return fullBOD;
+    }
+
+    public double[] getFullCOD() {
+        return fullCOD;
+    }
+
+    public double[] getFullTSS() {
+        return fullTSS;
+    }
 }

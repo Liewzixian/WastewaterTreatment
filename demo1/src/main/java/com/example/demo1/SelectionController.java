@@ -151,10 +151,10 @@ public class SelectionController {
             tempList.get(loop.getKey()).clear();
 
         for(Selection loop : Selected)
-            tempList.get(loop.stage).put(loop.treatments,loop);
+            tempList.get(loop.getStage()).put(loop.getTreatments(),loop);
 
         for(Selection loop : selection)
-            tempList.get(loop.stage).put(loop.treatments,loop);
+            tempList.get(loop.getStage()).put(loop.getTreatments(),loop);
 
         Selected.clear();
 
@@ -189,7 +189,7 @@ public class SelectionController {
         boolean [] flag = new boolean[5];
 
         for(Selection list: Selected){
-            flag[Arrays.asList(treatments).indexOf(list.stage)] = true;
+            flag[Arrays.asList(treatments).indexOf(list.getStage())] = true;
         }
         return flag;
     }
@@ -216,8 +216,8 @@ public class SelectionController {
                         tempList.get(loop.getKey()).clear();
 
                     for(Selection loop : Selected)
-                        tempList.get(loop.stage).put(loop.treatments,loop);
-                    tempList.get(selection.stage).put(selection.treatments,selection);
+                        tempList.get(loop.getStage()).put(loop.getTreatments(),loop);
+                    tempList.get(selection.getStage()).put(selection.getTreatments(),selection);
 
                     Selected.clear();
 
@@ -264,13 +264,13 @@ public class SelectionController {
             tempList.get(loop.getKey()).clear();
 
         for(Selection loop : Unselected)
-            tempList.get(loop.stage).put(loop.treatments,loop);
+            tempList.get(loop.getStage()).put(loop.getTreatments(),loop);
 
         for(Selection loop : Selected)
-            tempList.get(loop.stage).put(loop.treatments,loop);
+            tempList.get(loop.getStage()).put(loop.getTreatments(),loop);
 
         for(Selection loop : selection)
-            tempList.get(loop.stage).put(loop.treatments,loop);
+            tempList.get(loop.getStage()).put(loop.getTreatments(),loop);
 
         Selected.clear();
         Unselected.clear();

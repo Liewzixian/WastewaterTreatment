@@ -1,7 +1,6 @@
 package com.example.demo1;
 
 import com.example.demo1.dataclasses.Initial;
-import com.example.demo1.dataclasses.Location;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -26,11 +24,12 @@ public class WastewaterCharacteristic {
     ObservableList <String> StandardsList = FXCollections.observableArrayList("Standard A","Standard B");
     ObservableList<String> StateList=FXCollections.observableArrayList(sharedData.getStates());
     ObservableList<String> AreaList=FXCollections.observableArrayList();
-    Location locations;
+
+    Initial initial;
     String selectedState;
 
     ArrayList<String> AreaArrayList;
-    Input input = new Input();
+    NumTest numTest = new NumTest();
     String Tss,Bss,Css,SelectedStandard;
 
     @FXML
@@ -50,10 +49,13 @@ public class WastewaterCharacteristic {
 
     private String clickSound;
 
+    private boolean validate;
+
     @FXML
     private void initialize() {
         Standard.setItems(StandardsList);
         State.setItems(StateList);
+        validate = false;
         clickSound = "src/main/resources/com/SoundEffect/clicksound.wav";
     }
 
@@ -76,25 +78,28 @@ public class WastewaterCharacteristic {
 
     @FXML
     protected void EnterButtonOnAction() {
+
         SoundEffect sound = new SoundEffect();
         sound.playSound(clickSound);
+
         Css=TCod.getText();
-        TCod.setText(input.getDouble(Css));
+        TCod.setText(numTest.getDouble(Css));
         Bss=TBod.getText();
-        TBod.setText(input.getDouble(Bss));
+        TBod.setText(numTest.getDouble(Bss));
         Tss=TTss.getText();
-        TTss.setText(input.getDouble(Tss));
+        TTss.setText(numTest.getDouble(Tss));
         SelectedStandard = Standard.getValue();
 
         if (Standard.getValue() == null) {
             sound = new SoundEffect();
             sound.playSound(clickSound);
-            Input.validate = 1;
+            validate = false;
             StandardAlert.setText("Please Select A Standard");
         }
+        else
+            validate = true;
 
-        if(Input.validate == 0){
-
+        if(validate && numTest.isDouble(Css) && numTest.isDouble(Bss) && numTest.isDouble(Tss)){
             if(Objects.equals(Standard.getValue(), "Standard A"))
                 menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),0);
             else
@@ -111,9 +116,6 @@ public class WastewaterCharacteristic {
             }
             Login.window.setScene(scene);
             SetSceneOnCentral(Login.window);
-        }
-        else{
-            Input.validate = 0;
         }
     }
 
@@ -134,10 +136,10 @@ public class WastewaterCharacteristic {
     @FXML
     protected void AreaOnAction(){
         if(Area.getValue()!=null){
-            locations=sharedData.loadAreaData(selectedState,Area.getValue());
-            TCod.setText(String.valueOf(locations.getCOD()));
-            TBod.setText(String.valueOf(locations.getBOD()));
-            TTss.setText(String.valueOf(locations.getTSS()));
+            initial = sharedData.loadAreaData(selectedState,Area.getValue());
+            TCod.setText(String.valueOf(initial.getCOD()));
+            TBod.setText(String.valueOf(initial.getBOD()));
+            TTss.setText(String.valueOf(initial.getTSS()));
         }
     }
 }
