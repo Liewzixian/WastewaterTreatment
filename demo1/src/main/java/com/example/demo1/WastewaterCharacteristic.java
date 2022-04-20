@@ -14,16 +14,25 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 
 import static com.example.demo1.LoginController.menu;
 
 
 public class WastewaterCharacteristic {
-
+    SharedData sharedData=menu.sharedData;
     ObservableList <String> StandardsList = FXCollections.observableArrayList("Standard A","Standard B");
+    ObservableList<String> StateList=FXCollections.observableArrayList(sharedData.getStates());
+    ObservableList<String> AreaList=FXCollections.observableArrayList();
+    Location locations;
+    String selectedState;
+    ArrayList<String> AreaArrayList;
+
     Input input = new Input();
     String Tss,Bss,Css,SelectedStandard;
+
 
     @FXML
     private TextField TCod;
@@ -38,11 +47,18 @@ public class WastewaterCharacteristic {
     private ComboBox<String> Standard;
 
     @FXML
+    private ComboBox<String> State;
+
+    @FXML
+    private ComboBox<String> Area;
+
+    @FXML
     private Label StandardAlert;
 
     @FXML
     private void initialize() {
         Standard.setItems(StandardsList);
+        State.setItems(StateList);
     }
 
     @FXML
@@ -111,4 +127,20 @@ public class WastewaterCharacteristic {
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
+
+    @FXML
+    protected void StateOnAction(){
+        selectedState=State.getValue();
+        AreaList=FXCollections.observableArrayList(sharedData.loadStateArea(selectedState));
+        Area.setItems(AreaList);
+    }
+
+    @FXML
+    protected void AreaOnAction(){
+        if(Area.getValue()!=null){
+        locations=sharedData.loadAreaData(selectedState,Area.getValue());
+        TCod.setText(String.valueOf(locations.getCOD()));
+        TBod.setText(String.valueOf(locations.getBOD()));
+        TTss.setText(String.valueOf(locations.getTSS()));
+    }}
 }

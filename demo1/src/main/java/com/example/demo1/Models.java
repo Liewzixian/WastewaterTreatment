@@ -22,6 +22,7 @@ public class Models {
                 "," + getTSS() +
                 "," + getArea() +
                 "," + getEnergy()+
+                "," + getCost()+
                 "";
     }
 // DoubleProperty COD,BOD,TSS,area,energy = new SimpleDoubleProperty();

@@ -11,25 +11,32 @@ public class SharedData {
     LinkedHashMap<String,LinkedHashMap<String,Location>> locations;
     ArrayList<Print> selected;
     ArrayList<Print> unselected;
+    ArrayList<String> states;
     ArrayList<Result> results;
     IO io;
 
     public SharedData(IO io) throws FileNotFoundException {
         this.io = io;
-        originalList = io.loadData();
+
         selectedList = new LinkedHashMap<>();
         locations = io.loadLocations();
+
         selected= new ArrayList<>();
         unselected = new ArrayList<>();
+
+        states = new ArrayList<>();
+
         results = new ArrayList<>();
-        reloadList();
+
+        reloadData();
+        loadLocation();
     }
 
     public LinkedHashMap<String, LinkedHashMap<String, Tech>> getOriginalList() {
         return originalList;
     }
 
-    public LinkedHashMap<String, LinkedHashMap<String, Location>> getLocations() { return locations; }
+    public ArrayList<String> getStates(){ return states; }
     public ArrayList<Print> getSelected() {
         return selected;
     }
@@ -64,18 +71,31 @@ public class SharedData {
 
     public void reloadData() throws FileNotFoundException {
         originalList = io.loadData();
-    }
 
-    public void reloadList(){
         selected.clear();
         unselected.clear();
+
         for(Map.Entry<String, LinkedHashMap<String, Tech>> loop : originalList.entrySet())
             for(Map.Entry<String, Tech> print : loop.getValue().entrySet())
                 unselected.add(new Print(loop.getKey(),print.getKey()));
     }
 
-    public void reload() throws FileNotFoundException {
-        reloadData();
-        reloadList();
+    public void loadLocation() throws FileNotFoundException {
+        locations = io.loadLocations();
+
+        for(Map.Entry<String, LinkedHashMap<String, Location>> state : locations.entrySet())
+            if(!states.contains(state.getKey()))
+                states.add(state.getKey());
+    }
+
+    public ArrayList<String> loadStateArea(String stateName){
+        ArrayList<String> areas = new ArrayList<>();
+        for(Map.Entry<String, Location> area : locations.get(stateName).entrySet())
+            areas.add(area.getKey());
+        return areas;
+    }
+
+    public Location loadAreaData(String stateName, String areaName){
+        return locations.get(stateName).get(areaName);
     }
 }
