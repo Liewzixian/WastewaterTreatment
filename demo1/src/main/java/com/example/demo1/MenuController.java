@@ -35,7 +35,7 @@ public class MenuController {
         sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 1039, 560);
+            scene = new Scene(fxmlLoader.load(), 1239, 560);
             //menu.save();
         } catch (IOException e) {
             e.printStackTrace();

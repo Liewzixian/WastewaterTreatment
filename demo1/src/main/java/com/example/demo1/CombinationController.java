@@ -16,6 +16,7 @@ import static com.example.demo1.LoginController.menu;
 public class CombinationController {
     ObservableList<String> Preference = FXCollections.observableArrayList("Most Cleaning Efficient","Most Cost Efficient","Most Energy Efficient","Least Area");
     DecimalFormat df = new DecimalFormat("#.####");
+    DecimalFormat af = new DecimalFormat("#.#");
     Print rowData=DisplayResult.rowData;
     ArrayList<Result>BestResultList;
     double[] COD = rowData.fullCOD;
@@ -184,6 +185,8 @@ public class CombinationController {
         COSTTable.setCellValueFactory(new PropertyValueFactory<>("cost"));
         AreaTable.setCellValueFactory(new PropertyValueFactory<>("areaOfFootprint"));
         EnergyTable.setCellValueFactory(new PropertyValueFactory<>("energy"));
+        BestTable.setText("The Most Cleaning Efficient Combination");
+        Comparison.setText("Comparison With The Best Cleaning Efficiency");
         menu.UniformSearch(1);
         BestResultView.setItems(menu.getBestTable());
         autoResizeColumns(BestResultView);
@@ -239,21 +242,21 @@ public class CombinationController {
         CurrentFinalCOD.setText(COD);
         CurrentFinalBOD.setText(BOD);
         CurrentFinalTss.setText(Tss);
-        CurrentFinalCOST.setText(Cost);
+        CurrentFinalCOST.setText("$ "+Cost);
     }
 
     public void setBestFinal(String COD ,String BOD, String Tss , String Cost){
         BestFinalCOD.setText(COD);
         BestFinalBOD.setText(BOD);
         BestFinalTss.setText(Tss);
-        BestFinalCOST.setText(Cost);
+        BestFinalCOST.setText("$ "+Cost);
     }
 
     public void setCompareResult(String COD ,String BOD, String Tss , String Cost){
-        CompareCOD.setText(COD);
-        CompareBOD.setText(BOD);
-        CompareTSS.setText(Tss);
-        CompareCOST.setText(Cost);
+        CompareCOD.setText(COD+" %");
+        CompareBOD.setText(BOD+" %");
+        CompareTSS.setText(Tss+" %");
+        CompareCOST.setText("$ "+Cost);
     }
 
     public static void autoResizeColumns( TableView<Print> table )
@@ -280,7 +283,11 @@ public class CombinationController {
         } );
     }
     public String calculation(double current,double best){
-        return String.valueOf((int) (best/current*100));
+        double temp=Double.parseDouble(af.format (((current-best)/current)*100));
+        if(temp<=-0.00){
+            return String.valueOf(-temp);
+        }else
+        return String.valueOf(temp);
     }
 
     @FXML

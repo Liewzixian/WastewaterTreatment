@@ -144,7 +144,7 @@ public class DisplayResult {
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("CombinationProcess-View.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 850, 620);
+            scene = new Scene(fxmlLoader.load(), 850, 625);
         } catch (IOException e) {
             e.printStackTrace();
         }

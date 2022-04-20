@@ -78,6 +78,7 @@ public class ManageModel implements Initializable {
                     md.setTSS(details[4]);
                     md.setArea(details[5]);
                     md.setEnergy(details[6]);
+                    md.setCost(details[7]);
                     return md;
                 })
                 .collect(Collectors.toList());
@@ -111,6 +112,8 @@ public class ManageModel implements Initializable {
         areaColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         energyColumn.setCellValueFactory(new PropertyValueFactory<>("energy"));
         energyColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        CostColumn.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        CostColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
 
         TableView.setItems(details);
