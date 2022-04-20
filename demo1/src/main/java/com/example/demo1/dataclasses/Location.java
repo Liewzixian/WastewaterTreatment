@@ -1,8 +1,9 @@
-package com.example.demo1;
+package com.example.demo1.dataclasses;
 
 public class Location {
 
-    private String state,location;
+    private final String state;
+    private final String location;
     private double TSS,COD,BOD;
 
     public Location(String state, String location, double TSS, double COD, double BOD){
@@ -12,29 +13,11 @@ public class Location {
         this.COD = COD;
         this.BOD = BOD;
     }
-
-    private Location(Initial initial){
-        this.state = "CUSTOM";
-        this.location = "CUSTOM";
-        this.TSS = initial.getTSS();
-        this.COD = initial.getCOD();
-        this.BOD = initial.getBOD();
-    }
-
     public String getState() {
         return state;
     }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public String getLocation() {
         return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public double getTSS() {

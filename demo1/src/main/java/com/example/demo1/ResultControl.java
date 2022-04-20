@@ -1,10 +1,15 @@
 package com.example.demo1;
 
+import com.example.demo1.dataclasses.Initial;
+import com.example.demo1.dataclasses.Print;
+import com.example.demo1.dataclasses.Result;
+import com.example.demo1.dataclasses.Tech;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.example.demo1.LoginController.menu;
 

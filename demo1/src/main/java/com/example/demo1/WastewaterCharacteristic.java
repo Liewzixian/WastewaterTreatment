@@ -1,5 +1,7 @@
 package com.example.demo1;
 
+import com.example.demo1.dataclasses.Initial;
+import com.example.demo1.dataclasses.Location;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,56 +17,50 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-
+import java.util.Objects;
 
 import static com.example.demo1.LoginController.menu;
 
-
 public class WastewaterCharacteristic {
-    SharedData sharedData=menu.sharedData;
+    SharedData sharedData = menu.sharedData;
     ObservableList <String> StandardsList = FXCollections.observableArrayList("Standard A","Standard B");
     ObservableList<String> StateList=FXCollections.observableArrayList(sharedData.getStates());
     ObservableList<String> AreaList=FXCollections.observableArrayList();
     Location locations;
     String selectedState;
-    ArrayList<String> AreaArrayList;
 
+    ArrayList<String> AreaArrayList;
     Input input = new Input();
     String Tss,Bss,Css,SelectedStandard;
 
-
     @FXML
     private TextField TCod;
-
     @FXML
     private TextField TBod;
-
     @FXML
     private TextField TTss;
-
     @FXML
     private ComboBox<String> Standard;
-
     @FXML
     private ComboBox<String> State;
-
     @FXML
     private ComboBox<String> Area;
-
     @FXML
     private Label StandardAlert;
+
+    private String clickSound;
 
     @FXML
     private void initialize() {
         Standard.setItems(StandardsList);
         State.setItems(StateList);
+        clickSound = "src/main/resources/com/SoundEffect/clicksound.wav";
     }
 
     @FXML
     protected void BackButtonOnAction(){
         SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        sound.playSound(clickSound);
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-View.fxml"));
         Scene scene = null;
 
@@ -79,27 +75,27 @@ public class WastewaterCharacteristic {
     }
 
     @FXML
-    protected void EnterButtonOnAction() throws FileNotFoundException {
+    protected void EnterButtonOnAction() {
         SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        sound.playSound(clickSound);
         Css=TCod.getText();
         TCod.setText(input.getDouble(Css));
         Bss=TBod.getText();
         TBod.setText(input.getDouble(Bss));
         Tss=TTss.getText();
         TTss.setText(input.getDouble(Tss));
-        SelectedStandard=(String)Standard.getValue();
+        SelectedStandard = Standard.getValue();
 
         if (Standard.getValue() == null) {
             sound = new SoundEffect();
-            sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+            sound.playSound(clickSound);
             Input.validate = 1;
             StandardAlert.setText("Please Select A Standard");
         }
 
         if(Input.validate == 0){
 
-            if(Standard.getValue()=="Standard A")
+            if(Objects.equals(Standard.getValue(), "Standard A"))
                 menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),0);
             else
                 menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),1);
@@ -117,7 +113,7 @@ public class WastewaterCharacteristic {
             SetSceneOnCentral(Login.window);
         }
         else{
-            Input.validate =0;
+            Input.validate = 0;
         }
     }
 
@@ -138,9 +134,10 @@ public class WastewaterCharacteristic {
     @FXML
     protected void AreaOnAction(){
         if(Area.getValue()!=null){
-        locations=sharedData.loadAreaData(selectedState,Area.getValue());
-        TCod.setText(String.valueOf(locations.getCOD()));
-        TBod.setText(String.valueOf(locations.getBOD()));
-        TTss.setText(String.valueOf(locations.getTSS()));
-    }}
+            locations=sharedData.loadAreaData(selectedState,Area.getValue());
+            TCod.setText(String.valueOf(locations.getCOD()));
+            TBod.setText(String.valueOf(locations.getBOD()));
+            TTss.setText(String.valueOf(locations.getTSS()));
+        }
+    }
 }

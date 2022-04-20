@@ -1,5 +1,6 @@
 package com.example.demo1;
 
+import com.example.demo1.dataclasses.Tech;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,7 +27,7 @@ public class addNewModel implements Initializable {
     private Button BackButton;
 
     @FXML
-    private ComboBox TStage;
+    private ComboBox<String> TStage;
 
     @FXML
     private Label CODSlider;

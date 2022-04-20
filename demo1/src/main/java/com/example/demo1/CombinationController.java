@@ -1,5 +1,7 @@
 package com.example.demo1;
 
+import com.example.demo1.dataclasses.Print;
+import com.example.demo1.dataclasses.Result;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

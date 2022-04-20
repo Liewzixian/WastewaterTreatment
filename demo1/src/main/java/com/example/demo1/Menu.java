@@ -1,6 +1,6 @@
 package com.example.demo1;
 
-
+import com.example.demo1.dataclasses.*;
 import javafx.collections.ObservableList;
 
 import java.io.FileNotFoundException;
@@ -10,19 +10,12 @@ import java.util.LinkedHashMap;
 
 public class Menu {
 
-    TechControl techControl;
     ResultControl resultControl;
-
     SharedData sharedData;
-
     IO io;
-    boolean changed;
-
     ArrayList<Result> results;
     LinkedHashMap<String,LinkedHashMap<String,Location>> locations;
     AdjacencyList adjacencyList;
-
-    //static LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList;
 
     public Menu(String fileName) throws FileNotFoundException {
         locations = new LinkedHashMap<>();
@@ -31,8 +24,6 @@ public class Menu {
 
         io = new IO(fileName);
         sharedData = new SharedData(io);
-        techControl = new TechControl(sharedData);
-        changed = false;
     }
 
     public void load() throws FileNotFoundException {
@@ -41,22 +32,13 @@ public class Menu {
     }
 
     public void add(String type, Tech newTech){
-        changed = techControl.addEntry(type,newTech);
-    }
-
-    public void delete(String type, String name){
-        changed = techControl.deleteEntry(type,name);
-    }
-
-    public void change(String type, String code, int choice, String newEntry){
-        changed = techControl.changeEntry(type,code,choice,newEntry);
+        sharedData.getOriginalList().get(type).put(newTech.getName(),newTech);
     }
 
     public void showAllResults(Initial initial, int standard){
         resultControl = new ResultControl(sharedData);
         resultControl.calculateResults(initial);
         resultControl.printResults(standard);
-        changed = false;
     }
 
     public ObservableList<Print> getResultsTable() {

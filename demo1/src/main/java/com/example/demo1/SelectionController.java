@@ -1,5 +1,6 @@
 package com.example.demo1;
 
+import com.example.demo1.dataclasses.Selection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -23,11 +24,9 @@ import static com.example.demo1.LoginController.menu;
 
 public class SelectionController {
     SharedData sharedData;
-
-    ObservableList<Print> Unselected;
-    ObservableList<Print> Selected;
-
-    private final LinkedHashMap<String,LinkedHashMap<String,Print>> tempList;
+    ObservableList<Selection> Unselected;
+    ObservableList<Selection> Selected;
+    private final LinkedHashMap<String,LinkedHashMap<String,Selection>> tempList;
 
     static Stage stage = new Stage();
     boolean ModelValidation;
@@ -39,21 +38,21 @@ public class SelectionController {
     private TextField SelectedTextField;
 
     @FXML
-    private TableColumn<Print, String> UnselectedStage;
+    private TableColumn<Selection, String> UnselectedStage;
 
     @FXML
-    private TableColumn<Print, Integer> UnselectedModel;
+    private TableColumn<Selection, Integer> UnselectedModel;
 
     @FXML
-    private TableColumn<Print, String> SelectedStage;
+    private TableColumn<Selection, String> SelectedStage;
 
     @FXML
-    private TableColumn<Print, String> SelectedModel;
+    private TableColumn<Selection, String> SelectedModel;
 
     @FXML
-    private TableView<Print> UnselectedTable;
+    private TableView<Selection> UnselectedTable;
     @FXML
-    private TableView<Print> SelectedTable;
+    private TableView<Selection> SelectedTable;
 
     public SelectionController() {
 
@@ -107,7 +106,7 @@ public class SelectionController {
 
     public void Search()  {
 
-        FilteredList<Print> filteredData = new FilteredList<>(Unselected, k -> true);
+        FilteredList<Selection> filteredData = new FilteredList<>(Unselected, k -> true);
         UnselectedTextField.setOnKeyReleased(e -> {
             UnselectedTextField.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(Unselected -> {
                 if (newValue.isEmpty() || newValue.isBlank()) {
@@ -118,12 +117,12 @@ public class SelectionController {
                     return Unselected.getTreatments().toLowerCase().contains(Keyword);
                 }
             }));
-            SortedList<Print> sortedList = new SortedList<>(filteredData);
+            SortedList<Selection> sortedList = new SortedList<>(filteredData);
             sortedList.comparatorProperty().bind(UnselectedTable.comparatorProperty());
             UnselectedTable.setItems(sortedList);
         });
 
-        FilteredList<Print> filteredData1 = new FilteredList<>(Selected, k -> true);
+        FilteredList<Selection> filteredData1 = new FilteredList<>(Selected, k -> true);
         SelectedTextField.setOnKeyReleased(f -> {
             SelectedTextField.textProperty().addListener((observable, oldValue, newValue) -> filteredData1.setPredicate(selected -> {
                 if (newValue.isEmpty() || newValue.isBlank()) {
@@ -135,7 +134,7 @@ public class SelectionController {
                     return selected.getTreatments().toLowerCase().contains(Keyword);
                 }
             }));
-            SortedList<Print> sortedList1 = new SortedList<>(filteredData1);
+            SortedList<Selection> sortedList1 = new SortedList<>(filteredData1);
             sortedList1.comparatorProperty().bind(SelectedTable.comparatorProperty());
             SelectedTable.setItems(sortedList1);
         });
@@ -146,21 +145,21 @@ public class SelectionController {
         SoundEffect sound = new SoundEffect();
         sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
 
-        ObservableList<Print> selection = UnselectedTable.getItems();
+        ObservableList<Selection> selection = UnselectedTable.getItems();
 
-        for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
+        for(Map.Entry<String, LinkedHashMap<String, Selection>> loop : tempList.entrySet())
             tempList.get(loop.getKey()).clear();
 
-        for(Print loop : Selected)
+        for(Selection loop : Selected)
             tempList.get(loop.stage).put(loop.treatments,loop);
 
-        for(Print loop : selection)
+        for(Selection loop : selection)
             tempList.get(loop.stage).put(loop.treatments,loop);
 
         Selected.clear();
 
-        for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
-            for (Map.Entry<String, Print> print : loop.getValue().entrySet())
+        for(Map.Entry<String, LinkedHashMap<String, Selection>> loop : tempList.entrySet())
+            for (Map.Entry<String, Selection> print : loop.getValue().entrySet())
                 Selected.add(print.getValue());
         remove();
         UnselectedTable.getItems().clear();
@@ -189,7 +188,7 @@ public class SelectionController {
         String[] treatments = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
         boolean [] flag = new boolean[5];
 
-        for(Print list: Selected){
+        for(Selection list: Selected){
             flag[Arrays.asList(treatments).indexOf(list.stage)] = true;
         }
         return flag;
@@ -203,27 +202,27 @@ public class SelectionController {
     }
 
     @FXML
-    protected  void SelectOnDoubleClick(){
+    protected void SelectOnDoubleClick(){
         UnselectedTable.setRowFactory( tv -> {
-            TableRow<Print> row = new TableRow<>();
+            TableRow<Selection> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     SoundEffect sound = new SoundEffect();
                     sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
-                    Print selection = UnselectedTable.getSelectionModel().getSelectedItem();
+                    Selection selection = UnselectedTable.getSelectionModel().getSelectedItem();
                     Unselected.remove(selection);
 
-                    for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
+                    for(Map.Entry<String, LinkedHashMap<String, Selection>> loop : tempList.entrySet())
                         tempList.get(loop.getKey()).clear();
 
-                    for(Print loop : Selected)
+                    for(Selection loop : Selected)
                         tempList.get(loop.stage).put(loop.treatments,loop);
                     tempList.get(selection.stage).put(selection.treatments,selection);
 
                     Selected.clear();
 
-                    for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
-                        for (Map.Entry<String, Print> print : loop.getValue().entrySet())
+                    for(Map.Entry<String, LinkedHashMap<String, Selection>> loop : tempList.entrySet())
+                        for (Map.Entry<String, Selection> print : loop.getValue().entrySet())
                             Selected.add(print.getValue());
 
                     remove();
@@ -236,12 +235,12 @@ public class SelectionController {
     @FXML
     protected  void DeleteOnDoubleClick(){
         SelectedTable.setRowFactory( tv -> {
-            TableRow<Print> row = new TableRow<>();
+            TableRow<Selection> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     SoundEffect sound = new SoundEffect();
                     sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
-                    Print selection = SelectedTable.getSelectionModel().getSelectedItem();
+                    Selection selection = SelectedTable.getSelectionModel().getSelectedItem();
                     Selected.remove(selection);
                     Unselected.add(selection);
                     UnselectedTable.refresh();
@@ -259,25 +258,25 @@ public class SelectionController {
         SoundEffect sound = new SoundEffect();
         sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
 
-        ObservableList<Print> selection = SelectedTable.getItems();
+        ObservableList<Selection> selection = SelectedTable.getItems();
 
-        for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
+        for(Map.Entry<String, LinkedHashMap<String, Selection>> loop : tempList.entrySet())
             tempList.get(loop.getKey()).clear();
 
-        for(Print loop : Unselected)
+        for(Selection loop : Unselected)
             tempList.get(loop.stage).put(loop.treatments,loop);
 
-        for(Print loop : Selected)
+        for(Selection loop : Selected)
             tempList.get(loop.stage).put(loop.treatments,loop);
 
-        for(Print loop : selection)
+        for(Selection loop : selection)
             tempList.get(loop.stage).put(loop.treatments,loop);
 
         Selected.clear();
         Unselected.clear();
 
-        for(Map.Entry<String, LinkedHashMap<String, Print>> loop : tempList.entrySet())
-            for (Map.Entry<String, Print> print : loop.getValue().entrySet())
+        for(Map.Entry<String, LinkedHashMap<String, Selection>> loop : tempList.entrySet())
+            for (Map.Entry<String, Selection> print : loop.getValue().entrySet())
                 Unselected.add(print.getValue());
 
         remove();

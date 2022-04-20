@@ -29,7 +29,7 @@ public class WeightedGraph {
         }
     }
 
-    public void uniformCostSearch(int source, int destination){
+    public void uniformCostSearch(int source){
         Edge currentNode;
 
         for (int i = 0; i < adjacencyList.length; i++) {
@@ -78,16 +78,6 @@ public class WeightedGraph {
     public void addEdge(int source, int destination, int weight) {
         Edge edge = new Edge(source, destination, weight);
         adjacencyList[source].addLast(edge); //for directed graph
-    }
-
-    public void printGraph(){
-        for (int i = 0; i <vertices ; i++) {
-            LinkedList<Edge> list = adjacencyList[i];
-            for (Edge edge : list) {
-                System.out.println("vertex-" + i + " is connected to " +
-                        edge.destination + " with weight " + edge.weight);
-            }
-        }
     }
 
     static class Edge implements Comparator<Edge> {

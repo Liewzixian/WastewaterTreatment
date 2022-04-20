@@ -1,16 +1,20 @@
 package com.example.demo1;
 
+import com.example.demo1.dataclasses.Location;
+import com.example.demo1.dataclasses.Result;
+import com.example.demo1.dataclasses.Selection;
+import com.example.demo1.dataclasses.Tech;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 public class SharedData {
     LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList;
     LinkedHashMap<String, LinkedHashMap<String,Tech>> selectedList;
     LinkedHashMap<String,LinkedHashMap<String,Location>> locations;
-    ArrayList<Print> selected;
-    ArrayList<Print> unselected;
+    ArrayList<Selection> selected;
+    ArrayList<Selection> unselected;
     ArrayList<String> states;
     ArrayList<Result> results;
     IO io;
@@ -25,7 +29,6 @@ public class SharedData {
         unselected = new ArrayList<>();
 
         states = new ArrayList<>();
-
         results = new ArrayList<>();
 
         reloadData();
@@ -35,12 +38,11 @@ public class SharedData {
     public LinkedHashMap<String, LinkedHashMap<String, Tech>> getOriginalList() {
         return originalList;
     }
-
     public ArrayList<String> getStates(){ return states; }
-    public ArrayList<Print> getSelected() {
+    public ArrayList<Selection> getSelected() {
         return selected;
     }
-    public ArrayList<Print> getUnselected() {
+    public ArrayList<Selection> getUnselected() {
         return unselected;
     }
     public ArrayList<Result> getResults() {
@@ -58,7 +60,7 @@ public class SharedData {
             for(String stage : stages)
                 selectedList.put(stage,new LinkedHashMap<>());
 
-            for(Print loop: selected)
+            for(Selection loop: selected)
                 selectedList.get(loop.stage).put(loop.treatments,originalList.get(loop.stage).get(loop.treatments));
 
             for(Map.Entry<String, LinkedHashMap<String, Tech>> stage : selectedList.entrySet()){
@@ -77,7 +79,7 @@ public class SharedData {
 
         for(Map.Entry<String, LinkedHashMap<String, Tech>> loop : originalList.entrySet())
             for(Map.Entry<String, Tech> print : loop.getValue().entrySet())
-                unselected.add(new Print(loop.getKey(),print.getKey()));
+                unselected.add(new Selection(loop.getKey(),print.getKey()));
     }
 
     public void loadLocation() throws FileNotFoundException {

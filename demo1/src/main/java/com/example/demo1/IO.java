@@ -1,6 +1,9 @@
 package com.example.demo1;
 
 
+import com.example.demo1.dataclasses.Location;
+import com.example.demo1.dataclasses.Tech;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,7 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class IO {
-
     private final String fileName;
     public IO(String fileName){
         this.fileName = fileName;
@@ -80,17 +82,5 @@ public class IO {
                 writer.format("%S,%S,%.2f,%.2f,%.2f,%.2f,%.3f\n", list.getValue().getType(), list.getValue().getName(), list.getValue().getTSS(), list.getValue().getCOD(), list.getValue().getBOD(),list.getValue().getArea(), list.getValue().getEnergy());
 
         writer.close(); //close writer
-    }
-
-    public void saveLocations(LinkedHashMap<String,LinkedHashMap<String,Location>> locations) throws IOException {
-
-        PrintWriter writer2 = new PrintWriter("src/main/resources/com/Treatment/location.txt", StandardCharsets.UTF_8); //save location (can add code to change location)
-
-        for(Map.Entry<String, LinkedHashMap<String, Location>> full : locations.entrySet())
-            for(Map.Entry<String, Location> list : full.getValue().entrySet())
-                writer2.format("%S,%S,%.2f,%.2f,%.2f\n", list.getValue().getState(), list.getValue().getLocation(), list.getValue().getTSS(), list.getValue().getCOD(),list.getValue().getBOD());
-
-        writer2.close();
-
     }
 }

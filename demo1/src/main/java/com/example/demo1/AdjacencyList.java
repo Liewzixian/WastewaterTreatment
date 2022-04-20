@@ -1,10 +1,10 @@
 package com.example.demo1;
+import com.example.demo1.dataclasses.Tech;
+
 import java.util.*;
 
 public class AdjacencyList {
-
     SharedData sharedData;
-
     public LinkedHashMap<String,Tech> UniformCostSearch(int choice, SharedData sharedData){
 
         LinkedHashMap<String, LinkedHashMap<String,Tech>> selectedList;
@@ -54,7 +54,7 @@ public class AdjacencyList {
             }
         }
 
-        weightedGraph.uniformCostSearch(0, index[5]+1);
+        weightedGraph.uniformCostSearch(0);
         path = weightedGraph.printPath(0,index[5]+1);
 
         for(int i = 1; i < 6; i++) {
