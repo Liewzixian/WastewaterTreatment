@@ -11,40 +11,57 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #434343;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.WastewaterCharacteristic">
    <children>
-      <Label layoutX="298.0" layoutY="111.0" text="COD(ppm)" textFill="WHITE">
+      <Label layoutX="298.0" layoutY="169.0" text="COD(ppm)" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Button fx:id="EnterButton" layoutX="503.0" layoutY="346.0" mnemonicParsing="false" onAction="#EnterButtonOnAction" style="-fx-background-color: #ffbd59;" text="Enter " textFill="WHITE" />
-      <Button fx:id="BackButton" layoutX="297.0" layoutY="346.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #ffbd59;" text="Back" textFill="WHITE" />
-      <Label layoutX="298.0" layoutY="148.0" text="BOD(ppm)" textFill="WHITE">
+      <Button fx:id="EnterButton" layoutX="508.0" layoutY="372.0" mnemonicParsing="false" onAction="#EnterButtonOnAction" style="-fx-background-color: #ffbd59;" text="Enter " textFill="WHITE" />
+      <Button fx:id="BackButton" layoutX="298.0" layoutY="372.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #ffbd59;" text="Back" textFill="WHITE" />
+      <Label layoutX="298.0" layoutY="203.0" text="BOD(ppm)" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
       <Label layoutX="192.0" layoutY="130.0" />
-      <ComboBox fx:id="Standard" layoutX="368.0" layoutY="235.0" prefHeight="26.0" prefWidth="164.0" promptText="Select standard" style="-fx-background-color: #ffbd59;" />
-      <TextField fx:id="TCod" layoutX="368.0" layoutY="108.0" />
-      <TextField fx:id="TBod" layoutX="368.0" layoutY="145.0" />
-      <TextField fx:id="TTss" layoutX="368.0" layoutY="185.0" />
+      <ComboBox fx:id="Standard" layoutX="368.0" layoutY="281.0" prefHeight="26.0" prefWidth="178.0" promptText="Select standard" style="-fx-background-color: #ffbd59;" />
+      <TextField fx:id="TCod" layoutX="368.0" layoutY="166.0" prefHeight="26.0" prefWidth="178.0" />
+      <TextField fx:id="TBod" layoutX="368.0" layoutY="200.0" prefHeight="26.0" prefWidth="178.0" />
+      <TextField fx:id="TTss" layoutX="368.0" layoutY="235.0" prefHeight="26.0" prefWidth="178.0" />
       <ImageView fitHeight="441.0" fitWidth="251.0" layoutX="-3.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../wastewater/watercharacter.png" />
          </image>
       </ImageView>
       <Label fx:id="StandardAlert" layoutX="368.0" layoutY="217.0" prefHeight="18.0" prefWidth="164.0" textFill="WHITE" />
-      <Label layoutX="298.0" layoutY="188.0" text="TSS (ppm)" textFill="WHITE">
+      <Label layoutX="299.0" layoutY="238.0" text="TSS (ppm)" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="349.0" layoutY="55.0" text="Initial Pollution Level" textFill="WHITE">
+      <Label layoutX="348.0" layoutY="35.0" text="Initial Pollution Level" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="368.0" layoutY="261.0" prefHeight="63.0" prefWidth="164.0" text="Malaysia Wastewater Effluent Discharge Standards" textFill="WHITE" wrapText="true">
+      <Label layoutX="368.0" layoutY="308.0" prefHeight="63.0" prefWidth="164.0" text="Malaysia Wastewater Effluent Discharge Standards" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="Area" layoutX="371.0" layoutY="126.0" onAction="#AreaOnAction" prefHeight="26.0" prefWidth="178.0" promptText="Select Area (*Optional)" style="-fx-background-color: #ffbd59;" />
+      <ComboBox fx:id="State" layoutX="371.0" layoutY="89.0" onAction="#StateOnAction" prefHeight="26.0" prefWidth="178.0" promptText="Select State (*Optional)" style="-fx-background-color: #ffbd59;" />
+      <Label layoutX="307.0" layoutY="92.0" text="State" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="309.0" layoutY="129.0" text="Area" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="392.0" layoutY="46.0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
    </children>
