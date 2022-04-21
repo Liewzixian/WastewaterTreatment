@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.MenuController">
+   <children>
+      <ImageView fitHeight="635.0" fitWidth="715.0" layoutX="-115.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../wastewater/menu1.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="addButton" layoutX="102.0" layoutY="141.0" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="67.0" prefWidth="180.0" style="-fx-background-color: #434343#434343;" text="Add New Model" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="ManageButton" layoutX="310.0" layoutY="141.0" mnemonicParsing="false" onAction="#manageButtonOnAction" prefHeight="67.0" prefWidth="186.0" style="-fx-background-color: #434343#434343;" text="Manage Model" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="AfterMenu" layoutX="310.0" layoutY="254.0" mnemonicParsing="false" onAction="#afterMenuButtonOnAction" prefHeight="67.0" prefWidth="186.0" style="-fx-background-color: #434343#434343;" text="Continue" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="SelectButton" layoutX="102.0" layoutY="254.0" mnemonicParsing="false" onAction="#selectButtonOnAction" prefHeight="67.0" prefWidth="180.0" style="-fx-background-color: #434343#434343;" text="Model Selection" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font></Button>
+      <Label layoutX="252.0" layoutY="65.0" text="MENU" textFill="#ffbd59">
+         <font>
+            <Font name="Verdana Bold" size="26.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="BGM" layoutX="524.0" layoutY="363.0" mnemonicParsing="false" onAction="#BGMButtonOnAction" prefHeight="23.0" prefWidth="50.0" text="BGM" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </RadioButton>
+   </children>
+</AnchorPane>
