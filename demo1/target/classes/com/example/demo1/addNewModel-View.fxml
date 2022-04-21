@@ -40,9 +40,9 @@
       <font>
          <Font name="Arial Bold" size="13.0" />
       </font></Label>
-   <TextField fx:id="TModel" layoutX="393.0" layoutY="83.0" />
-   <TextField fx:id="TAof" layoutX="393.0" layoutY="225.0" />
-   <TextField fx:id="TEpm" layoutX="393.0" layoutY="258.0" />
+   <TextField fx:id="TModel" layoutX="393.0" layoutY="83.0" onMouseClicked="#ModelTextFieldClickOnAction" />
+   <TextField fx:id="TAof" layoutX="393.0" layoutY="225.0" onMouseClicked="#AreaTextFieldClickOnAction" />
+   <TextField fx:id="TEpm" layoutX="393.0" layoutY="258.0" onMouseClicked="#EnergyTextFieldClickOnAction" />
    <Button fx:id="addToButton" layoutX="512.0" layoutY="346.0" mnemonicParsing="false" onAction="#addButtonOnAction" style="-fx-background-color: #ffbd59;" text="Add" textFill="WHITE" />
    <Button fx:id="BackButton" layoutX="206.0" layoutY="346.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #ffbd59;" text="Back" textFill="WHITE" />
    <Label fx:id="addnewMessageLabel" layoutX="393.0" layoutY="290.0" prefHeight="26.0" prefWidth="160.0" />
@@ -52,7 +52,7 @@
       </image>
    </ImageView>
    <ComboBox fx:id="TStage" layoutX="393.0" layoutY="48.0" prefHeight="26.0" prefWidth="150.0" promptText="Treatment Stage" style="-fx-background-color: #ffffff;" />
-   <TextField fx:id="TCost" layoutX="393.0" layoutY="290.0" />
+   <TextField fx:id="TCost" layoutX="393.0" layoutY="290.0" onMouseClicked="#CostTextFieldClickOnAction" />
    <Label fx:id="epm1" layoutX="206.0" layoutY="295.0" text="Cost (USD)" textFill="WHITE">
       <font>
          <Font name="Arial Bold" size="13.0" />
