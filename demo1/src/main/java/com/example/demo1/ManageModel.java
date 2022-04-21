@@ -24,6 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -32,7 +33,8 @@ public class ManageModel implements Initializable {
 
     private final ObservableList<Models> detailss = FXCollections.observableArrayList();
     File inputFile = new File("src/main/resources/com/Treatment/output.txt");
-    File tempFile = new File("src/main/resources/com/Treatment/output1.txt");
+
+    NumTest numTest = new NumTest();
 
     @FXML
     private Label Alert;
@@ -59,6 +61,7 @@ public class ManageModel implements Initializable {
 
 
     public void readFile() throws Exception {
+
         Collection<Models> list = Files.readAllLines(Paths.get(String.valueOf(inputFile)))
                 .stream()
                 .map(line -> {
@@ -75,9 +78,8 @@ public class ManageModel implements Initializable {
                     return md;
                 })
                 .collect(Collectors.toList());
-        ObservableList<Models> details = FXCollections.observableArrayList(list);
 
-        // TableView.getColumns().addAll(StageColumn, NameColumn, codColumn, bodColumn, tssColumn);
+        ObservableList<Models> details = FXCollections.observableArrayList(list);
 
         StageColumn.setCellValueFactory(new PropertyValueFactory<>("stage"));
         StageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -133,21 +135,18 @@ public class ManageModel implements Initializable {
             sortedData.comparatorProperty().bind(TableView.comparatorProperty());
             TableView.setItems(sortedData);
         });
-
-
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         searCh();
         try {
             readFile();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
         autoResizeColumns(TableView);
-
     }
 
     @FXML
@@ -164,18 +163,44 @@ public class ManageModel implements Initializable {
     void ModifyButtonOnAction() throws Exception {
         SoundEffect sound = new SoundEffect();
         sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
-        sound.playSound("src/main/resources/com/SoundEffect/short-success.wav");
-        BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile));
+
         ObservableList<Models> Md = TableView.getItems();
 
+        boolean validate = true;
         String[] words = Md.toString().split(", ");
+
         for (String word: words) {
-            writer.write(word.replace("[","").replace("]", ""));
-            writer.newLine();
+            word = word.replace("[","").replace("]", "");
+            StringTokenizer st = new StringTokenizer(word,",");
+            st.nextToken();
+            st.nextToken();
+
+            while (st.hasMoreTokens()){
+                if(!numTest.isDouble(st.nextToken())) {
+                    validate = false;
+                    break;
+                }
+            }
+            
+            if(!validate)
+                break;
         }
-        writer.close();
-        menu.sharedData.reloadData();
-        Alert.setText("Modified Successfully!");
+
+        if(validate){
+            sound.playSound("src/main/resources/com/SoundEffect/short-success.wav");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile));
+            for (String word: words) {
+                writer.write(word.replace("[","").replace("]", ""));
+                writer.newLine();
+            }
+            writer.close();
+            menu.sharedData.reloadData();
+            Alert.setText("Modified Successfully!");
+        }
+        else {
+            sound.playSound("src/main/resources/com/SoundEffect/error.wav");
+            Alert.setText("Modified Failed!");
+        }
     }
 
     @FXML
