@@ -23,9 +23,9 @@
          </font></Label>
       <Label layoutX="192.0" layoutY="130.0" />
       <ComboBox fx:id="Standard" layoutX="368.0" layoutY="281.0" prefHeight="26.0" prefWidth="178.0" promptText="Select standard" style="-fx-background-color: #ffbd59;" />
-      <TextField fx:id="TCod" layoutX="368.0" layoutY="166.0" prefHeight="26.0" prefWidth="178.0" />
-      <TextField fx:id="TBod" layoutX="368.0" layoutY="200.0" prefHeight="26.0" prefWidth="178.0" />
-      <TextField fx:id="TTss" layoutX="368.0" layoutY="235.0" prefHeight="26.0" prefWidth="178.0" />
+      <TextField fx:id="TCod" layoutX="368.0" layoutY="166.0" onMouseClicked="#CODTextFieldClickOnAction" prefHeight="26.0" prefWidth="178.0" />
+      <TextField fx:id="TBod" layoutX="368.0" layoutY="200.0" onMouseClicked="#BODTextFieldClickOnAction" prefHeight="26.0" prefWidth="178.0" />
+      <TextField fx:id="TTss" layoutX="368.0" layoutY="235.0" onMouseClicked="#TSSTextFieldClickOnAction" prefHeight="26.0" prefWidth="178.0" />
       <ImageView fitHeight="441.0" fitWidth="251.0" layoutX="-3.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../wastewater/watercharacter.png" />

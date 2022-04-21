@@ -29,6 +29,8 @@ public class SignUpController {
     private final SoundEffect sound = new SoundEffect();
 
     private final String soundFile = "src/main/resources/com/SoundEffect/clicksound.wav";
+    private final String error = "src/main/resources/com/SoundEffect/error.wav";
+    private final String success = "src/main/resources/com/SoundEffect/short-success.wav";
 
     @FXML
     private void initialize() throws FileNotFoundException {
@@ -82,9 +84,11 @@ public class SignUpController {
             user.put(usernameText,passwordText);
             Alert.setText("New User Registered. Welcome " + usernameText);
             saveUserdata();
+            sound.playSound(success);
         }
         else {
             Alert.setText("Invalid username or password");
+            sound.playSound(error);
         }
     }
 
@@ -95,5 +99,15 @@ public class SignUpController {
             writer.format("%s,%s\n",users.getKey(),users.getValue());
 
         writer.close(); //close writer
+    }
+
+    @FXML
+    public void UsernameFieldClickOnAction(){
+        username.setText("");
+    }
+
+    @FXML
+    public void PasswordFieldClickOnAction(){
+        Password.setText("");
     }
 }

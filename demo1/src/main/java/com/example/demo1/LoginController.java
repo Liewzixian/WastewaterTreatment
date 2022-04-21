@@ -63,10 +63,11 @@ public class LoginController {
     @FXML
     protected void loginButtonOnAction() throws FileNotFoundException {
         // if username and password is filled up then go to validateLogin()
+        SoundEffect sound = new SoundEffect();
+        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         if(validateLogin()){
             //validateLogin();
-            SoundEffect sound = new SoundEffect();
-            sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+            sound.playSound("src/main/resources/com/SoundEffect/short-success.wav");
             LoginMessageLabel.setText("Successfully login!");
             nextScene(); // go to next scene when login successfully
             menu = new Menu("src/main/resources/com/Treatment/output.txt");
@@ -74,7 +75,7 @@ public class LoginController {
 
         }
         else{
-            SoundEffect sound = new SoundEffect();
+            sound = new SoundEffect();
             sound.playSound("src/main/resources/com/SoundEffect/error.wav");
             // if username and password is empty then msg will display
             LoginMessageLabel.setText("Please enter username and password");

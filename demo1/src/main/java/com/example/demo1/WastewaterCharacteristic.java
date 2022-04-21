@@ -149,4 +149,18 @@ public class WastewaterCharacteristic {
         stage.show();
         SetSceneOnCentral(stage);
     }
+    @FXML
+    protected void CODTextFieldClickOnAction(){
+        TCod.setText("");
+    }
+
+    @FXML
+    protected void BODTextFieldClickOnAction(){
+        TBod.setText("");
+    }
+
+    @FXML
+    protected void TSSTextFieldClickOnAction(){
+        TTss.setText("");
+    }
 }

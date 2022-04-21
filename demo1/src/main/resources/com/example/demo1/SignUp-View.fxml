@@ -20,8 +20,8 @@
             <Font name="Verdana Bold" size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="username" layoutX="151.0" layoutY="115.0" prefHeight="31.0" prefWidth="231.0" promptText="Enter a  username" />
-      <TextField fx:id="Password" layoutX="152.0" layoutY="164.0" prefHeight="31.0" prefWidth="231.0" promptText="Enter a password" />
+      <TextField fx:id="username" layoutX="151.0" layoutY="115.0" onMouseClicked="#UsernameFieldClickOnAction" prefHeight="31.0" prefWidth="231.0" promptText="Enter a  username" />
+      <TextField fx:id="Password" layoutX="152.0" layoutY="164.0" onMouseClicked="#PasswordFieldClickOnAction" prefHeight="31.0" prefWidth="231.0" promptText="Enter a password" />
       <Button layoutX="152.0" layoutY="232.0" mnemonicParsing="false" onAction="#CreateButtonOnAction" prefHeight="25.0" prefWidth="227.0" style="-fx-background-color: #ffbd59;" text="Create Account" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="13.0" />
@@ -32,7 +32,7 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Button>
-      <Label fx:id="Alert" layoutX="152.0" layoutY="205.0" prefHeight="18.0" prefWidth="227.0" textFill="WHITE">
+      <Label fx:id="Alert" layoutX="152.0" layoutY="205.0" prefHeight="18.0" prefWidth="348.0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

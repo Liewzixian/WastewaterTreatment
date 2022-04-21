@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -33,6 +34,8 @@ public class ManageModel implements Initializable {
     File inputFile = new File("src/main/resources/com/Treatment/output.txt");
     File tempFile = new File("src/main/resources/com/Treatment/output1.txt");
 
+    @FXML
+    private Label Alert;
     @FXML
     private TableView<Models> TableView;
     @FXML
@@ -161,6 +164,7 @@ public class ManageModel implements Initializable {
     void ModifyButtonOnAction() throws Exception {
         SoundEffect sound = new SoundEffect();
         sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        sound.playSound("src/main/resources/com/SoundEffect/short-success.wav");
         BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile));
         ObservableList<Models> Md = TableView.getItems();
 
@@ -171,13 +175,14 @@ public class ManageModel implements Initializable {
         }
         writer.close();
         menu.sharedData.reloadData();
+        Alert.setText("Modified Successfully!");
     }
 
     @FXML
     void deleteButtonOnAction() throws IOException {
         SoundEffect sound = new SoundEffect();
         sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
-
+        sound.playSound("src/main/resources/com/SoundEffect/short-success.wav");
         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
@@ -194,6 +199,7 @@ public class ManageModel implements Initializable {
         inputFile.delete();
         tempFile.renameTo(inputFile);
         TableView.getItems().remove(Md);
+        Alert.setText("Deleted Successfully!");
     }
     @FXML
     protected void SetSceneOnCentral(Stage stage){

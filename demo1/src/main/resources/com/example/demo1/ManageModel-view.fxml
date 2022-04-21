@@ -46,5 +46,10 @@
             <TableColumn fx:id="CostColumn" minWidth="0.0" prefWidth="147.199951171875" style="-fx-background-color: #ffbd59;" text="Cost" />
             </columns>
         </TableView>
+      <Label fx:id="Alert" layoutX="742.0" layoutY="515.0" prefHeight="18.0" prefWidth="278.0" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

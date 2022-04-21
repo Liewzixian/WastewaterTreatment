@@ -51,7 +51,7 @@ public class addNewModel implements Initializable {
 
     @FXML
     protected void addButtonOnAction() throws IOException {
-        validation = true;
+        validation= TStage.getValue() != null;
 
         if(TModel.getText().isEmpty()){
             TModel.setText("Please Enter The Model");
@@ -60,6 +60,7 @@ public class addNewModel implements Initializable {
 
         if(TAof.getText().isEmpty()){
             TAof.setText("Please Enter Area");
+            validation = false;
         }
         else if(!numTest.isDouble(TAof.getText())){
             TAof.setText("Invalid Value");
@@ -68,6 +69,7 @@ public class addNewModel implements Initializable {
 
         if(TCost.getText().isEmpty()){
             TCost.setText("Please Enter Cost");
+            validation = false;
         }
         else if(!numTest.isDouble(TCost.getText())){
             TCost.setText("Invalid Value");
@@ -76,6 +78,7 @@ public class addNewModel implements Initializable {
 
         if(TEpm.getText().isEmpty()){
             TEpm.setText("Please Enter Energy");
+            validation = false;
         }
         else if(!numTest.isDouble(TEpm.getText())){
             TEpm.setText("Invalid Value");
@@ -91,9 +94,13 @@ public class addNewModel implements Initializable {
             menu.add(String.valueOf(TStage.getValue()), newTech);
             menu.save();
             menu.sharedData.reloadData();
+            addNewMessageLabel.setText("Model Addition Successful!");
+            sound.playSound("src/main/resources/com/SoundEffect/short-success.wav");
         }
         else{
             addNewMessageLabel.setText("Model Addition Failed!");
+            SoundEffect sound = new SoundEffect();
+            sound.playSound("src/main/resources/com/SoundEffect/error.wav");
         }
     }
 
@@ -128,4 +135,25 @@ public class addNewModel implements Initializable {
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
+
+    @FXML
+    protected void AreaTextFieldClickOnAction(){
+      TAof.setText("");
+    }
+
+    @FXML
+    protected void EnergyTextFieldClickOnAction(){
+      TEpm.setText("");
+    }
+
+    @FXML
+    protected void CostTextFieldClickOnAction(){
+      TCost.setText("");
+    }
+
+    @FXML
+    protected void ModelTextFieldClickOnAction(){
+        TModel.setText("");
+    }
+
     }

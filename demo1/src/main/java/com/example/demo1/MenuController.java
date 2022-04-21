@@ -49,7 +49,7 @@ public class MenuController {
         sound.playSound(clickSound);
         Scene scene = null;
         try {
-            scene = new Scene(new FXMLLoader(MenuController.class.getResource("WaterChar-view.fxml")).load(), 595, 415);
+            scene = new Scene(new FXMLLoader(MenuController.class.getResource("WaterChar-view.fxml")).load(), 600, 425);
         }
         catch (IOException e) {
             e.printStackTrace();
