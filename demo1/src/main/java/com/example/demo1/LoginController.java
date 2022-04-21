@@ -18,7 +18,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-
+/**
+ * This class is the controller class of the LOGIN GUI
+ */
 public class LoginController {
     static Menu menu;
 
@@ -38,6 +40,10 @@ public class LoginController {
 
     private HashMap<String,String> user;
 
+    /**
+     * This method set up the login page
+     * It loads the program data from the file for further use
+     */
     @FXML
     private void initialize() throws FileNotFoundException {
 
@@ -59,12 +65,15 @@ public class LoginController {
         }
         sc.close();
     }
-
+    /**
+     * This method is invoked when the "login" button is clicked
+     * It will validate the username and password
+     */
     @FXML
     protected void loginButtonOnAction() throws FileNotFoundException {
         SoundEffect.clicksound();
         if(validateLogin()){
-            //validateLogin();
+            //validateLogin
             SoundEffect.success();
             LoginMessageLabel.setText("Successfully login!");
             nextScene(); // go to next scene when login successfully
@@ -76,7 +85,10 @@ public class LoginController {
             LoginMessageLabel.setText("Please enter username and password");
         }
     }
-
+    /**
+     * This method is invoked when the "cancel" button is clicked
+     * It will close the program
+     */
     @FXML
     protected void cancelButtonOnAction(){
         SoundEffect.clicksound();
@@ -84,14 +96,18 @@ public class LoginController {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
-
+    /**
+     * This method will perform login validation process
+     */
     protected boolean validateLogin(){
         String username = UsernameTextField.getText();
         String password = enterPasswordField.getText();
 
         return user.containsKey(username) && user.get(username).equals(password);
     }
-
+    /**
+     * This method will run the menu GUI
+     */
     public void nextScene(){
         FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("Menu-View.fxml"));
         try {
@@ -104,14 +120,20 @@ public class LoginController {
         Login.window.show();
         SetSceneOnCentral(Login.window);
     }
-
+    /**
+     * This method takes the stage and set the stage to the central based on user's scene size
+     * @param stage the stage the users want to set at the central
+     */
     @FXML
     protected void SetSceneOnCentral(Stage stage){
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
-
+    /**
+     * This method is invoked when the "Sign up" label is clicked
+     * It will lead the user to the sign-up page
+     */
     @FXML
     protected void SignUpOnClicked(){
         SoundEffect.clicksound();

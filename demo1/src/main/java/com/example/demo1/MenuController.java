@@ -8,11 +8,18 @@ import javafx.scene.control.RadioButton;
 import javafx.stage.Screen;
 import java.io.IOException;
 
+/**
+ * This class is the controller class of menu GUI
+ */
 public class MenuController {
     @FXML
     private RadioButton BGM;
-     SoundEffect soundEffect = new SoundEffect();
+    SoundEffect soundEffect = new SoundEffect();
 
+    /**
+     * This method is invoked when the "Add New Model" button is being clicked.
+     * It will lead the user to add new model GUI
+     */
     @FXML
     protected void addButtonOnAction() {
         SoundEffect.clicksound();
@@ -26,6 +33,10 @@ public class MenuController {
         Login.window.setScene(scene);
         SetSceneOnCentral();
     }
+    /**
+     * This method is invoked when the "Manage Model" button is being clicked.
+     * It will lead the user to manage model GUI
+     */
 
     @FXML
     protected void manageButtonOnAction() {
@@ -40,6 +51,10 @@ public class MenuController {
         Login.window.setScene(scene);
         SetSceneOnCentral();
     }
+    /**
+     * This method is invoked when the "Continue" button is being clicked.
+     * It will lead the user to Wastewater Characteristic GUI
+     */
     @FXML
     protected void afterMenuButtonOnAction() {
         SoundEffect.clicksound();
@@ -53,7 +68,10 @@ public class MenuController {
         Login.window.setScene(scene);
         SetSceneOnCentral();
     }
-
+    /**
+     * This method is invoked when the "Model Selection" button is being clicked.
+     * It will lead the user to model selection GUI
+     */
     @FXML
     protected void selectButtonOnAction() {
         SoundEffect.clicksound();
@@ -67,14 +85,19 @@ public class MenuController {
         Login.window.setScene(scene);
         SetSceneOnCentral();
     }
-
+    /**
+     * This method takes the stage and set the stage to the central based on user's scene size
+     */
     @FXML
     protected void SetSceneOnCentral(){
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         Login.window.setX((primScreenBounds.getWidth() - Login.window.getWidth()) / 2);
         Login.window.setY((primScreenBounds.getHeight() - Login.window.getHeight()) / 2);
     }
-
+    /**
+     * This method is invoked when the BGM radio button is being clicked.
+     * It will play the bgm and stop
+     */
     @FXML
     protected void BGMButtonOnAction(){
         if(BGM.isSelected()){

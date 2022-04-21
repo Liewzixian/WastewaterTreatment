@@ -62,4 +62,3 @@ public class PollutionLevels {
         return BOD;
     }
 }
-

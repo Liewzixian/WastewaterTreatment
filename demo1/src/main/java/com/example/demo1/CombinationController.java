@@ -14,16 +14,18 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static com.example.demo1.LoginController.menu;
-
+/**
+ * This class is showing the detail and more information of the selected technology combination from the result table
+ */
 public class CombinationController {
     ObservableList<String> Preference = FXCollections.observableArrayList("Most Cleaning Efficient","Most Cost Efficient","Most Energy Efficient","Least Area");
     DecimalFormat df = new DecimalFormat("#.####");
     DecimalFormat af = new DecimalFormat("#.");
-    Print rowData=DisplayResult.rowData;
-    ArrayList<Result>BestResultList;
-    double[] COD = rowData.getFullCOD();
-    double[] BOD = rowData.getFullBOD();
-    double[] TSS = rowData.getFullTSS();
+    Print rowData=DisplayResult.rowData;//the selected row by the user in the result table
+    ArrayList<Result>BestResultList;//Store the best technology combination
+    double[] COD = rowData.getFullCOD();//get the cod of each stage for selected row
+    double[] BOD = rowData.getFullBOD();//get the bod of each stage for selected row
+    double[] TSS = rowData.getFullTSS();//get the tss of each stage for selected row
     @FXML
     private ComboBox<String> SelectPreference;
 
@@ -165,17 +167,23 @@ public class CombinationController {
     @FXML
     private TableColumn<Print,Double> AreaTable;
 
-
+    /**
+     * This method will set up the technology combination for the selected row
+     * It also set up the functionality for users to compare the selected combination with the best combination based on their preference
+     * It calculates the parameter comparison between the selected and the best.
+     */
     @FXML
     public void initialize(){
         df.setRoundingMode(RoundingMode.CEILING);
         SelectPreference.setItems(Preference);
+        //setting the data of the selected technology combination
         setStage1(rowData.getTreatmentsA(),String.valueOf(df.format(COD[0])),String.valueOf(df.format(BOD[0])),String.valueOf(df.format(TSS[0])));
         setStage2(rowData.getTreatmentsB(),String.valueOf(df.format(COD[1])),String.valueOf(df.format(BOD[1])),String.valueOf(df.format(TSS[1])));
         setStage3(rowData.getTreatmentsC(),String.valueOf(df.format(COD[2])),String.valueOf(df.format(BOD[2])),String.valueOf(df.format(TSS[2])));
         setStage4(rowData.getTreatmentsD(),String.valueOf(df.format(COD[3])),String.valueOf(df.format(BOD[3])),String.valueOf(df.format(TSS[3])));
         setStage5(rowData.getTreatmentsE(),String.valueOf(df.format(COD[4])),String.valueOf(df.format(BOD[4])),String.valueOf(df.format(TSS[4])));
         setCurrentFinal(String.valueOf(df.format(COD[4])),String.valueOf(df.format(BOD[4])),String.valueOf(df.format(TSS[4])),String.valueOf(df.format(rowData.getCost())));
+        //setting up best technology combination table
         Preliminary.setCellValueFactory(new PropertyValueFactory<>("treatmentsA"));
         Chemical.setCellValueFactory(new PropertyValueFactory<>("treatmentsB"));
         Biological.setCellValueFactory(new PropertyValueFactory<>("treatmentsC"));
@@ -189,17 +197,24 @@ public class CombinationController {
         EnergyTable.setCellValueFactory(new PropertyValueFactory<>("energy"));
         BestTable.setText("The Most Cleaning Efficient Combination");
         Comparison.setText("Comparison With The Best Cleaning Efficiency");
+        //calculate the best combination
         menu.UniformSearch(1);
+        //get the best combination
         BestResultView.setItems(menu.getBestTable());
         autoResizeColumns(BestResultView);
+        //get the best detail data
         BestResultList=menu.getBestResults();
         for(Result print : BestResultList) {
+            //setting up the best combination's values
             setBestFinal(String.valueOf(df.format(print.getFinalCOD())),String.valueOf(df.format(print.getFinalBOD())),String.valueOf(df.format(print.getFinalTSS())),String.valueOf(df.format(print.getFinalCost())));
+            //calculate the comparison
             setCompareResult(calculation(COD[4],print.getFinalCOD()),calculation(BOD[4],print.getFinalBOD()),calculation(TSS[4],print.getFinalTSS()),calculation(rowData.getCost(), print.getFinalCost()));
         }
 
     }
-
+    /**
+     * This method set up the parameter of the selected technology from result table
+     */
     public void setStage1(String stage1Name,String stage1CoD,String stage1BoD,String stage1Tss) {
         Stage1Name.setText(stage1Name);
         Stage1CoD.setText(stage1CoD+" ppm");
@@ -207,7 +222,9 @@ public class CombinationController {
         Stage1Tss.setText(stage1Tss+" ppm");
 
     }
-
+    /**
+     * This method set up the parameter of the selected technology from result table
+     */
     public void setStage2(String stage2Name,String stage2CoD,String stage2BoD,String stage2Tss) {
         Stage2Name.setText(stage2Name);
         Stage2CoD.setText(stage2CoD+" ppm");
@@ -215,7 +232,9 @@ public class CombinationController {
         Stage2Tss.setText(stage2Tss+" ppm");
 
     }
-
+    /**
+     * This method set up the parameter of the selected technology from result table
+     */
     public void setStage3(String stage3Name,String stage3CoD,String stage3BoD,String stage3Tss) {
         Stage3Name.setText(stage3Name);
         Stage3CoD.setText(stage3CoD+" ppm");
@@ -223,7 +242,9 @@ public class CombinationController {
         Stage3Tss.setText(stage3Tss+" ppm");
 
     }
-
+    /**
+     * This method set up the parameter of the selected technology from result table
+     */
     public void setStage4(String stage4Name,String stage4CoD,String stage4BoD,String stage4Tss) {
         Stage4Name.setText(stage4Name);
         Stage4CoD.setText(stage4CoD+" ppm");
@@ -231,7 +252,9 @@ public class CombinationController {
         Stage4Tss.setText(stage4Tss+" ppm");
 
     }
-
+    /**
+     * This method set up the parameter of the selected technology from result table
+     */
     public void setStage5(String stage5Name,String stage5CoD,String stage5BoD,String stage5Tss) {
         Stage5Name.setText(stage5Name);
         Stage5CoD.setText(stage5CoD+" ppm");
@@ -239,28 +262,37 @@ public class CombinationController {
         Stage5Tss.setText(stage5Tss+" ppm");
 
     }
-
+    /**
+     * This method set up the parameter of the selected technology from result table
+     */
     public void setCurrentFinal(String COD ,String BOD, String Tss , String Cost){
         CurrentFinalCOD.setText(COD);
         CurrentFinalBOD.setText(BOD);
         CurrentFinalTss.setText(Tss);
         CurrentFinalCOST.setText("$ "+Cost);
     }
-
+    /**
+     * This method set up the parameter of the best technology
+     */
     public void setBestFinal(String COD ,String BOD, String Tss , String Cost){
         BestFinalCOD.setText(COD);
         BestFinalBOD.setText(BOD);
         BestFinalTss.setText(Tss);
         BestFinalCOST.setText("$ "+Cost);
     }
-
+    /**
+     * This method set up compare result
+     */
     public void setCompareResult(String COD ,String BOD, String Tss , String Cost){
         CompareCOD.setText(COD+" %");
         CompareBOD.setText(BOD+" %");
         CompareTSS.setText(Tss+" %");
-        CompareCOST.setText("$ "+Cost);
+        CompareCOST.setText(Cost+ " %");
     }
-
+    /**
+     * This method auto resize the table column based on the content length
+     * @param table the table that the users want to autoresize
+     */
     public static void autoResizeColumns( TableView<Print> table )
     {
         //Set the right policy
@@ -284,11 +316,19 @@ public class CombinationController {
             column.setPrefWidth( max + 10.0d );
         } );
     }
+    /**
+     * This method will calculate the comparison
+     * @param current the parameter of selected technology combination
+     * @param best the parameter of selected best technology combination
+     * @return the result of comparison
+     */
     public String calculation(double current,double best){
         double temp=Double.parseDouble(af.format (((current-best)/current)*100));
         return String.valueOf(temp);
     }
-
+    /**
+     * This method will detect what user select at the preference and generate the best technology combination that is preferred
+     */
     @FXML
     private void ComboBoxOnActionListener(){
         if(SelectPreference.getValue().equals("Most Cleaning Efficient")){

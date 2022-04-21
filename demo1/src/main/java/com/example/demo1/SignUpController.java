@@ -16,6 +16,9 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+/**
+ * This class will run the sign-up GUI
+ */
 public class SignUpController {
     @FXML
     private Label Alert;
@@ -26,6 +29,9 @@ public class SignUpController {
     private HashMap<String,String> user;
     private final NumTest numTest = new NumTest();
 
+    /**
+     * This method initialize the program data for sign up controller
+     */
     @FXML
     private void initialize() throws FileNotFoundException {
 
@@ -47,7 +53,10 @@ public class SignUpController {
         }
         sc.close();
     }
-
+    /**
+     * This method is invoked when the back button is being clicked.
+     * This method will bring users back to the login scene.
+     */
     @FXML
     protected void BackButtonOnAction() {
         SoundEffect.clicksound();
@@ -61,7 +70,10 @@ public class SignUpController {
         }
         Login.splashStage.setScene(scene);
     }
-
+    /**
+     * This method is invoked when the "create" button is being clicked.
+     * It will validate the username and password for signing up
+     */
     @FXML
     protected void CreateButtonOnAction() throws IOException {
         SoundEffect.clicksound();
@@ -86,7 +98,9 @@ public class SignUpController {
             SoundEffect.errorsound();
         }
     }
-
+    /**
+     * This method will save the new validated username and password to the database
+     */
     public void saveUserdata() throws IOException {
         PrintWriter writer = new PrintWriter("src/main/resources/com/Treatment/users.txt", StandardCharsets.UTF_8); //save location (can add code to change location)
 
@@ -96,11 +110,18 @@ public class SignUpController {
         writer.close(); //close writer
     }
 
+    /**
+     * This method will be invoked if users click the username text field
+     * It will clear the text in username text field
+     */
     @FXML
     public void UsernameFieldClickOnAction(){
         username.setText("");
     }
-
+    /**
+     * This method will be invoked if users click the password text field
+     * It will clear the text in username text field
+     */
     @FXML
     public void PasswordFieldClickOnAction(){
         Password.setText("");

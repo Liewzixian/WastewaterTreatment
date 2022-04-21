@@ -168,4 +168,3 @@ public class Result {
         return Double.parseDouble(df.format(energy[4]));
     }
 }
-

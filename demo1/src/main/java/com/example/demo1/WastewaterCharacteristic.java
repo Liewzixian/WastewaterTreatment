@@ -18,6 +18,9 @@ import java.util.Objects;
 
 import static com.example.demo1.LoginController.menu;
 
+/**
+ * This class will run the wastewater characteristic
+ */
 public class WastewaterCharacteristic {
     SharedData sharedData = menu.sharedData;
     ObservableList <String> StandardsList = FXCollections.observableArrayList("Standard A","Standard B");
@@ -48,13 +51,19 @@ public class WastewaterCharacteristic {
 
     private boolean validate;
 
+    /**
+     * This method initialize the program data for wastewater characteristic
+     */
     @FXML
     private void initialize() {
         Standard.setItems(StandardsList);
         State.setItems(StateList);
         validate = false;
     }
-
+    /**
+     * This method is invoked when the back button is being clicked.
+     * This method will bring users back to the menu scene.
+     */
     @FXML
     protected void BackButtonOnAction(){
         SoundEffect.clicksound();
@@ -63,7 +72,9 @@ public class WastewaterCharacteristic {
         Login.window.setScene(scene);
         SetSceneOnCentral(Login.window);
     }
-
+    /**
+     * This method validate the wastewater characteristic that user input and save at database while user click enter button
+     */
     @FXML
     protected void EnterButtonOnAction() {
 
@@ -104,21 +115,28 @@ public class WastewaterCharacteristic {
             SetSceneOnCentral(Login.window);
         }
     }
-
+    /**
+     * This method takes the stage and set the stage to the central based on user's scene size
+     * @param stage the stage the users want to set at the central
+     */
     @FXML
     protected void SetSceneOnCentral(Stage stage){
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
-
+    /**
+     * This method is controlling the state combo box
+     */
     @FXML
     protected void StateOnAction(){
         selectedState=State.getValue();
         AreaList=FXCollections.observableArrayList(sharedData.loadStateArea(selectedState));
         Area.setItems(AreaList);
     }
-
+    /**
+     * This method is controlling the area combo box
+     */
     @FXML
     protected void AreaOnAction(){
         if(Area.getValue()!=null){
@@ -128,7 +146,9 @@ public class WastewaterCharacteristic {
             TTss.setText(String.valueOf(pollutionLevels.getTSS()));
         }
     }
-
+    /**
+     * This method will display user the info about the standard by calling out a pop-out dialog box
+     */
     @FXML
     protected void ClickInfoOnAction(){
         stage.setResizable(false);
@@ -143,16 +163,26 @@ public class WastewaterCharacteristic {
         stage.show();
         SetSceneOnCentral(stage);
     }
+    /**
+     * This method will be invoked if users click the TCod text field
+     * It will clear the text in TCod text field
+     */
     @FXML
     protected void CODTextFieldClickOnAction(){
         TCod.setText("");
     }
-
+    /**
+     * This method will be invoked if users click the TBod text field
+     * It will clear the text in TBod text field
+     */
     @FXML
     protected void BODTextFieldClickOnAction(){
         TBod.setText("");
     }
-
+    /**
+     * This method will be invoked if users click the TTss text field
+     * It will clear the text in TTss text field
+     */
     @FXML
     protected void TSSTextFieldClickOnAction(){
         TTss.setText("");

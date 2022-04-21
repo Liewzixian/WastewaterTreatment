@@ -29,10 +29,15 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.example.demo1.LoginController.menu;
+
+/**
+ * This class enable users to manage all the models inserted and available
+ */
 public class ManageModel implements Initializable {
 
     private final ObservableList<Models> detailss = FXCollections.observableArrayList();
     File inputFile = new File("src/main/resources/com/Treatment/output.txt");
+
     NumTest numTest = new NumTest();
 
     @FXML
@@ -58,7 +63,9 @@ public class ManageModel implements Initializable {
     @FXML
     private TableColumn<Models, String> CostColumn;
 
-
+    /**
+     * This method setting up content in the manage model table
+     */
     public void readFile() throws Exception {
 
         Collection<Models> list = Files.readAllLines(Paths.get(String.valueOf(inputFile)))
@@ -116,7 +123,9 @@ public class ManageModel implements Initializable {
         detailss.addAll(details);
         TableView.setEditable(true);
     }
-
+    /**
+     * This method provide search function using the model name
+     */
     public void searCh() {
         FilteredList<Models> filteredData = new FilteredList<>(detailss, e -> true);
         SearchBar.setOnKeyReleased(e -> {
@@ -135,7 +144,11 @@ public class ManageModel implements Initializable {
             TableView.setItems(sortedData);
         });
     }
-
+    /**
+     * This method initialize the manage model GUI
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         searCh();
@@ -147,7 +160,10 @@ public class ManageModel implements Initializable {
         }
         autoResizeColumns(TableView);
     }
-
+    /**
+     * This method is invoked when the back button is being clicked.
+     * This method will bring users back to the menu scene.
+     */
     @FXML
     void BackButtonOnAction() {
         SoundEffect.clicksound();
@@ -156,7 +172,10 @@ public class ManageModel implements Initializable {
         Login.window.setScene(scene);
         SetSceneOnCentral(Login.window);
     }
-
+    /**
+     * This method is invoked when the "modify" button is being clicked.
+     * It will update the modified value to the database
+     */
     @FXML
     void ModifyButtonOnAction() throws Exception {
         SoundEffect.clicksound();
@@ -211,7 +230,10 @@ public class ManageModel implements Initializable {
             Alert.setText("Modified Failed!");
         }
     }
-
+    /**
+     * This method is invoked when the "delete" button is being clicked.
+     * It will delete the selected model
+     */
     @FXML
     void deleteButtonOnAction() throws IOException {
         SoundEffect.clicksound();
@@ -228,14 +250,20 @@ public class ManageModel implements Initializable {
         menu.sharedData.reloadData();
         Alert.setText("Deleted Successfully!");
     }
-	
+    /**
+     * This method takes the stage and set the stage to the central based on user's scene size
+     * @param stage the stage the users want to set at the central
+     */
     @FXML
     protected void SetSceneOnCentral(Stage stage){
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
-
+    /**
+     * This method auto resize the table column based on the content length
+     * @param table the table that the users want to autoresize
+     */
     public void autoResizeColumns( TableView<Models> table )
     {
         //Set the right policy

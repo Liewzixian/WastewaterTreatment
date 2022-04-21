@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+
+/**
+ * This class will start the LOGIN page for users to begin using the system
+ */
 public class Login extends Application {
     static Stage window;
     static Stage splashStage;

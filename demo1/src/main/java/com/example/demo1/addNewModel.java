@@ -18,6 +18,9 @@ import java.util.ResourceBundle;
 
 import static com.example.demo1.LoginController.menu;
 
+/**
+ * This class enable users to add new model
+ */
 public class addNewModel implements Initializable {
     Tech newTech;
     ObservableList<String> StageName = FXCollections.observableArrayList("PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE");
@@ -49,6 +52,11 @@ public class addNewModel implements Initializable {
     @FXML
     private Label addNewMessageLabel;
 
+    /**
+     * This method is invoked when the add button is being clicked.
+     * All the data that user inserted will be validated when clicking this "add"button
+     * Users will get an alert message which will indicate whether if the model added successfully
+     */
     @FXML
     protected void addButtonOnAction() throws IOException {
         validation= TStage.getValue() != null;
@@ -94,13 +102,18 @@ public class addNewModel implements Initializable {
             menu.sharedData.reloadData();
             addNewMessageLabel.setText("Model Addition Successful!");
             SoundEffect.clicksound();
+            SoundEffect.success();
         }
         else{
             addNewMessageLabel.setText("Model Addition Failed!");
             SoundEffect.clicksound();
+            SoundEffect.errorsound();
         }
     }
-
+    /**
+     * This method is invoked when the back button is being clicked.
+     * This method will bring users back to the menu scene.
+     */
     @FXML
     protected void BackButtonOnAction() {
         SoundEffect.clicksound();
@@ -109,7 +122,11 @@ public class addNewModel implements Initializable {
         Login.window.setScene(scene);
         SetSceneOnCentral(Login.window);
     }
-
+    /**
+     * This method is invoked when setting up the "addNewModel" interface
+     * @param url
+     * @param resources
+     */
     @FXML
     public void initialize(URL url, ResourceBundle resources){
         TStage.setItems(StageName);
@@ -125,28 +142,40 @@ public class addNewModel implements Initializable {
         TTss.valueProperty().addListener((observable,oldNumber,newNumber)-> TSSSlider.setText(df.format(newNumber.doubleValue()*100) + "%"));
     }
 
+    /**
+     * This method takes the stage and set the stage to the central based on user's scene size
+     * @param stage the stage the users want to set at the central
+     */
     @FXML
     protected void SetSceneOnCentral(Stage stage){
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
-
+    /**
+     * This method will clear the text in the Area of footprint text field everytime the user click the text field
+     */
     @FXML
     protected void AreaTextFieldClickOnAction(){
       TAof.setText("");
     }
-
+    /**
+     * This method will clear the text in the Energy per meter cube text field everytime the user click the text field
+     */
     @FXML
     protected void EnergyTextFieldClickOnAction(){
       TEpm.setText("");
     }
-
+    /**
+     * This method will clear the text in the Cost text field everytime the user click the text field
+     */
     @FXML
     protected void CostTextFieldClickOnAction(){
       TCost.setText("");
     }
-
+    /**
+     * This method will clear the text in the Model text field everytime the user click the text field
+     */
     @FXML
     protected void ModelTextFieldClickOnAction(){
         TModel.setText("");

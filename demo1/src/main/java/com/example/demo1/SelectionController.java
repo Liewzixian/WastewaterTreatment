@@ -21,7 +21,9 @@ import java.util.Map;
 
 import static com.example.demo1.LoginController.menu;
 
-
+/**
+ * This class will run the Model Selection GUI
+ */
 public class SelectionController {
     SharedData sharedData;
     ObservableList<Selection> Unselected;
@@ -51,6 +53,9 @@ public class SelectionController {
     @FXML
     private TableView<Selection> SelectedTable;
 
+    /**
+     * This method is setting up the data for model selection
+     */
     public SelectionController() {
 
         sharedData = menu.sharedData;
@@ -64,7 +69,10 @@ public class SelectionController {
         Unselected = FXCollections.observableList(sharedData.getUnselected());
         Selected = FXCollections.observableList(sharedData.getSelected());
     }
-
+    /**
+     * This method is invoked when the "back" button is being clicked.
+     * It will lead the user to menu scene
+     */
     @FXML
     protected void backButtonOnAction() {
 
@@ -75,7 +83,9 @@ public class SelectionController {
         SetSceneOnCentral(Login.window);
 
     }
-
+    /**
+     * This method provides search functionality for users to search the unselected model list and selected model list
+     */
     public void Search()  {
 
         FilteredList<Selection> filteredData = new FilteredList<>(Unselected, k -> true);
@@ -111,7 +121,10 @@ public class SelectionController {
             SelectedTable.setItems(sortedList1);
         });
     }
-
+    /**
+     * This method is invoked when the "select all" button is being clicked.
+     * It will make all the unselected model to be selected
+     */
     @FXML
     protected void selectAllButtonOnAction() {
         SoundEffect.clicksound();
@@ -135,12 +148,16 @@ public class SelectionController {
         remove();
         UnselectedTable.getItems().clear();
     }
-
+    /**
+     * This method is to clear the search bar text field
+     */
     public void remove() {
         UnselectedTextField.clear();
         SelectedTextField.clear();
     }
-
+    /**
+     * This method initialize the program data for model selection GUI
+     */
     @FXML
     private void initialize(){
         UnselectedStage.setCellValueFactory(new PropertyValueFactory<>("stage"));
@@ -153,14 +170,20 @@ public class SelectionController {
         DeleteOnDoubleClick();
         Search();
     }
-
+    /**
+     * This method takes the stage and set the stage to the central based on user's scene size
+     * @param stage the stage the users want to set at the central
+     */
     @FXML
     protected void SetSceneOnCentral(Stage stage){
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
-
+    /**
+     * This method will be invoked when user double-clicking the row on the unselected table
+     * the row that is being double-clicked will be selected
+     */
     @FXML
     protected void SelectOnDoubleClick(){
         UnselectedTable.setRowFactory( tv -> {
@@ -190,7 +213,10 @@ public class SelectionController {
             return row ;
         });
     }
-
+    /**
+     * This method will be invoked when user double-clicking the row on the unselected table
+     * the row that is being double-clicked will be deleted.
+     */
     @FXML
     protected  void DeleteOnDoubleClick(){
         SelectedTable.setRowFactory( tv -> {
@@ -210,7 +236,10 @@ public class SelectionController {
             return row ;
         });
     }
-
+    /**
+     * This method is invoked when the "delete all" button is being clicked.
+     * It will make all the selected model to be unselected
+     */
     @FXML
     protected void DeleteAllOnAction(){
         SoundEffect.clicksound();

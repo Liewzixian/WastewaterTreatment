@@ -17,27 +17,16 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
 import static com.example.demo1.LoginController.menu;
 
+/**
+ * This class display the wastewater treatment plant result to the users
+ */
 public class DisplayResult {
     static Stage stage = new Stage();
     ObservableList<String> Preference = FXCollections.observableArrayList("Show All Combination","Most Cleaning Efficient","Most Cost Efficient","Most Energy Efficient","Least Area");
     static Print rowData;
 
-    @FXML
-    protected void BackButtonOnAction(){
-        SoundEffect.clicksound();
-        FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("WaterChar-view.fxml"));
-        Scene scene = null;
-        try {
-            scene = new Scene(fxmlLoader.load(), 595, 400);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Login.window.setScene(scene);
-        SetSceneOnCentral(Login.window);
-    }
     @FXML
     private ComboBox<String> SelectPreference;
 
@@ -77,6 +66,9 @@ public class DisplayResult {
     @FXML
     private TableColumn<Print,Double> Area;
 
+    /**
+     * This method set up the result GUI
+     */
     @FXML
     private void initialize() {
         SelectPreference.setItems(Preference);
@@ -96,7 +88,9 @@ public class DisplayResult {
         ClickListener();
 
     }
-
+    /**
+     * This method will detect what user select at the preference and generate the selected technology combination that is preferred
+     */
     @FXML
     private void ComboBoxOnActionListener(){
        if(SelectPreference.getValue().equals("Most Cleaning Efficient")){
@@ -121,6 +115,27 @@ public class DisplayResult {
        }
     }
 
+    /**
+     * This method is invoked when the back button is being clicked.
+     * This method will bring users back to the wastewater characteristic scene.
+     */
+    @FXML
+    protected void BackButtonOnAction(){
+        SoundEffect.clicksound();
+        FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("WaterChar-view.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 595, 400);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Login.window.setScene(scene);
+        SetSceneOnCentral(Login.window);
+    }
+
+    /**
+     * This method will detect the row that user double click and bring the users to the combination process GUI
+     */
     @FXML
     private void ClickListener(){
         ResultView.setRowFactory( tv -> {
@@ -135,7 +150,9 @@ public class DisplayResult {
             return row ;
         });
     }
-
+    /**
+     * This method run the combination process GUI
+     */
     @FXML
     private void DedicatedWindow(){
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("CombinationProcess-View.fxml"));
@@ -149,14 +166,20 @@ public class DisplayResult {
         stage.show();
         SetSceneOnCentral(stage);
     }
-
+    /**
+     * This method takes the stage and set the stage to the central based on user's scene size
+     * @param stage the stage the users want to set at the central
+     */
     @FXML
     protected void SetSceneOnCentral(Stage stage){
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
-
+    /**
+     * This method auto resize the table column based on the content length
+     * @param table the table that the users want to autoresize
+     */
     public static void autoResizeColumns( TableView<Print> table )
     {
         //Set the right policy

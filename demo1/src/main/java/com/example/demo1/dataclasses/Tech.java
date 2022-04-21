@@ -166,4 +166,3 @@ public class Tech {
         this.cost = cost;
     }
 }
-
