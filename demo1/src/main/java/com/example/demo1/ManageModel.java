@@ -33,7 +33,6 @@ public class ManageModel implements Initializable {
 
     private final ObservableList<Models> detailss = FXCollections.observableArrayList();
     File inputFile = new File("src/main/resources/com/Treatment/output.txt");
-
     NumTest numTest = new NumTest();
 
     @FXML

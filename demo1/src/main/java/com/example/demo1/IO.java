@@ -10,11 +10,32 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-public class IO { //class to get wastewater tech and location data
-    private final String fileName; //name for wastewater tech location
+/**
+ * Public class IO is used to load all important information to and from a file system.
+ *
+ * @author Group 2A
+ * @version 1.0
+ * @since 21/04/2022
+ */
+public class IO {
+    /**
+     * Name for wastewater tech text file location
+     */
+    private final String fileName;
+
+    /**
+     * This constructor loads the file location of the wastewater tech text file
+     * @param fileName file location of the wastewater tech text file
+     */
     public IO(String fileName){
         this.fileName = fileName;
-    } //constructor
+    }
+
+    /**
+     * This method loads all the wastewater tech data into the system.
+     * @return LinkedHashMap holding all the wastewater tech loaded.
+     * @throws FileNotFoundException if the specified text file does not exist.
+     */
     public LinkedHashMap<String, LinkedHashMap<String,Tech>> loadData() throws FileNotFoundException { //load wastewater tech
 
         LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList = new LinkedHashMap<>(); //hold all wastewater tech
@@ -44,7 +65,12 @@ public class IO { //class to get wastewater tech and location data
         return originalList;
     }
 
-    public LinkedHashMap<String,LinkedHashMap<String,PollutionLevels>> loadLocations() throws FileNotFoundException { //load location data
+    /**
+     * This method loads all the location and pollution data into the system.
+     * @return LinkedHashMap holding all the location and pollution data loaded.
+     * @throws FileNotFoundException if the specified text file does not exist.
+     */
+    public LinkedHashMap<String,LinkedHashMap<String,PollutionLevels>> loadLocations() throws FileNotFoundException {
 
         LinkedHashMap<String,LinkedHashMap<String, PollutionLevels>> locations = new LinkedHashMap<>();
 
@@ -71,9 +97,14 @@ public class IO { //class to get wastewater tech and location data
         return locations;
     }
 
-    public void saveData(LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList) throws IOException { //save wastewater tech
+    /**
+     * This method saves all the wastewater tech data to the text file.
+     * @param originalList list of all available wastewater tech loaded into the system
+     * @throws IOException if the specified text file does not exist.
+     */
+    public void saveData(LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList) throws IOException {
 
-        PrintWriter writer = new PrintWriter(fileName, StandardCharsets.UTF_8); //save location (can add code to change location)
+        PrintWriter writer = new PrintWriter(fileName, StandardCharsets.UTF_8); //save location
 
         for(Map.Entry<String, LinkedHashMap<String, Tech>> full : originalList.entrySet())
             for(Map.Entry<String, Tech> list : full.getValue().entrySet())

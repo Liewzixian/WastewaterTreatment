@@ -3,8 +3,25 @@ import com.example.demo1.dataclasses.Tech;
 
 import java.util.*;
 
+/**
+ * Public class AdjacencyList creates an adjacency list of the selected tech to be used in the uniform cost search.
+ *
+ * @author Group 2A
+ * @version 1.0
+ * @since 21/04/2022
+ */
 public class AdjacencyList { //Adjacency list for uniform cost search
-    SharedData sharedData; //data class
+    /**
+     * Data class to hold user-selected list
+     */
+    SharedData sharedData;
+
+    /**
+     * Perform uniform cost search to get the best combination of tech for a given criteria.
+     * @param choice criteria to be used in uniform cost search
+     * @param sharedData data class holding user-selected list
+     * @return combination of 5 best tech for a given criteria
+     */
     public LinkedHashMap<String,Tech> UniformCostSearch(int choice, SharedData sharedData){ //uniform cost search
 
         LinkedHashMap<String, LinkedHashMap<String,Tech>> selectedList; //get user choice of tech
@@ -66,7 +83,13 @@ public class AdjacencyList { //Adjacency list for uniform cost search
         return best; //return best combination of tech
     }
 
-    public int getWeight(Tech tech, int choice){ //controls which criteria to control uniform cost search
+    /**
+     * Controls which criteria to control uniform cost search
+     * @param tech technology to be judged by the algorithm
+     * @param choice criteria of uniform cost search
+     * @return a weight/score to be used in uniform cost search
+     */
+    public int getWeight(Tech tech, int choice){
         if(choice == 1){ //get the best overall cleaning efficiency
             return 300 - (int) (tech.getTSS() + tech.getCOD() + tech.getBOD()) * 100;
         }
