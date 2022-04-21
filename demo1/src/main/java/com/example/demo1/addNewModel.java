@@ -87,27 +87,23 @@ public class addNewModel implements Initializable {
 
         if(validation) {
 
-            SoundEffect sound = new SoundEffect();
-            sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
-
+            SoundEffect.clicksound();
             newTech = new Tech(String.valueOf(TStage.getValue()), String.valueOf(TModel.getText()), Double.parseDouble(String.valueOf(TTss.getValue())), Double.parseDouble(String.valueOf(TCod.getValue())), Double.parseDouble(String.valueOf(TBod.getValue())), Double.parseDouble(TAof.getText()), Double.parseDouble(TEpm.getText()), Double.parseDouble(TCost.getText()));
             menu.add(String.valueOf(TStage.getValue()), newTech);
             menu.save();
             menu.sharedData.reloadData();
             addNewMessageLabel.setText("Model Addition Successful!");
-            sound.playSound("src/main/resources/com/SoundEffect/short-success.wav");
+            SoundEffect.clicksound();
         }
         else{
             addNewMessageLabel.setText("Model Addition Failed!");
-            SoundEffect sound = new SoundEffect();
-            sound.playSound("src/main/resources/com/SoundEffect/error.wav");
+            SoundEffect.clicksound();
         }
     }
 
     @FXML
     protected void BackButtonOnAction() {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        SoundEffect.clicksound();
         Scene scene;
         scene = LoginController.LoginScene;
         Login.window.setScene(scene);

@@ -63,11 +63,10 @@ public class LoginController {
     @FXML
     protected void loginButtonOnAction() throws FileNotFoundException {
         // if username and password is filled up then go to validateLogin()
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        SoundEffect.clicksound();
         if(validateLogin()){
             //validateLogin();
-            sound.playSound("src/main/resources/com/SoundEffect/short-success.wav");
+            SoundEffect.success();
             LoginMessageLabel.setText("Successfully login!");
             nextScene(); // go to next scene when login successfully
             menu = new Menu("src/main/resources/com/Treatment/output.txt");
@@ -75,8 +74,7 @@ public class LoginController {
 
         }
         else{
-            sound = new SoundEffect();
-            sound.playSound("src/main/resources/com/SoundEffect/error.wav");
+            SoundEffect.errorsound();
             // if username and password is empty then msg will display
             LoginMessageLabel.setText("Please enter username and password");
         }
@@ -84,8 +82,7 @@ public class LoginController {
 
     @FXML
     protected void cancelButtonOnAction(){
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        SoundEffect.clicksound();
         //when cancel button is click then window will be close
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
@@ -120,6 +117,7 @@ public class LoginController {
 
     @FXML
     protected void SignUpOnClicked(){
+        SoundEffect.clicksound();
         FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("SignUp-View.fxml"));
         Scene Scene = null;
         try {

@@ -11,13 +11,11 @@ import java.io.IOException;
 public class MenuController {
     @FXML
     private RadioButton BGM;
-    String clickSound = "src/main/resources/com/SoundEffect/clicksound.wav";
-    SoundEffect soundEffect=new SoundEffect();
+     SoundEffect soundEffect=new SoundEffect();
 
     @FXML
     protected void addButtonOnAction() {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound(clickSound);
+        SoundEffect.clicksound();
         Scene scene = null;
         try {
             scene = new Scene(new FXMLLoader(MenuController.class.getResource("addNewModel-view.fxml")).load(), 600, 380);
@@ -31,8 +29,7 @@ public class MenuController {
 
     @FXML
     protected void manageButtonOnAction() {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound(clickSound);
+        SoundEffect.clicksound();
         Scene scene = null;
         try {
             scene = new Scene(new FXMLLoader(MenuController.class.getResource("ManageModel-view.fxml")).load(), 1239, 560);
@@ -45,8 +42,7 @@ public class MenuController {
     }
     @FXML
     protected void afterMenuButtonOnAction() {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound(clickSound);
+        SoundEffect.clicksound();
         Scene scene = null;
         try {
             scene = new Scene(new FXMLLoader(MenuController.class.getResource("WaterChar-view.fxml")).load(), 600, 425);
@@ -60,8 +56,7 @@ public class MenuController {
 
     @FXML
     protected void selectButtonOnAction() {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound(clickSound);
+        SoundEffect.clicksound();
         Scene scene = null;
         try {
             scene = new Scene(new FXMLLoader(MenuController.class.getResource("Selection-view.fxml")).load(), 739, 483);

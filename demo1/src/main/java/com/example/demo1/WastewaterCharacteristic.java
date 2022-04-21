@@ -46,8 +46,6 @@ public class WastewaterCharacteristic {
     @FXML
     private Label StandardAlert;
 
-    private String clickSound;
-
     private boolean validate;
 
     @FXML
@@ -55,13 +53,12 @@ public class WastewaterCharacteristic {
         Standard.setItems(StandardsList);
         State.setItems(StateList);
         validate = false;
-        clickSound = "src/main/resources/com/SoundEffect/clicksound.wav";
+        SoundEffect.clicksound();
     }
 
     @FXML
     protected void BackButtonOnAction(){
-        SoundEffect sound = new SoundEffect();
-        sound.playSound(clickSound);
+        SoundEffect.clicksound();
         Scene scene;
         scene = LoginController.LoginScene;
         Login.window.setScene(scene);
@@ -71,8 +68,7 @@ public class WastewaterCharacteristic {
     @FXML
     protected void EnterButtonOnAction() {
 
-        SoundEffect sound = new SoundEffect();
-        sound.playSound(clickSound);
+        SoundEffect.clicksound();
 
         Css=TCod.getText();
         TCod.setText(numTest.getDouble(Css));
@@ -83,8 +79,7 @@ public class WastewaterCharacteristic {
         SelectedStandard = Standard.getValue();
 
         if (Standard.getValue() == null) {
-            sound = new SoundEffect();
-            sound.playSound(clickSound);
+            SoundEffect.clicksound();
             validate = false;
             StandardAlert.setText("Please Select A Standard");
         }

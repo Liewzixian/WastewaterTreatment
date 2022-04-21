@@ -27,8 +27,7 @@ public class DisplayResult {
 
     @FXML
     protected void BackButtonOnAction(){
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        SoundEffect.clicksound();
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("WaterChar-view.fxml"));
         Scene scene = null;
         try {
@@ -128,8 +127,7 @@ public class DisplayResult {
             TableRow<Print> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    SoundEffect sound = new SoundEffect();
-                    sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+                    SoundEffect.clicksound();
                     rowData = row.getItem();
                     DedicatedWindow();
                 }

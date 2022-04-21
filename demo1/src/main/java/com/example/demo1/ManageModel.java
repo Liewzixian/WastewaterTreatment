@@ -151,8 +151,7 @@ public class ManageModel implements Initializable {
 
     @FXML
     void BackButtonOnAction() {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        SoundEffect.clicksound();
         Scene scene;
         scene = LoginController.LoginScene;
         Login.window.setScene(scene);
@@ -161,8 +160,7 @@ public class ManageModel implements Initializable {
 
     @FXML
     void ModifyButtonOnAction() throws Exception {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        SoundEffect.clicksound();
 
         ObservableList<Models> Md = TableView.getItems();
 
@@ -170,32 +168,24 @@ public class ManageModel implements Initializable {
         String[] words = Md.toString().split(", ");
 
         for (String word: words) {
-
             word = word.replace("[","").replace("]", "");
             StringTokenizer st = new StringTokenizer(word,",");
             st.nextToken();
             st.nextToken();
 
-            for(int i = 0; i < 3; i++){
-                String num = st.nextToken();
-
-                if(!numTest.isDouble(num))
+            while (st.hasMoreTokens()){
+                if(!numTest.isDouble(st.nextToken())) {
                     validate = false;
-
-                if(Double.parseDouble(num) < 0 || Double.parseDouble(num) > 1)
-                    validate = false;
+                    break;
+                }
             }
-
-            while (st.hasMoreTokens())
-                if(!numTest.isDouble(st.nextToken()))
-                    validate = false;
-
+            
             if(!validate)
                 break;
         }
 
         if(validate){
-            sound.playSound("src/main/resources/com/SoundEffect/short-success.wav");
+            SoundEffect.clicksound();
             BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile));
             for (String word: words) {
                 writer.write(word.replace("[","").replace("]", ""));
@@ -206,16 +196,15 @@ public class ManageModel implements Initializable {
             Alert.setText("Modified Successfully!");
         }
         else {
-            sound.playSound("src/main/resources/com/SoundEffect/error.wav");
+            SoundEffect.clicksound();
             Alert.setText("Modified Failed!");
         }
     }
 
     @FXML
     void deleteButtonOnAction() throws IOException {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
-        sound.playSound("src/main/resources/com/SoundEffect/short-success.wav");
+        SoundEffect.clicksound();
+        SoundEffect.success();
 
         Models Md = TableView.getSelectionModel().getSelectedItem();
 

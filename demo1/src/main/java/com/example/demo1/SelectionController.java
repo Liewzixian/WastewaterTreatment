@@ -68,8 +68,7 @@ public class SelectionController {
     @FXML
     protected void backButtonOnAction() {
 
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        SoundEffect.clicksound();
         Scene scene;
         scene = LoginController.LoginScene;
         Login.window.setScene(scene);
@@ -115,8 +114,7 @@ public class SelectionController {
 
     @FXML
     protected void selectAllButtonOnAction() {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        SoundEffect.clicksound();
 
         ObservableList<Selection> selection = UnselectedTable.getItems();
 
@@ -169,8 +167,7 @@ public class SelectionController {
             TableRow<Selection> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    SoundEffect sound = new SoundEffect();
-                    sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+                    SoundEffect.clicksound();
                     Selection selection = UnselectedTable.getSelectionModel().getSelectedItem();
                     Unselected.remove(selection);
 
@@ -200,8 +197,7 @@ public class SelectionController {
             TableRow<Selection> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    SoundEffect sound = new SoundEffect();
-                    sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+                    SoundEffect.clicksound();
                     Selection selection = SelectedTable.getSelectionModel().getSelectedItem();
                     Selected.remove(selection);
                     Unselected.add(selection);
@@ -217,8 +213,7 @@ public class SelectionController {
 
     @FXML
     protected void DeleteAllOnAction(){
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        SoundEffect.clicksound();
 
         ObservableList<Selection> selection = SelectedTable.getItems();
 

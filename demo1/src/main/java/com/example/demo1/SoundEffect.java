@@ -41,4 +41,22 @@ public class SoundEffect {
             e.printStackTrace();
         }
     }
+
+    public static void clicksound()
+    {
+        SoundEffect sound = new SoundEffect();
+        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+    }
+
+    public static void errorsound()
+    {
+        SoundEffect sound = new SoundEffect();
+        sound.playSound("src/main/resources/com/SoundEffect/error.wav");
+    }
+
+    public static void success()
+    {
+        SoundEffect sound = new SoundEffect();
+        sound.playSound("src/main/resources/com/SoundEffect/short-success.wav");
+    }
 }

@@ -26,12 +26,6 @@ public class SignUpController {
     private HashMap<String,String> user;
     private final NumTest numTest = new NumTest();
 
-    private final SoundEffect sound = new SoundEffect();
-
-    private final String soundFile = "src/main/resources/com/SoundEffect/clicksound.wav";
-    private final String error = "src/main/resources/com/SoundEffect/error.wav";
-    private final String success = "src/main/resources/com/SoundEffect/short-success.wav";
-
     @FXML
     private void initialize() throws FileNotFoundException {
 
@@ -56,7 +50,7 @@ public class SignUpController {
 
     @FXML
     protected void BackButtonOnAction() {
-        sound.playSound(soundFile);
+        SoundEffect.clicksound();
 
         FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("hello-view.fxml"));
         Scene scene = null;
@@ -70,7 +64,7 @@ public class SignUpController {
 
     @FXML
     protected void CreateButtonOnAction() throws IOException {
-        sound.playSound(soundFile);
+        SoundEffect.clicksound();
 
         String usernameText = username.getText();
         String passwordText = Password.getText();
@@ -84,11 +78,12 @@ public class SignUpController {
             user.put(usernameText,passwordText);
             Alert.setText("New User Registered. Welcome " + usernameText);
             saveUserdata();
-            sound.playSound(success);
+            SoundEffect.clicksound();
+            SoundEffect.success();
         }
         else {
             Alert.setText("Invalid username or password");
-            sound.playSound(error);
+            SoundEffect.errorsound();
         }
     }
 
