@@ -177,18 +177,18 @@ public class CombinationController {
         df.setRoundingMode(RoundingMode.CEILING);
         SelectPreference.setItems(Preference);
         //setting the data of the selected technology combination
-        setStage1(rowData.getTreatmentsA(),String.valueOf(df.format(COD[0])),String.valueOf(df.format(BOD[0])),String.valueOf(df.format(TSS[0])));
-        setStage2(rowData.getTreatmentsB(),String.valueOf(df.format(COD[1])),String.valueOf(df.format(BOD[1])),String.valueOf(df.format(TSS[1])));
-        setStage3(rowData.getTreatmentsC(),String.valueOf(df.format(COD[2])),String.valueOf(df.format(BOD[2])),String.valueOf(df.format(TSS[2])));
-        setStage4(rowData.getTreatmentsD(),String.valueOf(df.format(COD[3])),String.valueOf(df.format(BOD[3])),String.valueOf(df.format(TSS[3])));
-        setStage5(rowData.getTreatmentsE(),String.valueOf(df.format(COD[4])),String.valueOf(df.format(BOD[4])),String.valueOf(df.format(TSS[4])));
+        setStage1(rowData.getPreliminaryTreatments(),String.valueOf(df.format(COD[0])),String.valueOf(df.format(BOD[0])),String.valueOf(df.format(TSS[0])));
+        setStage2(rowData.getChemicalTreatments(),String.valueOf(df.format(COD[1])),String.valueOf(df.format(BOD[1])),String.valueOf(df.format(TSS[1])));
+        setStage3(rowData.getBiologicalTreatments(),String.valueOf(df.format(COD[2])),String.valueOf(df.format(BOD[2])),String.valueOf(df.format(TSS[2])));
+        setStage4(rowData.getTertiaryTreatments(),String.valueOf(df.format(COD[3])),String.valueOf(df.format(BOD[3])),String.valueOf(df.format(TSS[3])));
+        setStage5(rowData.getSludgeTreatments(),String.valueOf(df.format(COD[4])),String.valueOf(df.format(BOD[4])),String.valueOf(df.format(TSS[4])));
         setCurrentFinal(String.valueOf(df.format(COD[4])),String.valueOf(df.format(BOD[4])),String.valueOf(df.format(TSS[4])),String.valueOf(df.format(rowData.getCost())));
         //setting up best technology combination table
-        Preliminary.setCellValueFactory(new PropertyValueFactory<>("treatmentsA"));
-        Chemical.setCellValueFactory(new PropertyValueFactory<>("treatmentsB"));
-        Biological.setCellValueFactory(new PropertyValueFactory<>("treatmentsC"));
-        Tertiary.setCellValueFactory(new PropertyValueFactory<>("treatmentsD"));
-        Sludge.setCellValueFactory(new PropertyValueFactory<>("treatmentsE"));
+        Preliminary.setCellValueFactory(new PropertyValueFactory<>("PreliminaryTreatments"));
+        Chemical.setCellValueFactory(new PropertyValueFactory<>("ChemicalTreatments"));
+        Biological.setCellValueFactory(new PropertyValueFactory<>("BiologicalTreatments"));
+        Tertiary.setCellValueFactory(new PropertyValueFactory<>("TertiaryTreatments"));
+        Sludge.setCellValueFactory(new PropertyValueFactory<>("SludgeTreatments"));
         TSSTable.setCellValueFactory(new PropertyValueFactory<>("TSS"));
         CODTable.setCellValueFactory(new PropertyValueFactory<>("COD"));
         BODTable.setCellValueFactory(new PropertyValueFactory<>("BOD"));

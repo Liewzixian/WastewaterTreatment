@@ -224,7 +224,6 @@ public class ManageModel implements Initializable {
             writer.close();
             menu.sharedData.reloadData();
             Alert.setText("Modified Successfully!");
-            readFile();
         }
         else {
             SoundEffect.errorsound();
@@ -236,7 +235,7 @@ public class ManageModel implements Initializable {
      * It will delete the selected model
      */
     @FXML
-    void deleteButtonOnAction() throws Exception {
+    void deleteButtonOnAction() throws IOException {
         SoundEffect.clicksound();
         SoundEffect.success();
 
@@ -250,7 +249,6 @@ public class ManageModel implements Initializable {
         menu.sharedData.saveData();
         menu.sharedData.reloadData();
         Alert.setText("Deleted Successfully!");
-        readFile();
     }
     /**
      * This method takes the stage and set the stage to the central based on user's scene size

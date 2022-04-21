@@ -1,11 +1,18 @@
 package com.example.demo1.dataclasses;
 
+/**
+ * Public class Print is used to display the model data to the user
+ *
+ * @author Group 2A
+ * @version 1.0
+ * @since 21/04/2022
+ */
 public class Print {
-    private final String treatmentsA;
-    private final String treatmentsB;
-    private final String treatmentsC;
-    private final String treatmentsD;
-    private final String treatmentsE;
+    private final String PreliminaryTreatments;
+    private final String ChemicalTreatments;
+    private final String BiologicalTreatments;
+    private final String TertiaryTreatments;
+    private final String SludgeTreatments;
 
     private final double TSS;
     private final double COD;
@@ -17,70 +24,104 @@ public class Print {
     private final double[] fullTSS;
     private final double[] fullBOD;
     private final double[] fullCOD;
-
-    public Print(String a, String b, String c, String d, String e, double aa, double bb, double cc, double dd, double []cod, double []bod, double []tss, double energy, double areaOfFootprint){
-        treatmentsA=a;
-        treatmentsB=b;
-        treatmentsC=c;
-        treatmentsD=d;
-        treatmentsE=e;
-        TSS=aa;
-        COD=bb;
-        BOD=cc;
-        cost=dd;
+    /**
+    Constructor
+     */
+    public Print(String Preliminary, String Chemical, String Biological, String Tertiary, String Sludge, double TTss, double TCod, double TBod, double TCost, double []cod, double []bod, double []tss, double energy, double areaOfFootprint){
+        PreliminaryTreatments =Preliminary;
+        ChemicalTreatments =Chemical;
+        BiologicalTreatments =Biological;
+        TertiaryTreatments =Tertiary;
+        SludgeTreatments =Sludge;
+        TSS=TTss;
+        COD=TCod;
+        BOD=TBod;
+        cost=TCost;
         fullCOD=cod;
         fullBOD=bod;
         fullTSS=tss;
         this.energy=energy;
         this.areaOfFootprint=areaOfFootprint;
     }
-
-    public String getTreatmentsB() {
-        return treatmentsB;
+    /**
+     Getter of ChemicalTreatments
+     */
+    public String getChemicalTreatments() {
+        return ChemicalTreatments;
     }
-    public String getTreatmentsD() {
-        return treatmentsD;
+    /**
+     Getter of TertiaryTreatments
+     */
+    public String getTertiaryTreatments() {
+        return TertiaryTreatments;
     }
-    public String getTreatmentsE() {
-        return treatmentsE;
+    /**
+     Getter of SludgeTreatments
+     */
+    public String getSludgeTreatments() {
+        return SludgeTreatments;
     }
-
+    /**
+     Getter of TSS
+     */
     public double getTSS() {
         return TSS;
     }
-
+    /**
+     Getter of COD
+     */
     public double getCOD() {
         return COD;
     }
-
+    /**
+     Getter of BOD
+     */
     public double getBOD() {
         return BOD;
     }
-
+    /**
+     Getter of Cost
+     */
     public double getCost() {
         return cost;
     }
-    public String getTreatmentsC(){
-        return treatmentsC;
+    /**
+     Getter of BiologicalTreatments
+     */
+    public String getBiologicalTreatments(){
+        return BiologicalTreatments;
     }
-    public String getTreatmentsA(){
-        return treatmentsA;
+    /**
+     Getter of PreliminaryTreatments
+     */
+    public String getPreliminaryTreatments(){
+        return PreliminaryTreatments;
     }
-
+    /**
+     Getter of energy
+     */
     public double getEnergy(){
         return energy;
     }
-
+    /**
+     Getter of areaOfFootprint
+     */
     public double getAreaOfFootprint() {return areaOfFootprint;}
-
+    /**
+     Getter of FullBod
+     */
     public double[] getFullBOD() {
         return fullBOD;
     }
-
+    /**
+     Getter of FullCod
+     */
     public double[] getFullCOD() {
         return fullCOD;
     }
-
+    /**
+     Getter of FullTss
+     */
     public double[] getFullTSS() {
         return fullTSS;
     }

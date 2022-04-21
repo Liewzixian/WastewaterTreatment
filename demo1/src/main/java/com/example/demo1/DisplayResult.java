@@ -72,11 +72,11 @@ public class DisplayResult {
     @FXML
     private void initialize() {
         SelectPreference.setItems(Preference);
-        Preliminary.setCellValueFactory(new PropertyValueFactory<>("treatmentsA"));
-        Chemical.setCellValueFactory(new PropertyValueFactory<>("treatmentsB"));
-        Biological.setCellValueFactory(new PropertyValueFactory<>("treatmentsC"));
-        Tertiary.setCellValueFactory(new PropertyValueFactory<>("treatmentsD"));
-        Sludge.setCellValueFactory(new PropertyValueFactory<>("treatmentsE"));
+        Preliminary.setCellValueFactory(new PropertyValueFactory<>("PreliminaryTreatments"));
+        Chemical.setCellValueFactory(new PropertyValueFactory<>("ChemicalTreatments"));
+        Biological.setCellValueFactory(new PropertyValueFactory<>("BiologicalTreatments"));
+        Tertiary.setCellValueFactory(new PropertyValueFactory<>("TertiaryTreatments"));
+        Sludge.setCellValueFactory(new PropertyValueFactory<>("SludgeTreatments"));
         TSS.setCellValueFactory(new PropertyValueFactory<>("TSS"));
         COD.setCellValueFactory(new PropertyValueFactory<>("COD"));
         BOD.setCellValueFactory(new PropertyValueFactory<>("BOD"));
