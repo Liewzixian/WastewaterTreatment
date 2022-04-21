@@ -8,34 +8,48 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="557.0" prefWidth="1039.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.ManageModel">
+<AnchorPane prefHeight="558.0" prefWidth="1205.0" style="-fx-background-color: #434343;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.ManageModel">
     <children>
-      <ImageView fitHeight="566.0" fitWidth="888.0" layoutX="151.0" pickOnBounds="true" preserveRatio="true">
+        <TextField fx:id="SearchBar" layoutX="199.0" layoutY="35.0" prefHeight="26.0" prefWidth="284.0" />
+        <Label layoutX="494.0" layoutY="39.0" prefHeight="18.0" prefWidth="156.0" text="Search by Model Name " textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font></Label>
+        <Button fx:id="ModifyButton" layoutX="1109.0" layoutY="512.0" mnemonicParsing="false" onAction="#ModifyButtonOnAction" style="-fx-background-color: #ffbd59;" text="Modify" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font></Button>
+        <Button fx:id="BackButton" layoutX="199.0" layoutY="512.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #ffbd59;" text="Back" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font></Button>
+        <Button fx:id="DeleteButton" layoutX="1029.0" layoutY="512.0" mnemonicParsing="false" onAction="#deleteButtonOnAction" style="-fx-background-color: #ffbd59;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font></Button>
+      <ImageView fitHeight="571.0" fitWidth="315.0" layoutX="-138.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../wastewater/BackgroundManage.png" />
+            <Image url="@../../wastewater/manage.png" />
          </image>
       </ImageView>
-        <TableView fx:id="TableView" layoutX="171.0" layoutY="93.0" prefHeight="397.0" prefWidth="822.0">
+        <TableView fx:id="TableView" layoutX="197.0" layoutY="93.0" prefHeight="398.0" prefWidth="972.0">
             <columns>
-                <TableColumn fx:id="StageColumn" prefWidth="40.0" style="-fx-background-color: #00D4FF;" text="Stage" />
-                <TableColumn fx:id="NameColumn" prefWidth="88.0" style="-fx-background-color: #00D4FF;" text="Model Name" />
-                <TableColumn fx:id="codColumn" prefWidth="144.0" style="-fx-background-color: #00D4FF;" text="COD Cleaning Efficiency " />
-                <TableColumn fx:id="bodColumn" prefWidth="144.79989624023438" style="-fx-background-color: #00D4FF;" text="BOD Cleaning Efficiency " />
-                <TableColumn fx:id="tssColumn" minWidth="0.0" prefWidth="141.60009765625" style="-fx-background-color: #00D4FF;" text="TSS Cleaning Efficiency " />
-                <TableColumn fx:id="areaColumn" minWidth="0.0" prefWidth="115.9998779296875" style="-fx-background-color: #00D4FF;" text="Area of Footprint" />
-                <TableColumn fx:id="energyColumn" minWidth="0.0" prefWidth="147.199951171875" style="-fx-background-color: #00D4FF;" text="Energy per Meter Cube " />
+                <TableColumn fx:id="StageColumn" editable="false" prefWidth="40.0" style="-fx-background-color: #ffbd59;" text="Stage" />
+                <TableColumn fx:id="NameColumn" prefWidth="88.0" style="-fx-background-color: #ffbd59;" text="Model Name" />
+                <TableColumn fx:id="codColumn" prefWidth="144.0" style="-fx-background-color: #ffbd59;" text="COD Cleaning Efficiency " />
+                <TableColumn fx:id="bodColumn" prefWidth="144.79989624023438" style="-fx-background-color: #ffbd59;" text="BOD Cleaning Efficiency " />
+                <TableColumn fx:id="tssColumn" minWidth="0.0" prefWidth="141.60009765625" style="-fx-background-color: #ffbd59;" text="TSS Cleaning Efficiency " />
+                <TableColumn fx:id="areaColumn" minWidth="0.0" prefWidth="115.9998779296875" style="-fx-background-color: #ffbd59;" text="Area of Footprint" />
+                <TableColumn fx:id="energyColumn" minWidth="0.0" prefWidth="147.199951171875" style="-fx-background-color: #ffbd59;" text="Energy per Meter Cube " />
+            <TableColumn fx:id="CostColumn" minWidth="0.0" prefWidth="147.199951171875" style="-fx-background-color: #ffbd59;" text="Cost" />
             </columns>
         </TableView>
-        <TextField fx:id="SearchBar" layoutX="173.0" layoutY="35.0" prefHeight="26.0" prefWidth="284.0" />
-        <Label layoutX="468.0" layoutY="39.0" prefHeight="18.0" prefWidth="131.0" text="Search by Model Name " textFill="WHITE" />
-        <Button fx:id="ModifyButton" layoutX="939.0" layoutY="526.0" mnemonicParsing="false" onAction="#ModifyButtonOnAction" style="-fx-background-color: #00D4FF;" text="Modify" />
-        <Button fx:id="BackButton" layoutX="173.0" layoutY="526.0" mnemonicParsing="false" onAction="#BackButtonOnAction" style="-fx-background-color: #00D4FF;" text="Back" />
-        <Button fx:id="DeleteButton" layoutX="863.0" layoutY="526.0" mnemonicParsing="false" onAction="#deleteButtonOnAction" style="-fx-background-color: #00D4FF;" text="Delete" />
-      <ImageView fitHeight="566.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../wastewater/ManageModel.png" />
-         </image>
-      </ImageView>
+      <Label fx:id="Alert" layoutX="742.0" layoutY="515.0" prefHeight="18.0" prefWidth="278.0" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

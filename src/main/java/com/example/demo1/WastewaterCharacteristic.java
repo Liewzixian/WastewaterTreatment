@@ -1,5 +1,6 @@
 package com.example.demo1;
 
+import com.example.demo1.dataclasses.Initial;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,83 +13,84 @@ import javafx.scene.control.TextField;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-
+import java.util.Objects;
 
 import static com.example.demo1.LoginController.menu;
 
-
 public class WastewaterCharacteristic {
-
+    SharedData sharedData = menu.sharedData;
     ObservableList <String> StandardsList = FXCollections.observableArrayList("Standard A","Standard B");
-    Input input = new Input();
-    String Tss,Bss,Css,SelectedStandard;
+    ObservableList<String> StateList=FXCollections.observableArrayList(sharedData.getStates());
+    ObservableList<String> AreaList=FXCollections.observableArrayList();
+    static Stage stage = new Stage();
 
-    int [] standard ={1,2};
+    Initial initial;
+    String selectedState;
+
+    NumTest numTest = new NumTest();
+    String Tss,Bss,Css,SelectedStandard;
 
     @FXML
     private TextField TCod;
-
     @FXML
     private TextField TBod;
-
     @FXML
     private TextField TTss;
-
     @FXML
-    private ComboBox Standard;
-
+    private ComboBox<String> Standard;
+    @FXML
+    private ComboBox<String> State;
+    @FXML
+    private ComboBox<String> Area;
     @FXML
     private Label StandardAlert;
+
+    private boolean validate;
 
     @FXML
     private void initialize() {
         Standard.setItems(StandardsList);
+        State.setItems(StateList);
+        validate = false;
+        SoundEffect.clicksound();
     }
 
     @FXML
     protected void BackButtonOnAction(){
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
-        FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-View.fxml"));
-        Scene scene = null;
-
-        try {
-            scene = new Scene(fxmlLoader.load(), 585, 400);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        SoundEffect.clicksound();
+        Scene scene;
+        scene = LoginController.LoginScene;
         Login.window.setScene(scene);
         SetSceneOnCentral(Login.window);
     }
 
     @FXML
-    protected void EnterButtonOnAction() throws FileNotFoundException {
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+    protected void EnterButtonOnAction() {
+
+        SoundEffect.clicksound();
+
         Css=TCod.getText();
-        TCod.setText(input.getDouble(Css));
+        TCod.setText(numTest.getDouble(Css));
         Bss=TBod.getText();
-        TBod.setText(input.getDouble(Bss));
+        TBod.setText(numTest.getDouble(Bss));
         Tss=TTss.getText();
-        TTss.setText(input.getDouble(Tss));
-        SelectedStandard=(String)Standard.getValue();
+        TTss.setText(numTest.getDouble(Tss));
+        SelectedStandard = Standard.getValue();
 
         if (Standard.getValue() == null) {
-            sound = new SoundEffect();
-            sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
-            Input.validate = 1;
+            SoundEffect.clicksound();
+            validate = false;
             StandardAlert.setText("Please Select A Standard");
         }
+        else
+            validate = true;
 
-        if(Input.validate == 0){
-
-            if(Standard.getValue()=="Standard A")
-                menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),standard[0]);
+        if(validate && numTest.isDouble(Css) && numTest.isDouble(Bss) && numTest.isDouble(Tss)){
+            if(Objects.equals(Standard.getValue(), "Standard A"))
+                menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),0);
             else
-                menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),standard[1]);
+                menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),1);
 
             FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("DisplayResultView.fxml"));
             Scene scene = null;
@@ -102,9 +104,6 @@ public class WastewaterCharacteristic {
             Login.window.setScene(scene);
             SetSceneOnCentral(Login.window);
         }
-        else{
-            Input.validate =0;
-        }
     }
 
     @FXML
@@ -112,5 +111,51 @@ public class WastewaterCharacteristic {
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+    }
+
+    @FXML
+    protected void StateOnAction(){
+        selectedState=State.getValue();
+        AreaList=FXCollections.observableArrayList(sharedData.loadStateArea(selectedState));
+        Area.setItems(AreaList);
+    }
+
+    @FXML
+    protected void AreaOnAction(){
+        if(Area.getValue()!=null){
+            initial = sharedData.loadAreaData(selectedState,Area.getValue());
+            TCod.setText(String.valueOf(initial.getCOD()));
+            TBod.setText(String.valueOf(initial.getBOD()));
+            TTss.setText(String.valueOf(initial.getTSS()));
+        }
+    }
+
+    @FXML
+    protected void ClickInfoOnAction(){
+        stage.setResizable(false);
+        FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("StandardInfo-view.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 380, 180);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setScene(scene);
+        stage.show();
+        SetSceneOnCentral(stage);
+    }
+    @FXML
+    protected void CODTextFieldClickOnAction(){
+        TCod.setText("");
+    }
+
+    @FXML
+    protected void BODTextFieldClickOnAction(){
+        TBod.setText("");
+    }
+
+    @FXML
+    protected void TSSTextFieldClickOnAction(){
+        TTss.setText("");
     }
 }

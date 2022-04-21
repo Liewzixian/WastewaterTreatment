@@ -12,24 +12,21 @@ public class WeightedGraph {
     private final LinkedList<Integer> path;
     private final int[] distances;
     private final int[] parent;
-    private final int vertices;
-    public static final int MAX_VALUE = 9999;
+    public static final int MAX_VALUE = 99999;
 
     @SuppressWarnings("unchecked")
     public WeightedGraph(int vertices){
-        this.vertices = vertices;
         this.priorityQueue = new PriorityQueue<>(vertices, new Edge());
         this.adjacencyList = new LinkedList[vertices];
         this.distances = new int[vertices];
         this.parent = new int[vertices];
         this.path = new LinkedList<>();
-        //initialize adjacency lists for all the vertices
         for (int i = 0; i <vertices ; i++) {
             adjacencyList[i] = new LinkedList<>();
         }
     }
 
-    public void uniformCostSearch(int source, int destination){
+    public void uniformCostSearch(int source){
         Edge currentNode;
 
         for (int i = 0; i < adjacencyList.length; i++) {
@@ -65,30 +62,19 @@ public class WeightedGraph {
             path.add(parent[vertex]);
             vertex = parent[vertex];
         }
-        System.out.println("The Path between " + source + " and " + destination + " is ");
+
         Iterator<Integer> iterator = path.descendingIterator();
+
         int i = 0;
-        while (iterator.hasNext()) {
-            jobs[i] = iterator.next();
-            System.out.print(jobs[i] + "\t");
-            i++;
-        }
+        while (iterator.hasNext())
+            jobs[i++] = iterator.next();
+
         return jobs;
     }
 
     public void addEdge(int source, int destination, int weight) {
         Edge edge = new Edge(source, destination, weight);
         adjacencyList[source].addLast(edge); //for directed graph
-    }
-
-    public void printGraph(){
-        for (int i = 0; i <vertices ; i++) {
-            LinkedList<Edge> list = adjacencyList[i];
-            for (Edge edge : list) {
-                System.out.println("vertex-" + i + " is connected to " +
-                        edge.destination + " with weight " + edge.weight);
-            }
-        }
     }
 
     static class Edge implements Comparator<Edge> {

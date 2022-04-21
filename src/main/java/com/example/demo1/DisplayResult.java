@@ -1,5 +1,6 @@
 package com.example.demo1;
 
+import com.example.demo1.dataclasses.Print;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,14 +22,12 @@ import static com.example.demo1.LoginController.menu;
 
 public class DisplayResult {
     static Stage stage = new Stage();
-    ObservableList<String> Preference = FXCollections.observableArrayList("Best Overall","Cost Effectiveness ");
-
+    ObservableList<String> Preference = FXCollections.observableArrayList("Show All Combination","Most Cleaning Efficient","Most Cost Efficient","Most Energy Efficient","Least Area");
     static Print rowData;
 
     @FXML
     protected void BackButtonOnAction(){
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        SoundEffect.clicksound();
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("WaterChar-view.fxml"));
         Scene scene = null;
         try {
@@ -73,6 +72,12 @@ public class DisplayResult {
     private TableColumn<Print,Double> COST;
 
     @FXML
+    private TableColumn<Print,Double> Energy;
+
+    @FXML
+    private TableColumn<Print,Double> Area;
+
+    @FXML
     private void initialize() {
         SelectPreference.setItems(Preference);
         Preliminary.setCellValueFactory(new PropertyValueFactory<>("treatmentsA"));
@@ -84,6 +89,8 @@ public class DisplayResult {
         COD.setCellValueFactory(new PropertyValueFactory<>("COD"));
         BOD.setCellValueFactory(new PropertyValueFactory<>("BOD"));
         COST.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        Energy.setCellValueFactory(new PropertyValueFactory<>("energy"));
+        Area.setCellValueFactory(new PropertyValueFactory<>("areaOfFootprint"));
         ResultView.setItems(menu.getResultsTable());
         autoResizeColumns(ResultView)  ;
         ClickListener();
@@ -91,13 +98,27 @@ public class DisplayResult {
     }
 
     @FXML
-    private void sortByCost(){
-
-    }
-
-    @FXML
     private void ComboBoxOnActionListener(){
-
+       if(SelectPreference.getValue().equals("Most Cleaning Efficient")){
+           menu.UniformSearch(1);
+           ResultView.setItems(menu.getBestTable());
+           ResultView.refresh();
+       }else if(SelectPreference.getValue().equals("Most Cost Efficient")){
+           menu.UniformSearch(2);
+           ResultView.setItems(menu.getBestTable());
+           ResultView.refresh();
+       }else if(SelectPreference.getValue().equals("Show All Combination")){
+           ResultView.setItems(menu.getResultsTable());
+           ResultView.refresh();
+       }else if(SelectPreference.getValue().equals("Most Energy Efficient")){
+           menu.UniformSearch(3);
+           ResultView.setItems(menu.getBestTable());
+           ResultView.refresh();
+       }else if(SelectPreference.getValue().equals("Least Area")){
+           menu.UniformSearch(4);
+           ResultView.setItems(menu.getBestTable());
+           ResultView.refresh();
+       }
     }
 
     @FXML
@@ -106,15 +127,13 @@ public class DisplayResult {
             TableRow<Print> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    SoundEffect sound = new SoundEffect();
-                    sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+                    SoundEffect.clicksound();
                     rowData = row.getItem();
                     DedicatedWindow();
                 }
             });
             return row ;
         });
-
     }
 
     @FXML
@@ -122,7 +141,7 @@ public class DisplayResult {
         FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("CombinationProcess-View.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 825, 600);
+            scene = new Scene(fxmlLoader.load(), 850, 625);
         } catch (IOException e) {
             e.printStackTrace();
         }

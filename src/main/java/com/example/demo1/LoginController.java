@@ -1,6 +1,5 @@
 package com.example.demo1;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -12,18 +11,18 @@ import javafx.scene.control.TextField;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
 
 public class LoginController {
     static Menu menu;
 
-    @FXML
-    private Button loginButton;
+    static Scene LoginScene = null;
 
     @FXML
     private Button cancelButton;
@@ -37,84 +36,74 @@ public class LoginController {
     @FXML
     private TextField UsernameTextField;
 
+    private HashMap<String,String> user;
+
     @FXML
-    protected void loginButtonOnAction(ActionEvent event) throws FileNotFoundException {
+    private void initialize() throws FileNotFoundException {
+
+        user = new HashMap<>();
+        String[] hold = new String[2]; //make array of strings with 5 elements
+
+        File file = new File("src/main/resources/com/Treatment/users.txt"); //load location
+        Scanner sc = new Scanner(file);
+
+        while(sc.hasNextLine()){ //tokenize string using , and stop when list is empty
+            StringTokenizer st = new StringTokenizer(sc.nextLine(),",");
+
+            while (st.hasMoreTokens()) { //temporarily save info of treatment in each loop
+
+                for (int count = 0; count < 2; count++)
+                    hold[count] = st.nextToken();
+                user.put(hold[0],hold[1]);
+            }
+        }
+        sc.close();
+    }
+
+    @FXML
+    protected void loginButtonOnAction() throws FileNotFoundException {
         // if username and password is filled up then go to validateLogin()
-        if(!UsernameTextField.getText().isBlank() && !enterPasswordField.getText().isBlank()){
+        SoundEffect.clicksound();
+        if(validateLogin()){
             //validateLogin();
-            SoundEffect sound = new SoundEffect();
-            sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+            SoundEffect.success();
             LoginMessageLabel.setText("Successfully login!");
             nextScene(); // go to next scene when login successfully
             menu = new Menu("src/main/resources/com/Treatment/output.txt");
             menu.load();
 
-        }else{
-            SoundEffect sound = new SoundEffect();
-            sound.playSound("src/main/resources/com/SoundEffect/error.wav");
+        }
+        else{
+            SoundEffect.errorsound();
             // if username and password is empty then msg will display
             LoginMessageLabel.setText("Please enter username and password");
         }
     }
 
     @FXML
-    protected void cancelButtonOnAction(ActionEvent event){
-        SoundEffect sound = new SoundEffect();
-        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+    protected void cancelButtonOnAction(){
+        SoundEffect.clicksound();
         //when cancel button is click then window will be close
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
-    @FXML
-    protected void validateLogin() {
-        // connecting to database
-        ConnectionDB connectNow = new ConnectionDB();
-        Connection connectDB = connectNow.main();
+    protected boolean validateLogin(){
+        String username = UsernameTextField.getText();
+        String password = enterPasswordField.getText();
 
-        // making statement to check if there is existing data or not
-        String verifyLogin = "SELECT count(1) FROM login WHERE username = '" + UsernameTextField.getText() + "' AND password = '" + enterPasswordField.getText() + "'";
-
-        try {
-            //create statement that is connected to database
-            Statement statement = connectDB.createStatement();
-            ResultSet queryResult = statement.executeQuery(verifyLogin);
-
-            while (queryResult.next()) {
-                // if result is 1 means data exist in database
-                if (queryResult.getInt(1) == 1) {
-                    SoundEffect sound = new SoundEffect();
-                    sound.playSound("src/main/resources/com/SoundEffect/success-chime.wav");
-                    LoginMessageLabel.setText("Successfully login!");
-                    nextScene(); // go to next scene when login successfully
-                    menu = new Menu("src/main/resources/com/Treatment/output.txt");
-                    menu.load();
-                } else {
-                    SoundEffect sound = new SoundEffect();
-                    sound.playSound("src/main/resources/com/SoundEffect/error.wav");
-                    LoginMessageLabel.setText("Invalid login!");
-
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.getCause();
-
-        }
-
+        return user.containsKey(username) && user.get(username).equals(password);
     }
 
-    // go to next scene when user login successfully AND login button is clicked
     public void nextScene(){
         FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("Menu-View.fxml"));
-        Scene scene = null;
         try {
-            scene = new Scene(loader.load(), 600, 400);
+            LoginScene = new Scene(loader.load(), 600, 400);
         } catch (IOException e) {
             e.printStackTrace();
         }
         Login.splashStage.hide();
-        Login.window.setScene(scene);
+        Login.window.setScene(LoginScene);
         Login.window.show();
         SetSceneOnCentral(Login.window);
     }
@@ -124,5 +113,19 @@ public class LoginController {
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+    }
+
+    @FXML
+    protected void SignUpOnClicked(){
+        SoundEffect.clicksound();
+        FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("SignUp-View.fxml"));
+        Scene Scene = null;
+        try {
+            Scene = new Scene(loader.load(), 545, 365);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Login.splashStage.setScene(Scene);
+        SetSceneOnCentral(Login.splashStage);
     }
 }

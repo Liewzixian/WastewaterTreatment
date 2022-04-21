@@ -2,12 +2,10 @@ package com.example.demo1;
 
 import javafx.fxml.FXML;
 
-import java.io.FileNotFoundException;
-
 public class JDialogBoxController{
     @FXML
-    protected void okButtonOnAction() throws FileNotFoundException {
-       SelectionController close = new SelectionController();
+    protected void okButtonOnAction() {
+       WastewaterCharacteristic close = new WastewaterCharacteristic();
        close.stage.close();
     }
 }

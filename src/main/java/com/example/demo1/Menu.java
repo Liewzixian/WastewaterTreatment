@@ -1,6 +1,6 @@
 package com.example.demo1;
 
-
+import com.example.demo1.dataclasses.*;
 import javafx.collections.ObservableList;
 
 import java.io.FileNotFoundException;
@@ -10,63 +10,30 @@ import java.util.LinkedHashMap;
 
 public class Menu {
 
-    TechControl techControl;
     ResultControl resultControl;
-
+    SharedData sharedData;
     IO io;
-    boolean changed;
-
-    ArrayList<Result> results;
-    LinkedHashMap<String,LinkedHashMap<String,Location>> locations;
     AdjacencyList adjacencyList;
 
-    static LinkedHashMap<String,LinkedHashMap<String,Tech>> fullList;
 
-    public Menu(String fileName) {
-        fullList = new LinkedHashMap<>();
-        this.locations = new LinkedHashMap<>();
-        this.results = new ArrayList<>();
-        this.adjacencyList = new AdjacencyList();
-
-        io = new IO(fileName,locations);
-        techControl = new TechControl();
-        changed = false;
+    public Menu(String fileName) throws FileNotFoundException {
+        adjacencyList = new AdjacencyList();
+        io = new IO(fileName);
+        sharedData = new SharedData(io);
     }
 
     public void load() throws FileNotFoundException {
-        io.load();
-        System.out.println("Treatment data loaded to linked list.");
+        io.loadData();
     }
 
     public void add(String type, Tech newTech){
-        changed = techControl.addEntry(type,newTech);
-    }
-
-    public void delete(String type, String name){
-        changed = techControl.deleteEntry(type,name);
-    }
-
-    public void change(String type, String code, int choice, String newEntry){
-        changed = techControl.changeEntry(type,code,choice,newEntry);
-    }
-
-    public void showAllTreatments(){
-        techControl.showAllTreatments();
-    }
-
-    public boolean getCode(String choice){
-        return resultControl.getCode(choice);
-    }
-
-    public void getSpecificResult(Initial initial){
-        resultControl.getSpecificResult(initial);
+        sharedData.getOriginalList().get(type).put(newTech.getName(),newTech);
     }
 
     public void showAllResults(Initial initial, int standard){
-        resultControl = new ResultControl(results);
+        resultControl = new ResultControl(sharedData);
         resultControl.calculateResults(initial);
         resultControl.printResults(standard);
-        changed = false;
     }
 
     public ObservableList<Print> getResultsTable() {
@@ -76,20 +43,12 @@ public class Menu {
     public  void UniformSearch(int i){resultControl.UniFormSearch(i);}
 
     public LinkedHashMap<String,Tech> uniformCost(int choice){
-        return adjacencyList.UniformCostSearch(choice);
+        return adjacencyList.UniformCostSearch(choice,sharedData);
     }
 
     public void save() throws IOException {
-        io.save();
+        io.saveData(sharedData.getOriginalList());
         System.out.println("Treatment data saved to text file.");
-    }
-
-    public void clear(){
-        techControl.Clear();
-    }
-
-    public ObservableList<Print> getSelectionTable() {
-        return techControl.getSelectionTable();
     }
     public ArrayList<Result> getBestResults() {return resultControl.getBestResults();}
 }
