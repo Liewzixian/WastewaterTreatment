@@ -168,18 +168,26 @@ public class ManageModel implements Initializable {
         String[] words = Md.toString().split(", ");
 
         for (String word: words) {
+
             word = word.replace("[","").replace("]", "");
             StringTokenizer st = new StringTokenizer(word,",");
             st.nextToken();
             st.nextToken();
 
-            while (st.hasMoreTokens()){
-                if(!numTest.isDouble(st.nextToken())) {
+            for(int i = 0; i < 3; i++){
+                String num = st.nextToken();
+
+                if(!numTest.isDouble(num))
                     validate = false;
-                    break;
-                }
+
+                if(Double.parseDouble(num) < 0 || Double.parseDouble(num) > 1)
+                    validate = false;
             }
-            
+
+            while (st.hasMoreTokens())
+                if(!numTest.isDouble(st.nextToken()))
+                    validate = false;
+
             if(!validate)
                 break;
         }
