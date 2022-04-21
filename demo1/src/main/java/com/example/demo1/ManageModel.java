@@ -183,24 +183,19 @@ public class ManageModel implements Initializable {
         SoundEffect sound = new SoundEffect();
         sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
         sound.playSound("src/main/resources/com/SoundEffect/short-success.wav");
-        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
         Models Md = TableView.getSelectionModel().getSelectedItem();
-        String currentLine;
 
-        while ((currentLine = reader.readLine()) != null)
-            if(!currentLine.equals(Md.toString()))
-                writer.write(currentLine + System.getProperty("line.separator"));
-
-        writer.close();
-        reader.close();
-
-        inputFile.delete();
-        tempFile.renameTo(inputFile);
         TableView.getItems().remove(Md);
+        StringTokenizer st = new StringTokenizer(Md.toString(),",");
+
+        menu.sharedData.originalList.get(st.nextToken()).remove(st.nextToken());
+
+        menu.save();
+        menu.sharedData.reloadData();
         Alert.setText("Deleted Successfully!");
     }
+	
     @FXML
     protected void SetSceneOnCentral(Stage stage){
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
