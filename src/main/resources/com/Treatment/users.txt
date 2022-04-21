@@ -1,7 +1,0 @@
-aa,aaaaa
-bb,bbbbbb
-a,a
-Invalid input.,Invalid input.
-rrr,rrrrr
-karyan,lol
-aaaa,aaaaaa
