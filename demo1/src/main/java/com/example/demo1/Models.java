@@ -3,7 +3,6 @@ package com.example.demo1;
 import javafx.beans.property.*;
 
 public class Models {
- //  IntegerProperty stage = new SimpleIntegerProperty();
     StringProperty stage = new SimpleStringProperty();
     StringProperty name = new SimpleStringProperty();
     StringProperty COD = new SimpleStringProperty();
@@ -25,7 +24,6 @@ public class Models {
                 "," + getCost()+
                 "";
     }
-// DoubleProperty COD,BOD,TSS,area,energy = new SimpleDoubleProperty();
 
     public final StringProperty stageProperty() {
         return this.stage;

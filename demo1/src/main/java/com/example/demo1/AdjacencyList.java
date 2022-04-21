@@ -71,7 +71,7 @@ public class AdjacencyList { //Adjacency list for uniform cost search
             return 300 - (int) (tech.getTSS() + tech.getCOD() + tech.getBOD()) * 100;
         }
         else if(choice == 2){
-            return (int) (tech.getCost()*100);
+            return (int) (tech.getCost());
         }else if(choice == 3){
             return (int) (tech.getEnergy()*100);
         }else if(choice == 4){

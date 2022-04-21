@@ -18,7 +18,7 @@ import static com.example.demo1.LoginController.menu;
 public class CombinationController {
     ObservableList<String> Preference = FXCollections.observableArrayList("Most Cleaning Efficient","Most Cost Efficient","Most Energy Efficient","Least Area");
     DecimalFormat df = new DecimalFormat("#.####");
-    DecimalFormat af = new DecimalFormat("#.#");
+    DecimalFormat af = new DecimalFormat("#.");
     Print rowData=DisplayResult.rowData;
     ArrayList<Result>BestResultList;
     double[] COD = rowData.getFullCOD();
@@ -286,9 +286,6 @@ public class CombinationController {
     }
     public String calculation(double current,double best){
         double temp=Double.parseDouble(af.format (((current-best)/current)*100));
-        if(temp<=-0.00){
-            return String.valueOf(-temp);
-        }else
         return String.valueOf(temp);
     }
 

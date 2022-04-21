@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 public class JDialogBoxController{
     @FXML
     protected void okButtonOnAction() {
-       SelectionController close = new SelectionController();
+       WastewaterCharacteristic close = new WastewaterCharacteristic();
        close.stage.close();
     }
 }

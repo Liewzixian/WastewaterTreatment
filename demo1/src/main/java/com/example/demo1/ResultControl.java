@@ -79,7 +79,7 @@ public class ResultControl {
         this.standard=standard;
         ResultsTable.clear();
         for(Result print : sharedData.getResults()) {
-            if (print.getFinalTSS() <= getStandardNum(standard,0) && print.getFinalCOD() <= getStandardNum(standard,1) && print.getFinalBOD() <= getStandardNum(standard,2))
+            if (print.getFinalCOD() <= getStandardNum(standard,0) && print.getFinalBOD() <= getStandardNum(standard,1) && print.getFinalTSS() <= getStandardNum(standard,2))
                 ResultsTable.add(new Print(print.getTreatments()[0], print.getTreatments()[1], print.getTreatments()[2], print.getTreatments()[3], print.getTreatments()[4], print.getFinalTSS(), print.getFinalCOD(), print.getFinalBOD(), print.getFinalCost(), print.getCOD(), print.getBOD(), print.getTSS(),print.getFinalEnergy(),print.getFinalArea()));
         }
     }

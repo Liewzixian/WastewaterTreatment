@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -14,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -32,10 +32,6 @@ public class ManageModel implements Initializable {
     private final ObservableList<Models> detailss = FXCollections.observableArrayList();
     File inputFile = new File("src/main/resources/com/Treatment/output.txt");
     File tempFile = new File("src/main/resources/com/Treatment/output1.txt");
-
-    boolean deleteValidation;
-
-    boolean renameValidation;
 
     @FXML
     private TableView<Models> TableView;
@@ -124,8 +120,10 @@ public class ManageModel implements Initializable {
 
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
+                } else {
+                    String Keyword = newValue.toLowerCase();
+                    return models.toString().toLowerCase().contains(Keyword);
                 }
-                return models.toString().contains(newValue);
             }));
 
             SortedList<Models> sortedData = new SortedList<>(filteredData);
@@ -145,6 +143,7 @@ public class ManageModel implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        autoResizeColumns(TableView);
 
     }
 
@@ -152,13 +151,8 @@ public class ManageModel implements Initializable {
     void BackButtonOnAction() {
         SoundEffect sound = new SoundEffect();
         sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
-        FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-view.fxml"));
-        Scene scene = null;
-        try {
-            scene = new Scene(fxmlLoader.load(), 585, 400);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Scene scene;
+        scene = LoginController.LoginScene;
         Login.window.setScene(scene);
         SetSceneOnCentral(Login.window);
     }
@@ -206,5 +200,29 @@ public class ManageModel implements Initializable {
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+    }
+
+    public void autoResizeColumns( TableView<Models> table )
+    {
+        //Set the right policy
+        table.setColumnResizePolicy( TableView.UNCONSTRAINED_RESIZE_POLICY);
+        table.getColumns().forEach( (column) ->
+        {
+            Text t = new Text( column.getText() );
+            double max = t.getLayoutBounds().getWidth();
+            for ( int i = 0; i < table.getItems().size(); i++ )
+            {
+                if ( column.getCellData( i ) != null )
+                {
+                    t = new Text( column.getCellData( i ).toString() );
+                    double CalWidth = t.getLayoutBounds().getWidth();
+                    if ( CalWidth > max )
+                    {
+                        max = CalWidth;
+                    }
+                }
+            }
+            column.setPrefWidth( max + 10.0d );
+        } );
     }
 }

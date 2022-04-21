@@ -15,14 +15,11 @@ public class Menu {
     IO io;
     AdjacencyList adjacencyList;
 
-    SoundEffect soundEffect;
 
     public Menu(String fileName) throws FileNotFoundException {
         adjacencyList = new AdjacencyList();
         io = new IO(fileName);
         sharedData = new SharedData(io);
-        soundEffect = new SoundEffect();
-        soundEffect.playBGM("src/main/resources/com/SoundEffect/BGM.wav");
     }
 
     public void load() throws FileNotFoundException {

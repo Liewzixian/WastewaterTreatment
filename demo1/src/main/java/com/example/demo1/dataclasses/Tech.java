@@ -62,8 +62,6 @@ public class Tech { //class for linked list to hold all information on all treat
         this.energy = energy;
     } //setter for energy
 
-    public void setType(String type) { this.type = type; } //setter for treatment stage
-
     public void setName(String name) {
         this.name = name;
     } //setter for treatment tech name

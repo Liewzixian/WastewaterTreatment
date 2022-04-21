@@ -22,6 +22,8 @@ import java.util.StringTokenizer;
 public class LoginController {
     static Menu menu;
 
+    static Scene LoginScene = null;
+
     @FXML
     private Button cancelButton;
 
@@ -97,14 +99,13 @@ public class LoginController {
 
     public void nextScene(){
         FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("Menu-View.fxml"));
-        Scene scene = null;
         try {
-            scene = new Scene(loader.load(), 600, 400);
+            LoginScene = new Scene(loader.load(), 600, 400);
         } catch (IOException e) {
             e.printStackTrace();
         }
         Login.splashStage.hide();
-        Login.window.setScene(scene);
+        Login.window.setScene(LoginScene);
         Login.window.show();
         SetSceneOnCentral(Login.window);
     }
@@ -119,13 +120,13 @@ public class LoginController {
     @FXML
     protected void SignUpOnClicked(){
         FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("SignUp-View.fxml"));
-        Scene scene = null;
+        Scene Scene = null;
         try {
-            scene = new Scene(loader.load(), 545, 365);
+            Scene = new Scene(loader.load(), 545, 365);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Login.splashStage.setScene(scene);
+        Login.splashStage.setScene(Scene);
         SetSceneOnCentral(Login.splashStage);
     }
 }

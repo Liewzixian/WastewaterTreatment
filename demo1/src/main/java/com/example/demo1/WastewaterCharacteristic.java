@@ -14,7 +14,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Objects;
 
 import static com.example.demo1.LoginController.menu;
@@ -24,11 +23,11 @@ public class WastewaterCharacteristic {
     ObservableList <String> StandardsList = FXCollections.observableArrayList("Standard A","Standard B");
     ObservableList<String> StateList=FXCollections.observableArrayList(sharedData.getStates());
     ObservableList<String> AreaList=FXCollections.observableArrayList();
+    static Stage stage = new Stage();
 
     Initial initial;
     String selectedState;
 
-    ArrayList<String> AreaArrayList;
     NumTest numTest = new NumTest();
     String Tss,Bss,Css,SelectedStandard;
 
@@ -63,15 +62,8 @@ public class WastewaterCharacteristic {
     protected void BackButtonOnAction(){
         SoundEffect sound = new SoundEffect();
         sound.playSound(clickSound);
-        FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-View.fxml"));
-        Scene scene = null;
-
-        try {
-            scene = new Scene(fxmlLoader.load(), 585, 400);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        Scene scene;
+        scene = LoginController.LoginScene;
         Login.window.setScene(scene);
         SetSceneOnCentral(Login.window);
     }
@@ -141,5 +133,20 @@ public class WastewaterCharacteristic {
             TBod.setText(String.valueOf(initial.getBOD()));
             TTss.setText(String.valueOf(initial.getTSS()));
         }
+    }
+
+    @FXML
+    protected void ClickInfoOnAction(){
+        stage.setResizable(false);
+        FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("StandardInfo-view.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 380, 180);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setScene(scene);
+        stage.show();
+        SetSceneOnCentral(stage);
     }
 }

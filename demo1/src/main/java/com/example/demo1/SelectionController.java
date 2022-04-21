@@ -6,16 +6,16 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -27,9 +27,6 @@ public class SelectionController {
     ObservableList<Selection> Unselected;
     ObservableList<Selection> Selected;
     private final LinkedHashMap<String,LinkedHashMap<String,Selection>> tempList;
-
-    static Stage stage = new Stage();
-    boolean ModelValidation;
 
     @FXML
     private TextField UnselectedTextField;
@@ -70,38 +67,14 @@ public class SelectionController {
 
     @FXML
     protected void backButtonOnAction() {
-        ModelValidation=true;
-
-        /*boolean[] flag = stageFlag();
-        for (int i = 0; i < 5; i++)
-            ModelValidation = ModelValidation && flag[i];*/
 
         SoundEffect sound = new SoundEffect();
-        if (ModelValidation) {
-            sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
-            FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("Menu-view.fxml"));
-            Scene scene = null;
-            try {
-                scene = new Scene(fxmlLoader.load(), 585, 400);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Login.window.setScene(scene);
-            SetSceneOnCentral(Login.window);
-        }
-        else {
-            sound.playSound("src/main/resources/com/SoundEffect/error.wav");
-            FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("SelectionAlert-view.fxml"));
-            Scene scene = null;
-            try {
-                scene = new Scene(fxmlLoader.load(), 359, 180);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            stage.setScene(scene);
-            stage.show();
-            SetSceneOnCentral(stage);
-        }
+        sound.playSound("src/main/resources/com/SoundEffect/clicksound.wav");
+        Scene scene;
+        scene = LoginController.LoginScene;
+        Login.window.setScene(scene);
+        SetSceneOnCentral(Login.window);
+
     }
 
     public void Search()  {
@@ -181,17 +154,6 @@ public class SelectionController {
         SelectOnDoubleClick();
         DeleteOnDoubleClick();
         Search();
-    }
-
-    public boolean[] stageFlag(){
-
-        String[] treatments = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
-        boolean [] flag = new boolean[5];
-
-        for(Selection list: Selected){
-            flag[Arrays.asList(treatments).indexOf(list.getStage())] = true;
-        }
-        return flag;
     }
 
     @FXML
