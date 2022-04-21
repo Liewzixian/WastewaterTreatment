@@ -1,6 +1,6 @@
 package com.example.demo1;
 
-import com.example.demo1.dataclasses.Initial;
+import com.example.demo1.dataclasses.PollutionLevels;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,7 +25,7 @@ public class WastewaterCharacteristic {
     ObservableList<String> AreaList=FXCollections.observableArrayList();
     static Stage stage = new Stage();
 
-    Initial initial;
+    PollutionLevels pollutionLevels;
     String selectedState;
 
     NumTest numTest = new NumTest();
@@ -53,7 +53,6 @@ public class WastewaterCharacteristic {
         Standard.setItems(StandardsList);
         State.setItems(StateList);
         validate = false;
-        SoundEffect.clicksound();
     }
 
     @FXML
@@ -79,7 +78,7 @@ public class WastewaterCharacteristic {
         SelectedStandard = Standard.getValue();
 
         if (Standard.getValue() == null) {
-            SoundEffect.clicksound();
+            SoundEffect.errorsound();
             validate = false;
             StandardAlert.setText("Please Select A Standard");
         }
@@ -88,9 +87,9 @@ public class WastewaterCharacteristic {
 
         if(validate && numTest.isDouble(Css) && numTest.isDouble(Bss) && numTest.isDouble(Tss)){
             if(Objects.equals(Standard.getValue(), "Standard A"))
-                menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),0);
+                menu.addResultsToTable(new PollutionLevels(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),0);
             else
-                menu.showAllResults(new Initial(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),1);
+                menu.addResultsToTable(new PollutionLevels(Double.parseDouble(Tss),Double.parseDouble(Css),Double.parseDouble(Bss)),1);
 
             FXMLLoader fxmlLoader = new FXMLLoader(WastewaterCharacteristic.class.getResource("DisplayResultView.fxml"));
             Scene scene = null;
@@ -123,10 +122,10 @@ public class WastewaterCharacteristic {
     @FXML
     protected void AreaOnAction(){
         if(Area.getValue()!=null){
-            initial = sharedData.loadAreaData(selectedState,Area.getValue());
-            TCod.setText(String.valueOf(initial.getCOD()));
-            TBod.setText(String.valueOf(initial.getBOD()));
-            TTss.setText(String.valueOf(initial.getTSS()));
+            pollutionLevels = sharedData.loadAreaData(selectedState,Area.getValue());
+            TCod.setText(String.valueOf(pollutionLevels.getCOD()));
+            TBod.setText(String.valueOf(pollutionLevels.getBOD()));
+            TTss.setText(String.valueOf(pollutionLevels.getTSS()));
         }
     }
 

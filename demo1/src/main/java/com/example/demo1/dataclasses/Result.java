@@ -12,7 +12,7 @@ public class Result { //class for linked list to hold result of all possible com
     private final double[] energy; //array of energy after each stage
     DecimalFormat df = new DecimalFormat("#.####"); //decimal format to show results
 
-    public Result(Tech[] tech, Initial initial) { //constructor
+    public Result(Tech[] tech, PollutionLevels pollutionLevels) { //constructor
 
         this.treatments = new String[5];
         this.TSS = new double[5];
@@ -21,7 +21,7 @@ public class Result { //class for linked list to hold result of all possible com
         this.cost = new double[5];
         this.area = new double[5];
         this.energy = new double[5];
-        double tempTSS = initial.getTSS(), tempCOD = initial.getCOD(), tempBOD = initial.getBOD(), tempCost = 0, tempArea = 0, tempEnergy = 0;
+        double tempTSS = pollutionLevels.getTSS(), tempCOD = pollutionLevels.getCOD(), tempBOD = pollutionLevels.getBOD(), tempCost = 0, tempArea = 0, tempEnergy = 0;
 
         for(int i = 0; i < 5; i++) {
             treatments[i] = tech[i].getName();

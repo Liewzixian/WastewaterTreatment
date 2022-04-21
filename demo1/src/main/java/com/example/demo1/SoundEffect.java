@@ -6,7 +6,6 @@ import java.io.IOException;
 
 public class SoundEffect {
     Clip BGMClip;
-
     public void playSound(String soundName) {
 
         try {

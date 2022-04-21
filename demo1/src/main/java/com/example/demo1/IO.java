@@ -1,6 +1,6 @@
 package com.example.demo1;
 
-import com.example.demo1.dataclasses.Initial;
+import com.example.demo1.dataclasses.PollutionLevels;
 import com.example.demo1.dataclasses.Tech;
 
 import java.io.File;
@@ -17,7 +17,7 @@ public class IO { //class to get wastewater tech and location data
     } //constructor
     public LinkedHashMap<String, LinkedHashMap<String,Tech>> loadData() throws FileNotFoundException { //load wastewater tech
 
-        LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList = new LinkedHashMap<>();
+        LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList = new LinkedHashMap<>(); //hold all wastewater tech
 
         String[] stages = {"PRELIMINARY","CHEMICAL","BIOLOGICAL","TERTIARY","SLUDGE"};
         for(String stage : stages)
@@ -26,7 +26,7 @@ public class IO { //class to get wastewater tech and location data
         File file = new File(fileName); //load location
         Scanner sc = new Scanner(file);
 
-        String[] hold = new String[8]; //make array of strings with 7 elements
+        String[] hold = new String[8]; //make array of strings with 8 elements
 
         while(sc.hasNextLine()){ //tokenize string using , and stop when list is empty
             StringTokenizer st = new StringTokenizer(sc.nextLine(),",");
@@ -44,9 +44,9 @@ public class IO { //class to get wastewater tech and location data
         return originalList;
     }
 
-    public LinkedHashMap<String,LinkedHashMap<String,Initial>> loadLocations() throws FileNotFoundException { //load location data
+    public LinkedHashMap<String,LinkedHashMap<String,PollutionLevels>> loadLocations() throws FileNotFoundException { //load location data
 
-        LinkedHashMap<String,LinkedHashMap<String, Initial>> locations = new LinkedHashMap<>();
+        LinkedHashMap<String,LinkedHashMap<String, PollutionLevels>> locations = new LinkedHashMap<>();
 
         File locationData = new File("src/main/resources/com/Treatment/location.txt");
         Scanner sc2 = new Scanner(locationData);
@@ -63,7 +63,7 @@ public class IO { //class to get wastewater tech and location data
                 }
 
                 locations.computeIfAbsent(hold[0], k -> new LinkedHashMap<>());
-                Initial initial = new Initial(Double.parseDouble(hold[2]),Double.parseDouble(hold[3]),Double.parseDouble(hold[4]));
+                PollutionLevels initial = new PollutionLevels(Double.parseDouble(hold[2]),Double.parseDouble(hold[3]),Double.parseDouble(hold[4]));
                 locations.get(hold[0]).putIfAbsent(hold[1],initial);
             }
         }

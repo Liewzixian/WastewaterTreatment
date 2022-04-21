@@ -1,54 +1,31 @@
 package com.example.demo1;
 
-import com.example.demo1.dataclasses.*;
+import com.example.demo1.dataclasses.PollutionLevels;
+import com.example.demo1.dataclasses.Print;
+import com.example.demo1.dataclasses.Result;
 import javafx.collections.ObservableList;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 public class Menu {
+    ResultControl resultControl; //generate results
+    SharedData sharedData; //data class
+    IO io; //input/output
 
-    ResultControl resultControl;
-    SharedData sharedData;
-    IO io;
-    AdjacencyList adjacencyList;
-
-
-    public Menu(String fileName) throws FileNotFoundException {
-        adjacencyList = new AdjacencyList();
+    public Menu(String fileName) throws FileNotFoundException { //main menu
         io = new IO(fileName);
         sharedData = new SharedData(io);
     }
-
-    public void load() throws FileNotFoundException {
-        io.loadData();
-    }
-
-    public void add(String type, Tech newTech){
-        sharedData.getOriginalList().get(type).put(newTech.getName(),newTech);
-    }
-
-    public void showAllResults(Initial initial, int standard){
+    public void addResultsToTable(PollutionLevels pollutionLevels, int standard){ //add results to table
         resultControl = new ResultControl(sharedData);
-        resultControl.calculateResults(initial);
+        resultControl.calculateResults(pollutionLevels);
         resultControl.printResults(standard);
     }
-
     public ObservableList<Print> getResultsTable() {
         return resultControl.getResultsTable();
-    }
-    public ObservableList<Print> getBestTable() {return resultControl.getBestTable();}
-    public  void UniformSearch(int i){resultControl.UniFormSearch(i);}
-
-    public LinkedHashMap<String,Tech> uniformCost(int choice){
-        return adjacencyList.UniformCostSearch(choice,sharedData);
-    }
-
-    public void save() throws IOException {
-        io.saveData(sharedData.getOriginalList());
-        System.out.println("Treatment data saved to text file.");
-    }
-    public ArrayList<Result> getBestResults() {return resultControl.getBestResults();}
+    } //return results table
+    public ObservableList<Print> getBestTable() {return resultControl.getBestTable();} //return best results table
+    public void UniformSearch(int i){ resultControl.UniFormSearch(i);} //uniform cost search
+    public ArrayList<Result> getBestResults() {return resultControl.getBestResults();} //return best results array
 }

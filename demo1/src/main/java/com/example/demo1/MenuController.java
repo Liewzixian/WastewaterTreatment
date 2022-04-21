@@ -11,7 +11,7 @@ import java.io.IOException;
 public class MenuController {
     @FXML
     private RadioButton BGM;
-     SoundEffect soundEffect=new SoundEffect();
+     SoundEffect soundEffect = new SoundEffect();
 
     @FXML
     protected void addButtonOnAction() {

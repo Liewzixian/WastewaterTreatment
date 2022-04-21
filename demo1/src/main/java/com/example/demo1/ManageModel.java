@@ -177,11 +177,15 @@ public class ManageModel implements Initializable {
             for(int i = 0; i < 3; i++){
                 String num = st.nextToken();
 
-                if(!numTest.isDouble(num))
+                if(!numTest.isDouble(num)) {
                     validate = false;
+                    break;
+                }
 
-                if(Double.parseDouble(num) < 0 || Double.parseDouble(num) > 1)
+                if(Double.parseDouble(num) < 0 || Double.parseDouble(num) > 1) {
                     validate = false;
+                    break;
+                }
             }
 
             while (st.hasMoreTokens())
@@ -193,7 +197,7 @@ public class ManageModel implements Initializable {
         }
 
         if(validate){
-            SoundEffect.clicksound();
+            SoundEffect.success();
             BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile));
             for (String word: words) {
                 writer.write(word.replace("[","").replace("]", ""));
@@ -204,7 +208,7 @@ public class ManageModel implements Initializable {
             Alert.setText("Modified Successfully!");
         }
         else {
-            SoundEffect.clicksound();
+            SoundEffect.errorsound();
             Alert.setText("Modified Failed!");
         }
     }
@@ -221,7 +225,7 @@ public class ManageModel implements Initializable {
 
         menu.sharedData.originalList.get(st.nextToken()).remove(st.nextToken());
 
-        menu.save();
+        menu.sharedData.saveData();
         menu.sharedData.reloadData();
         Alert.setText("Deleted Successfully!");
     }
@@ -236,7 +240,7 @@ public class ManageModel implements Initializable {
     public void autoResizeColumns( TableView<Models> table )
     {
         //Set the right policy
-        table.setColumnResizePolicy( TableView.UNCONSTRAINED_RESIZE_POLICY);
+        table.setColumnResizePolicy(javafx.scene.control.TableView.UNCONSTRAINED_RESIZE_POLICY);
         table.getColumns().forEach( (column) ->
         {
             Text t = new Text( column.getText() );

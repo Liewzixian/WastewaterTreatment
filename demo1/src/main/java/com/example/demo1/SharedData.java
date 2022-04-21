@@ -3,13 +3,14 @@ package com.example.demo1;
 import com.example.demo1.dataclasses.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 public class SharedData {
     LinkedHashMap<String, LinkedHashMap<String,Tech>> originalList;
     LinkedHashMap<String, LinkedHashMap<String,Tech>> selectedList;
-    LinkedHashMap<String,LinkedHashMap<String, Initial>> locations;
+    LinkedHashMap<String,LinkedHashMap<String, PollutionLevels>> locations;
     ArrayList<Selection> selected;
     ArrayList<Selection> unselected;
     ArrayList<String> states;
@@ -82,19 +83,23 @@ public class SharedData {
     public void loadLocation() throws FileNotFoundException {
         locations = io.loadLocations();
 
-        for(Map.Entry<String, LinkedHashMap<String, Initial>> state : locations.entrySet())
+        for(Map.Entry<String, LinkedHashMap<String, PollutionLevels>> state : locations.entrySet())
             if(!states.contains(state.getKey()))
                 states.add(state.getKey());
     }
 
     public ArrayList<String> loadStateArea(String stateName){
         ArrayList<String> areas = new ArrayList<>();
-        for(Map.Entry<String, Initial> area : locations.get(stateName).entrySet())
+        for(Map.Entry<String, PollutionLevels> area : locations.get(stateName).entrySet())
             areas.add(area.getKey());
         return areas;
     }
 
-    public Initial loadAreaData(String stateName, String areaName){
+    public PollutionLevels loadAreaData(String stateName, String areaName){
         return locations.get(stateName).get(areaName);
+    }
+
+    public void saveData() throws IOException {
+        io.saveData(getOriginalList());
     }
 }

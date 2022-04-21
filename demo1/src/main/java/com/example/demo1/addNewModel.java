@@ -89,8 +89,8 @@ public class addNewModel implements Initializable {
 
             SoundEffect.clicksound();
             newTech = new Tech(String.valueOf(TStage.getValue()), String.valueOf(TModel.getText()), Double.parseDouble(String.valueOf(TTss.getValue())), Double.parseDouble(String.valueOf(TCod.getValue())), Double.parseDouble(String.valueOf(TBod.getValue())), Double.parseDouble(TAof.getText()), Double.parseDouble(TEpm.getText()), Double.parseDouble(TCost.getText()));
-            menu.add(String.valueOf(TStage.getValue()), newTech);
-            menu.save();
+            menu.sharedData.getOriginalList().get(TStage.getValue()).put(newTech.getName(),newTech);
+            menu.sharedData.saveData();
             menu.sharedData.reloadData();
             addNewMessageLabel.setText("Model Addition Successful!");
             SoundEffect.clicksound();

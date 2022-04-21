@@ -1,10 +1,10 @@
 package com.example.demo1.dataclasses;
 
-public class Initial {
+public class PollutionLevels {
     private final double TSS; //initial TSS pollution levels
     private final double COD; //initial COD pollution levels
     private final double BOD; //initial BOD pollution levels
-    public Initial(double COD, double BOD, double TSS){ //constructor
+    public PollutionLevels(double COD, double BOD, double TSS){ //constructor
         this.COD = COD;
         this.BOD = BOD;
         this.TSS = TSS;
