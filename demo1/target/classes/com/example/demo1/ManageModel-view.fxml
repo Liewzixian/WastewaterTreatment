@@ -36,7 +36,7 @@
       </ImageView>
         <TableView fx:id="TableView" layoutX="197.0" layoutY="93.0" prefHeight="398.0" prefWidth="972.0">
             <columns>
-                <TableColumn fx:id="StageColumn" prefWidth="40.0" style="-fx-background-color: #ffbd59;" text="Stage" />
+                <TableColumn fx:id="StageColumn" editable="false" prefWidth="40.0" style="-fx-background-color: #ffbd59;" text="Stage" />
                 <TableColumn fx:id="NameColumn" prefWidth="88.0" style="-fx-background-color: #ffbd59;" text="Model Name" />
                 <TableColumn fx:id="codColumn" prefWidth="144.0" style="-fx-background-color: #ffbd59;" text="COD Cleaning Efficiency " />
                 <TableColumn fx:id="bodColumn" prefWidth="144.79989624023438" style="-fx-background-color: #ffbd59;" text="BOD Cleaning Efficiency " />
