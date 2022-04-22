@@ -122,8 +122,8 @@ public class addNewModel implements Initializable {
     }
     /**
      * This method is invoked when setting up the "addNewModel" interface
-     * @param url
-     * @param resources
+     * @param url url
+     * @param resources resources
      */
     @FXML
     public void initialize(URL url, ResourceBundle resources){
