@@ -108,7 +108,7 @@ public class IO {
 
         for(Map.Entry<String, LinkedHashMap<String, Tech>> full : originalList.entrySet())
             for(Map.Entry<String, Tech> list : full.getValue().entrySet())
-                writer.format("%S,%S,%.2f,%.2f,%.2f,%.2f,%.3f,%.2f\n", list.getValue().getType(), list.getValue().getName(), list.getValue().getTSS(), list.getValue().getCOD(), list.getValue().getBOD(),list.getValue().getArea(), list.getValue().getEnergy(),list.getValue().getCost());
+                writer.format("%S,%S,%.4f,%.4f,%.4f,%.2f,%.3f,%.2f\n", list.getValue().getType(), list.getValue().getName(), list.getValue().getTSS(), list.getValue().getCOD(), list.getValue().getBOD(),list.getValue().getArea(), list.getValue().getEnergy(),list.getValue().getCost());
 
         writer.close(); //close writer
     }

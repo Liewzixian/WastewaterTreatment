@@ -120,6 +120,7 @@ public class ManageModel implements Initializable {
         CostColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
         TableView.setItems(details);
+        detailss.clear();
         detailss.addAll(details);
         TableView.setEditable(true);
     }
@@ -146,8 +147,8 @@ public class ManageModel implements Initializable {
     }
     /**
      * This method initialize the manage model GUI
-     * @param url
-     * @param resourceBundle
+     * @param url url
+     * @param resourceBundle resources
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -223,6 +224,8 @@ public class ManageModel implements Initializable {
             }
             writer.close();
             menu.sharedData.reloadData();
+            readFile();
+            TableView.refresh();
             Alert.setText("Modified Successfully!");
         }
         else {
@@ -235,7 +238,7 @@ public class ManageModel implements Initializable {
      * It will delete the selected model
      */
     @FXML
-    void deleteButtonOnAction() throws IOException {
+    void deleteButtonOnAction() throws Exception {
         SoundEffect.clicksound();
         SoundEffect.success();
 
@@ -245,9 +248,10 @@ public class ManageModel implements Initializable {
         StringTokenizer st = new StringTokenizer(Md.toString(),",");
 
         menu.sharedData.originalList.get(st.nextToken()).remove(st.nextToken());
-
         menu.sharedData.saveData();
         menu.sharedData.reloadData();
+        readFile();
+        TableView.refresh();
         Alert.setText("Deleted Successfully!");
     }
     /**

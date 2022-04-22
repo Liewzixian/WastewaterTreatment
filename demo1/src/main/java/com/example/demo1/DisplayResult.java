@@ -203,6 +203,4 @@ public class DisplayResult {
             column.setPrefWidth( max + 10.0d );
         } );
     }
-
-
 }
