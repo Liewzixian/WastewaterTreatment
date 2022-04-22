@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="873.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.CombinationController">
+   <ImageView fitHeight="620.0" fitWidth="1097.0" layoutX="72.0" layoutY="-3.0" opacity="0.29" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../wastewater/combination1.png" />
+      </image>
+   </ImageView>
+   <SplitPane dividerPositions="0.2623626373626374" layoutX="58.0" layoutY="138.0" orientation="VERTICAL" prefHeight="117.0" prefWidth="134.0" style="-fx-border-color: #000000;">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="141.0" style="-fx-background-color: #ffbd59;">
+         <children>
+            <Label layoutX="7.0" layoutY="4.0" prefHeight="18.0" prefWidth="114.0" text="Preliminary Model " />
+         </children>
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="26.0" prefWidth="130.0">
+         <children>
+            <Label fx:id="Stage1Name" layoutX="8.0" prefHeight="75.0" prefWidth="114.0" text="Label" wrapText="true" />
+         </children></AnchorPane>
+   </SplitPane>
+   <SplitPane dividerPositions="0.2623626373626374" layoutX="297.0" layoutY="138.0" orientation="VERTICAL" prefHeight="117.0" prefWidth="134.0" style="-fx-border-color: #000000;">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="141.0" style="-fx-background-color: #ffbd59;">
+         <children>
+            <Label layoutX="7.0" layoutY="4.0" prefHeight="18.0" prefWidth="114.0" text="Chemical Model " />
+         </children>
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="60.0" prefWidth="130.0">
+         <children>
+            <Label fx:id="Stage2Name" layoutX="7.0" layoutY="8.0" prefHeight="66.0" prefWidth="114.0" text="Label" wrapText="true" />
+         </children></AnchorPane>
+   </SplitPane>
+   <SplitPane dividerPositions="0.2623626373626374" layoutX="537.0" layoutY="137.0" orientation="VERTICAL" prefHeight="117.0" prefWidth="134.0" style="-fx-border-color: #000000;">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="141.0" style="-fx-background-color: #ffbd59;">
+         <children>
+            <Label layoutX="7.0" layoutY="4.0" prefHeight="18.0" prefWidth="114.0" text="Biological Model " />
+         </children>
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="94.0" prefWidth="143.0">
+         <children>
+            <Label fx:id="Stage3Name" layoutX="7.0" layoutY="3.0" prefHeight="75.0" prefWidth="114.0" text="Label" wrapText="true" />
+         </children></AnchorPane>
+   </SplitPane>
+   <SplitPane dividerPositions="0.2623626373626374" layoutX="338.0" layoutY="291.0" orientation="VERTICAL" prefHeight="117.0" prefWidth="134.0" style="-fx-border-color: #000000;">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="141.0" style="-fx-background-color: #ffbd59;">
+         <children>
+            <Label layoutX="7.0" layoutY="4.0" prefHeight="18.0" prefWidth="114.0" text="Sludge Model " />
+         </children>
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="94.0" prefWidth="143.0">
+         <children>
+            <Label fx:id="Stage5Name" layoutX="7.0" layoutY="7.0" prefHeight="66.0" prefWidth="114.0" text="Label" wrapText="true" />
+         </children></AnchorPane>
+   </SplitPane>
+   <SplitPane dividerPositions="0.2623626373626374" layoutX="587.0" layoutY="291.0" orientation="VERTICAL" prefHeight="117.0" prefWidth="134.0" style="-fx-border-color: #000000;">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="141.0" style="-fx-background-color: #ffbd59;">
+         <children>
+            <Label layoutX="7.0" layoutY="4.0" prefHeight="18.0" prefWidth="114.0" text="Tertiary Model " />
+         </children>
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="94.0" prefWidth="143.0">
+         <children>
+            <Label fx:id="Stage4Name" layoutX="7.0" layoutY="7.0" prefHeight="66.0" prefWidth="114.0" text="Label" wrapText="true" />
+         </children></AnchorPane>
+   </SplitPane>
+   <Line endX="48.999969482421875" endY="-0.20001220703125" layoutX="249.0" layoutY="167.0" startX="-55.600006103515625" startY="-0.20001220703125" stroke="WHITE" />
+   <Line endX="48.999969482421875" endY="-0.20001220703125" layoutX="487.0" layoutY="167.0" startX="-55.600006103515625" startY="-0.20001220703125" stroke="WHITE" />
+   <Line endX="30.5999755859375" layoutX="772.0" layoutY="167.0" startX="-100.0" stroke="WHITE" />
+   <Line endX="33.0999755859375" endY="59.0" layoutX="768.0" layoutY="260.0" startX="35.0999755859375" startY="-92.5" stroke="WHITE" />
+   <Line endX="61.0" endY="-0.20001220703125" layoutX="526.0" layoutY="320.0" startX="-55.600006103515625" startY="-0.20001220703125" stroke="WHITE" />
+   <Line endX="-10.4000244140625" endY="1.499969482421875" layoutX="811.0" layoutY="318.0" startX="-88.800048828125" startY="1.499969482421875" stroke="WHITE" />
+   <Label layoutX="484.0" layoutY="332.0" text="COD:" textFill="#f3ff00" />
+   <Label layoutX="239.0" layoutY="347.0" prefHeight="18.0" prefWidth="38.0" text="BOD:" textFill="#f3ff00" />
+   <Label layoutX="439.0" layoutY="214.0" prefHeight="18.0" prefWidth="27.0" text="TSS:" textFill="#f3ff00" />
+   <Line endX="100.0" layoutX="244.0" layoutY="320.0" startX="-40.0" startY="-3.0517578125E-5" stroke="WHITE" />
+   <Line endX="15.999969482421875" endY="42.600006103515625" layoutX="204.0" layoutY="265.0" startX="-0.707122802734375" startY="55.292877197265625" stroke="WHITE" />
+   <Line endX="52.999969482421875" endY="-33.600006103515625" layoutX="168.0" layoutY="365.0" startX="36.292877197265625" startY="-44.292877197265625" stroke="WHITE" />
+   <Label layoutX="238.0" layoutY="330.0" text="COD:" textFill="#f3ff00" />
+   <Label layoutX="684.0" layoutY="178.0" text="COD:" textFill="#f3ff00" />
+   <Label layoutX="439.0" layoutY="178.0" text="COD:" textFill="#f3ff00" />
+   <Label layoutX="201.0" layoutY="178.0" text="COD:" textFill="#f3ff00" />
+   <Label layoutX="485.0" layoutY="348.0" prefHeight="18.0" prefWidth="38.0" text="BOD:" textFill="#f3ff00" />
+   <Label layoutX="684.0" layoutY="196.0" prefHeight="18.0" prefWidth="38.0" text="BOD:" textFill="#f3ff00" />
+   <Label layoutX="439.0" layoutY="196.0" prefHeight="18.0" prefWidth="38.0" text="BOD:" textFill="#f3ff00" />
+   <Label layoutX="201.0" layoutY="196.0" prefHeight="18.0" prefWidth="38.0" text="BOD:" textFill="#f3ff00" />
+   <Label layoutX="239.0" layoutY="364.0" prefHeight="18.0" prefWidth="27.0" text="TSS:" textFill="#f3ff00" />
+   <Label layoutX="485.0" layoutY="365.0" prefHeight="18.0" prefWidth="27.0" text="TSS:" textFill="#f3ff00" />
+   <Label layoutX="684.0" layoutY="214.0" prefHeight="18.0" prefWidth="27.0" text="TSS:" textFill="#f3ff00" />
+   <Label layoutX="202.0" layoutY="214.0" prefHeight="18.0" prefWidth="27.0" text="TSS:" textFill="#f3ff00" />
+   <Label fx:id="Stage1CoD" layoutX="232.0" layoutY="178.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage1BoD" layoutX="232.0" layoutY="197.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage1Tss" layoutX="232.0" layoutY="214.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage2CoD" layoutX="470.0" layoutY="178.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage2Bod" layoutX="470.0" layoutY="197.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage2Tss" layoutX="470.0" layoutY="215.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage3CoD" layoutX="715.0" layoutY="178.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage3BoD" layoutX="716.0" layoutY="197.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage3Tss" layoutX="716.0" layoutY="216.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage4CoD" layoutX="517.0" layoutY="332.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage4BoD" layoutX="517.0" layoutY="348.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage4Tss" layoutX="517.0" layoutY="366.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage5CoD" layoutX="270.0" layoutY="330.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage5BoD" layoutX="269.0" layoutY="348.0" text="Label" textFill="WHITE" />
+   <Label fx:id="Stage5Tss" layoutX="269.0" layoutY="365.0" text="Label" textFill="WHITE" />
+   <TabPane layoutX="28.0" layoutY="414.0" prefHeight="156.0" prefWidth="808.0" tabClosingPolicy="UNAVAILABLE">
+     <tabs>
+       <Tab fx:id="BestTable" style="-fx-background-color: #ffbd59; -fx-focus-color: #FF0000;" text="The Best Combination ">
+         <content>
+           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                  <children>
+                     <TableView fx:id="BestResultView" layoutX="28.0" layoutY="26.0" prefHeight="75.0" prefWidth="748.0">
+                       <columns>
+                         <TableColumn fx:id="Preliminary" minWidth="-Infinity" prefWidth="75.0" style="-fx-background-color: #d3d3d3;" text="Preliminary " />
+                         <TableColumn fx:id="Chemical" minWidth="-Infinity" prefWidth="88.0" style="-fx-background-color: #d3d3d3;" text="Chemical" />
+                           <TableColumn fx:id="Biological" minWidth="-Infinity" prefWidth="90.39999389648438" style="-fx-background-color: #d3d3d3;" text="Biological" />
+                           <TableColumn fx:id="Tertiary" minWidth="-Infinity" prefWidth="76.79998779296875" style="-fx-background-color: #d3d3d3;" text="Tertiary" />
+                           <TableColumn fx:id="Sludge" minWidth="-Infinity" prefWidth="76.0" style="-fx-background-color: #d3d3d3;" text="Sludge" />
+                           <TableColumn fx:id="CODTable" minWidth="-Infinity" prefWidth="57.600006103515625" style="-fx-background-color: #d3d3d3;" text="COD(ppm)" />
+                           <TableColumn fx:id="BODTable" minWidth="-Infinity" prefWidth="48.79998779296875" style="-fx-background-color: #d3d3d3;" text="BOD(ppm)" />
+                           <TableColumn fx:id="TSSTable" minWidth="-Infinity" prefWidth="45.5999755859375" style="-fx-background-color: d3d3d3;" text="TSS(pmm)" />
+                           <TableColumn fx:id="COSTTable" minWidth="-Infinity" prefWidth="47.2000732421875" style="-fx-background-color: d3d3d3;" text="COST(RM)" />
+                           <TableColumn fx:id="AreaTable" minWidth="-Infinity" prefWidth="47.20001220703125" style="-fx-background-color: d3d3d3;" text="Area of footprint (m^2) " />
+                           <TableColumn fx:id="EnergyTable" minWidth="-Infinity" prefWidth="92.0" style="-fx-background-color: d3d3d3;" text="Energy per meter cube (kWh/m^3)" />
+                       </columns>
+                     </TableView>
+                  </children>
+               </AnchorPane>
+         </content>
+       </Tab>
+       <Tab fx:id="Comparison" style="-fx-background-color: #ffbd59; -fx-focus-color: #FF0000;" text="Comparison With The Best Cleaning Efficiency">
+         <content>
+           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                  <children>
+                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="106.0" layoutX="23.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="761.0" />
+                     <Line endX="-70.0" endY="63.99998474121094" layoutX="213.0" layoutY="51.0" startX="-70.0" startY="-38.99998092651367" />
+                     <Label layoutX="31.0" layoutY="17.0" prefWidth="86.0" text="Final COD(BEST)" textFill="#f70808" />
+                     <Label layoutX="402.0" layoutY="17.0" text="Final TSS(BEST)" textFill="#f70808" />
+                     <Label layoutX="212.0" layoutY="17.0" text="Final BOD(BEST)" textFill="#f70808" />
+                     <Label layoutX="212.0" layoutY="53.0" text="Final BOD(CURRENT)" textFill="#f70808" />
+                     <Label layoutX="402.0" layoutY="52.0" prefHeight="18.0" prefWidth="114.0" text="Final TSS(CURRENT)" textFill="#f70808" />
+                     <Label layoutX="31.0" layoutY="53.0" text="Final COD(CURRENT)" textFill="#f70808" />
+                     <Line endX="-70.0" endY="63.99998474121094" layoutX="270.0" layoutY="51.0" startX="-70.0" startY="-38.99998092651367" />
+                     <Line endX="-70.0" endY="63.99998474121094" layoutX="400.0" layoutY="51.0" startX="-70.0" startY="-38.99998092651367" />
+                     <Line endX="-70.0" endY="63.99998474121094" layoutX="461.0" layoutY="51.0" startX="-70.0" startY="-38.99998092651367" />
+                     <Line endX="-70.0" endY="63.99998474121094" layoutX="586.0" layoutY="51.0" startX="-70.0" startY="-38.99998092651367" />
+                     <Line endX="-70.0" endY="63.99998474121094" layoutX="650.0" layoutY="51.0" startX="-70.0" startY="-38.99998092651367" />
+                     <Label layoutX="587.0" layoutY="17.0" text="Final COST(BEST)" textFill="#f70808" />
+                     <Label layoutX="587.0" layoutY="52.0" prefHeight="18.0" prefWidth="123.0" text="Final COST(CURRENT)" textFill="#f70808" />
+                     <Line endX="-70.0" endY="63.99998474121094" layoutX="788.0" layoutY="50.0" startX="-70.0" startY="-38.99998092651367" />
+                     <Label layoutX="31.0" layoutY="80.0" prefHeight="38.0" prefWidth="106.0" text="Percentage of Best COD Over Current" textFill="#f70808" wrapText="true" />
+                     <Line endX="667.0" endY="6.0058441162109375" layoutX="117.0" layoutY="73.0" startX="-94.0" startY="6.0058441162109375" />
+                     <Line endX="641.0" endY="1.9073486328125E-5" layoutX="143.0" layoutY="44.0" startX="-119.39999389648438" startY="1.9073486328125E-5" />
+                     <Label layoutX="212.0" layoutY="80.0" prefHeight="38.0" prefWidth="106.0" text="Percentage of Best BOD Over Current" textFill="#f70808" wrapText="true" />
+                     <Label layoutX="402.0" layoutY="80.0" prefHeight="38.0" prefWidth="106.0" text="Percentage of Best TSS Over Current" textFill="#f70808" wrapText="true" />
+                     <Label layoutX="587.0" layoutY="80.0" prefHeight="38.0" prefWidth="106.0" text="Percentage of Best COST Over Current" textFill="#f70808" wrapText="true" />
+                     <Label fx:id="BestFinalCOD" layoutX="147.0" layoutY="12.0" prefHeight="26.0" prefWidth="42.0" text="Label" wrapText="true" />
+                     <Label fx:id="CurrentFinalCOD" layoutX="147.0" layoutY="47.0" prefHeight="26.0" prefWidth="42.0" text="Label" wrapText="true" />
+                     <Label fx:id="CompareCOD" layoutX="148.0" layoutY="85.0" prefHeight="26.0" prefWidth="38.0" text="Label" wrapText="true" />
+                     <Label fx:id="BestFinalBOD" layoutX="342.0" layoutY="17.0" text="Label" wrapText="true" />
+                     <Label fx:id="CurrentFinalBOD" layoutX="342.0" layoutY="51.0" text="Label" wrapText="true" />
+                     <Label fx:id="CompareBOD" layoutX="342.0" layoutY="89.0" text="Label" wrapText="true" />
+                     <Label fx:id="BestFinalTss" layoutX="527.0" layoutY="17.0" text="Label" wrapText="true" />
+                     <Label fx:id="CurrentFinalTss" layoutX="527.0" layoutY="51.0" text="Label" wrapText="true" />
+                     <Label fx:id="CompareTSS" layoutX="527.0" layoutY="90.0" text="Label" wrapText="true" />
+                     <Label fx:id="BestFinalCOST" layoutX="728.0" layoutY="17.0" text="Label" wrapText="true" />
+                     <Label fx:id="CurrentFinalCOST" layoutX="728.0" layoutY="55.0" text="Label" wrapText="true" />
+                     <Label fx:id="CompareCOST" layoutX="728.0" layoutY="89.0" text="Label" wrapText="true" />
+                  </children>
+               </AnchorPane>
+         </content>
+       </Tab>
+     </tabs>
+   </TabPane>
+   <Label layoutX="265.0" layoutY="49.0" text="COMBINATION PROCESS" textFill="#ffbd59">
+      <font>
+         <Font name="Verdana Bold" size="27.0" />
+      </font>
+   </Label>
+   <ComboBox fx:id="SelectPreference" layoutX="28.0" layoutY="384.0" onAction="#ComboBoxOnActionListener" prefHeight="26.0" prefWidth="114.0" promptText="Preference" />
+</AnchorPane>
