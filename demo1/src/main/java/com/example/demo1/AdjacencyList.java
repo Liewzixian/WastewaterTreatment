@@ -5,6 +5,7 @@ import java.util.*;
 
 /**
  * Public class AdjacencyList creates an adjacency list of the selected tech to be used in the uniform cost search.
+ * Referenced and Modified code from: <a href="https://algorithms.tutorialhorizon.com/weighted-graph-implementation-java/">https://algorithms.tutorialhorizon.com/weighted-graph-implementation-java/</a>
  *
  * @author Group 2A
  * @version 1.0
